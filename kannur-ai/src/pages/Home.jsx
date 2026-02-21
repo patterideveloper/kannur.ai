@@ -145,21 +145,40 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
         </div>
       </header>
 
-      <section id="why-kannur" className="bento-section">
-        <div className="section-head">
+      <section id="why-kannur" className="why-section">
+        <div className="why-head">
           <p className="eyebrow">Why Kannur?</p>
           <h2 className="section-title">Heritage, coast, and craft — in one pulse.</h2>
         </div>
-        <div className="bento-grid">
-          {bentoCards.map((card) => (
-            <article key={card.id} className={`bento-card ${card.size} ${card.id}`}>
-              <img src={card.image} alt={card.title} loading="lazy" />
-              <div className="bento-content">
-                <h3>{card.title}</h3>
-                <p>{card.copy}</p>
-              </div>
-            </article>
-          ))}
+        <div className="why-grid">
+          <article className="why-card hero">
+            <img src="/bento/theyyam.svg" alt="The Red Ritual" loading="lazy" />
+            <div className="why-glass">
+              <h3>The Red Ritual</h3>
+              <p>Not a dance — a living god.</p>
+            </div>
+          </article>
+          <article className="why-card wide">
+            <img src="/bento/beach.svg" alt="Drive the Tide" loading="lazy" />
+            <div className="why-glass">
+              <h3>Drive the Tide</h3>
+              <p>4km of firm sand. Windows down.</p>
+            </div>
+          </article>
+          <article className="why-card small">
+            <img src="/bento/cake.svg" alt="The First Slice" loading="lazy" />
+            <div className="why-glass">
+              <h3>Slice</h3>
+              <p>India’s first cake, 1883.</p>
+            </div>
+          </article>
+          <article className="why-card small">
+            <img src="/bento/mist.svg" alt="Mist & Moss" loading="lazy" />
+            <div className="why-glass">
+              <h3>Mist & Moss</h3>
+              <p>Paithalmala above the clouds.</p>
+            </div>
+          </article>
         </div>
       </section>
 
