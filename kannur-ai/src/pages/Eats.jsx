@@ -1,5 +1,6 @@
-import { eateries, specialties } from "../data/extras";
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
+import { eateries, specialties } from "../data/extras";
 
 function InfoCard({ title, subtitle, description, meta, source, mapsQuery, t }) {
   const mapsUrl = mapsQuery
@@ -35,6 +36,16 @@ function InfoCard({ title, subtitle, description, meta, source, mapsQuery, t }) 
 export default function Eats({ lang, t }) {
   return (
     <main className="page">
+      <Seo
+        lang={lang === "ml" ? "ml" : "en"}
+        path="/eats"
+        title="Local Eateries | Kannur | Explore Tourism"
+        description={
+          lang === "ml"
+            ? "കണ്ണൂരിലെ പ്രശസ്ത ഭക്ഷണകേന്ദ്രങ്ങളും പ്രത്യേക വിഭവങ്ങളും."
+            : "Local eateries, iconic dishes, and food heritage in Kannur."
+        }
+      />
       <section className="page-hero">
         <Link className="back-link" to="/">
           ← {lang === "ml" ? "ഹോം" : "Back to Home"}

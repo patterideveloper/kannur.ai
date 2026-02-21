@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
 import { events } from "../data/extras";
 
 function InfoCard({ title, subtitle, description, meta, source, mapsQuery, t }) {
@@ -35,6 +36,16 @@ function InfoCard({ title, subtitle, description, meta, source, mapsQuery, t }) 
 export default function Events({ lang, t }) {
   return (
     <main className="page">
+      <Seo
+        lang={lang === "ml" ? "ml" : "en"}
+        path="/events"
+        title="Annual Events | Kannur | Explore Tourism"
+        description={
+          lang === "ml"
+            ? "കണ്ണൂരിലെ വാർഷിക ഉത്സവങ്ങളും പ്രധാന ഇവന്റുകളും."
+            : "Annual festivals and cultural events across Kannur district."
+        }
+      />
       <section className="page-hero">
         <Link className="back-link" to="/">
           ← {lang === "ml" ? "ഹോം" : "Back to Home"}

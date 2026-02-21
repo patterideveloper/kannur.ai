@@ -1,157 +1,196 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { places, quickPrompts } from "../data/places";
+import Seo from "../components/Seo";
+const bentoCards = [
+  {
+    id: "theyyam",
+    size: "large",
+    title: "The Red Ritual",
+    copy: "Not a dance, but a living god.",
+    image: "/bento/theyyam.svg",
+  },
+  {
+    id: "beach",
+    size: "wide",
+    title: "Drive the Tide",
+    copy: "4km of firm sand. Windows down. Arabian Sea at your wheels.",
+    image: "/bento/beach.svg",
+  },
+  {
+    id: "cake",
+    size: "small",
+    title: "The First Slice",
+    copy: "Did you know the first Indian cake was baked here in 1883?",
+    image: "/bento/cake.svg",
+  },
+  {
+    id: "mist",
+    size: "small",
+    title: "Mist & Moss",
+    copy: "Trek the Paithalmala heights for a view above the clouds.",
+    image: "/bento/mist.svg",
+  },
+];
 
-export default function Home({ lang, t, menuOpen, setMenuOpen, handleSend, slideIndex, setSlideIndex }) {
+export default function Home({ lang, t, menuOpen, setMenuOpen }) {
+  const slides = useMemo(
+    () => [
+      {
+        type: "image",
+        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Kandanar_kelan_theyyam%3B_The_fire_theyyam_%21.jpg",
+        caption: "Theyyam fire ritual close‑up",
+      },
+      {
+        type: "image",
+        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Muzhappilangad_Drive-In_Beach_Sunset_01.JPG",
+        caption: "Muzhappilangad drive‑in beach at sunset",
+      },
+      {
+        type: "image",
+        src: "https://commons.wikimedia.org/wiki/Special:FilePath/St_Angelo_Fort%2C_Kannur_10.jpg",
+        caption: "St. Angelo Fort — sea‑facing bastions",
+      },
+      {
+        type: "image",
+        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Payyambalam_beach%2C_Kannur.jpg",
+        caption: "Payyambalam beach — evening shoreline",
+      },
+      {
+        type: "image",
+        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmadom_island.jpg",
+        caption: "Dharmadam Island — low‑tide crossing",
+      },
+    ],
+    []
+  );
+
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
   return (
     <main>
-      <header className="hero hero-carousel">
-        <div className="carousel">
-          {[
-            {
-              id: "hero-video",
-              type: "video",
-              src: "/videos/kannur-hero.mp4",
-              poster: places.find((place) => place.images?.length)?.images[0]?.url,
-              name: lang === "ml" ? "കണ്ണൂർ" : "Kannur",
-              description:
-                lang === "ml"
-                  ? "കടൽ, പാരമ്പര്യം, തെയ്യം — കണ്ണൂരിന്റെ ആത്മാവ്."
-                  : "Sea, heritage, and living ritual — the soul of Kannur.",
-              isBright: false,
-            },
-            ...places
-              .filter((place) => place.images && place.images.length > 0)
-              .slice(0, 3)
-              .map((place) => ({
-                id: place.id,
-                type: "image",
-                src: place.images[0].url,
-                isBright: place.images[0]?.isBright,
-                name: lang === "ml" ? place.nameMl || place.name : place.name,
-                description: lang === "ml" ? place.descriptionMl || place.description : place.description,
-              })),
-          ].map((slide, index) => (
+      <Seo
+        lang={lang === "ml" ? "ml" : "en"}
+        path="/"
+        title="Kannur | Explore Tourism"
+        description={
+          lang === "ml"
+            ? "കണ്ണൂരിലെ കടൽത്തീരങ്ങൾ, ക്ഷേത്രങ്ങൾ, ഭക്ഷണകേന്ദ്രങ്ങൾ, ഇവന്റ്‌లు എന്നിവ കണ്ടെത്തൂ."
+            : "Explore beaches, temples, food, events, and cultural heritage across Kannur, Kerala."
+        }
+      />
+
+      <header className="hero-hook">
+        <div className="hero-media">
+          {slides.map((slide, index) => (
             <div
-              key={slide.id}
-              className={`carousel-slide ${index === slideIndex ? "active" : ""} ${
-                slide.isBright ? "bright" : ""
-              }`}
-              style={slide.type === "image" ? { backgroundImage: `url(${slide.src})` } : undefined}
-            >
-              <div className="carousel-nav">
-                <button
-                  className={`burger ${menuOpen ? "open" : ""}`}
-                  onClick={() => setMenuOpen((prev) => !prev)}
-                  aria-label="Toggle menu"
-                >
-                  <span />
-                  <span />
-                  <span />
-                </button>
-              </div>
-              {slide.type === "video" && (
-                <video
-                  className="carousel-video"
-                  src={slide.src}
-                  poster={slide.poster}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-              )}
-              <div className="carousel-overlay" />
-              <div className="carousel-content">
-                <p className="carousel-eyebrow">{t.heroEyebrow}</p>
-                <h1>{slide.name}</h1>
-                <p className="carousel-subhead">{slide.description}</p>
-              </div>
-            </div>
+              key={`${slide.type}-${slide.src || index}`}
+              className={`hero-slide ${index === activeSlide ? "active" : ""}`}
+              style={{ backgroundImage: `url(${slide.src})` }}
+            />
           ))}
-          <div className="carousel-controls">
-            {Array.from({ length: 4 }).map((_, idx) => (
-              <button
-                key={`dot-${idx}`}
-                className={`dot ${idx === slideIndex ? "active" : ""}`}
-                onClick={() => setSlideIndex(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
+          <div className="hero-gradient" />
+        </div>
+        <div className="hero-inner">
+          <div className="hero-top">
+            <div className="hero-banner">KANNUR.iO</div>
+            <button
+              className={`burger ${menuOpen ? "open" : ""}`}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-label="Toggle menu"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
           </div>
-          <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-            <Link to="/explore" onClick={() => setMenuOpen(false)}>
-              {t.sections.explore}
-            </Link>
-            <Link to="/eats" onClick={() => setMenuOpen(false)}>
-              {t.sections.eats}
-            </Link>
-            <Link to="/temples" onClick={() => setMenuOpen(false)}>
-              {t.sections.temples}
-            </Link>
-            <Link to="/events" onClick={() => setMenuOpen(false)}>
-              {t.sections.events}
-            </Link>
-            <Link to="/people" onClick={() => setMenuOpen(false)}>
-              {t.sections.personalities}
-            </Link>
-            <Link to="/hospitals" onClick={() => setMenuOpen(false)}>
-              {t.sections.hospitals}
-            </Link>
-            <a href="#ai" onClick={() => setMenuOpen(false)}>
-              {t.aiTitle}
-            </a>
+          <div className="hero-content">
+            <p className="hero-caption">{slides[activeSlide]?.caption}</p>
+            <div className="hero-dots" aria-hidden="true">
+              {slides.map((_, index) => (
+                <span key={`dot-${index}`} className={index === activeSlide ? "active" : ""} />
+              ))}
+            </div>
           </div>
+        </div>
+        <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+          <Link to="/explore" onClick={() => setMenuOpen(false)}>
+            {t.sections.explore}
+          </Link>
+          <Link to="/eats" onClick={() => setMenuOpen(false)}>
+            {t.sections.eats}
+          </Link>
+          <Link to="/temples" onClick={() => setMenuOpen(false)}>
+            {t.sections.temples}
+          </Link>
+          <Link to="/events" onClick={() => setMenuOpen(false)}>
+            {t.sections.events}
+          </Link>
+          <Link to="/people" onClick={() => setMenuOpen(false)}>
+            {t.sections.personalities}
+          </Link>
+          <Link to="/hospitals" onClick={() => setMenuOpen(false)}>
+            {t.sections.hospitals}
+          </Link>
+          <a href="#ai" onClick={() => setMenuOpen(false)}>
+            {t.aiTitle}
+          </a>
         </div>
       </header>
 
-      <section className="importance">
-        <div className="importance-copy">
-          <p className="eyebrow">{t.heroEyebrow}</p>
-          <h2>{lang === "ml" ? "കണ്ണൂർ ജില്ലയുടെ പ്രാധാന്യം" : "Why Kannur matters"}</h2>
+      <section id="why-kannur" className="bento-section">
+        <div className="section-head">
+          <p className="eyebrow">Why Kannur?</p>
+          <h2 className="section-title">Heritage, coast, and craft — in one pulse.</h2>
+        </div>
+        <div className="bento-grid">
+          {bentoCards.map((card) => (
+            <article key={card.id} className={`bento-card ${card.size} ${card.id}`}>
+              <img src={card.image} alt={card.title} loading="lazy" />
+              <div className="bento-content">
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="ai" className="ai-concierge">
+        <div className="ai-copy">
+          <p className="eyebrow">AI Concierge</p>
+          <h2 className="section-title">The .io edge, built for curious travelers.</h2>
           <p>
-            {lang === "ml"
-              ? "കടൽ, പാരമ്പര്യം, പര്‍വ്വതങ്ങൾ, തെയ്യം, കരകൗശലങ്ങൾ—ഇവ എല്ലാം ഒരേ ജില്ലയിൽ. കണ്ണൂർ ബീച്ചുകൾ, കോട്ടകൾ, വനപ്രദേശങ്ങൾ, ആസ്വാദ്യങ്ങൾ എന്നിവയിലൂടെ മലബാറിന്റെ സംസ്കാരഹൃദയം ആയി തുടരുന്നു."
-              : "Sea, heritage, hills, Theyyam, and crafts—Kannur is where Malabar’s culture meets raw coastline. From forts and beaches to forested highlands, the district blends history, ritual, and slow travel in one arc."}
+            Ask me anything about Kannur. (e.g., “Where can I see Theyyam tonight?” or “Best
+            sunset spot near the Fort?”)
           </p>
         </div>
-        <div className="importance-stats">
-          <div>
-            <p className="stat-label">{lang === "ml" ? "തീരം" : "Coastline"}</p>
-            <p className="stat-value">{lang === "ml" ? "തീര ശാന്തത" : "Arabian Sea views"}</p>
+        <div className="ai-panel">
+          <div className="ai-input">
+            <input
+              type="text"
+              placeholder="Ask about beaches, rituals, food, or routes…"
+              aria-label="Ask about Kannur"
+            />
+            <button className="primary" type="button">
+              Ask
+            </button>
           </div>
-          <div>
-            <p className="stat-label">{lang === "ml" ? "പരമ്പര്യം" : "Heritage"}</p>
-            <p className="stat-value">{lang === "ml" ? "കോട്ടകളും ക്ഷേത്രങ്ങളും" : "Forts + temples"}</p>
-          </div>
-          <div>
-            <p className="stat-label">{lang === "ml" ? "തെയ്യം" : "Theyyam"}</p>
-            <p className="stat-value">{lang === "ml" ? "ജീവന്ത കല" : "Living ritual art"}</p>
+          <div className="ai-suggestions">
+            <button type="button">Where can I see Theyyam tonight?</button>
+            <button type="button">Best sunset near St. Angelo Fort?</button>
+            <button type="button">Plan a 2‑day itinerary</button>
           </div>
         </div>
       </section>
 
-      <section className="explore-cta">
-        <div className="explore-cta-media">
-          <img
-            src={places.find((place) => place.images?.length)?.images[0]?.url}
-            alt={lang === "ml" ? "കണ്ണൂരിന്റെ കാഴ്ചകൾ" : "Views of Kannur"}
-            loading="lazy"
-          />
-        </div>
-        <div className="explore-cta-copy">
-          <p className="eyebrow">{lang === "ml" ? "അടുത്തത്" : "Next up"}</p>
-          <h2>{lang === "ml" ? "കണ്ണൂർ എക്സ്പ്ലോർ ചെയ്യൂ" : "Explore Kannur"}</h2>
-          <p>
-            {lang === "ml"
-              ? "ബീച്ചുകൾ, കോട്ടകൾ, കുന്നുകൾ, വന്യജീവി സങ്കേതങ്ങൾ—കണ്ണൂരിലെ പ്രധാന സ്ഥലങ്ങൾ ഇവിടെ ഒരുമിച്ച്."
-              : "Beaches, forts, hills, and wildlife—open the full map of Kannur’s must‑see places."}
-          </p>
-          <Link className="primary" to="/explore" onClick={() => window.scrollTo(0, 0)}>
-            {lang === "ml" ? "കൂടുതൽ കാണാൻ ക്ലിക്ക് ചെയ്യൂ" : "Click to see more"}
-          </Link>
-        </div>
-      </section>
     </main>
   );
 }

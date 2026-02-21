@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
@@ -7,7 +7,6 @@ import Temples from "./pages/Temples";
 import Events from "./pages/Events";
 import People from "./pages/People";
 import Hospitals from "./pages/Hospitals";
-import { quickPrompts } from "./data/places";
 
 const translations = {
   en: {
@@ -20,16 +19,20 @@ const translations = {
     ctaShop: "Find local shopping",
     searchPlaceholder: "Search beaches, forts, hills, wildlife, or shopping...",
     spotsLabel: "spots",
-    aiEyebrow: "Ask Kannur AI",
-    aiTitle: "Plan your day in seconds",
+    aiEyebrow: "AI Concierge",
+    aiTitle: "Ask Kannur",
     aiDesc:
       "This assistant uses local tags and curated sources to suggest real places. Ask anything in plain English.",
     chatPlaceholder: "Ask for beaches, a 1-day plan, quiet spots, or local shopping...",
     send: "Send",
-    sourcesTitle: "Official sources used",
-    sourcesDesc:
-      "Place details are based on Kerala Tourism, Government of India, and Kannur District tourism portals.",
-    footer: "Built for mobile-first exploration of Kannur and nearby day trips.",
+    footerTagline: "Built for the curious. Powered by the coast.",
+    footerLinks: {
+      calendar: "Cultural Calendar",
+      food: "Food Map",
+      stay: "Stay Local",
+      contact: "Contact",
+    },
+    footerCopy: "© 2026 Kannur.io",
     tags: {
       all: "All",
       beach: "Beaches",
@@ -111,16 +114,20 @@ const translations = {
     ctaShop: "ലോക്കൽ ഷോപ്പിംഗ്",
     searchPlaceholder: "ബീച്ച്, കോട്ട, കുന്ന്, വന്യജീവി, ഷോപ്പിംഗ് തിരയൂ...",
     spotsLabel: "സ്ഥലങ്ങൾ",
-    aiEyebrow: "കണ്ണൂർ AI-യോട് ചോദിക്കൂ",
-    aiTitle: "സെക്കൻഡുകളിൽ പ്ലാൻ",
+    aiEyebrow: "AI Concierge",
+    aiTitle: "കണ്ണൂർ AI",
     aiDesc:
       "പ്രാദേശിക ടാഗുകളും ഔദ്യോഗിക സ്രോതസ്സുകളും അടിസ്ഥാനമാക്കി നിർദ്ദേശങ്ങൾ നൽകുന്നു. മലയാളത്തിൽ ചോദിക്കാം.",
     chatPlaceholder: "ബീച്ചുകൾ, 1-ദിവസ പ്ലാൻ, ശാന്ത ഇടങ്ങൾ, ലോക്കൽ ഷോപ്പിംഗ്...",
     send: "അയക്കൂ",
-    sourcesTitle: "ഔദ്യോഗിക സ്രോതസ്സുകൾ",
-    sourcesDesc:
-      "സ്ഥല വിവരങ്ങൾ കേരള ടൂറിസം, ഇന്ത്യ സർക്കാർ, കണ്ണൂർ ജില്ലാ പോർട്ടൽ എന്നിവയെ ആശ്രയിച്ചുള്ളതാണ്.",
-    footer: "കണ്ണൂരിലും സമീപ പ്രദേശങ്ങളിലും മൊബൈൽ-ഫസ്റ്റ് എക്സ്പ്ലോറേഷനായി നിർമ്മിച്ചത്.",
+    footerTagline: "കൗതുകത്തിനായി നിർമ്മിച്ചത്. തീരത്തിന്റെ ഊർജ്ജത്തിൽ പ്രവർത്തിക്കുന്നു.",
+    footerLinks: {
+      calendar: "സാംസ്കാരിക കലണ്ടർ",
+      food: "ഭക്ഷ്യ മാപ്പ്",
+      stay: "സ്റ്റേ ലോക്കൽ",
+      contact: "ബന്ധപ്പെടുക",
+    },
+    footerCopy: "© 2026 Kannur.io",
     tags: {
       all: "എല്ലാം",
       beach: "ബീച്ചുകൾ",
@@ -196,19 +203,8 @@ const translations = {
 
 export default function App() {
   const [lang, setLang] = useState("en");
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [slideIndex, setSlideIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theyyamStart, setTheyyamStart] = useState(() => new Date().toISOString().slice(0, 10));
-  const [theyyamEnd, setTheyyamEnd] = useState(() => {
-    const end = new Date();
-    end.setDate(end.getDate() + 7);
-    return end.toISOString().slice(0, 10);
-  });
-  const [theyyamLoading, setTheyyamLoading] = useState(false);
-  const [theyyamEvents, setTheyyamEvents] = useState([]);
-  const [theyyamSources, setTheyyamSources] = useState([]);
+  
 
   const t = translations[lang];
 
@@ -216,38 +212,7 @@ export default function App() {
     document.documentElement.lang = lang === "ml" ? "ml" : "en";
   }, [lang]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % 4);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleSend = (value) => {
-    const trimmed = value.trim();
-    if (!trimmed) return;
-    setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
-    setInput("");
-  };
-
-  const fetchTheyyam = useCallback(async () => {
-    setTheyyamLoading(true);
-    try {
-      const response = await fetch(`/api/theyyam?start=${theyyamStart}&end=${theyyamEnd}`);
-      const data = await response.json();
-      setTheyyamEvents(data.events || []);
-      setTheyyamSources(data.sources || []);
-    } catch (error) {
-      setTheyyamEvents([]);
-      setTheyyamSources([]);
-    } finally {
-      setTheyyamLoading(false);
-    }
-  }, [theyyamStart, theyyamEnd]);
-
-  useEffect(() => {
-    fetchTheyyam();
-  }, [fetchTheyyam]);
+  
 
   return (
     <div className="app" data-lang={lang}>
@@ -273,9 +238,6 @@ export default function App() {
               t={t}
               menuOpen={menuOpen}
               setMenuOpen={setMenuOpen}
-              handleSend={handleSend}
-              slideIndex={slideIndex}
-              setSlideIndex={setSlideIndex}
             />
           }
         />
@@ -287,62 +249,15 @@ export default function App() {
         <Route path="/hospitals" element={<Hospitals lang={lang} t={t} />} />
       </Routes>
 
-      <section id="ai" className="ai-section">
-        <div className="ai-header">
-          <div>
-            <p className="eyebrow">{t.aiEyebrow}</p>
-            <h2>{t.aiTitle}</h2>
-            <p>{t.aiDesc}</p>
-          </div>
-          <div className="prompt-row">
-            {quickPrompts[lang].map((prompt) => (
-              <button key={prompt} className="prompt" onClick={() => handleSend(prompt)}>
-                {prompt}
-              </button>
-            ))}
-          </div>
+      <footer className="footer footer-modern">
+        <div className="footer-links">
+          <Link to="/events">{t.footerLinks.calendar}</Link>
+          <Link to="/eats">{t.footerLinks.food}</Link>
+          <Link to="/explore">{t.footerLinks.stay}</Link>
+          <a href="mailto:hello@kannur.io">{t.footerLinks.contact}</a>
         </div>
-
-        <div className="chat">
-          <div className="chat-feed">
-            {messages.map((message, index) => (
-              <div key={`${message.role}-${index}`} className={`chat-bubble ${message.role}`}>
-                <p>{message.text}</p>
-              </div>
-            ))}
-          </div>
-
-        <div className="chat-input">
-            <input
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              placeholder={t.chatPlaceholder}
-            />
-            <button className="primary" onClick={() => handleSend(input)}>
-              {t.send}
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="sources">
-        <h3>{t.sourcesTitle}</h3>
-        <p>{t.sourcesDesc}</p>
-        <div className="source-links">
-          <a href="https://www.keralatourism.org/" target="_blank" rel="noreferrer">
-            Kerala Tourism
-          </a>
-          <a href="https://kannur.nic.in/" target="_blank" rel="noreferrer">
-            Kannur District
-          </a>
-          <a href="https://lighthouse.nic.in/" target="_blank" rel="noreferrer">
-            Lighthouse Portal
-          </a>
-        </div>
-      </section>
-
-      <footer className="footer">
-        <p>{t.footer}</p>
+        <p className="footer-tagline">{t.footerTagline}</p>
+        <p className="footer-copy">{t.footerCopy}</p>
       </footer>
     </div>
   );

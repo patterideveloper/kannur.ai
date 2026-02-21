@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a1161a" />
+      <stop offset="55%" stop-color="#e24646" />
+      <stop offset="100%" stop-color="#45b6d9" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.4)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect y="0" width="1200" height="220" fill="url(#glow)" />
+  <circle cx="980" cy="170" r="140" fill="rgba(255,255,255,0.18)" />
+  <circle cx="180" cy="420" r="200" fill="rgba(255,255,255,0.12)" />
+  <g fill="#ffffff" font-family="Cormorant Garamond, Georgia, serif">
+    <text x="80" y="300" font-size="64" font-weight="700">Kannur</text>
+    <text x="80" y="360" font-size="32" font-weight="500">Explore Tourism</text>
+  </g>
+  <g fill="#ffffff" opacity="0.9" font-family="Spline Sans, Arial, sans-serif">
+    <text x="80" y="420" font-size="20">Beaches · Temples · Culture · Food</text>
+  </g>
+</svg>

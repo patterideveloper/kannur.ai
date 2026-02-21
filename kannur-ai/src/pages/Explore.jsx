@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
 import { places } from "../data/places";
 
 const tagGroups = [
@@ -151,6 +152,16 @@ export default function Explore({ lang, t }) {
 
   return (
     <main className="page">
+      <Seo
+        lang={lang === "ml" ? "ml" : "en"}
+        path="/explore"
+        title="Explore Kannur | Kannur | Explore Tourism"
+        description={
+          lang === "ml"
+            ? "കണ്ണൂരിലെ ടൂറിസ്റ്റ് സ്പോട്ടുകൾ, കടൽത്തീരങ്ങൾ, പാരമ്പര്യ കേന്ദ്രങ്ങൾ എന്നിവ കണ്ടെത്തൂ."
+            : "Discover tourist spots, beaches, heritage sites, and shopping in and around Kannur."
+        }
+      />
       <section className="page-hero">
         <Link className="back-link" to="/">
           ← {lang === "ml" ? "ഹോം" : "Back to Home"}

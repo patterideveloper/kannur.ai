@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
 import { temples } from "../data/extras";
 
 function InfoCard({ title, description, meta, source, mapsQuery, image, t }) {
@@ -65,6 +66,16 @@ export default function Temples({ lang, t }) {
 
   return (
     <main className="page">
+      <Seo
+        lang={lang === "ml" ? "ml" : "en"}
+        path="/temples"
+        title="Temples & Pilgrimage | Kannur | Explore Tourism"
+        description={
+          lang === "ml"
+            ? "കണ്ണൂരിലെ പ്രധാന ക്ഷേത്രങ്ങളും തീർത്ഥാടന കേന്ദ്രങ്ങളും."
+            : "Major temples and pilgrimage spots across Kannur district."
+        }
+      />
       <section className="page-hero">
         <Link className="back-link" to="/">
           ← {lang === "ml" ? "ഹോം" : "Back to Home"}

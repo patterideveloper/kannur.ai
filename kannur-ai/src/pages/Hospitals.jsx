@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
 import { hospitals } from "../data/extras";
 
 function InfoCard({ title, description, meta, source, mapsQuery, t }) {
@@ -34,6 +35,16 @@ function InfoCard({ title, description, meta, source, mapsQuery, t }) {
 export default function Hospitals({ lang, t }) {
   return (
     <main className="page">
+      <Seo
+        lang={lang === "ml" ? "ml" : "en"}
+        path="/hospitals"
+        title="Hospitals & Essentials | Kannur | Explore Tourism"
+        description={
+          lang === "ml"
+            ? "കണ്ണൂരിലെ പ്രധാന ആശുപത്രികളും അവശ്യ സേവനങ്ങളും."
+            : "Key hospitals and essential services across Kannur district."
+        }
+      />
       <section className="page-hero">
         <Link className="back-link" to="/">
           ← {lang === "ml" ? "ഹോം" : "Back to Home"}

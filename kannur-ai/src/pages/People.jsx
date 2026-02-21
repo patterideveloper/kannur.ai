@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
 import { personalities } from "../data/extras";
 
 function InfoCard({ title, subtitle, description, meta, source, image, t }) {
@@ -38,6 +39,16 @@ function InfoCard({ title, subtitle, description, meta, source, image, t }) {
 export default function People({ lang, t }) {
   return (
     <main className="page">
+      <Seo
+        lang={lang === "ml" ? "ml" : "en"}
+        path="/people"
+        title="People of Kannur | Kannur | Explore Tourism"
+        description={
+          lang === "ml"
+            ? "കണ്ണൂരിൽ നിന്നുള്ള ശ്രദ്ധേയ വ്യക്തികൾ."
+            : "Notable people from Kannur district across arts, politics, sports, and academia."
+        }
+      />
       <section className="page-hero">
         <Link className="back-link" to="/">
           ← {lang === "ml" ? "ഹോം" : "Back to Home"}
