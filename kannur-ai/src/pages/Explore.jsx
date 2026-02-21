@@ -81,9 +81,6 @@ function PlaceCard({ place, lang, t }) {
         ))}
       </div>
       <div className="place-actions">
-        <a className="source-link" href={place.source} target="_blank" rel="noreferrer">
-          {t.officialSource}
-        </a>
         <a className="map-link" href={mapsUrl} target="_blank" rel="noreferrer">
           {t.mapsLink}
         </a>

@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import { personalities } from "../data/extras";
 
-function InfoCard({ title, subtitle, description, meta, source, t }) {
+function InfoCard({ title, subtitle, description, meta, source, image, t }) {
   return (
     <article className="info-card">
+      {image?.url && (
+        <figure className="info-card-media">
+          <img src={image.url} alt={image.alt || title} loading="lazy" />
+          {image.credit && image.creditUrl && (
+            <figcaption className="info-card-credit">
+              <a href={image.creditUrl} target="_blank" rel="noreferrer">
+                {image.credit}
+              </a>
+            </figcaption>
+          )}
+        </figure>
+      )}
       <div>
         {subtitle && <p className="info-subtitle">{subtitle}</p>}
         <h3>{title}</h3>
@@ -18,13 +30,7 @@ function InfoCard({ title, subtitle, description, meta, source, t }) {
           ))}
         </div>
       )}
-      <div className="info-actions">
-        {source && (
-          <a className="source-link" href={source} target="_blank" rel="noreferrer">
-            {t.officialSource}
-          </a>
-        )}
-      </div>
+      <div className="info-actions" />
     </article>
   );
 }
@@ -53,6 +59,7 @@ export default function People({ lang, t }) {
               description={person.description}
               meta={[{ label: t.labels.field, value: person.field }]}
               source={person.source}
+              image={person.image}
               t={t}
             />
           ))}

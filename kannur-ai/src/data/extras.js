@@ -30,6 +30,13 @@ export const temples = [
     description: "A major Krishna temple in Kannur district with rich Kerala temple architecture.",
     source: "https://en.wikipedia.org/wiki/Trichambaram_Temple",
     mapsQuery: "Trichambaram Temple Taliparamba",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Thrichambaram-sreekrishna_temple-taliparamba.jpg",
+      alt: "Trichambaram Shree Krishna Temple",
+      credit: "Prajithek (CC BY-SA 3.0)",
+      creditUrl:
+        "https://commons.wikimedia.org/wiki/File:Thrichambaram-sreekrishna_temple-taliparamba.jpg",
+    },
   },
   {
     id: "sundareswara",
@@ -46,6 +53,13 @@ export const temples = [
     description: "Important temple in Thalassery town, established by Sree Narayana Guru.",
     source: "https://en.wikipedia.org/wiki/Thalassery_Jagannatha_Temple",
     mapsQuery: "Thalassery Jagannatha Temple",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Jagannath_Temple_Thalassery_JTG_(1).jpg",
+      alt: "Jagannatha Temple, Thalassery",
+      credit: "Prof tpms (CC BY-SA 4.0)",
+      creditUrl:
+        "https://commons.wikimedia.org/wiki/File:Jagannath_Temple_Thalassery_JTG_(1).jpg",
+    },
   },
   {
     id: "lakshmi-narasimha-thalassery",
@@ -54,6 +68,13 @@ export const temples = [
     description: "Historic temple associated with the GSB community in Thalassery.",
     source: "https://en.wikipedia.org/wiki/Sri_Lakshmi_Narasimha_Temple,_Thalassery",
     mapsQuery: "Sri Lakshmi Narasimha Temple Thalassery",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/Special:FilePath/SLN_temple_Thalassery1.jpg",
+      alt: "Sri Lakshmi Narasimha Temple, Thalassery",
+      credit: "Wikimedia Commons (CC BY-SA)",
+      creditUrl:
+        "https://commons.wikimedia.org/wiki/Category:Sri_Lakshmi_Narasimha_Temple,_Thalassery",
+    },
   },
 ];
 
@@ -93,6 +114,12 @@ export const personalities = [
     field: "Economist",
     description: "Internationally known economist; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Gita_Gopinath_2025_(cropped).jpg",
+      alt: "Gita Gopinath",
+      credit: "Roland Korner (licensed via Wikimedia Commons)",
+      creditUrl: "https://commons.wikimedia.org/wiki/File:Gita_Gopinath_2025_(cropped).jpg",
+    },
   },
   {
     id: "a-k-gopalan",
@@ -100,6 +127,13 @@ export const personalities = [
     field: "Politics",
     description: "Prominent communist leader; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/Special:FilePath/AK_Gopalan_1990_stamp_of_India.jpg",
+      alt: "A. K. Gopalan stamp",
+      credit: "India Post (GODL-India)",
+      creditUrl:
+        "https://commons.wikimedia.org/wiki/File:AK_Gopalan_1990_stamp_of_India.jpg",
+    },
   },
   {
     id: "jimmy-george",
@@ -107,6 +141,12 @@ export const personalities = [
     field: "Sports (Volleyball)",
     description: "Legendary volleyball player; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Jimmy_george.jpg",
+      alt: "Jimmy George playing volleyball",
+      credit: "JYOUTH (CC BY-SA 4.0)",
+      creditUrl: "https://commons.wikimedia.org/wiki/File:Jimmy_george.jpg",
+    },
   },
   {
     id: "sukumar-azhikode",
@@ -114,6 +154,12 @@ export const personalities = [
     field: "Writer & Critic",
     description: "Influential Malayalam writer and critic; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Sukumar_Azhikode.jpg",
+      alt: "Sukumar Azhikode",
+      credit: "Sreejithk2000 (CC BY-SA 3.0)",
+      creditUrl: "https://commons.wikimedia.org/wiki/File:Sukumar_Azhikode.jpg",
+    },
   },
 ];
 

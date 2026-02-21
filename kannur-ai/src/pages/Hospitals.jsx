@@ -21,11 +21,6 @@ function InfoCard({ title, description, meta, source, mapsQuery, t }) {
         </div>
       )}
       <div className="info-actions">
-        {source && (
-          <a className="source-link" href={source} target="_blank" rel="noreferrer">
-            {t.officialSource}
-          </a>
-        )}
         {mapsUrl && (
           <a className="map-link" href={mapsUrl} target="_blank" rel="noreferrer">
             {t.mapsLink}

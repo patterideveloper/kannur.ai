@@ -2,12 +2,24 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { temples } from "../data/extras";
 
-function InfoCard({ title, description, meta, source, mapsQuery, t }) {
+function InfoCard({ title, description, meta, source, mapsQuery, image, t }) {
   const mapsUrl = mapsQuery
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`
     : null;
   return (
     <article className="info-card">
+      {image?.url && (
+        <figure className="info-card-media">
+          <img src={image.url} alt={image.alt || title} loading="lazy" />
+          {image.credit && image.creditUrl && (
+            <figcaption className="info-card-credit">
+              <a href={image.creditUrl} target="_blank" rel="noreferrer">
+                {image.credit}
+              </a>
+            </figcaption>
+          )}
+        </figure>
+      )}
       <div>
         <h3>{title}</h3>
       </div>
@@ -22,11 +34,6 @@ function InfoCard({ title, description, meta, source, mapsQuery, t }) {
         </div>
       )}
       <div className="info-actions">
-        {source && (
-          <a className="source-link" href={source} target="_blank" rel="noreferrer">
-            {t.officialSource}
-          </a>
-        )}
         {mapsUrl && (
           <a className="map-link" href={mapsUrl} target="_blank" rel="noreferrer">
             {t.mapsLink}
@@ -79,6 +86,7 @@ export default function Temples({ lang, t }) {
               meta={[{ label: t.labels.area, value: temple.area }]}
               source={temple.source}
               mapsQuery={temple.mapsQuery}
+              image={temple.image}
               t={t}
             />
           ))}

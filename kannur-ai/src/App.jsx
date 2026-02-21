@@ -58,7 +58,6 @@ const translations = {
     introText:
       "Hi! I’m your Kannur guide. Ask me for beaches, forts, quiet spots, local shopping, or a 1-day plan — I’ll curate a route with the best views.",
     planHint: "Tip: carry water, start early for hills, and check tides if you’re visiting Dharmadam Island.",
-    officialSource: "Official source",
     mapsLink: "Google Maps",
     sections: {
       explore: "Explore Kannur",
@@ -150,7 +149,6 @@ const translations = {
     introText:
       "ഹായ്! ഞാൻ നിങ്ങളുടെ കണ്ണൂർ കോമ്പസ്. ബീച്ച്, കോട്ട, ശാന്ത സ്ഥലങ്ങൾ, ലോക്കൽ ഷോപ്പിംഗ് അല്ലെങ്കിൽ 1-ദിവസ പ്ലാൻ — പറയൂ, ഞാൻ പ്ലാൻ ചെയ്യാം.",
     planHint: "ടിപ്പ്: വെള്ളം എടുത്തോളൂ, കുന്നിലേക്ക് രാവിലെ തന്നെ പോകൂ, ധർമ്മടം ദ്വീപിന് ടൈഡ് സമയം പരിശോധിക്കൂ.",
-    officialSource: "ഔദ്യോഗിക സ്രോതസ്",
     mapsLink: "ഗൂഗിൾ മാപ്സ്",
     sections: {
       explore: "കണ്ണൂർ സന്ദർശിക്കുക",
