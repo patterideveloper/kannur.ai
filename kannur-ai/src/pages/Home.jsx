@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Seo from "../components/Seo";
 const bentoCards = [
@@ -33,31 +33,43 @@ const bentoCards = [
 ];
 
 export default function Home({ lang, t, menuOpen, setMenuOpen }) {
+  const whyRef = useRef(null);
+
   const slides = useMemo(
     () => [
       {
         type: "image",
-        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Kandanar_kelan_theyyam%3B_The_fire_theyyam_%21.jpg",
+        src: "/images/hero/theyyam_fire-1200.jpg",
+        srcSet:
+          "/images/hero/theyyam_fire-480.jpg 480w, /images/hero/theyyam_fire-800.jpg 800w, /images/hero/theyyam_fire-1200.jpg 1200w, /images/hero/theyyam_fire-1600.jpg 1600w",
         caption: "Theyyam fire ritual close‑up",
       },
       {
         type: "image",
-        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Muzhappilangad_Drive-In_Beach_Sunset_01.JPG",
+        src: "/images/hero/muzhappilangad_sunset-1200.jpg",
+        srcSet:
+          "/images/hero/muzhappilangad_sunset-480.jpg 480w, /images/hero/muzhappilangad_sunset-800.jpg 800w, /images/hero/muzhappilangad_sunset-1200.jpg 1200w, /images/hero/muzhappilangad_sunset-1600.jpg 1600w",
         caption: "Muzhappilangad drive‑in beach at sunset",
       },
       {
         type: "image",
-        src: "https://commons.wikimedia.org/wiki/Special:FilePath/St_Angelo_Fort%2C_Kannur_10.jpg",
+        src: "/images/hero/st_angelo_fort-1200.jpg",
+        srcSet:
+          "/images/hero/st_angelo_fort-480.jpg 480w, /images/hero/st_angelo_fort-800.jpg 800w, /images/hero/st_angelo_fort-1200.jpg 1200w, /images/hero/st_angelo_fort-1600.jpg 1600w",
         caption: "St. Angelo Fort — sea‑facing bastions",
       },
       {
         type: "image",
-        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Payyambalam_beach%2C_Kannur.jpg",
+        src: "/images/hero/payyambalam_beach-1200.jpg",
+        srcSet:
+          "/images/hero/payyambalam_beach-480.jpg 480w, /images/hero/payyambalam_beach-800.jpg 800w, /images/hero/payyambalam_beach-1200.jpg 1200w, /images/hero/payyambalam_beach-1600.jpg 1600w",
         caption: "Payyambalam beach — evening shoreline",
       },
       {
         type: "image",
-        src: "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmadom_island.jpg",
+        src: "/images/hero/dharmadam_island-1200.jpg",
+        srcSet:
+          "/images/hero/dharmadam_island-480.jpg 480w, /images/hero/dharmadam_island-800.jpg 800w, /images/hero/dharmadam_island-1200.jpg 1200w, /images/hero/dharmadam_island-1600.jpg 1600w",
         caption: "Dharmadam Island — low‑tide crossing",
       },
     ],
@@ -74,6 +86,32 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  useEffect(() => {
+    const container = whyRef.current;
+    if (!container) return;
+    const cards = Array.from(container.querySelectorAll(".why-card"));
+    if (cards.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    cards.forEach((card, index) => {
+      card.style.setProperty("--delay", `${index * 120}ms`);
+      observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main>
       <Seo
@@ -87,14 +125,28 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
         }
       />
 
-      <header className="hero-hook">
+      <header
+        className="hero-hook"
+        onClick={() => {
+          if (menuOpen) setMenuOpen(false);
+        }}
+      >
         <div className="hero-media">
           {slides.map((slide, index) => (
             <div
               key={`${slide.type}-${slide.src || index}`}
               className={`hero-slide ${index === activeSlide ? "active" : ""}`}
-              style={{ backgroundImage: `url(${slide.src})` }}
-            />
+            >
+              <img
+                src={slide.src}
+                srcSet={slide.srcSet}
+                sizes="100vw"
+                alt={slide.caption}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                fetchpriority={index === 0 ? "high" : "auto"}
+              />
+            </div>
           ))}
           <div className="hero-gradient" />
         </div>
@@ -103,7 +155,10 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
             <div className="hero-banner">KANNUR.iO</div>
             <button
               className={`burger ${menuOpen ? "open" : ""}`}
-              onClick={() => setMenuOpen((prev) => !prev)}
+              onClick={(event) => {
+                event.stopPropagation();
+                setMenuOpen((prev) => !prev);
+              }}
               aria-label="Toggle menu"
             >
               <span />
@@ -120,7 +175,10 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
             </div>
           </div>
         </div>
-        <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        <div
+          className={`mobile-menu ${menuOpen ? "open" : ""}`}
+          onClick={(event) => event.stopPropagation()}
+        >
           <Link to="/explore" onClick={() => setMenuOpen(false)}>
             {t.sections.explore}
           </Link>
@@ -145,35 +203,63 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
         </div>
       </header>
 
-      <section id="why-kannur" className="why-section">
+      <section id="why-kannur" className="why-section" ref={whyRef}>
         <div className="why-head">
           <p className="eyebrow">Why Kannur?</p>
           <h2 className="section-title">Heritage, coast, and craft — in one pulse.</h2>
         </div>
         <div className="why-grid">
           <article className="why-card hero">
-            <img src="/bento/theyyam.svg" alt="The Red Ritual" loading="lazy" />
+            <img
+              src="/images/hero/theyyam_fire-800.jpg"
+              srcSet="/images/hero/theyyam_fire-480.jpg 480w, /images/hero/theyyam_fire-800.jpg 800w"
+              sizes="(max-width: 700px) 100vw, 600px"
+              alt="The Red Ritual"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="why-glass">
               <h3>The Red Ritual</h3>
               <p>Not a dance — a living god.</p>
             </div>
           </article>
           <article className="why-card wide">
-            <img src="/bento/beach.svg" alt="Drive the Tide" loading="lazy" />
+            <img
+              src="/images/hero/muzhappilangad_sunset-800.jpg"
+              srcSet="/images/hero/muzhappilangad_sunset-480.jpg 480w, /images/hero/muzhappilangad_sunset-800.jpg 800w"
+              sizes="(max-width: 700px) 100vw, 600px"
+              alt="Drive the Tide"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="why-glass">
               <h3>Drive the Tide</h3>
               <p>4km of firm sand. Windows down.</p>
             </div>
           </article>
           <article className="why-card small">
-            <img src="/bento/cake.svg" alt="The First Slice" loading="lazy" />
+            <img
+              src="/images/why/cake_slice-800.jpg"
+              srcSet="/images/why/cake_slice-480.jpg 480w, /images/why/cake_slice-800.jpg 800w"
+              sizes="(max-width: 700px) 50vw, 280px"
+              alt="The First Slice"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="why-glass">
               <h3>Slice</h3>
-              <p>India’s first cake, 1883.</p>
+              <p>India’s First Slice (1883)</p>
             </div>
           </article>
           <article className="why-card small">
-            <img src="/bento/mist.svg" alt="Mist & Moss" loading="lazy" />
+            <img
+              src="/images/why/paithalmala-800.jpg"
+              srcSet="/images/why/paithalmala-480.jpg 480w, /images/why/paithalmala-800.jpg 800w"
+              sizes="(max-width: 700px) 50vw, 280px"
+              alt="Mist & Moss"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="why-glass">
               <h3>Mist & Moss</h3>
               <p>Paithalmala above the clouds.</p>

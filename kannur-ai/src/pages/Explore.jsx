@@ -63,7 +63,14 @@ function PlaceCard({ place, lang, t }) {
         <div className="gallery" aria-label={`${displayName} gallery`}>
           {place.images.map((image) => (
             <figure key={image.url}>
-              <img src={image.url} alt={image.alt} loading="lazy" />
+              <img
+                src={image.url}
+                srcSet={image.srcSet}
+                sizes={image.sizes || "(max-width: 700px) 80vw, 420px"}
+                alt={image.alt}
+                loading="lazy"
+                decoding="async"
+              />
               <figcaption>
                 <a href={image.creditUrl} target="_blank" rel="noreferrer">
                   Photo: {image.credit}

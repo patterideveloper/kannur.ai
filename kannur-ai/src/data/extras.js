@@ -31,7 +31,10 @@ export const temples = [
     source: "https://en.wikipedia.org/wiki/Trichambaram_Temple",
     mapsQuery: "Trichambaram Temple Taliparamba",
     image: {
-      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Thrichambaram-sreekrishna_temple-taliparamba.jpg",
+      url: "/images/temples/trichambaram_temple-800.jpg",
+      srcSet:
+        "/images/temples/trichambaram_temple-480.jpg 480w, /images/temples/trichambaram_temple-800.jpg 800w, /images/temples/trichambaram_temple-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 90vw, 420px",
       alt: "Trichambaram Shree Krishna Temple",
       credit: "Prajithek (CC BY-SA 3.0)",
       creditUrl:
@@ -54,7 +57,10 @@ export const temples = [
     source: "https://en.wikipedia.org/wiki/Thalassery_Jagannatha_Temple",
     mapsQuery: "Thalassery Jagannatha Temple",
     image: {
-      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Jagannath_Temple_Thalassery_JTG_(1).jpg",
+      url: "/images/temples/jagannatha_temple-800.jpg",
+      srcSet:
+        "/images/temples/jagannatha_temple-480.jpg 480w, /images/temples/jagannatha_temple-800.jpg 800w, /images/temples/jagannatha_temple-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 90vw, 420px",
       alt: "Jagannatha Temple, Thalassery",
       credit: "Prof tpms (CC BY-SA 4.0)",
       creditUrl:
@@ -69,7 +75,10 @@ export const temples = [
     source: "https://en.wikipedia.org/wiki/Sri_Lakshmi_Narasimha_Temple,_Thalassery",
     mapsQuery: "Sri Lakshmi Narasimha Temple Thalassery",
     image: {
-      url: "https://commons.wikimedia.org/wiki/Special:FilePath/SLN_temple_Thalassery1.jpg",
+      url: "/images/temples/lakshmi_narasimha-800.jpg",
+      srcSet:
+        "/images/temples/lakshmi_narasimha-480.jpg 480w, /images/temples/lakshmi_narasimha-800.jpg 800w, /images/temples/lakshmi_narasimha-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 90vw, 420px",
       alt: "Sri Lakshmi Narasimha Temple, Thalassery",
       credit: "Wikimedia Commons (CC BY-SA)",
       creditUrl:
@@ -115,7 +124,10 @@ export const personalities = [
     description: "Internationally known economist; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
-      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Gita_Gopinath_2025_(cropped).jpg",
+      url: "/images/people/gita_gopinath-800.jpg",
+      srcSet:
+        "/images/people/gita_gopinath-480.jpg 480w, /images/people/gita_gopinath-800.jpg 800w, /images/people/gita_gopinath-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
       alt: "Gita Gopinath",
       credit: "Roland Korner (licensed via Wikimedia Commons)",
       creditUrl: "https://commons.wikimedia.org/wiki/File:Gita_Gopinath_2025_(cropped).jpg",
@@ -128,7 +140,10 @@ export const personalities = [
     description: "Prominent communist leader; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
-      url: "https://commons.wikimedia.org/wiki/Special:FilePath/AK_Gopalan_1990_stamp_of_India.jpg",
+      url: "/images/people/ak_gopalan-800.jpg",
+      srcSet:
+        "/images/people/ak_gopalan-480.jpg 480w, /images/people/ak_gopalan-800.jpg 800w, /images/people/ak_gopalan-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
       alt: "A. K. Gopalan stamp",
       credit: "India Post (GODL-India)",
       creditUrl:
@@ -142,7 +157,10 @@ export const personalities = [
     description: "Legendary volleyball player; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
-      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Jimmy_george.jpg",
+      url: "/images/people/jimmy_george-800.jpg",
+      srcSet:
+        "/images/people/jimmy_george-480.jpg 480w, /images/people/jimmy_george-800.jpg 800w, /images/people/jimmy_george-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
       alt: "Jimmy George playing volleyball",
       credit: "JYOUTH (CC BY-SA 4.0)",
       creditUrl: "https://commons.wikimedia.org/wiki/File:Jimmy_george.jpg",
@@ -155,7 +173,10 @@ export const personalities = [
     description: "Influential Malayalam writer and critic; listed among notable people from Kannur district.",
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
-      url: "https://commons.wikimedia.org/wiki/Special:FilePath/Sukumar_Azhikode.jpg",
+      url: "/images/people/sukumar_azhikode-800.jpg",
+      srcSet:
+        "/images/people/sukumar_azhikode-480.jpg 480w, /images/people/sukumar_azhikode-800.jpg 800w, /images/people/sukumar_azhikode-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
       alt: "Sukumar Azhikode",
       credit: "Sreejithk2000 (CC BY-SA 3.0)",
       creditUrl: "https://commons.wikimedia.org/wiki/File:Sukumar_Azhikode.jpg",

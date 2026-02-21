@@ -16,7 +16,10 @@ export const places = [
     coords: { lat: 11.85405, lng: 75.37183 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/St%20Angelo%20Fort%2C%20Kannur%2010.jpg",
+        url: "/images/places/st_angelo_fort-800.jpg",
+        srcSet:
+          "/images/places/st_angelo_fort-480.jpg 480w, /images/places/st_angelo_fort-800.jpg 800w, /images/places/st_angelo_fort-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "St. Angelo Fort in Kannur",
         credit: "Deepa Chandran2014 (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:St_Angelo_Fort,_Kannur_10.jpg",
@@ -41,7 +44,10 @@ export const places = [
     coords: { lat: 11.79445, lng: 75.44096 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Muzhappilangad%20Drive-In%20Beach.JPG",
+        url: "/images/places/muzhappilangad_drivein-800.jpg",
+        srcSet:
+          "/images/places/muzhappilangad_drivein-480.jpg 480w, /images/places/muzhappilangad_drivein-800.jpg 800w, /images/places/muzhappilangad_drivein-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Muzhappilangad Drive-in Beach",
         credit: "Goutham Mohandas (CC BY-SA 3.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Muzhappilangad_Drive-In_Beach.JPG",
@@ -67,7 +73,10 @@ export const places = [
     coords: { lat: 11.88085, lng: 75.34359 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Payyambalam%20beach%2C%20Kannur.jpg",
+        url: "/images/places/payyambalam_beach-800.jpg",
+        srcSet:
+          "/images/places/payyambalam_beach-480.jpg 480w, /images/places/payyambalam_beach-800.jpg 800w, /images/places/payyambalam_beach-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Payyambalam Beach shoreline",
         credit: "Navaneeth Krishnan S (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Payyambalam_beach,_Kannur.jpg",
@@ -92,7 +101,10 @@ export const places = [
     coords: { lat: 11.76961, lng: 75.45068 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Dharmadam%20Thuruth%20%28Island%29.jpg",
+        url: "/images/places/dharmadam_island-800.jpg",
+        srcSet:
+          "/images/places/dharmadam_island-480.jpg 480w, /images/places/dharmadam_island-800.jpg 800w, /images/places/dharmadam_island-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Dharmadam Island",
         credit: "Shagil Kannur (CC BY 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Dharmadam_Thuruth_(Island).jpg",
@@ -117,7 +129,10 @@ export const places = [
     coords: { lat: 12.0472, lng: 75.6983 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Aralam%20Wildlife%20Sanctuary%2001.JPG",
+        url: "/images/places/aralam_wildlife-800.jpg",
+        srcSet:
+          "/images/places/aralam_wildlife-480.jpg 480w, /images/places/aralam_wildlife-800.jpg 800w, /images/places/aralam_wildlife-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Aralam Wildlife Sanctuary landscape",
         credit: "Vinayaraj (CC BY-SA 3.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Aralam_Wildlife_Sanctuary_01.JPG",
@@ -142,7 +157,10 @@ export const places = [
     coords: { lat: 12.14306, lng: 75.5121 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Palakkayam%20Thattu%2020190519%20171059.jpg",
+        url: "/images/places/palakkayam_thattu-800.jpg",
+        srcSet:
+          "/images/places/palakkayam_thattu-480.jpg 480w, /images/places/palakkayam_thattu-800.jpg 800w, /images/places/palakkayam_thattu-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Palakkayam Thattu view",
         credit: "Vengolis (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Palakkayam_Thattu_20190519_171059.jpg",
@@ -166,7 +184,10 @@ export const places = [
     coords: { lat: 12.17514, lng: 75.53903 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Paithalmala%20%2810664%29.jpg",
+        url: "/images/places/paithalmala-800.jpg",
+        srcSet:
+          "/images/places/paithalmala-480.jpg 480w, /images/places/paithalmala-800.jpg 800w, /images/places/paithalmala-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Paithalmala ridge view",
         credit: "Nativeplants garden (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Paithalmala_(10664).jpg",
@@ -190,7 +211,10 @@ export const places = [
     coords: { lat: 11.98934, lng: 75.38847 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Parassinikadavu%20Snake%20Park%28Entrance%29.jpg",
+        url: "/images/places/parassinikadavu_snake_park-800.jpg",
+        srcSet:
+          "/images/places/parassinikadavu_snake_park-480.jpg 480w, /images/places/parassinikadavu_snake_park-800.jpg 800w, /images/places/parassinikadavu_snake_park-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Parassinikadavu Snake Park entrance",
         credit: "Vaikoovery (CC BY 3.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Parassinikadavu_Snake_Park(Entrance).jpg",
@@ -214,7 +238,10 @@ export const places = [
     coords: { lat: 11.86045, lng: 75.35591 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Kannur%20Lighthouse.jpg",
+        url: "/images/places/kannur_lighthouse-800.jpg",
+        srcSet:
+          "/images/places/kannur_lighthouse-480.jpg 480w, /images/places/kannur_lighthouse-800.jpg 800w, /images/places/kannur_lighthouse-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kannur Lighthouse",
         credit: "Sarin Vinod (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Kannur_Lighthouse.jpg",
@@ -238,7 +265,10 @@ export const places = [
     coords: { lat: 11.82365, lng: 75.41587 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Kizhunna%20beach%201.jpg",
+        url: "/images/places/kizhunna_beach-800.jpg",
+        srcSet:
+          "/images/places/kizhunna_beach-480.jpg 480w, /images/places/kizhunna_beach-800.jpg 800w, /images/places/kizhunna_beach-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kizhunna Beach shoreline",
         credit: "Wikimedia Commons (CC BY-SA 3.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Kizhunna_beach_1.jpg",
@@ -263,7 +293,10 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Theyyam%20Handicraft%2002.jpg",
+        url: "/images/places/theyyam_handicraft-800.jpg",
+        srcSet:
+          "/images/places/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kerala handicraft statue",
         credit: "Ramesh Kunnappully (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Theyyam_Handicraft_02.jpg",
@@ -287,7 +320,10 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Theyyam%20Handicraft%2002.jpg",
+        url: "/images/places/theyyam_handicraft-800.jpg",
+        srcSet:
+          "/images/places/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kerala handicraft statue",
         credit: "Ramesh Kunnappully (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Theyyam_Handicraft_02.jpg",
@@ -311,7 +347,10 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Khadi%20the%20traditional%20clothing%20of%20India%20.jpg",
+        url: "/images/places/khadi_traditional-800.jpg",
+        srcSet:
+          "/images/places/khadi_traditional-480.jpg 480w, /images/places/khadi_traditional-800.jpg 800w, /images/places/khadi_traditional-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Khadi clothing",
         credit: "Shagil Kannur (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Khadi_the_traditional_clothing_of_India_.jpg",
@@ -335,7 +374,10 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Theyyam%20Handicraft%2002.jpg",
+        url: "/images/places/theyyam_handicraft-800.jpg",
+        srcSet:
+          "/images/places/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kerala handicraft statue",
         credit: "Ramesh Kunnappully (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Theyyam_Handicraft_02.jpg",
@@ -359,7 +401,10 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Khadi%20India.jpg",
+        url: "/images/places/khadi_india-800.jpg",
+        srcSet:
+          "/images/places/khadi_india-480.jpg 480w, /images/places/khadi_india-800.jpg 800w, /images/places/khadi_india-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Khadi India storefront",
         credit: "HarshavardhanR22 (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Khadi_India.jpg",
