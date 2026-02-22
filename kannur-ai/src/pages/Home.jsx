@@ -34,6 +34,12 @@ const bentoCards = [
 
 export default function Home({ lang, t, menuOpen, setMenuOpen }) {
   const whyRef = useRef(null);
+  const audioRef = useRef(null);
+  const [activeSound, setActiveSound] = useState(null);
+  const videoRef = useRef(null);
+  const [videoActive, setVideoActive] = useState(false);
+  const whyVideoRef = useRef(null);
+  const [whyVideoActive, setWhyVideoActive] = useState(false);
 
   const slides = useMemo(
     () => [
@@ -87,29 +93,82 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
   }, [slides.length]);
 
   useEffect(() => {
-    const container = whyRef.current;
-    if (!container) return;
-    const cards = Array.from(container.querySelectorAll(".why-card"));
-    if (cards.length === 0) return;
-
+    const node = videoRef.current;
+    if (!node) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
+            setVideoActive(true);
+          } else {
+            setVideoActive(false);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.6 }
     );
-
-    cards.forEach((card, index) => {
-      card.style.setProperty("--delay", `${index * 120}ms`);
-      observer.observe(card);
-    });
-
+    observer.observe(node);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const node = whyVideoRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setWhyVideoActive(true);
+          } else {
+            setWhyVideoActive(false);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const soundOptions = [
+    {
+      id: "theyyam",
+      label: "Theyyam Drums (Chenda)",
+      src: "/media/theyyam-chenda.mp3",
+    },
+    {
+      id: "waves",
+      label: "Muzhappilangad Waves",
+      src: "/media/muzhappilangad-waves.mp3",
+    },
+    {
+      id: "loom",
+      label: "Chirakkal Handloom",
+      src: "/media/chirakkal-handloom.mp3",
+    },
+  ];
+
+  const handleSoundToggle = async (sound) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (activeSound?.id === sound.id) {
+      audio.pause();
+      setActiveSound(null);
+      return;
+    }
+    audio.src = sound.src;
+    try {
+      await audio.play();
+      setActiveSound(sound);
+    } catch (error) {
+      setActiveSound(null);
+    }
+  };
+
+  useEffect(() => {
+    const container = whyRef.current;
+    if (!container) return;
+    return undefined;
   }, []);
 
   return (
@@ -208,63 +267,78 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
           <p className="eyebrow">Why Kannur?</p>
           <h2 className="section-title">Heritage, coast, and craft — in one pulse.</h2>
         </div>
-        <div className="why-grid">
-          <article className="why-card hero">
-            <img
-              src="/images/hero/theyyam_fire-800.jpg"
-              srcSet="/images/hero/theyyam_fire-480.jpg 480w, /images/hero/theyyam_fire-800.jpg 800w"
-              sizes="(max-width: 700px) 100vw, 600px"
-              alt="The Red Ritual"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="why-glass">
-              <h3>The Red Ritual</h3>
-              <p>Not a dance — a living god.</p>
+        <div className="why-video">
+          <iframe
+            ref={whyVideoRef}
+            src={
+              whyVideoActive
+                ? "https://www.youtube.com/embed/imASkAzwU7U?rel=0&modestbranding=1&controls=0&autoplay=1&mute=1&loop=1&playlist=imASkAzwU7U"
+                : "https://www.youtube.com/embed/imASkAzwU7U?rel=0&modestbranding=1&controls=0&loop=1&playlist=imASkAzwU7U"
+            }
+            title="Why Kannur - Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+        <Link className="primary video-cta" to="/theyyam">
+          Theyyam Calendar
+        </Link>
+      </section>
+
+      <section id="soundscape" className="immersive-section">
+        <div className="section-head">
+          <p className="eyebrow">Malabar Soundscape</p>
+          <h2 className="section-title">Feel the rhythm of Kannur</h2>
+        </div>
+        <div className="immersive-grid">
+          <div className="immersive-card">
+            <p>Tap to play authentic sounds of Kannur — drums, waves, and looms.</p>
+            <div className="sound-row">
+              {soundOptions.map((sound) => (
+                <button
+                  key={sound.id}
+                  type="button"
+                  className={`sound-chip ${activeSound?.id === sound.id ? "active" : ""}`}
+                  onClick={() => handleSoundToggle(sound)}
+                >
+                  <span className="sound-dot" />
+                  {sound.label}
+                </button>
+              ))}
+              <button
+                type="button"
+                className="sound-chip ghost"
+                onClick={() => {
+                  if (audioRef.current) audioRef.current.pause();
+                  setActiveSound(null);
+                }}
+              >
+                Stop Audio
+              </button>
             </div>
-          </article>
-          <article className="why-card wide">
-            <img
-              src="/images/hero/muzhappilangad_sunset-800.jpg"
-              srcSet="/images/hero/muzhappilangad_sunset-480.jpg 480w, /images/hero/muzhappilangad_sunset-800.jpg 800w"
-              sizes="(max-width: 700px) 100vw, 600px"
-              alt="Drive the Tide"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="why-glass">
-              <h3>Drive the Tide</h3>
-              <p>4km of firm sand. Windows down.</p>
+            <audio ref={audioRef} preload="none" />
+          </div>
+
+          <div className="immersive-card">
+            <h3>Asia's Longest Drive-in beach</h3>
+            <p>Experience the drive‑in beach at sunset.</p>
+            <div className="drive-embed">
+              <iframe
+                ref={videoRef}
+                src={
+                  videoActive
+                    ? "https://www.youtube.com/embed/yeuJbqIFKJM?rel=0&modestbranding=1&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=yeuJbqIFKJM"
+                    : "https://www.youtube.com/embed/yeuJbqIFKJM?rel=0&modestbranding=1&controls=0&showinfo=0&loop=1&playlist=yeuJbqIFKJM"
+                }
+                title="Muzhappilangad Beach 360° Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
-          </article>
-          <article className="why-card small">
-            <img
-              src="/images/why/cake_slice-800.jpg"
-              srcSet="/images/why/cake_slice-480.jpg 480w, /images/why/cake_slice-800.jpg 800w"
-              sizes="(max-width: 700px) 50vw, 280px"
-              alt="The First Slice"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="why-glass">
-              <h3>Slice</h3>
-              <p>India’s First Slice (1883)</p>
-            </div>
-          </article>
-          <article className="why-card small">
-            <img
-              src="/images/why/paithalmala-800.jpg"
-              srcSet="/images/why/paithalmala-480.jpg 480w, /images/why/paithalmala-800.jpg 800w"
-              sizes="(max-width: 700px) 50vw, 280px"
-              alt="Mist & Moss"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="why-glass">
-              <h3>Mist & Moss</h3>
-              <p>Paithalmala above the clouds.</p>
-            </div>
-          </article>
+            <Link className="primary video-cta" to="/explore">
+              Explore More
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -272,10 +346,7 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
         <div className="ai-copy">
           <p className="eyebrow">AI Concierge</p>
           <h2 className="section-title">The .io edge, built for curious travelers.</h2>
-          <p>
-            Ask me anything about Kannur. (e.g., “Where can I see Theyyam tonight?” or “Best
-            sunset spot near the Fort?”)
-          </p>
+          <p>Ask about routes, rituals, food.</p>
         </div>
         <div className="ai-panel">
           <div className="ai-input">

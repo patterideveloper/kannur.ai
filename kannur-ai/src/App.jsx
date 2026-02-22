@@ -7,6 +7,7 @@ import Temples from "./pages/Temples";
 import Events from "./pages/Events";
 import People from "./pages/People";
 import Hospitals from "./pages/Hospitals";
+import Theyyam from "./pages/Theyyam";
 
 const translations = {
   en: {
@@ -245,18 +246,12 @@ export default function App() {
         <Route path="/eats" element={<Eats lang={lang} t={t} />} />
         <Route path="/temples" element={<Temples lang={lang} t={t} />} />
         <Route path="/events" element={<Events lang={lang} t={t} />} />
+        <Route path="/theyyam" element={<Theyyam lang={lang} t={t} />} />
         <Route path="/people" element={<People lang={lang} t={t} />} />
         <Route path="/hospitals" element={<Hospitals lang={lang} t={t} />} />
       </Routes>
 
       <footer className="footer footer-modern">
-        <div className="footer-links">
-          <Link to="/events">{t.footerLinks.calendar}</Link>
-          <Link to="/eats">{t.footerLinks.food}</Link>
-          <Link to="/explore">{t.footerLinks.stay}</Link>
-          <a href="mailto:hello@kannur.io">{t.footerLinks.contact}</a>
-        </div>
-        <p className="footer-tagline">{t.footerTagline}</p>
         <p className="footer-copy">{t.footerCopy}</p>
       </footer>
     </div>

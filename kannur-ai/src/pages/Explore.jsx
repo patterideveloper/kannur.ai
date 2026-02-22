@@ -34,18 +34,18 @@ function PlaceCard({ place, lang, t }) {
     }
     if (place.coords?.lat && place.coords?.lng) {
       if (place.distanceState?.loading) {
-        return lang === "ml" ? "ദൂരം കണക്കാക്കുന്നു..." : "Calculating distance...";
+        return "0km";
       }
       if (place.distanceState?.error) {
-        return lang === "ml" ? "ദൂരം ലഭ്യമല്ല" : "Distance unavailable";
+        return "0km";
       }
-      return lang === "ml" ? "ദൂരം കണക്കാക്കുന്നു..." : "Calculating distance...";
+      return "0km";
     }
     if (place.distanceState?.loading) {
-      return lang === "ml" ? "ദൂരം കണക്കാക്കുന്നു..." : "Calculating distance...";
+      return "0km";
     }
     if (place.distanceState?.error) {
-      return lang === "ml" ? "ദൂരം ലഭ്യമല്ല" : "Distance unavailable";
+      return "0km";
     }
     return displayArea;
   })();
