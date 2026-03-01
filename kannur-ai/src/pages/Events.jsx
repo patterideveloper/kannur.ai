@@ -41,17 +41,18 @@ export default function Events({ lang, t }) {
         path="/events"
         title="Annual Events | Kannur | Explore Tourism"
         description={
-          lang === "ml"
+          t?.eventsPage?.description ||
+          (lang === "ml"
             ? "കണ്ണൂരിലെ വാർഷിക ഉത്സവങ്ങളും പ്രധാന ഇവന്റുകളും."
-            : "Annual festivals and cultural events across Kannur district."
+            : "Annual festivals and cultural events across Kannur district.")
         }
       />
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {lang === "ml" ? "ഹോം" : "Back to Home"}
+          ← {t?.eventsPage?.back || (lang === "ml" ? "ഹോം" : "Back to Home")}
         </Link>
-        <h1>{lang === "ml" ? "വാർഷിക ഇവന്റുകൾ" : "Annual Events"}</h1>
-        <p>{lang === "ml" ? "വർഷേന നടക്കുന്ന പ്രധാന ചടങ്ങുകൾ." : "Key annual festivals and rituals."}</p>
+        <h1>{t?.eventsPage?.title || (lang === "ml" ? "വാർഷിക ഇവന്റുകൾ" : "Annual Events")}</h1>
+        <p>{t?.eventsPage?.subtitle || (lang === "ml" ? "വർഷേന നടക്കുന്ന പ്രധാന ചടങ്ങുകൾ." : "Key annual festivals and rituals.")}</p>
       </section>
 
       <section className="info-section">

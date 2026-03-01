@@ -7,14 +7,19 @@ function InfoCard({ title, subtitle, description, meta, source, image, t }) {
     <article className="info-card">
       {image?.url && (
         <figure className="info-card-media">
-          <img
-            src={image.url}
-            srcSet={image.srcSet}
-            sizes={image.sizes || "(max-width: 700px) 80vw, 360px"}
-            alt={image.alt || title}
-            loading="lazy"
-            decoding="async"
-          />
+          <picture>
+            {image.srcSet && (
+              <source type="image/webp" srcSet={image.srcSet.replace(/\\.jpg/g, ".webp")} />
+            )}
+            <img
+              src={image.url}
+              srcSet={image.srcSet}
+              sizes={image.sizes || "(max-width: 700px) 80vw, 360px"}
+              alt={image.alt || title}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           {image.credit && image.creditUrl && (
             <figcaption className="info-card-credit">
               <a href={image.creditUrl} target="_blank" rel="noreferrer">

@@ -32,7 +32,7 @@ const bentoCards = [
   },
 ];
 
-export default function Home({ lang, t, menuOpen, setMenuOpen }) {
+export default function Home({ lang, t, setLang, menuOpen, setMenuOpen }) {
   const whyRef = useRef(null);
   const audioRef = useRef(null);
   const [activeSound, setActiveSound] = useState(null);
@@ -48,38 +48,39 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
         src: "/images/hero/theyyam_fire-1200.jpg",
         srcSet:
           "/images/hero/theyyam_fire-480.jpg 480w, /images/hero/theyyam_fire-800.jpg 800w, /images/hero/theyyam_fire-1200.jpg 1200w, /images/hero/theyyam_fire-1600.jpg 1600w",
-        caption: "Theyyam fire ritual close‑up",
+        caption: t?.home?.heroCaptions?.[0] || "Theyyam fire ritual close‑up",
       },
       {
         type: "image",
         src: "/images/hero/muzhappilangad_sunset-1200.jpg",
         srcSet:
           "/images/hero/muzhappilangad_sunset-480.jpg 480w, /images/hero/muzhappilangad_sunset-800.jpg 800w, /images/hero/muzhappilangad_sunset-1200.jpg 1200w, /images/hero/muzhappilangad_sunset-1600.jpg 1600w",
-        caption: "Muzhappilangad drive‑in beach at sunset",
+        caption:
+          t?.home?.heroCaptions?.[1] || "Muzhappilangad drive‑in beach at sunset",
       },
       {
         type: "image",
         src: "/images/hero/st_angelo_fort-1200.jpg",
         srcSet:
           "/images/hero/st_angelo_fort-480.jpg 480w, /images/hero/st_angelo_fort-800.jpg 800w, /images/hero/st_angelo_fort-1200.jpg 1200w, /images/hero/st_angelo_fort-1600.jpg 1600w",
-        caption: "St. Angelo Fort — sea‑facing bastions",
+        caption: t?.home?.heroCaptions?.[2] || "St. Angelo Fort — sea‑facing bastions",
       },
       {
         type: "image",
         src: "/images/hero/payyambalam_beach-1200.jpg",
         srcSet:
           "/images/hero/payyambalam_beach-480.jpg 480w, /images/hero/payyambalam_beach-800.jpg 800w, /images/hero/payyambalam_beach-1200.jpg 1200w, /images/hero/payyambalam_beach-1600.jpg 1600w",
-        caption: "Payyambalam beach — evening shoreline",
+        caption: t?.home?.heroCaptions?.[3] || "Payyambalam beach — evening shoreline",
       },
       {
         type: "image",
         src: "/images/hero/dharmadam_island-1200.jpg",
         srcSet:
           "/images/hero/dharmadam_island-480.jpg 480w, /images/hero/dharmadam_island-800.jpg 800w, /images/hero/dharmadam_island-1200.jpg 1200w, /images/hero/dharmadam_island-1600.jpg 1600w",
-        caption: "Dharmadam Island — low‑tide crossing",
+        caption: t?.home?.heroCaptions?.[4] || "Dharmadam Island — low‑tide crossing",
       },
     ],
-    []
+    [t]
   );
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -133,17 +134,17 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
   const soundOptions = [
     {
       id: "theyyam",
-      label: "Theyyam Drums (Chenda)",
+      label: t?.home?.soundLabels?.theyyam || "Theyyam Drums (Chenda)",
       src: "/media/theyyam-chenda.mp3",
     },
     {
       id: "waves",
-      label: "Muzhappilangad Waves",
+      label: t?.home?.soundLabels?.waves || "Muzhappilangad Waves",
       src: "/media/muzhappilangad-waves.mp3",
     },
     {
       id: "loom",
-      label: "Chirakkal Handloom",
+      label: t?.home?.soundLabels?.loom || "Chirakkal Handloom",
       src: "/media/chirakkal-handloom.mp3",
     },
   ];
@@ -196,27 +197,43 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
               key={`${slide.type}-${slide.src || index}`}
               className={`hero-slide ${index === activeSlide ? "active" : ""}`}
             >
-              <img
-                src={slide.src}
-                srcSet={slide.srcSet}
-                sizes="100vw"
-                alt={slide.caption}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-                fetchpriority={index === 0 ? "high" : "auto"}
-              />
+              <picture>
+                {slide.srcSet && (
+                  <source type="image/webp" srcSet={slide.srcSet.replace(/\\.jpg/g, ".webp")} />
+                )}
+                <img
+                  src={slide.src}
+                  srcSet={slide.srcSet}
+                  sizes="100vw"
+                  alt={slide.caption}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchpriority={index === 0 ? "high" : "auto"}
+                />
+              </picture>
             </div>
           ))}
           <div className="hero-gradient" />
         </div>
         <div className="hero-inner">
-          <div className="hero-top">
-            <div className="hero-banner">KANNUR.iO</div>
-            <button
-              className={`burger ${menuOpen ? "open" : ""}`}
-              onClick={(event) => {
-                event.stopPropagation();
-                setMenuOpen((prev) => !prev);
+        <div className="hero-top">
+          <div className="hero-banner">KANNUR.iO</div>
+          <button
+            type="button"
+            className="lang-toggle"
+            onClick={(event) => {
+              event.stopPropagation();
+              setLang((prev) => (prev === "en" ? "ml" : "en"));
+            }}
+            aria-label={t?.languageSwitch || "Switch language"}
+          >
+            {t?.languageSwitch || "മലയാളം"}
+          </button>
+          <button
+            className={`burger ${menuOpen ? "open" : ""}`}
+            onClick={(event) => {
+              event.stopPropagation();
+              setMenuOpen((prev) => !prev);
               }}
               aria-label="Toggle menu"
             >
@@ -244,9 +261,6 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
           <Link to="/eats" onClick={() => setMenuOpen(false)}>
             {t.sections.eats}
           </Link>
-          <Link to="/temples" onClick={() => setMenuOpen(false)}>
-            {t.sections.temples}
-          </Link>
           <Link to="/events" onClick={() => setMenuOpen(false)}>
             {t.sections.events}
           </Link>
@@ -264,8 +278,10 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
 
       <section id="why-kannur" className="why-section" ref={whyRef}>
         <div className="why-head">
-          <p className="eyebrow">Why Kannur?</p>
-          <h2 className="section-title">Heritage, coast, and craft — in one pulse.</h2>
+          <p className="eyebrow">{t?.home?.whyEyebrow || "Why Kannur?"}</p>
+          <h2 className="section-title">
+            {t?.home?.whyTitle || "Heritage, coast, and craft — in one pulse."}
+          </h2>
         </div>
         <div className="why-video">
           <iframe
@@ -275,24 +291,27 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
                 ? "https://www.youtube.com/embed/imASkAzwU7U?rel=0&modestbranding=1&controls=0&autoplay=1&mute=1&loop=1&playlist=imASkAzwU7U"
                 : "https://www.youtube.com/embed/imASkAzwU7U?rel=0&modestbranding=1&controls=0&loop=1&playlist=imASkAzwU7U"
             }
-            title="Why Kannur - Video"
+            title={t?.home?.whyVideoTitle || "Why Kannur - Video"}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
         </div>
         <Link className="primary video-cta" to="/theyyam">
-          Theyyam Calendar
+          {t?.home?.theyyamCta || "Theyyam Calendar"}
         </Link>
       </section>
 
       <section id="soundscape" className="immersive-section">
         <div className="section-head">
-          <p className="eyebrow">Malabar Soundscape</p>
-          <h2 className="section-title">Feel the rhythm of Kannur</h2>
+          <p className="eyebrow">{t?.home?.soundscapeEyebrow || "Malabar Soundscape"}</p>
+          <h2 className="section-title">{t?.home?.soundscapeTitle || "Feel the rhythm of Kannur"}</h2>
         </div>
         <div className="immersive-grid">
           <div className="immersive-card">
-            <p>Tap to play authentic sounds of Kannur — drums, waves, and looms.</p>
+            <p>
+              {t?.home?.soundscapeCopy ||
+                "Tap to play authentic sounds of Kannur — drums, waves, and looms."}
+            </p>
             <div className="sound-row">
               {soundOptions.map((sound) => (
                 <button
@@ -313,15 +332,15 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
                   setActiveSound(null);
                 }}
               >
-                Stop Audio
+                {t?.home?.stopAudio || "Stop Audio"}
               </button>
             </div>
             <audio ref={audioRef} preload="none" />
           </div>
 
           <div className="immersive-card">
-            <h3>Asia's Longest Drive-in beach</h3>
-            <p>Experience the drive‑in beach at sunset.</p>
+            <h3>{t?.home?.driveTitle || "Asia's Longest Drive-in beach"}</h3>
+            <p>{t?.home?.driveCopy || "Experience the drive‑in beach at sunset."}</p>
             <div className="drive-embed">
               <iframe
                 ref={videoRef}
@@ -330,13 +349,13 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
                     ? "https://www.youtube.com/embed/yeuJbqIFKJM?rel=0&modestbranding=1&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=yeuJbqIFKJM"
                     : "https://www.youtube.com/embed/yeuJbqIFKJM?rel=0&modestbranding=1&controls=0&showinfo=0&loop=1&playlist=yeuJbqIFKJM"
                 }
-                title="Muzhappilangad Beach 360° Video"
+                title={t?.home?.driveVideoTitle || "Muzhappilangad Beach Video"}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
             </div>
             <Link className="primary video-cta" to="/explore">
-              Explore More
+              {t?.home?.exploreCta || "Explore More"}
             </Link>
           </div>
         </div>
@@ -344,25 +363,29 @@ export default function Home({ lang, t, menuOpen, setMenuOpen }) {
 
       <section id="ai" className="ai-concierge">
         <div className="ai-copy">
-          <p className="eyebrow">AI Concierge</p>
-          <h2 className="section-title">The .io edge, built for curious travelers.</h2>
-          <p>Ask about routes, rituals, food.</p>
+          <p className="eyebrow">{t?.home?.aiEyebrow || "AI Concierge"}</p>
+          <h2 className="section-title">
+            {t?.home?.aiTitle || "The .io edge, built for curious travelers."}
+          </h2>
+          <p>{t?.home?.aiCopy || "Ask about routes, rituals, food."}</p>
         </div>
         <div className="ai-panel">
           <div className="ai-input">
             <input
               type="text"
-              placeholder="Ask about beaches, rituals, food, or routes…"
+              placeholder={t?.home?.aiPlaceholder || "Ask about beaches, rituals, food, or routes…"}
               aria-label="Ask about Kannur"
             />
             <button className="primary" type="button">
-              Ask
+              {t?.home?.aiButton || "Ask"}
             </button>
           </div>
           <div className="ai-suggestions">
-            <button type="button">Where can I see Theyyam tonight?</button>
-            <button type="button">Best sunset near St. Angelo Fort?</button>
-            <button type="button">Plan a 2‑day itinerary</button>
+            {(t?.home?.aiSuggestions || []).map((suggestion) => (
+              <button key={suggestion} type="button">
+                {suggestion}
+              </button>
+            ))}
           </div>
         </div>
       </section>

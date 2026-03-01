@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Seo from "../components/Seo";
 import { places } from "../data/places";
+import { temples } from "../data/extras";
 
 const tagGroups = [
   { value: "all" },
@@ -10,9 +11,35 @@ const tagGroups = [
   { value: "hill" },
   { value: "wildlife" },
   { value: "shopping" },
+  { value: "worship" },
   { value: "family" },
   { value: "quiet" },
 ];
+
+const templePlaces = temples.map((temple) => ({
+  id: `temple-${temple.id}`,
+  name: temple.name,
+  nameMl: temple.nameMl,
+  type: "Worship",
+  area: temple.area,
+  areaMl: temple.areaMl,
+  description: temple.description,
+  descriptionMl: temple.descriptionMl,
+  tags: ["worship", "heritage"],
+  mapsQuery: temple.mapsQuery,
+  images: temple.image
+    ? [
+        {
+          url: temple.image.url,
+          srcSet: temple.image.srcSet,
+          sizes: temple.image.sizes,
+          alt: temple.image.alt || temple.name,
+          credit: temple.image.credit,
+          creditUrl: temple.image.creditUrl,
+        },
+      ]
+    : [],
+}));
 
 function PlaceCard({ place, lang, t }) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -63,14 +90,19 @@ function PlaceCard({ place, lang, t }) {
         <div className="gallery" aria-label={`${displayName} gallery`}>
           {place.images.map((image) => (
             <figure key={image.url}>
-              <img
-                src={image.url}
-                srcSet={image.srcSet}
-                sizes={image.sizes || "(max-width: 700px) 80vw, 420px"}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-              />
+              <picture>
+                {image.srcSet && (
+                  <source type="image/webp" srcSet={image.srcSet.replace(/\\.jpg/g, ".webp")} />
+                )}
+                <img
+                  src={image.url}
+                  srcSet={image.srcSet}
+                  sizes={image.sizes || "(max-width: 700px) 80vw, 420px"}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
               <figcaption>
                 <a href={image.creditUrl} target="_blank" rel="noreferrer">
                   Photo: {image.credit}
@@ -113,7 +145,7 @@ export default function Explore({ lang, t }) {
       setDistancesLoading(true);
       setDistanceError(false);
       const origin = { lat: 11.876096, lng: 75.373579 };
-      const destinations = places
+      const destinations = [...places, ...templePlaces]
         .filter((place) => place.coords?.lat && place.coords?.lng)
         .map((place) => ({ id: place.id, ...place.coords }));
 
@@ -142,8 +174,10 @@ export default function Explore({ lang, t }) {
     loadDistances();
   }, []);
 
+  const combinedPlaces = useMemo(() => [...places, ...templePlaces], []);
+
   const filteredPlaces = useMemo(() => {
-    return places.filter((place) => {
+    return combinedPlaces.filter((place) => {
       const matchesTag =
         activeTag === "all" || place.tags.includes(activeTag) || place.type.toLowerCase() === activeTag;
       const searchValue = search.toLowerCase();
@@ -155,7 +189,7 @@ export default function Explore({ lang, t }) {
         place.tags.some((tag) => tag.includes(searchValue));
       return matchesTag && matchesSearch;
     });
-  }, [activeTag, search]);
+  }, [activeTag, search, combinedPlaces]);
 
   return (
     <main className="page">

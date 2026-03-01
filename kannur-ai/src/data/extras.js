@@ -114,6 +114,25 @@ export const events = [
     source: "https://en.wikipedia.org/wiki/Sree_Sundareswara_Temple",
     mapsQuery: "Sree Sundareswara Temple Kannur",
   },
+  {
+    id: "thayineri-kurinji-theyyam",
+    name: "Thayineri Sree Kurinji Temple Theyyam",
+    season: "Feb (Makaram–Kumbham)",
+    description:
+      "Theyyam festival noted for the Theekkundam (ceremonial pyre) lit inside the temple walls.",
+    source: "https://www.keralatourism.org/theyyamcalendar/temple.php?id=41",
+    mapsQuery: "Thayineri Sree Kurinji Temple Payyanur",
+  },
+  {
+    id: "keecheri-palottu-kavu",
+    name: "Keecheri Sree Palottu Kavu Theyyam (Vishu Vilakku)",
+    season: "Apr 14–20 (Medam 1–7)",
+    description:
+      "Annual Kaliyattam/Theyyam festival (Vishu Vilakku) that traditionally begins with fireworks.",
+    source: "https://travelkannur.com/theyyam-kavu/keecheri-sree-palottu-kavu/",
+    secondarySource: "https://www.hindu-blog.com/2022/03/keecheri-sree-palottu-kavu-temple.html",
+    mapsQuery: "Keecheri Sree Palottu Kavu Kannur",
+  },
 ];
 
 export const personalities = [
