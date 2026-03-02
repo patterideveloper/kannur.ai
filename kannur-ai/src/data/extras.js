@@ -137,10 +137,68 @@ export const events = [
 
 export const personalities = [
   {
+    id: "sushin-shyam",
+    name: "Sushin Shyam",
+    field: "Music & Film",
+    description: "Music director and composer from Kannur district.",
+    birthYear: 1992,
+    source: "https://www.district.in/events/sushin-shyam/artist",
+    mapsQuery: "Kannur, Kerala",
+    image: {
+      url: "/images/people/sushin_shyam-800.jpg",
+      srcSet:
+        "/images/people/sushin_shyam-480.jpg 480w, /images/people/sushin_shyam-800.jpg 800w, /images/people/sushin_shyam-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "Sushin Shyam",
+      credit: "Onmanorama",
+      creditUrl:
+        "https://www.onmanorama.com/entertainment/entertainment-news/2024/10/07/sushin-shyam-submits-work-grammy-consideration-aavesham-manjummel-boys.html",
+    },
+  },
+  {
+    id: "tintu-luka",
+    name: "Tintu Luka",
+    field: "Sports (Athletics)",
+    description: "Indian middle‑distance runner and Olympian.",
+    birthYear: 1989,
+    source: "https://en.wikipedia.org/wiki/Tintu_Luka",
+    mapsQuery: "Kerala, India",
+    image: {
+      url: "/images/people/tintu_luka-800.jpg",
+      srcSet:
+        "/images/people/tintu_luka-480.jpg 480w, /images/people/tintu_luka-800.jpg 800w, /images/people/tintu_luka-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "Tintu Luka",
+      credit: "Tilak1 (CC BY-SA 4.0)",
+      creditUrl:
+        "https://commons.wikimedia.org/wiki/File:Tintu_Lukka_Of_India_In_Action_(cropped).jpg",
+    },
+  },
+  {
+    id: "ck-vineeth",
+    name: "C. K. Vineeth",
+    field: "Sports (Football)",
+    description: "Professional footballer from Kannur district.",
+    birthYear: 1988,
+    source: "https://en.wikipedia.org/wiki/C._K._Vineeth",
+    mapsQuery: "Kannur, Kerala",
+    image: {
+      url: "/images/people/ck_vineeth-800.jpg",
+      srcSet:
+        "/images/people/ck_vineeth-480.jpg 480w, /images/people/ck_vineeth-800.jpg 800w, /images/people/ck_vineeth-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "C. K. Vineeth",
+      credit: "Coderzombie (CC BY-SA 4.0)",
+      creditUrl:
+        "https://commons.wikimedia.org/wiki/File:C.K._Vineeth,_man_of_the_match_against_Mumbai_F.C.jpg",
+    },
+  },
+  {
     id: "gita-gopinath",
     name: "Gita Gopinath",
     field: "Economist",
     description: "Internationally known economist; listed among notable people from Kannur district.",
+    birthYear: 1971,
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
       url: "/images/people/gita_gopinath-800.jpg",
@@ -153,20 +211,40 @@ export const personalities = [
     },
   },
   {
-    id: "a-k-gopalan",
-    name: "A. K. Gopalan",
-    field: "Politics",
-    description: "Prominent communist leader; listed among notable people from Kannur district.",
-    source: "https://en.wikipedia.org/wiki/Kannur_district",
+    id: "vp-sathyan",
+    name: "V. P. Sathyan",
+    field: "Sports (Football)",
+    description: "Former India captain and defender from Kannur district.",
+    birthYear: 1965,
+    source: "https://en.wikipedia.org/wiki/V._P._Sathyan",
+    mapsQuery: "Mekkunnu, Kannur",
     image: {
-      url: "/images/people/ak_gopalan-800.jpg",
+      url: "/images/people/vp_sathyan-800.jpg",
       srcSet:
-        "/images/people/ak_gopalan-480.jpg 480w, /images/people/ak_gopalan-800.jpg 800w, /images/people/ak_gopalan-1200.jpg 1200w",
+        "/images/people/vp_sathyan-480.jpg 480w, /images/people/vp_sathyan-800.jpg 800w, /images/people/vp_sathyan-1200.jpg 1200w",
       sizes: "(max-width: 700px) 80vw, 360px",
-      alt: "A. K. Gopalan stamp",
-      credit: "India Post (GODL-India)",
+      alt: "V. P. Sathyan",
+      credit: "Goal Malayalam",
+      creditUrl: "https://www.goal.com/",
+    },
+  },
+  {
+    id: "pinarayi-vijayan",
+    name: "Pinarayi Vijayan",
+    field: "Politics",
+    description: "Chief Minister of Kerala; listed among notable people from Kannur district.",
+    birthYear: 1945,
+    source: "https://en.wikipedia.org/wiki/Pinarayi_Vijayan",
+    mapsQuery: "Pinarayi, Kannur",
+    image: {
+      url: "/images/people/pinarayi_vijayan-800.jpg",
+      srcSet:
+        "/images/people/pinarayi_vijayan-480.jpg 480w, /images/people/pinarayi_vijayan-800.jpg 800w, /images/people/pinarayi_vijayan-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "Pinarayi Vijayan",
+      credit: "Sanu N (CC BY-SA 4.0)",
       creditUrl:
-        "https://commons.wikimedia.org/wiki/File:AK_Gopalan_1990_stamp_of_India.jpg",
+        "https://commons.wikimedia.org/wiki/File:Pinarayi_Vijayan_Close-up_smiling_02.jpg",
     },
   },
   {
@@ -174,6 +252,7 @@ export const personalities = [
     name: "Jimmy George",
     field: "Sports (Volleyball)",
     description: "Legendary volleyball player; listed among notable people from Kannur district.",
+    birthYear: 1955,
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
       url: "/images/people/jimmy_george-800.jpg",
@@ -186,10 +265,29 @@ export const personalities = [
     },
   },
   {
+    id: "sreenivasan",
+    name: "Sreenivasan",
+    field: "Cinema",
+    description: "Actor, screenwriter, and director from Thalassery, Kannur district.",
+    birthYear: 1950,
+    source: "https://en.wikipedia.org/wiki/Sreenivasan",
+    mapsQuery: "Thalassery, Kannur",
+    image: {
+      url: "/images/people/sreenivasan-800.jpg",
+      srcSet:
+        "/images/people/sreenivasan-480.jpg 480w, /images/people/sreenivasan-800.jpg 800w, /images/people/sreenivasan-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "Sreenivasan",
+      credit: "Anees Kodiyathur (CC BY 3.0)",
+      creditUrl: "https://commons.wikimedia.org/wiki/File:Sreenivasan_2008.jpg",
+    },
+  },
+  {
     id: "sukumar-azhikode",
     name: "Sukumar Azhikode",
     field: "Writer & Critic",
     description: "Influential Malayalam writer and critic; listed among notable people from Kannur district.",
+    birthYear: 1926,
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
       url: "/images/people/sukumar_azhikode-800.jpg",
@@ -199,6 +297,78 @@ export const personalities = [
       alt: "Sukumar Azhikode",
       credit: "Sreejithk2000 (CC BY-SA 3.0)",
       creditUrl: "https://commons.wikimedia.org/wiki/File:Sukumar_Azhikode.jpg",
+    },
+  },
+  {
+    id: "ek-nayanar",
+    name: "E. K. Nayanar",
+    field: "Politics",
+    description: "Prominent communist leader and former Chief Minister of Kerala.",
+    birthYear: 1919,
+    source: "https://en.wikipedia.org/wiki/E._K._Nayanar",
+    mapsQuery: "Kalliasseri, Kannur",
+    image: {
+      url: "/images/people/ek_nayanar-800.jpg",
+      srcSet:
+        "/images/people/ek_nayanar-480.jpg 480w, /images/people/ek_nayanar-800.jpg 800w, /images/people/ek_nayanar-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "E. K. Nayanar",
+      credit: "Horreb (CC BY-SA 4.0)",
+      creditUrl: "https://commons.wikimedia.org/wiki/File:E.K.Nayanar_1.jpg",
+    },
+  },
+  {
+    id: "mn-nambiar",
+    name: "M. N. Nambiar",
+    field: "Cinema",
+    description: "Actor known for Tamil cinema; born in Cannanore (Kannur).",
+    birthYear: 1919,
+    source: "https://en.wikipedia.org/wiki/M._N._Nambiar",
+    mapsQuery: "Kannur, Kerala",
+    image: {
+      url: "/images/people/mn_nambiar-800.jpg",
+      srcSet:
+        "/images/people/mn_nambiar-480.jpg 480w, /images/people/mn_nambiar-800.jpg 800w, /images/people/mn_nambiar-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "M. N. Nambiar",
+      credit: "The Hindu",
+      creditUrl: "https://www.thehindu.com/news/cities/chennai/mn-nambiar-not-so-evil-after-all/article26045134.ece",
+    },
+  },
+  {
+    id: "k-karunakaran",
+    name: "K. Karunakaran",
+    field: "Politics",
+    description: "Former Chief Minister of Kerala; senior Congress leader.",
+    birthYear: 1918,
+    source: "https://en.wikipedia.org/wiki/K._Karunakaran",
+    mapsQuery: "Thrissur, Kerala",
+    image: {
+      url: "/images/people/k_karunakaran-800.jpg",
+      srcSet:
+        "/images/people/k_karunakaran-480.jpg 480w, /images/people/k_karunakaran-800.jpg 800w, /images/people/k_karunakaran-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "K. Karunakaran",
+      credit: "Press Information Bureau (GODL-India)",
+      creditUrl: "https://commons.wikimedia.org/wiki/File:K._Karunakaran_in_1977.jpg",
+    },
+  },
+  {
+    id: "a-k-gopalan",
+    name: "A. K. Gopalan",
+    field: "Politics",
+    description: "Prominent communist leader; listed among notable people from Kannur district.",
+    birthYear: 1904,
+    source: "https://en.wikipedia.org/wiki/Kannur_district",
+    image: {
+      url: "/images/people/ak_gopalan-800.jpg",
+      srcSet:
+        "/images/people/ak_gopalan-480.jpg 480w, /images/people/ak_gopalan-800.jpg 800w, /images/people/ak_gopalan-1200.jpg 1200w",
+      sizes: "(max-width: 700px) 80vw, 360px",
+      alt: "A. K. Gopalan stamp",
+      credit: "India Post (GODL-India)",
+      creditUrl:
+        "https://commons.wikimedia.org/wiki/File:AK_Gopalan_1990_stamp_of_India.jpg",
     },
   },
 ];
