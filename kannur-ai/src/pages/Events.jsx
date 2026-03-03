@@ -60,18 +60,28 @@ export default function Events({ lang, t }) {
           <h2>{t.sections.events}</h2>
         </div>
         <div className="info-grid">
-          {events.map((event) => (
+          {events.map((event) => {
+            const title =
+              lang === "ml" ? event.nameMl || event.name : event.name;
+            const season =
+              lang === "ml" ? event.seasonMl || event.season : event.season;
+            const description =
+              lang === "ml"
+                ? event.descriptionMl || event.description
+                : event.description;
+            return (
             <InfoCard
               key={event.id}
-              title={event.name}
-              subtitle={event.season}
-              description={event.description}
-              meta={[{ label: t.labels.season, value: event.season }]}
+              title={title}
+              subtitle={season}
+              description={description}
+              meta={[{ label: t.labels.season, value: season }]}
               source={event.source}
               mapsQuery={event.mapsQuery}
               t={t}
             />
-          ))}
+          );
+          })}
         </div>
       </section>
     </main>

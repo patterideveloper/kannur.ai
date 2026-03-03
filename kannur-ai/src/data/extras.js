@@ -26,8 +26,11 @@ export const temples = [
   {
     id: "trichambaram",
     name: "Trichambaram Shree Krishna Temple",
+    nameMl: "ത്രിച്ചംബരം ശ്രീകൃഷ്ണ ക്ഷേത്രം",
     area: "Taliparamba",
+    areaMl: "തളിപ്പറമ്പ്",
     description: "A major Krishna temple in Kannur district with rich Kerala temple architecture.",
+    descriptionMl: "കേരളത്തിലെ സമൃദ്ധമായ ക്ഷേത്ര ശില്പശൈലികൾക്കൊപ്പം കണ്ണൂർ ജില്ലയിലെ പ്രധാന കൃഷ്ണ ക്ഷേത്രം.",
     source: "https://en.wikipedia.org/wiki/Trichambaram_Temple",
     mapsQuery: "Trichambaram Temple Taliparamba",
     image: {
@@ -44,16 +47,22 @@ export const temples = [
   {
     id: "sundareswara",
     name: "Sree Sundareswara Temple",
+    nameMl: "ശ്രീ സുന്ദരേശ്വര ക്ഷേത്രം",
     area: "Talap, Kannur",
+    areaMl: "തളപ്പ്, കണ്ണൂർ",
     description: "Prominent Shiva temple consecrated by Sree Narayana Guru.",
+    descriptionMl: "ശ്രീ നാരായണ ഗുരു പ്രതിഷ്ഠ നടത്തിയ ശ്രദ്ധേയമായ ശിവക്ഷേത്രം.",
     source: "https://en.wikipedia.org/wiki/Sree_Sundareswara_Temple",
     mapsQuery: "Sree Sundareswara Temple Kannur",
   },
   {
     id: "jagannatha-thalassery",
     name: "Thalassery Jagannatha Temple",
+    nameMl: "തലശ്ശേരി ജഗന്നാഥ ക്ഷേത്രം",
     area: "Thalassery",
+    areaMl: "തലശ്ശേരി",
     description: "Important temple in Thalassery town, established by Sree Narayana Guru.",
+    descriptionMl: "ശ്രീ നാരായണ ഗുരു സ്ഥാപിച്ച തലശ്ശേരി പട്ടണത്തിലെ പ്രധാന ക്ഷേത്രം.",
     source: "https://en.wikipedia.org/wiki/Thalassery_Jagannatha_Temple",
     mapsQuery: "Thalassery Jagannatha Temple",
     image: {
@@ -70,8 +79,11 @@ export const temples = [
   {
     id: "lakshmi-narasimha-thalassery",
     name: "Sri Lakshmi Narasimha Temple",
+    nameMl: "ശ്രീ ലക്ഷ്മി നരസിംഹ ക്ഷേത്രം",
     area: "Thalassery",
+    areaMl: "തലശ്ശേരി",
     description: "Historic temple associated with the GSB community in Thalassery.",
+    descriptionMl: "തലശ്ശേരിയിലെ ജിഎസ്ബി സമുദായവുമായി ബന്ധപ്പെട്ട ചരിത്രപ്രധാന ക്ഷേത്രം.",
     source: "https://en.wikipedia.org/wiki/Sri_Lakshmi_Narasimha_Temple,_Thalassery",
     mapsQuery: "Sri Lakshmi Narasimha Temple Thalassery",
     image: {
@@ -91,44 +103,64 @@ export const events = [
   {
     id: "kottiyoor-vysakha",
     name: "Kottiyoor Vysakha Mahotsavam",
+    nameMl: "കോട്ടിയൂർ വൈശാഖ മഹോത്സവം",
     season: "May–June",
+    seasonMl: "മെയ്–ജൂൺ",
     description:
       "Annual 28‑day festival at the Kottiyoor temples (Akkare/Ikkare), set in forested riverbanks.",
+    descriptionMl:
+      "കാട്ടും നദീതീരവും ചേർന്ന അക്കരെ/ഇക്കരെ കോട്ടിയൂർ ക്ഷേത്രങ്ങളിൽ 28 ദിവസത്തെ വാർഷിക ഉത്സവം.",
     source: "https://www.keralatourism.org/malabar/kottiyoor-vaishaka-mahotsavam/187",
     mapsQuery: "Kottiyoor Temple",
   },
   {
     id: "trichambaram-utsavam",
     name: "Trichambaram Utsavam",
+    nameMl: "ത്രിച്ചംബരം ഉത്സവം",
     season: "March",
+    seasonMl: "മാർച്ച്",
     description:
       "Annual festival at Trichambaram Shree Krishna Temple, with Thitambu Nriththam traditions.",
+    descriptionMl:
+      "ത്രിച്ചംബരം ശ്രീകൃഷ്ണ ക്ഷേത്രത്തിലെ വാർഷിക ഉത്സവം; തിടമ്പ് നൃത്തം ഉൾപ്പെടെയുള്ള ആചാരങ്ങൾ.",
     source: "https://en.wikipedia.org/wiki/Trichambaram_Temple",
     mapsQuery: "Trichambaram Temple Taliparamba",
   },
   {
     id: "sundareswara-pooyam",
     name: "Sree Sundareswara Pooyam Festival",
+    nameMl: "ശ്രീ സുന്ദരേശ്വര പൂയം ഉത്സവം",
     season: "Meenam (Mar–Apr)",
+    seasonMl: "മീനം (മാർച്ച്–ഏപ്രിൽ)",
     description: "Temple festival held on Pooyam star in Meenam at Sree Sundareswara Temple.",
+    descriptionMl:
+      "മീനത്തിൽ പൂയം നക്ഷത്രദിനം ശ്രീ സുന്ദരേശ്വര ക്ഷേത്രത്തിൽ നടക്കുന്ന ഉത്സവം.",
     source: "https://en.wikipedia.org/wiki/Sree_Sundareswara_Temple",
     mapsQuery: "Sree Sundareswara Temple Kannur",
   },
   {
     id: "thayineri-kurinji-theyyam",
     name: "Thayineri Sree Kurinji Temple Theyyam",
+    nameMl: "തയ്യിനേരി ശ്രീ കുറിഞ്ഞി ക്ഷേത്ര തെയ്യം",
     season: "Feb (Makaram–Kumbham)",
+    seasonMl: "ഫെബ്രുവരി (മകരം–കുംഭം)",
     description:
       "Theyyam festival noted for the Theekkundam (ceremonial pyre) lit inside the temple walls.",
+    descriptionMl:
+      "ക്ഷേത്രമതിലിനുള്ളിൽ തീക്കുണ്ടം തെളിയിക്കുന്നതിൽ പ്രശസ്തമായ തെയ്യോത്സവം.",
     source: "https://www.keralatourism.org/theyyamcalendar/temple.php?id=41",
     mapsQuery: "Thayineri Sree Kurinji Temple Payyanur",
   },
   {
     id: "keecheri-palottu-kavu",
     name: "Keecheri Sree Palottu Kavu Theyyam (Vishu Vilakku)",
+    nameMl: "കീച്ചേരി ശ്രീ പാലോട്ടു കാവ് തെയ്യം (വിഷു വിളക്ക്)",
     season: "Apr 14–20 (Medam 1–7)",
+    seasonMl: "ഏപ്രിൽ 14–20 (മേടം 1–7)",
     description:
       "Annual Kaliyattam/Theyyam festival (Vishu Vilakku) that traditionally begins with fireworks.",
+    descriptionMl:
+      "വിഷു വിളക്കോടെ ആരംഭിക്കുന്ന വാർഷിക കളിയാട്ടം/തെയ്യോത്സവം; പരമ്പരാഗതമായി പടക്കങ്ങളോടെ തുടങ്ങുന്നു.",
     source: "https://travelkannur.com/theyyam-kavu/keecheri-sree-palottu-kavu/",
     secondarySource: "https://www.hindu-blog.com/2022/03/keecheri-sree-palottu-kavu-temple.html",
     mapsQuery: "Keecheri Sree Palottu Kavu Kannur",
@@ -139,8 +171,11 @@ export const personalities = [
   {
     id: "sushin-shyam",
     name: "Sushin Shyam",
+    nameMl: "സുഷിൻ ശ്യാം",
     field: "Music & Film",
+    fieldMl: "സംഗീതം & സിനിമ",
     description: "Music director and composer from Kannur district.",
+    descriptionMl: "കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള സംഗീത സംവിധായകൻയും കംപോസറും.",
     birthYear: 1992,
     source: "https://www.district.in/events/sushin-shyam/artist",
     mapsQuery: "Kannur, Kerala",
@@ -158,8 +193,11 @@ export const personalities = [
   {
     id: "tintu-luka",
     name: "Tintu Luka",
+    nameMl: "ടിന്റു ലൂക്ക",
     field: "Sports (Athletics)",
+    fieldMl: "കായികം (അത്‌ലറ്റിക്‌സ്)",
     description: "Indian middle‑distance runner and Olympian.",
+    descriptionMl: "ഇന്ത്യൻ മിഡിൽ‑ഡിസ്റ്റൻസ് റണ്ണറും ഒളിമ്പ്യനുമാണ്.",
     birthYear: 1989,
     source: "https://en.wikipedia.org/wiki/Tintu_Luka",
     mapsQuery: "Kerala, India",
@@ -177,8 +215,11 @@ export const personalities = [
   {
     id: "ck-vineeth",
     name: "C. K. Vineeth",
+    nameMl: "സി. കെ. വിനീത്",
     field: "Sports (Football)",
+    fieldMl: "കായികം (ഫുട്ബോൾ)",
     description: "Professional footballer from Kannur district.",
+    descriptionMl: "കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള പ്രൊഫഷണൽ ഫുട്ബോൾ താരം.",
     birthYear: 1988,
     source: "https://en.wikipedia.org/wiki/C._K._Vineeth",
     mapsQuery: "Kannur, Kerala",
@@ -196,8 +237,11 @@ export const personalities = [
   {
     id: "gita-gopinath",
     name: "Gita Gopinath",
+    nameMl: "ഗീത ഗോപിനാഥ്",
     field: "Economist",
+    fieldMl: "അർത്ഥശാസ്ത്രജ്ഞ",
     description: "Internationally known economist; listed among notable people from Kannur district.",
+    descriptionMl: "അന്താരാഷ്ട്ര തലത്തിൽ ശ്രദ്ധേയയായ അർത്ഥശാസ്ത്രജ്ഞ; കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള പ്രമുഖ വ്യക്തികളിൽ ഒരാൾ.",
     birthYear: 1971,
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
@@ -213,8 +257,11 @@ export const personalities = [
   {
     id: "vp-sathyan",
     name: "V. P. Sathyan",
+    nameMl: "വി. പി. സത്യൻ",
     field: "Sports (Football)",
+    fieldMl: "കായികം (ഫുട്ബോൾ)",
     description: "Former India captain and defender from Kannur district.",
+    descriptionMl: "കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള മുൻ ഇന്ത്യൻ ക്യാപ്റ്റനും ഡിഫെൻഡറും.",
     birthYear: 1965,
     source: "https://en.wikipedia.org/wiki/V._P._Sathyan",
     mapsQuery: "Mekkunnu, Kannur",
@@ -231,8 +278,11 @@ export const personalities = [
   {
     id: "pinarayi-vijayan",
     name: "Pinarayi Vijayan",
+    nameMl: "പിണറായി വിജയൻ",
     field: "Politics",
+    fieldMl: "രാഷ്ട്രീയം",
     description: "Chief Minister of Kerala; listed among notable people from Kannur district.",
+    descriptionMl: "കേരള മുഖ്യമന്ത്രിയും കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള പ്രമുഖ വ്യക്തിയും.",
     birthYear: 1945,
     source: "https://en.wikipedia.org/wiki/Pinarayi_Vijayan",
     mapsQuery: "Pinarayi, Kannur",
@@ -250,8 +300,11 @@ export const personalities = [
   {
     id: "jimmy-george",
     name: "Jimmy George",
+    nameMl: "ജിമ്മി ജോർജ്",
     field: "Sports (Volleyball)",
+    fieldMl: "കായികം (വോളിബോൾ)",
     description: "Legendary volleyball player; listed among notable people from Kannur district.",
+    descriptionMl: "പ്രശസ്ത വോളിബോൾ താരം; കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള പ്രമുഖർ.",
     birthYear: 1955,
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
@@ -267,8 +320,11 @@ export const personalities = [
   {
     id: "sreenivasan",
     name: "Sreenivasan",
+    nameMl: "ശ്രീനിവാസൻ",
     field: "Cinema",
+    fieldMl: "സിനിമ",
     description: "Actor, screenwriter, and director from Thalassery, Kannur district.",
+    descriptionMl: "തലശ്ശേരി, കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള അഭിനേതാവ്, തിരക്കഥാകൃത്ത്, സംവിധായകൻ.",
     birthYear: 1950,
     source: "https://en.wikipedia.org/wiki/Sreenivasan",
     mapsQuery: "Thalassery, Kannur",
@@ -285,8 +341,11 @@ export const personalities = [
   {
     id: "sukumar-azhikode",
     name: "Sukumar Azhikode",
+    nameMl: "സുകുമാർ അഴിക്കോട്",
     field: "Writer & Critic",
+    fieldMl: "എഴുത്തുകാരൻ & വിമർശകൻ",
     description: "Influential Malayalam writer and critic; listed among notable people from Kannur district.",
+    descriptionMl: "പ്രമുഖ മലയാള എഴുത്തുകാരനും വിമർശകനും; കണ്ണൂർ ജില്ലയിലെ പ്രമുഖർ.",
     birthYear: 1926,
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {
@@ -302,8 +361,11 @@ export const personalities = [
   {
     id: "ek-nayanar",
     name: "E. K. Nayanar",
+    nameMl: "ഇ. കെ. നായനാർ",
     field: "Politics",
+    fieldMl: "രാഷ്ട്രീയം",
     description: "Prominent communist leader and former Chief Minister of Kerala.",
+    descriptionMl: "പ്രമുഖ കമ്മ്യൂണിസ്റ്റ് നേതാവും മുൻ കേരള മുഖ്യമന്ത്രിയും.",
     birthYear: 1919,
     source: "https://en.wikipedia.org/wiki/E._K._Nayanar",
     mapsQuery: "Kalliasseri, Kannur",
@@ -320,8 +382,11 @@ export const personalities = [
   {
     id: "mn-nambiar",
     name: "M. N. Nambiar",
+    nameMl: "എം. എൻ. നമ്പ്യാർ",
     field: "Cinema",
+    fieldMl: "സിനിമ",
     description: "Actor known for Tamil cinema; born in Cannanore (Kannur).",
+    descriptionMl: "തമിഴ് സിനിമയിലെ പ്രശസ്ത നടൻ; കണ്ണൂർ (കണ്ണനോർ) ജനനം.",
     birthYear: 1919,
     source: "https://en.wikipedia.org/wiki/M._N._Nambiar",
     mapsQuery: "Kannur, Kerala",
@@ -338,8 +403,11 @@ export const personalities = [
   {
     id: "k-karunakaran",
     name: "K. Karunakaran",
+    nameMl: "കെ. കരുണാകരൻ",
     field: "Politics",
+    fieldMl: "രാഷ്ട്രീയം",
     description: "Former Chief Minister of Kerala; senior Congress leader.",
+    descriptionMl: "മുൻ കേരള മുഖ്യമന്ത്രി; മുതിർന്ന കോൺഗ്രസ് നേതാവ്.",
     birthYear: 1918,
     source: "https://en.wikipedia.org/wiki/K._Karunakaran",
     mapsQuery: "Thrissur, Kerala",
@@ -356,8 +424,11 @@ export const personalities = [
   {
     id: "a-k-gopalan",
     name: "A. K. Gopalan",
+    nameMl: "എ. കെ. ഗോപാലൻ",
     field: "Politics",
+    fieldMl: "രാഷ്ട്രീയം",
     description: "Prominent communist leader; listed among notable people from Kannur district.",
+    descriptionMl: "പ്രമുഖ കമ്മ്യൂണിസ്റ്റ് നേതാവ്; കണ്ണൂർ ജില്ലയിൽ നിന്നുള്ള പ്രമുഖർ.",
     birthYear: 1904,
     source: "https://en.wikipedia.org/wiki/Kannur_district",
     image: {

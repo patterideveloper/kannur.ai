@@ -74,18 +74,24 @@ export default function People({ lang, t }) {
           <h2>{t.sections.personalities}</h2>
         </div>
         <div className="info-grid compact">
-          {personalities.map((person) => (
-            <InfoCard
-              key={person.id}
-              title={person.name}
-              subtitle={person.field}
-              description={person.description}
-              meta={[{ label: t.labels.field, value: person.field }]}
-              source={person.source}
-              image={person.image}
-              t={t}
-            />
-          ))}
+          {personalities.map((person) => {
+            const title = lang === "ml" ? person.nameMl || person.name : person.name;
+            const field = lang === "ml" ? person.fieldMl || person.field : person.field;
+            const description =
+              lang === "ml" ? person.descriptionMl || person.description : person.description;
+            return (
+              <InfoCard
+                key={person.id}
+                title={title}
+                subtitle={field}
+                description={description}
+                meta={[{ label: t.labels.field, value: field }]}
+                source={person.source}
+                image={person.image}
+                t={t}
+              />
+            );
+          })}
         </div>
       </section>
     </main>

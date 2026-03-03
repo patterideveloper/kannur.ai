@@ -101,18 +101,24 @@ export default function Temples({ lang, t }) {
           <h2>{t.sections.temples}</h2>
         </div>
         <div className="info-grid">
-          {temples.map((temple) => (
-            <InfoCard
-              key={temple.id}
-              title={temple.name}
-              description={temple.description}
-              meta={[{ label: t.labels.area, value: temple.area }]}
-              source={temple.source}
-              mapsQuery={temple.mapsQuery}
-              image={temple.image}
-              t={t}
-            />
-          ))}
+          {temples.map((temple) => {
+            const title = lang === "ml" ? temple.nameMl || temple.name : temple.name;
+            const description =
+              lang === "ml" ? temple.descriptionMl || temple.description : temple.description;
+            const area = lang === "ml" ? temple.areaMl || temple.area : temple.area;
+            return (
+              <InfoCard
+                key={temple.id}
+                title={title}
+                description={description}
+                meta={[{ label: t.labels.area, value: area }]}
+                source={temple.source}
+                mapsQuery={temple.mapsQuery}
+                image={temple.image}
+                t={t}
+              />
+            );
+          })}
         </div>
       </section>
 
