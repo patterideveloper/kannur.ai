@@ -334,6 +334,7 @@ export default function App() {
           }
         />
         <Route path="/explore" element={<Explore lang={lang} t={t} />} />
+        <Route path="/explore/:filter" element={<Explore lang={lang} t={t} />} />
         <Route path="/eats" element={<Eats lang={lang} t={t} />} />
         <Route path="/temples" element={<Temples lang={lang} t={t} />} />
         <Route path="/events" element={<Events lang={lang} t={t} />} />

@@ -208,6 +208,11 @@ export const places = [
     tags: ["family", "wildlife", "education"],
     source: "https://thesnakepark.com/",
     mapsQuery: "Parassinikadavu Snake Park",
+    searchAliases: [
+      "parassinikkadavu snake park",
+      "parassinkkadavu snake park",
+      "parassinikkadavu",
+    ],
     coords: { lat: 11.98934, lng: 75.38847 },
     images: [
       {
@@ -408,6 +413,251 @@ export const places = [
         alt: "Khadi India storefront",
         credit: "HarshavardhanR22 (CC BY-SA 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Khadi_India.jpg",
+      },
+    ],
+  },
+  {
+    id: "kavvayi-islands",
+    name: "Kavvayi Islands",
+    nameMl: "കവ്വായി ദ്വീപുകൾ",
+    type: "Island",
+    area: "Payyanur region",
+    areaMl: "പയ്യന്നൂർ മേഖല",
+    description:
+      "A backwater island cluster known for serene water channels, birdlife, and canoe experiences.",
+    descriptionMl:
+      "ശാന്തമായ കായൽച്ചാലുകൾ, പക്ഷിജീവജാലം, കനോ യാത്രകൾ എന്നിവയ്ക്ക് പ്രശസ്തമായ ദ്വീപുസമുച്ചയം.",
+    tags: ["island", "nature", "quiet", "family"],
+    source:
+      "https://www.tripadvisor.in/Attraction_Review-g777115-d8474386-Reviews-Kavvayi_Islands-Kannur_Kannur_District_Kerala.html",
+    mapsQuery: "Kavvayi Islands Kannur",
+    coords: { lat: 12.1042, lng: 75.1761 },
+    images: [
+      {
+        url: "/images/places/kavvayi_islands-800.jpg",
+        srcSet:
+          "/images/places/kavvayi_islands-480.jpg 480w, /images/places/kavvayi_islands-800.jpg 800w, /images/places/kavvayi_islands-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Kavvayi Islands backwater view",
+        credit: "Tripadvisor",
+        creditUrl:
+          "https://www.tripadvisor.in/Attraction_Review-g777115-d8474386-Reviews-Kavvayi_Islands-Kannur_Kannur_District_Kerala.html",
+      },
+    ],
+  },
+  {
+    id: "petstation-kannur",
+    name: "Petstation Kannur",
+    nameMl: "പെറ്റ്‌സ്റ്റേഷൻ കണ്ണൂർ",
+    type: "Zoo",
+    area: "Matool",
+    areaMl: "മാറ്റൂൽ",
+    description:
+      "Family-friendly pet and animal interaction spot in Matool, popular with kids and weekend visitors.",
+    descriptionMl:
+      "മാറ്റൂളിലെ കുടുംബസൗഹൃദ പെറ്റ്-ആനിമൽ ഇടപെടൽ കേന്ദ്രം; കുട്ടികൾക്കും വാരാന്ത്യ യാത്രികർക്കും പ്രിയപ്പെട്ട സ്ഥലം.",
+    tags: ["family", "wildlife", "education"],
+    source:
+      "https://www.tripadvisor.in/Attraction_Review-g27690922-d27914580-Reviews-Petstation_Kannur-Matool_Kannur_District_Kerala.html",
+    mapsQuery: "Petstation Kannur Matool",
+    coords: { lat: 11.9832, lng: 75.2951 },
+    images: [
+      {
+        url: "/images/places/petstation_kannur-800.jpg",
+        srcSet:
+          "/images/places/petstation_kannur-480.jpg 480w, /images/places/petstation_kannur-800.jpg 800w, /images/places/petstation_kannur-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Petstation Kannur entrance area",
+        credit: "Tripadvisor",
+        creditUrl:
+          "https://www.tripadvisor.in/Attraction_Review-g27690922-d27914580-Reviews-Petstation_Kannur-Matool_Kannur_District_Kerala.html",
+      },
+    ],
+  },
+  {
+    id: "thalassery-fort",
+    name: "Thalassery Fort",
+    nameMl: "തലശ്ശേരി കോട്ട",
+    type: "Heritage",
+    area: "Thalassery",
+    areaMl: "തലശ്ശേരി",
+    description:
+      "18th-century seaside fort that reflects colonial history and offers elevated views over town and coast.",
+    descriptionMl:
+      "18-ആം നൂറ്റാണ്ടിലെ കടൽതീര കോട്ട; കോളനിയൽ ചരിത്രത്തിന്റെ സാക്ഷിയും പട്ടണ-തീര ദൃശ്യങ്ങൾക്ക് പ്രശസ്തവുമാണ്.",
+    tags: ["heritage", "history", "city", "view"],
+    source:
+      "https://www.google.com/search?q=thalassery+fort",
+    mapsQuery: "Thalassery Fort",
+    coords: { lat: 11.7488, lng: 75.4924 },
+    images: [
+      {
+        url: "/images/places/thalassery_fort-800.jpg",
+        srcSet:
+          "/images/places/thalassery_fort-480.jpg 480w, /images/places/thalassery_fort-800.jpg 800w, /images/places/thalassery_fort-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Thalassery Fort",
+        credit: "Wikimedia Commons",
+        creditUrl: "https://commons.wikimedia.org/wiki/File:Thalassery_fort_(1).jpg",
+      },
+    ],
+  },
+  {
+    id: "vayalapra-floating-park",
+    name: "Vayalapra Floating Park",
+    nameMl: "വയലപ്ര ഫ്ലോട്ടിംഗ് പാർക്ക്",
+    type: "Viewpoint",
+    area: "Kannur district",
+    areaMl: "കണ്ണൂർ ജില്ല",
+    description:
+      "Floating park and waterfront leisure point with walkways, boating ambience, and family evening outings.",
+    descriptionMl:
+      "വാട്ടർഫ്രണ്ട് നടത്തിപ്പാതകളും ശാന്തമായ ബോട്ടിംഗ് അന്തരീക്ഷവുമുള്ള ഫ്ലോട്ടിംഗ് പാർക്ക്; കുടുംബ സായാഹ്നങ്ങൾക്ക് അനുയോജ്യം.",
+    tags: ["family", "nature", "view", "quiet"],
+    source:
+      "https://www.google.com/search?q=vayalapra+floating+park",
+    mapsQuery: "Vayalapra Floating Park",
+    coords: { lat: 11.9519, lng: 75.4274 },
+    images: [
+      {
+        url: "/images/places/vayalapra_floating_park-800.jpg",
+        srcSet:
+          "/images/places/vayalapra_floating_park-480.jpg 480w, /images/places/vayalapra_floating_park-800.jpg 800w, /images/places/vayalapra_floating_park-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Vayalapra Floating Park waterfront view",
+        credit: "Tripadvisor",
+        creditUrl:
+          "https://www.tripadvisor.in/Attraction_Review-g2283657-d17692895-Reviews-V_Pra_Kaayal_Floating_Park-Kannur_Kannur_District_Kerala.html",
+      },
+    ],
+  },
+  {
+    id: "mridanga-saileswari-temple",
+    name: "Mridanga Saileswari Temple",
+    nameMl: "മൃദംഗശൈലേശ്വരി ക്ഷേത്രം",
+    type: "Worship",
+    area: "Muzhakkunnu, Kannur district",
+    areaMl: "മുഴക്കുന്ന്, കണ്ണൂർ ജില്ല",
+    description:
+      "Historic temple dedicated to Goddess Durga, revered for its traditional rituals and cultural significance.",
+    descriptionMl:
+      "ദുർഗാദേവിക്ക് സമർപ്പിച്ച ചരിത്രപ്രാധാന്യമുള്ള ക്ഷേത്രം; പരമ്പരാഗത ആചാരങ്ങൾക്കും സാംസ്കാരിക പ്രാധാന്യത്തിനും പ്രശസ്തം.",
+    tags: ["worship", "heritage", "family"],
+    source: "https://www.google.com/search?q=mridanga+saileswari+temple",
+    mapsQuery: "Mridanga Saileswari Temple Muzhakkunnu",
+    images: [
+      {
+        url: "/images/places/mridanga_saileswari_temple-800.jpg",
+        srcSet:
+          "/images/places/mridanga_saileswari_temple-480.jpg 480w, /images/places/mridanga_saileswari_temple-800.jpg 800w, /images/places/mridanga_saileswari_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Mridanga Saileswari Temple",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=mridanga+saileswari+temple&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "payyannur-murugan-temple",
+    name: "Payyannur Murugan Temple",
+    nameMl: "പയ്യന്നൂർ മുരുകൻ ക്ഷേത്രം",
+    type: "Worship",
+    area: "Payyannur",
+    areaMl: "പയ്യന്നൂർ",
+    description:
+      "Popular Murugan temple in North Malabar, known for devotional gatherings and annual temple events.",
+    descriptionMl:
+      "ഉത്തര മലബാറിലെ പ്രസിദ്ധമായ മുരുകൻ ക്ഷേത്രം; ഭക്തിസമ്മേളനങ്ങൾക്കും വാർഷിക ഉത്സവങ്ങൾക്കും അറിയപ്പെടുന്നു.",
+    tags: ["worship", "heritage", "family"],
+    source: "https://www.google.com/search?q=payyannur+murugan+temple",
+    mapsQuery: "Payyannur Murugan Temple",
+    images: [
+      {
+        url: "/images/places/payyannur_murugan_temple-800.jpg",
+        srcSet:
+          "/images/places/payyannur_murugan_temple-480.jpg 480w, /images/places/payyannur_murugan_temple-800.jpg 800w, /images/places/payyannur_murugan_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Payyannur Murugan Temple",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=payyannur+murugan+temple&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "peralassery-subramanya-temple",
+    name: "Peralassery Subramanya Temple",
+    nameMl: "പേരലശ്ശേരി സുബ്രഹ്മണ്യ ക്ഷേത്രം",
+    type: "Worship",
+    area: "Peralassery",
+    areaMl: "പേരലശ്ശേരി",
+    description:
+      "Well-known Subramanya temple with a sacred temple tank and vibrant annual festival traditions.",
+    descriptionMl:
+      "ക്ഷേത്രക്കുളവും സമൃദ്ധമായ വാർഷിക ഉത്സവപരമ്പരയും കൊണ്ട് ശ്രദ്ധേയമായ സുബ്രഹ്മണ്യ ക്ഷേത്രം.",
+    tags: ["worship", "heritage", "family"],
+    source: "https://www.google.com/search?q=peralassery+subramanya+temple",
+    mapsQuery: "Peralassery Subramanya Temple",
+    images: [
+      {
+        url: "/images/places/peralassery_subramanya_temple-800.jpg",
+        srcSet:
+          "/images/places/peralassery_subramanya_temple-480.jpg 480w, /images/places/peralassery_subramanya_temple-800.jpg 800w, /images/places/peralassery_subramanya_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Peralassery Subramanya Temple",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=peralassery+subramanya+temple&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "kalarivathukkal-temple",
+    name: "Kalarivathukkal Temple",
+    nameMl: "കളരിവാതുക്കൽ ക്ഷേത്രം",
+    type: "Worship",
+    area: "Valapattanam, Kannur",
+    areaMl: "വളപട്ടണം, കണ്ണൂർ",
+    description:
+      "Famous Bhadrakali temple in Kannur associated with traditional Theyyam performances.",
+    descriptionMl:
+      "പരമ്പരാഗത തെയ്യം ആചാരങ്ങളുമായി ബന്ധപ്പെട്ട കണ്ണൂരിലെ പ്രശസ്ത ഭദ്രകാളി ക്ഷേത്രം.",
+    tags: ["worship", "heritage", "family"],
+    source: "https://www.google.com/search?q=kalarivathukkal+temple+kannur",
+    mapsQuery: "Kalarivathukkal Temple Kannur",
+    images: [
+      {
+        url: "/images/places/kalarivathukkal_temple-800.jpg",
+        srcSet:
+          "/images/places/kalarivathukkal_temple-480.jpg 480w, /images/places/kalarivathukkal_temple-800.jpg 800w, /images/places/kalarivathukkal_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Kalarivathukkal Temple Kannur",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=kalarivathukkal+temple+kannur&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "mamanikkunnu-temple",
+    name: "Mamanikkunnu Temple",
+    nameMl: "മാമണിക്കുന്ന് ക്ഷേത്രം",
+    type: "Worship",
+    area: "Kannur district",
+    areaMl: "കണ്ണൂർ ജില്ല",
+    description:
+      "Important local temple known for regional rituals and community festivals.",
+    descriptionMl:
+      "പ്രാദേശിക ആചാരങ്ങളാലും സാമൂഹിക ഉത്സവങ്ങളാലും പ്രശസ്തമായ പ്രധാന ക്ഷേത്രം.",
+    tags: ["worship", "heritage", "family"],
+    source: "https://www.google.com/search?q=mamanikkunnu+temple",
+    mapsQuery: "Mamanikkunnu Temple Kannur",
+    images: [
+      {
+        url: "/images/places/mamanikkunnu_temple-800.jpg",
+        srcSet:
+          "/images/places/mamanikkunnu_temple-480.jpg 480w, /images/places/mamanikkunnu_temple-800.jpg 800w, /images/places/mamanikkunnu_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Mamanikkunnu Temple",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=mamanikkunnu+temple&tbm=isch",
       },
     ],
   },

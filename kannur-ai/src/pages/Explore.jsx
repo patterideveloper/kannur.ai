@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import { places } from "../data/places";
 import { temples } from "../data/extras";
@@ -15,6 +15,30 @@ const tagGroups = [
   { value: "family" },
   { value: "quiet" },
 ];
+
+const routeToTag = {
+  all: "all",
+  beaches: "beach",
+  heritage: "heritage",
+  hills: "hill",
+  wildlife: "wildlife",
+  shopping: "shopping",
+  worship: "worship",
+  family: "family",
+  quiet: "quiet",
+};
+
+const tagToRoute = {
+  all: "",
+  beach: "beaches",
+  heritage: "heritage",
+  hill: "hills",
+  wildlife: "wildlife",
+  shopping: "shopping",
+  worship: "worship",
+  family: "family",
+  quiet: "quiet",
+};
 
 const templePlaces = temples.map((temple) => ({
   id: `temple-${temple.id}`,
@@ -130,15 +154,25 @@ function PlaceCard({ place, lang, t }) {
 }
 
 export default function Explore({ lang, t }) {
-  const [activeTag, setActiveTag] = useState("all");
+  const navigate = useNavigate();
+  const { filter } = useParams();
   const [search, setSearch] = useState("");
   const [distances, setDistances] = useState({});
   const [distancesLoading, setDistancesLoading] = useState(false);
   const [distanceError, setDistanceError] = useState(false);
 
+  const activeTag = (filter ? routeToTag[filter] : "all") || "all";
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (!filter) return;
+    if (!routeToTag[filter]) {
+      navigate("/explore", { replace: true });
+    }
+  }, [filter, navigate]);
 
   useEffect(() => {
     const loadDistances = async () => {
@@ -186,7 +220,9 @@ export default function Explore({ lang, t }) {
         place.description.toLowerCase().includes(searchValue) ||
         (place.nameMl && place.nameMl.toLowerCase().includes(searchValue)) ||
         (place.descriptionMl && place.descriptionMl.toLowerCase().includes(searchValue)) ||
-        place.tags.some((tag) => tag.includes(searchValue));
+        place.tags.some((tag) => tag.includes(searchValue)) ||
+        (place.searchAliases &&
+          place.searchAliases.some((alias) => alias.toLowerCase().includes(searchValue)));
       return matchesTag && matchesSearch;
     });
   }, [activeTag, search, combinedPlaces]);
@@ -195,7 +231,7 @@ export default function Explore({ lang, t }) {
     <main className="page">
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
-        path="/explore"
+        path={filter ? `/explore/${filter}` : "/explore"}
         title="Explore Kannur | Kannur | Explore Tourism"
         description={
           lang === "ml"
@@ -221,7 +257,10 @@ export default function Explore({ lang, t }) {
             <button
               key={tag.value}
               className={`chip ${activeTag === tag.value ? "active" : ""}`}
-              onClick={() => setActiveTag(tag.value)}
+              onClick={() => {
+                const route = tagToRoute[tag.value];
+                navigate(route ? `/explore/${route}` : "/explore");
+              }}
             >
               {t.tags[tag.value]}
             </button>
