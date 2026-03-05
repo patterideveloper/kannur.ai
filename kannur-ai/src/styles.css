@@ -1388,7 +1388,21 @@ h3,
 }
 
 .secondary-link {
-  color: var(--sun);
+  color: #fff;
+  background: linear-gradient(135deg, var(--sun), #f05d3b);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 20px rgba(230, 57, 70, 0.28);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.secondary-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(230, 57, 70, 0.35);
 }
 
 .detail-meta {
@@ -1419,6 +1433,7 @@ h3,
   overflow: hidden;
   border: 1px solid rgba(29, 53, 87, 0.14);
   background: rgba(9, 13, 24, 0.03);
+  position: relative;
 }
 
 .detail-image-card img {
@@ -1436,6 +1451,33 @@ h3,
 .detail-image-card figcaption a {
   color: rgba(47, 59, 67, 0.72);
   text-decoration: none;
+}
+
+.detail-carousel .carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(9, 13, 24, 0.48);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.detail-carousel .carousel-nav.prev {
+  left: 10px;
+}
+
+.detail-carousel .carousel-nav.next {
+  right: 10px;
 }
 
 .detail-map-wrap {

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
-import { explorePlaces } from "../data/explorePlaces";
 
 const tagGroups = [
   { value: "all" },
@@ -10,7 +9,9 @@ const tagGroups = [
   { value: "hill" },
   { value: "wildlife" },
   { value: "shopping" },
-  { value: "worship" },
+  { value: "temple" },
+  { value: "church" },
+  { value: "mosque" },
   { value: "family" },
   { value: "quiet" },
 ];
@@ -22,7 +23,10 @@ const routeToTag = {
   hills: "hill",
   wildlife: "wildlife",
   shopping: "shopping",
-  worship: "worship",
+  worship: "temple",
+  temples: "temple",
+  churches: "church",
+  mosques: "mosque",
   family: "family",
   quiet: "quiet",
 };
@@ -34,7 +38,9 @@ const tagToRoute = {
   hill: "hills",
   wildlife: "wildlife",
   shopping: "shopping",
-  worship: "worship",
+  temple: "temples",
+  church: "churches",
+  mosque: "mosques",
   family: "family",
   quiet: "quiet",
 };
@@ -80,40 +86,33 @@ function PlaceCard({ place, lang, t, fromPath }) {
         </div>
         <span className="place-area">{distanceLabel}</span>
       </div>
-      {place.images?.length > 0 && (
-        <div className="gallery" aria-label={`${displayName} gallery`}>
-          {place.images.map((image) => (
-            <figure key={image.url}>
-              <picture>
-                {image.srcSet && (
-                  <source type="image/webp" srcSet={image.srcSet.replace(/\\.jpg/g, ".webp")} />
-                )}
-                <img
-                  src={image.url}
-                  srcSet={image.srcSet}
-                  sizes={image.sizes || "(max-width: 700px) 80vw, 420px"}
-                  alt={image.alt}
-                  loading="lazy"
-                  decoding="async"
+      {place.images?.[0] && (
+        <div className="gallery" aria-label={`${displayName} preview`}>
+          <figure>
+            <picture>
+              {place.images[0].srcSet && (
+                <source
+                  type="image/webp"
+                  srcSet={place.images[0].srcSet.replace(/\\.jpg/g, ".webp")}
                 />
-              </picture>
-              <figcaption>
-                <a href={image.creditUrl} target="_blank" rel="noreferrer">
-                  Photo: {image.credit}
-                </a>
-              </figcaption>
-            </figure>
-          ))}
+              )}
+              <img
+                src={place.images[0].url}
+                srcSet={place.images[0].srcSet}
+                sizes={place.images[0].sizes || "(max-width: 700px) 80vw, 420px"}
+                alt={place.images[0].alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <figcaption>
+              <a href={place.images[0].creditUrl} target="_blank" rel="noreferrer">
+                Photo: {place.images[0].credit}
+              </a>
+            </figcaption>
+          </figure>
         </div>
       )}
-      <p className="place-desc">{displayDesc}</p>
-      <div className="tag-row">
-        {place.tags.map((tag) => (
-          <span key={tag} className="tag">
-            {t.tags[tag] || tag}
-          </span>
-        ))}
-      </div>
       <div className="place-actions">
         <Link className="map-link secondary-link" to={`/explore/place/${place.id}`} state={{ from: fromPath }}>
           {t.viewDetails || (lang === "ml" ? "കൂടുതൽ കാണൂ" : "View Details")}
@@ -128,6 +127,8 @@ export default function Explore({ lang, t }) {
   const navigate = useNavigate();
   const { filter } = useParams();
   const [search, setSearch] = useState("");
+  const [placesData, setPlacesData] = useState([]);
+  const [placesLoading, setPlacesLoading] = useState(true);
   const [distances, setDistances] = useState({});
   const [distancesLoading, setDistancesLoading] = useState(false);
   const [distanceError, setDistanceError] = useState(false);
@@ -146,11 +147,28 @@ export default function Explore({ lang, t }) {
   }, [filter, navigate]);
 
   useEffect(() => {
+    const loadPlaces = async () => {
+      try {
+        setPlacesLoading(true);
+        const response = await fetch("/api/explore");
+        const data = await response.json();
+        setPlacesData(data.items || []);
+      } catch (error) {
+        setPlacesData([]);
+      } finally {
+        setPlacesLoading(false);
+      }
+    };
+    loadPlaces();
+  }, []);
+
+  useEffect(() => {
+    if (placesData.length === 0) return;
     const loadDistances = async () => {
       setDistancesLoading(true);
       setDistanceError(false);
       const origin = { lat: 11.876096, lng: 75.373579 };
-      const destinations = explorePlaces
+      const destinations = placesData
         .filter((place) => place.coords?.lat && place.coords?.lng)
         .map((place) => ({ id: place.id, ...place.coords }));
 
@@ -177,9 +195,9 @@ export default function Explore({ lang, t }) {
     };
 
     loadDistances();
-  }, []);
+  }, [placesData]);
 
-  const combinedPlaces = useMemo(() => explorePlaces, []);
+  const combinedPlaces = useMemo(() => placesData, [placesData]);
 
   const filteredPlaces = useMemo(() => {
     return combinedPlaces.filter((place) => {
@@ -248,6 +266,12 @@ export default function Explore({ lang, t }) {
           </span>
         </div>
       </section>
+
+      {placesLoading && (
+        <section className="info-section">
+          <p>{lang === "ml" ? "ലോഡ് ചെയ്യുന്നു..." : "Loading places..."}</p>
+        </section>
+      )}
 
       <section className="grid">
         {filteredPlaces.map((place) => (

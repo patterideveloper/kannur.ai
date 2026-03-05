@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { fetchTheyyamEvents } from "./server/theyyam.js";
 import { fetchTemplesFromTravelKannur, fetchTemplesFromWiki } from "./server/temples.js";
+import { buildExplorePlaces, getExplorePlaceById } from "./server/explore.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,6 +54,27 @@ app.get("/api/temples", async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch temples" });
+  }
+});
+
+app.get("/api/explore", (req, res) => {
+  try {
+    const items = buildExplorePlaces();
+    return res.json({ items });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch explore places" });
+  }
+});
+
+app.get("/api/explore/:id", (req, res) => {
+  try {
+    const item = getExplorePlaceById(req.params.id);
+    if (!item) {
+      return res.status(404).json({ error: "Place not found" });
+    }
+    return res.json({ item });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch place detail" });
   }
 });
 

@@ -16,12 +16,21 @@ export const places = [
     coords: { lat: 11.85405, lng: 75.37183 },
     images: [
       {
-        url: "/images/places/st_angelo_fort-800.jpg",
+        url: "/images/places/st_angelo_fort/st_angelo_fort-800.jpg",
         srcSet:
-          "/images/places/st_angelo_fort-480.jpg 480w, /images/places/st_angelo_fort-800.jpg 800w, /images/places/st_angelo_fort-1200.jpg 1200w",
+          "/images/places/st_angelo_fort/st_angelo_fort-480.jpg 480w, /images/places/st_angelo_fort/st_angelo_fort-800.jpg 800w, /images/places/st_angelo_fort/st_angelo_fort-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "St. Angelo Fort in Kannur",
         credit: "Deepa Chandran2014 (CC BY-SA 4.0)",
+        creditUrl: "https://commons.wikimedia.org/wiki/File:St_Angelo_Fort,_Kannur_10.jpg",
+      },
+      {
+        url: "/images/hero/st_angelo_fort-1200.jpg",
+        srcSet:
+          "/images/hero/st_angelo_fort-480.jpg 480w, /images/hero/st_angelo_fort-800.jpg 800w, /images/hero/st_angelo_fort-1200.jpg 1200w, /images/hero/st_angelo_fort-1600.jpg 1600w",
+        sizes: "(max-width: 700px) 92vw, 900px",
+        alt: "St. Angelo Fort sea-facing wall",
+        credit: "Wikimedia Commons",
         creditUrl: "https://commons.wikimedia.org/wiki/File:St_Angelo_Fort,_Kannur_10.jpg",
       },
     ],
@@ -44,13 +53,23 @@ export const places = [
     coords: { lat: 11.79445, lng: 75.44096 },
     images: [
       {
-        url: "/images/places/muzhappilangad_drivein-800.jpg",
+        url: "/images/places/muzhappilangad_drivein/muzhappilangad_drivein-800.jpg",
         srcSet:
-          "/images/places/muzhappilangad_drivein-480.jpg 480w, /images/places/muzhappilangad_drivein-800.jpg 800w, /images/places/muzhappilangad_drivein-1200.jpg 1200w",
+          "/images/places/muzhappilangad_drivein/muzhappilangad_drivein-480.jpg 480w, /images/places/muzhappilangad_drivein/muzhappilangad_drivein-800.jpg 800w, /images/places/muzhappilangad_drivein/muzhappilangad_drivein-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Muzhappilangad Drive-in Beach",
         credit: "Goutham Mohandas (CC BY-SA 3.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Muzhappilangad_Drive-In_Beach.JPG",
+        isBright: true,
+      },
+      {
+        url: "/images/hero/muzhappilangad_sunset-1200.jpg",
+        srcSet:
+          "/images/hero/muzhappilangad_sunset-480.jpg 480w, /images/hero/muzhappilangad_sunset-800.jpg 800w, /images/hero/muzhappilangad_sunset-1200.jpg 1200w, /images/hero/muzhappilangad_sunset-1600.jpg 1600w",
+        sizes: "(max-width: 700px) 92vw, 900px",
+        alt: "Muzhappilangad beach sunset",
+        credit: "Wikimedia Commons",
+        creditUrl: "https://commons.wikimedia.org/wiki/File:Muzhappilangad_Drive-In_Beach_Sunset_01.JPG",
         isBright: true,
       },
     ],
@@ -73,12 +92,22 @@ export const places = [
     coords: { lat: 11.88085, lng: 75.34359 },
     images: [
       {
-        url: "/images/places/payyambalam_beach-800.jpg",
+        url: "/images/places/payyambalam_beach/payyambalam_beach-800.jpg",
         srcSet:
-          "/images/places/payyambalam_beach-480.jpg 480w, /images/places/payyambalam_beach-800.jpg 800w, /images/places/payyambalam_beach-1200.jpg 1200w",
+          "/images/places/payyambalam_beach/payyambalam_beach-480.jpg 480w, /images/places/payyambalam_beach/payyambalam_beach-800.jpg 800w, /images/places/payyambalam_beach/payyambalam_beach-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Payyambalam Beach shoreline",
         credit: "Navaneeth Krishnan S (CC BY-SA 4.0)",
+        creditUrl: "https://commons.wikimedia.org/wiki/File:Payyambalam_beach,_Kannur.jpg",
+        isBright: true,
+      },
+      {
+        url: "/images/hero/payyambalam_beach-1200.jpg",
+        srcSet:
+          "/images/hero/payyambalam_beach-480.jpg 480w, /images/hero/payyambalam_beach-800.jpg 800w, /images/hero/payyambalam_beach-1200.jpg 1200w, /images/hero/payyambalam_beach-1600.jpg 1600w",
+        sizes: "(max-width: 700px) 92vw, 900px",
+        alt: "Payyambalam beach at evening",
+        credit: "Wikimedia Commons",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Payyambalam_beach,_Kannur.jpg",
         isBright: true,
       },
@@ -101,13 +130,23 @@ export const places = [
     coords: { lat: 11.76961, lng: 75.45068 },
     images: [
       {
-        url: "/images/places/dharmadam_island-800.jpg",
+        url: "/images/places/dharmadam_island/dharmadam_island-800.jpg",
         srcSet:
-          "/images/places/dharmadam_island-480.jpg 480w, /images/places/dharmadam_island-800.jpg 800w, /images/places/dharmadam_island-1200.jpg 1200w",
+          "/images/places/dharmadam_island/dharmadam_island-480.jpg 480w, /images/places/dharmadam_island/dharmadam_island-800.jpg 800w, /images/places/dharmadam_island/dharmadam_island-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Dharmadam Island",
         credit: "Shagil Kannur (CC BY 4.0)",
         creditUrl: "https://commons.wikimedia.org/wiki/File:Dharmadam_Thuruth_(Island).jpg",
+        isBright: true,
+      },
+      {
+        url: "/images/hero/dharmadam_island-1200.jpg",
+        srcSet:
+          "/images/hero/dharmadam_island-480.jpg 480w, /images/hero/dharmadam_island-800.jpg 800w, /images/hero/dharmadam_island-1200.jpg 1200w, /images/hero/dharmadam_island-1600.jpg 1600w",
+        sizes: "(max-width: 700px) 92vw, 900px",
+        alt: "Dharmadam Island shoreline",
+        credit: "Wikimedia Commons",
+        creditUrl: "https://commons.wikimedia.org/wiki/File:Dharmadom_island.jpg",
         isBright: true,
       },
     ],
@@ -129,9 +168,9 @@ export const places = [
     coords: { lat: 12.0472, lng: 75.6983 },
     images: [
       {
-        url: "/images/places/aralam_wildlife-800.jpg",
+        url: "/images/places/aralam_wildlife/aralam_wildlife-800.jpg",
         srcSet:
-          "/images/places/aralam_wildlife-480.jpg 480w, /images/places/aralam_wildlife-800.jpg 800w, /images/places/aralam_wildlife-1200.jpg 1200w",
+          "/images/places/aralam_wildlife/aralam_wildlife-480.jpg 480w, /images/places/aralam_wildlife/aralam_wildlife-800.jpg 800w, /images/places/aralam_wildlife/aralam_wildlife-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Aralam Wildlife Sanctuary landscape",
         credit: "Vinayaraj (CC BY-SA 3.0)",
@@ -157,9 +196,9 @@ export const places = [
     coords: { lat: 12.14306, lng: 75.5121 },
     images: [
       {
-        url: "/images/places/palakkayam_thattu-800.jpg",
+        url: "/images/places/palakkayam_thattu/palakkayam_thattu-800.jpg",
         srcSet:
-          "/images/places/palakkayam_thattu-480.jpg 480w, /images/places/palakkayam_thattu-800.jpg 800w, /images/places/palakkayam_thattu-1200.jpg 1200w",
+          "/images/places/palakkayam_thattu/palakkayam_thattu-480.jpg 480w, /images/places/palakkayam_thattu/palakkayam_thattu-800.jpg 800w, /images/places/palakkayam_thattu/palakkayam_thattu-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Palakkayam Thattu view",
         credit: "Vengolis (CC BY-SA 4.0)",
@@ -184,9 +223,9 @@ export const places = [
     coords: { lat: 12.17514, lng: 75.53903 },
     images: [
       {
-        url: "/images/places/paithalmala-800.jpg",
+        url: "/images/places/paithalmala/paithalmala-800.jpg",
         srcSet:
-          "/images/places/paithalmala-480.jpg 480w, /images/places/paithalmala-800.jpg 800w, /images/places/paithalmala-1200.jpg 1200w",
+          "/images/places/paithalmala/paithalmala-480.jpg 480w, /images/places/paithalmala/paithalmala-800.jpg 800w, /images/places/paithalmala/paithalmala-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Paithalmala ridge view",
         credit: "Nativeplants garden (CC BY-SA 4.0)",
@@ -216,9 +255,9 @@ export const places = [
     coords: { lat: 11.98934, lng: 75.38847 },
     images: [
       {
-        url: "/images/places/parassinikadavu_snake_park-800.jpg",
+        url: "/images/places/parassinikadavu_snake_park/parassinikadavu_snake_park-800.jpg",
         srcSet:
-          "/images/places/parassinikadavu_snake_park-480.jpg 480w, /images/places/parassinikadavu_snake_park-800.jpg 800w, /images/places/parassinikadavu_snake_park-1200.jpg 1200w",
+          "/images/places/parassinikadavu_snake_park/parassinikadavu_snake_park-480.jpg 480w, /images/places/parassinikadavu_snake_park/parassinikadavu_snake_park-800.jpg 800w, /images/places/parassinikadavu_snake_park/parassinikadavu_snake_park-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Parassinikadavu Snake Park entrance",
         credit: "Vaikoovery (CC BY 3.0)",
@@ -243,9 +282,9 @@ export const places = [
     coords: { lat: 11.86045, lng: 75.35591 },
     images: [
       {
-        url: "/images/places/kannur_lighthouse-800.jpg",
+        url: "/images/places/kannur_lighthouse/kannur_lighthouse-800.jpg",
         srcSet:
-          "/images/places/kannur_lighthouse-480.jpg 480w, /images/places/kannur_lighthouse-800.jpg 800w, /images/places/kannur_lighthouse-1200.jpg 1200w",
+          "/images/places/kannur_lighthouse/kannur_lighthouse-480.jpg 480w, /images/places/kannur_lighthouse/kannur_lighthouse-800.jpg 800w, /images/places/kannur_lighthouse/kannur_lighthouse-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kannur Lighthouse",
         credit: "Sarin Vinod (CC BY-SA 4.0)",
@@ -270,9 +309,9 @@ export const places = [
     coords: { lat: 11.82365, lng: 75.41587 },
     images: [
       {
-        url: "/images/places/kizhunna_beach-800.jpg",
+        url: "/images/places/kizhunna_beach/kizhunna_beach-800.jpg",
         srcSet:
-          "/images/places/kizhunna_beach-480.jpg 480w, /images/places/kizhunna_beach-800.jpg 800w, /images/places/kizhunna_beach-1200.jpg 1200w",
+          "/images/places/kizhunna_beach/kizhunna_beach-480.jpg 480w, /images/places/kizhunna_beach/kizhunna_beach-800.jpg 800w, /images/places/kizhunna_beach/kizhunna_beach-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kizhunna Beach shoreline",
         credit: "Wikimedia Commons (CC BY-SA 3.0)",
@@ -298,9 +337,9 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "/images/places/theyyam_handicraft-800.jpg",
+        url: "/images/places/theyyam_handicraft/theyyam_handicraft-800.jpg",
         srcSet:
-          "/images/places/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft-1200.jpg 1200w",
+          "/images/places/theyyam_handicraft/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft/theyyam_handicraft-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kerala handicraft statue",
         credit: "Ramesh Kunnappully (CC BY-SA 4.0)",
@@ -325,9 +364,9 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "/images/places/theyyam_handicraft-800.jpg",
+        url: "/images/places/theyyam_handicraft/theyyam_handicraft-800.jpg",
         srcSet:
-          "/images/places/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft-1200.jpg 1200w",
+          "/images/places/theyyam_handicraft/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft/theyyam_handicraft-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kerala handicraft statue",
         credit: "Ramesh Kunnappully (CC BY-SA 4.0)",
@@ -352,9 +391,9 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "/images/places/khadi_traditional-800.jpg",
+        url: "/images/places/khadi_traditional/khadi_traditional-800.jpg",
         srcSet:
-          "/images/places/khadi_traditional-480.jpg 480w, /images/places/khadi_traditional-800.jpg 800w, /images/places/khadi_traditional-1200.jpg 1200w",
+          "/images/places/khadi_traditional/khadi_traditional-480.jpg 480w, /images/places/khadi_traditional/khadi_traditional-800.jpg 800w, /images/places/khadi_traditional/khadi_traditional-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Khadi clothing",
         credit: "Shagil Kannur (CC BY-SA 4.0)",
@@ -379,9 +418,9 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "/images/places/theyyam_handicraft-800.jpg",
+        url: "/images/places/theyyam_handicraft/theyyam_handicraft-800.jpg",
         srcSet:
-          "/images/places/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft-1200.jpg 1200w",
+          "/images/places/theyyam_handicraft/theyyam_handicraft-480.jpg 480w, /images/places/theyyam_handicraft/theyyam_handicraft-800.jpg 800w, /images/places/theyyam_handicraft/theyyam_handicraft-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kerala handicraft statue",
         credit: "Ramesh Kunnappully (CC BY-SA 4.0)",
@@ -406,9 +445,9 @@ export const places = [
     coords: { lat: 11.8877, lng: 75.3786 },
     images: [
       {
-        url: "/images/places/khadi_india-800.jpg",
+        url: "/images/places/khadi_india/khadi_india-800.jpg",
         srcSet:
-          "/images/places/khadi_india-480.jpg 480w, /images/places/khadi_india-800.jpg 800w, /images/places/khadi_india-1200.jpg 1200w",
+          "/images/places/khadi_india/khadi_india-480.jpg 480w, /images/places/khadi_india/khadi_india-800.jpg 800w, /images/places/khadi_india/khadi_india-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Khadi India storefront",
         credit: "HarshavardhanR22 (CC BY-SA 4.0)",
@@ -434,9 +473,9 @@ export const places = [
     coords: { lat: 12.1042, lng: 75.1761 },
     images: [
       {
-        url: "/images/places/kavvayi_islands-800.jpg",
+        url: "/images/places/kavvayi_islands/kavvayi_islands-800.jpg",
         srcSet:
-          "/images/places/kavvayi_islands-480.jpg 480w, /images/places/kavvayi_islands-800.jpg 800w, /images/places/kavvayi_islands-1200.jpg 1200w",
+          "/images/places/kavvayi_islands/kavvayi_islands-480.jpg 480w, /images/places/kavvayi_islands/kavvayi_islands-800.jpg 800w, /images/places/kavvayi_islands/kavvayi_islands-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kavvayi Islands backwater view",
         credit: "Tripadvisor",
@@ -463,9 +502,9 @@ export const places = [
     coords: { lat: 11.9832, lng: 75.2951 },
     images: [
       {
-        url: "/images/places/petstation_kannur-800.jpg",
+        url: "/images/places/petstation_kannur/petstation_kannur-800.jpg",
         srcSet:
-          "/images/places/petstation_kannur-480.jpg 480w, /images/places/petstation_kannur-800.jpg 800w, /images/places/petstation_kannur-1200.jpg 1200w",
+          "/images/places/petstation_kannur/petstation_kannur-480.jpg 480w, /images/places/petstation_kannur/petstation_kannur-800.jpg 800w, /images/places/petstation_kannur/petstation_kannur-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Petstation Kannur entrance area",
         credit: "Tripadvisor",
@@ -492,9 +531,9 @@ export const places = [
     coords: { lat: 11.7488, lng: 75.4924 },
     images: [
       {
-        url: "/images/places/thalassery_fort-800.jpg",
+        url: "/images/places/thalassery_fort/thalassery_fort-800.jpg",
         srcSet:
-          "/images/places/thalassery_fort-480.jpg 480w, /images/places/thalassery_fort-800.jpg 800w, /images/places/thalassery_fort-1200.jpg 1200w",
+          "/images/places/thalassery_fort/thalassery_fort-480.jpg 480w, /images/places/thalassery_fort/thalassery_fort-800.jpg 800w, /images/places/thalassery_fort/thalassery_fort-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Thalassery Fort",
         credit: "Wikimedia Commons",
@@ -520,9 +559,9 @@ export const places = [
     coords: { lat: 11.9519, lng: 75.4274 },
     images: [
       {
-        url: "/images/places/vayalapra_floating_park-800.jpg",
+        url: "/images/places/vayalapra_floating_park/vayalapra_floating_park-800.jpg",
         srcSet:
-          "/images/places/vayalapra_floating_park-480.jpg 480w, /images/places/vayalapra_floating_park-800.jpg 800w, /images/places/vayalapra_floating_park-1200.jpg 1200w",
+          "/images/places/vayalapra_floating_park/vayalapra_floating_park-480.jpg 480w, /images/places/vayalapra_floating_park/vayalapra_floating_park-800.jpg 800w, /images/places/vayalapra_floating_park/vayalapra_floating_park-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Vayalapra Floating Park waterfront view",
         credit: "Tripadvisor",
@@ -542,14 +581,14 @@ export const places = [
       "Historic temple dedicated to Goddess Durga, revered for its traditional rituals and cultural significance.",
     descriptionMl:
       "ദുർഗാദേവിക്ക് സമർപ്പിച്ച ചരിത്രപ്രാധാന്യമുള്ള ക്ഷേത്രം; പരമ്പരാഗത ആചാരങ്ങൾക്കും സാംസ്കാരിക പ്രാധാന്യത്തിനും പ്രശസ്തം.",
-    tags: ["worship", "heritage", "family"],
+    tags: ["temple", "heritage", "family"],
     source: "https://www.google.com/search?q=mridanga+saileswari+temple",
     mapsQuery: "Mridanga Saileswari Temple Muzhakkunnu",
     images: [
       {
-        url: "/images/places/mridanga_saileswari_temple-800.jpg",
+        url: "/images/places/mridanga_saileswari_temple/mridanga_saileswari_temple-800.jpg",
         srcSet:
-          "/images/places/mridanga_saileswari_temple-480.jpg 480w, /images/places/mridanga_saileswari_temple-800.jpg 800w, /images/places/mridanga_saileswari_temple-1200.jpg 1200w",
+          "/images/places/mridanga_saileswari_temple/mridanga_saileswari_temple-480.jpg 480w, /images/places/mridanga_saileswari_temple/mridanga_saileswari_temple-800.jpg 800w, /images/places/mridanga_saileswari_temple/mridanga_saileswari_temple-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Mridanga Saileswari Temple",
         credit: "Google Images",
@@ -568,14 +607,14 @@ export const places = [
       "Popular Murugan temple in North Malabar, known for devotional gatherings and annual temple events.",
     descriptionMl:
       "ഉത്തര മലബാറിലെ പ്രസിദ്ധമായ മുരുകൻ ക്ഷേത്രം; ഭക്തിസമ്മേളനങ്ങൾക്കും വാർഷിക ഉത്സവങ്ങൾക്കും അറിയപ്പെടുന്നു.",
-    tags: ["worship", "heritage", "family"],
+    tags: ["temple", "heritage", "family"],
     source: "https://www.google.com/search?q=payyannur+murugan+temple",
     mapsQuery: "Payyannur Murugan Temple",
     images: [
       {
-        url: "/images/places/payyannur_murugan_temple-800.jpg",
+        url: "/images/places/payyannur_murugan_temple/payyannur_murugan_temple-800.jpg",
         srcSet:
-          "/images/places/payyannur_murugan_temple-480.jpg 480w, /images/places/payyannur_murugan_temple-800.jpg 800w, /images/places/payyannur_murugan_temple-1200.jpg 1200w",
+          "/images/places/payyannur_murugan_temple/payyannur_murugan_temple-480.jpg 480w, /images/places/payyannur_murugan_temple/payyannur_murugan_temple-800.jpg 800w, /images/places/payyannur_murugan_temple/payyannur_murugan_temple-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Payyannur Murugan Temple",
         credit: "Google Images",
@@ -594,14 +633,14 @@ export const places = [
       "Well-known Subramanya temple with a sacred temple tank and vibrant annual festival traditions.",
     descriptionMl:
       "ക്ഷേത്രക്കുളവും സമൃദ്ധമായ വാർഷിക ഉത്സവപരമ്പരയും കൊണ്ട് ശ്രദ്ധേയമായ സുബ്രഹ്മണ്യ ക്ഷേത്രം.",
-    tags: ["worship", "heritage", "family"],
+    tags: ["temple", "heritage", "family"],
     source: "https://www.google.com/search?q=peralassery+subramanya+temple",
     mapsQuery: "Peralassery Subramanya Temple",
     images: [
       {
-        url: "/images/places/peralassery_subramanya_temple-800.jpg",
+        url: "/images/places/peralassery_subramanya_temple/peralassery_subramanya_temple-800.jpg",
         srcSet:
-          "/images/places/peralassery_subramanya_temple-480.jpg 480w, /images/places/peralassery_subramanya_temple-800.jpg 800w, /images/places/peralassery_subramanya_temple-1200.jpg 1200w",
+          "/images/places/peralassery_subramanya_temple/peralassery_subramanya_temple-480.jpg 480w, /images/places/peralassery_subramanya_temple/peralassery_subramanya_temple-800.jpg 800w, /images/places/peralassery_subramanya_temple/peralassery_subramanya_temple-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Peralassery Subramanya Temple",
         credit: "Google Images",
@@ -620,14 +659,14 @@ export const places = [
       "Famous Bhadrakali temple in Kannur associated with traditional Theyyam performances.",
     descriptionMl:
       "പരമ്പരാഗത തെയ്യം ആചാരങ്ങളുമായി ബന്ധപ്പെട്ട കണ്ണൂരിലെ പ്രശസ്ത ഭദ്രകാളി ക്ഷേത്രം.",
-    tags: ["worship", "heritage", "family"],
+    tags: ["temple", "heritage", "family"],
     source: "https://www.google.com/search?q=kalarivathukkal+temple+kannur",
     mapsQuery: "Kalarivathukkal Temple Kannur",
     images: [
       {
-        url: "/images/places/kalarivathukkal_temple-800.jpg",
+        url: "/images/places/kalarivathukkal_temple/kalarivathukkal_temple-800.jpg",
         srcSet:
-          "/images/places/kalarivathukkal_temple-480.jpg 480w, /images/places/kalarivathukkal_temple-800.jpg 800w, /images/places/kalarivathukkal_temple-1200.jpg 1200w",
+          "/images/places/kalarivathukkal_temple/kalarivathukkal_temple-480.jpg 480w, /images/places/kalarivathukkal_temple/kalarivathukkal_temple-800.jpg 800w, /images/places/kalarivathukkal_temple/kalarivathukkal_temple-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Kalarivathukkal Temple Kannur",
         credit: "Google Images",
@@ -646,18 +685,99 @@ export const places = [
       "Important local temple known for regional rituals and community festivals.",
     descriptionMl:
       "പ്രാദേശിക ആചാരങ്ങളാലും സാമൂഹിക ഉത്സവങ്ങളാലും പ്രശസ്തമായ പ്രധാന ക്ഷേത്രം.",
-    tags: ["worship", "heritage", "family"],
+    tags: ["temple", "heritage", "family"],
     source: "https://www.google.com/search?q=mamanikkunnu+temple",
     mapsQuery: "Mamanikkunnu Temple Kannur",
     images: [
       {
-        url: "/images/places/mamanikkunnu_temple-800.jpg",
+        url: "/images/places/mamanikkunnu_temple/mamanikkunnu_temple-800.jpg",
         srcSet:
-          "/images/places/mamanikkunnu_temple-480.jpg 480w, /images/places/mamanikkunnu_temple-800.jpg 800w, /images/places/mamanikkunnu_temple-1200.jpg 1200w",
+          "/images/places/mamanikkunnu_temple/mamanikkunnu_temple-480.jpg 480w, /images/places/mamanikkunnu_temple/mamanikkunnu_temple-800.jpg 800w, /images/places/mamanikkunnu_temple/mamanikkunnu_temple-1200.jpg 1200w",
         sizes: "(max-width: 700px) 80vw, 420px",
         alt: "Mamanikkunnu Temple",
         credit: "Google Images",
         creditUrl: "https://www.google.com/search?q=mamanikkunnu+temple&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "kattile-palli",
+    name: "Kattile Palli",
+    nameMl: "കാട്ടിലെ പള്ളി",
+    type: "Worship",
+    area: "Kannur district",
+    areaMl: "കണ്ണൂർ ജില്ല",
+    description:
+      "Known local worship site in Kannur district, visited for prayer and community gatherings.",
+    descriptionMl:
+      "കണ്ണൂർ ജില്ലയിലെ പ്രാദേശിക ആരാധനാലയം; പ്രാർത്ഥനക്കും സമൂഹ സംഗമങ്ങൾക്കും സന്ദർശിക്കുന്ന സ്ഥലം.",
+    tags: ["mosque", "heritage", "family"],
+    source: "https://www.google.com/search?q=kattile+palli",
+    mapsQuery: "Kattile Palli Kannur",
+    images: [
+      {
+        url: "/images/places/kattile_palli/kattile_palli-800.jpg",
+        srcSet:
+          "/images/places/kattile_palli/kattile_palli-480.jpg 480w, /images/places/kattile_palli/kattile_palli-800.jpg 800w, /images/places/kattile_palli/kattile_palli-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Kattile Palli",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=kattile+palli&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "mohyidheen-juma-masjid",
+    name: "Mohyidheen Juma Masjid",
+    nameMl: "മുഹിയുദ്ധീൻ ജുമാ മസ്ജിദ്",
+    type: "Worship",
+    area: "Kannur",
+    areaMl: "കണ്ണൂർ",
+    description:
+      "Juma Masjid in Kannur known for regular congregational prayers and local community importance.",
+    descriptionMl:
+      "കണ്ണൂരിലെ ജുമാ മസ്ജിദ്; സ്ഥിരം ജുമുഅ പ്രാർത്ഥനകൾക്കും പ്രാദേശിക സമുദായ പ്രാധാന്യത്തിനും പ്രശസ്തം.",
+    tags: ["mosque", "family", "city"],
+    source: "https://www.google.com/search?q=Mohyidheen+Juma+Masjid%2C+kannur",
+    mapsQuery: "Mohyidheen Juma Masjid Kannur",
+    images: [
+      {
+        url: "/images/places/mohyidheen_juma_masjid/mohyidheen_juma_masjid-800.jpg",
+        srcSet:
+          "/images/places/mohyidheen_juma_masjid/mohyidheen_juma_masjid-480.jpg 480w, /images/places/mohyidheen_juma_masjid/mohyidheen_juma_masjid-800.jpg 800w, /images/places/mohyidheen_juma_masjid/mohyidheen_juma_masjid-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Mohyidheen Juma Masjid",
+        credit: "Google Images",
+        creditUrl:
+          "https://www.google.com/search?q=Mohyidheen+Juma+Masjid+kannur&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "lourdes-matha-forane-church",
+    name: "Lourdes Matha Forane Church",
+    nameMl: "ലൂർദ്ദ് മാതാ ഫൊറോനാ ദേവാലയം",
+    type: "Worship",
+    area: "Chemperi, Kannur",
+    areaMl: "ചെമ്പേരി, കണ്ണൂർ",
+    description:
+      "Historic Forane church at Chemperi, an important Christian pilgrimage and parish center.",
+    descriptionMl:
+      "ചെമ്പേരിയിലെ ചരിത്രപ്രധാന ഫൊറോനാ ദേവാലയം; പ്രധാന ക്രിസ്ത്യൻ തീർത്ഥാടന, പരിഷ്‌കേന്ദ്രം.",
+    tags: ["church", "heritage", "family"],
+    source:
+      "https://www.justdial.com/Kannur/Lourdes-Matha-Forane-Church-Near-State-Bank-Of-India-Chemperi/9999PX497-X497-180821030708-S6U9_BZDET",
+    mapsQuery: "Lourdes Matha Forane Church Chemperi",
+    images: [
+      {
+        url: "/images/places/lourdes_matha_forane_church/lourdes_matha_forane_church-800.jpg",
+        srcSet:
+          "/images/places/lourdes_matha_forane_church/lourdes_matha_forane_church-480.jpg 480w, /images/places/lourdes_matha_forane_church/lourdes_matha_forane_church-800.jpg 800w, /images/places/lourdes_matha_forane_church/lourdes_matha_forane_church-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Lourdes Matha Forane Church",
+        credit: "Google Images",
+        creditUrl:
+          "https://www.google.com/search?q=Lourdes+Matha+Forane+Church+Chemperi&tbm=isch",
       },
     ],
   },
