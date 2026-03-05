@@ -108,6 +108,44 @@ app.post("/api/distances", async (req, res) => {
   }
 });
 
+app.get("/api/place-rating", async (req, res) => {
+  try {
+    const query = req.query.query?.toString().trim();
+    if (!query) {
+      return res.status(400).json({ error: "Missing query" });
+    }
+
+    const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+    if (!apiKey) {
+      return res.status(503).json({ error: "GOOGLE_PLACES_API_KEY not set" });
+    }
+
+    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
+      query
+    )}&key=${apiKey}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok || data.status === "REQUEST_DENIED") {
+      return res.status(500).json({ error: "Google Places request failed", details: data });
+    }
+
+    const result = data.results?.[0];
+    if (!result) {
+      return res.json({ rating: null, userRatingsTotal: null });
+    }
+
+    return res.json({
+      rating: result.rating ?? null,
+      userRatingsTotal: result.user_ratings_total ?? null,
+      name: result.name ?? null,
+      placeId: result.place_id ?? null,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch place rating" });
+  }
+});
+
 const distDir = path.join(__dirname, "dist");
 app.use(express.static(distDir));
 

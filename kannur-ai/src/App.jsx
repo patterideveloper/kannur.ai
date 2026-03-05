@@ -8,6 +8,7 @@ import Events from "./pages/Events";
 import People from "./pages/People";
 import Hospitals from "./pages/Hospitals";
 import Theyyam from "./pages/Theyyam";
+import PlaceDetail from "./pages/PlaceDetail";
 
 const translations = {
   en: {
@@ -65,6 +66,7 @@ const translations = {
       "Hi! I’m your Kannur guide. Ask me for beaches, forts, quiet spots, local shopping, or a 1-day plan — I’ll curate a route with the best views.",
     planHint: "Tip: carry water, start early for hills, and check tides if you’re visiting Dharmadam Island.",
     mapsLink: "Google Maps",
+    viewDetails: "View Details",
     sections: {
       explore: "Explore Kannur",
       eats: "Local Eats",
@@ -205,6 +207,7 @@ const translations = {
       "ഹായ്! ഞാൻ നിങ്ങളുടെ കണ്ണൂർ കോമ്പസ്. ബീച്ച്, കോട്ട, ശാന്ത സ്ഥലങ്ങൾ, ലോക്കൽ ഷോപ്പിംഗ് അല്ലെങ്കിൽ 1-ദിവസ പ്ലാൻ — പറയൂ, ഞാൻ പ്ലാൻ ചെയ്യാം.",
     planHint: "ടിപ്പ്: വെള്ളം എടുത്തോളൂ, കുന്നിലേക്ക് രാവിലെ തന്നെ പോകൂ, ധർമ്മടം ദ്വീപിന് ടൈഡ് സമയം പരിശോധിക്കൂ.",
     mapsLink: "ഗൂഗിൾ മാപ്സ്",
+    viewDetails: "വിശദാംശങ്ങൾ കാണൂ",
     sections: {
       explore: "കണ്ണൂർ സന്ദർശിക്കുക",
       eats: "പ്രസിദ്ധ ഭക്ഷണ ഇടങ്ങൾ",
@@ -335,6 +338,7 @@ export default function App() {
         />
         <Route path="/explore" element={<Explore lang={lang} t={t} />} />
         <Route path="/explore/:filter" element={<Explore lang={lang} t={t} />} />
+        <Route path="/explore/place/:placeId" element={<PlaceDetail lang={lang} t={t} />} />
         <Route path="/eats" element={<Eats lang={lang} t={t} />} />
         <Route path="/temples" element={<Temples lang={lang} t={t} />} />
         <Route path="/events" element={<Events lang={lang} t={t} />} />

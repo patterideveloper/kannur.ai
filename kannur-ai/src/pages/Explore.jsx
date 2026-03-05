@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
-import { places } from "../data/places";
-import { temples } from "../data/extras";
+import { explorePlaces } from "../data/explorePlaces";
 
 const tagGroups = [
   { value: "all" },
@@ -40,36 +39,7 @@ const tagToRoute = {
   quiet: "quiet",
 };
 
-const templePlaces = temples.map((temple) => ({
-  id: `temple-${temple.id}`,
-  name: temple.name,
-  nameMl: temple.nameMl,
-  type: "Worship",
-  area: temple.area,
-  areaMl: temple.areaMl,
-  description: temple.description,
-  descriptionMl: temple.descriptionMl,
-  tags: ["worship", "heritage"],
-  mapsQuery: temple.mapsQuery,
-  images: temple.image
-    ? [
-        {
-          url: temple.image.url,
-          srcSet: temple.image.srcSet,
-          sizes: temple.image.sizes,
-          alt: temple.image.alt || temple.name,
-          credit: temple.image.credit,
-          creditUrl: temple.image.creditUrl,
-        },
-      ]
-    : [],
-}));
-
-function PlaceCard({ place, lang, t }) {
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    place.mapsQuery || `${place.name} Kannur`
-  )}`;
-
+function PlaceCard({ place, lang, t, fromPath }) {
   const displayName = lang === "ml" ? place.nameMl || place.name : place.name;
   const displayArea = lang === "ml" ? place.areaMl || place.area : place.area;
   const displayDesc = lang === "ml" ? place.descriptionMl || place.description : place.description;
@@ -145,15 +115,16 @@ function PlaceCard({ place, lang, t }) {
         ))}
       </div>
       <div className="place-actions">
-        <a className="map-link" href={mapsUrl} target="_blank" rel="noreferrer">
-          {t.mapsLink}
-        </a>
+        <Link className="map-link secondary-link" to={`/explore/place/${place.id}`} state={{ from: fromPath }}>
+          {t.viewDetails || (lang === "ml" ? "കൂടുതൽ കാണൂ" : "View Details")}
+        </Link>
       </div>
     </article>
   );
 }
 
 export default function Explore({ lang, t }) {
+  const location = useLocation();
   const navigate = useNavigate();
   const { filter } = useParams();
   const [search, setSearch] = useState("");
@@ -179,7 +150,7 @@ export default function Explore({ lang, t }) {
       setDistancesLoading(true);
       setDistanceError(false);
       const origin = { lat: 11.876096, lng: 75.373579 };
-      const destinations = [...places, ...templePlaces]
+      const destinations = explorePlaces
         .filter((place) => place.coords?.lat && place.coords?.lng)
         .map((place) => ({ id: place.id, ...place.coords }));
 
@@ -208,7 +179,7 @@ export default function Explore({ lang, t }) {
     loadDistances();
   }, []);
 
-  const combinedPlaces = useMemo(() => [...places, ...templePlaces], []);
+  const combinedPlaces = useMemo(() => explorePlaces, []);
 
   const filteredPlaces = useMemo(() => {
     return combinedPlaces.filter((place) => {
@@ -292,6 +263,7 @@ export default function Explore({ lang, t }) {
             }}
             lang={lang}
             t={t}
+            fromPath={location.pathname}
           />
         ))}
       </section>
