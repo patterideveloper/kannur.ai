@@ -406,7 +406,7 @@ export default function PlaceDetail({ lang, t }) {
                 ? lang === "ml"
                   ? "റേറ്റിംഗ് ലോഡ് ചെയ്യുന്നു..."
                   : "Loading rating..."
-                : ratingState.rating
+                : ratingState.rating !== null && ratingState.rating !== undefined
                   ? `${ratingState.rating} / 5${ratingState.totalRatings ? ` (${ratingState.totalRatings})` : ""}`
                   : lang === "ml"
                     ? "റേറ്റിംഗ് ലഭ്യമല്ല"

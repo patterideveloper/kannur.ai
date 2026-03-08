@@ -137,32 +137,71 @@ app.get("/api/place-rating", async (req, res) => {
       return res.status(400).json({ error: "Missing query" });
     }
 
-    const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+    const apiKey =
+      process.env.GOOGLE_PLACES_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
     if (!apiKey) {
-      return res.status(503).json({ error: "GOOGLE_PLACES_API_KEY not set" });
+      return res
+        .status(503)
+        .json({ error: "GOOGLE_PLACES_API_KEY (or GOOGLE_MAPS_API_KEY) not set" });
     }
 
-    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
-      query
-    )}&key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
+    const queryCandidates = [query, `${query} Kannur`, `${query} Kerala`];
 
-    if (!response.ok || data.status === "REQUEST_DENIED") {
-      return res.status(500).json({ error: "Google Places request failed", details: data });
+    for (const textQuery of queryCandidates) {
+      // Try Places API (New) first.
+      try {
+        const v1Response = await fetch("https://places.googleapis.com/v1/places:searchText", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": apiKey,
+            "X-Goog-FieldMask":
+              "places.id,places.displayName,places.rating,places.userRatingCount",
+          },
+          body: JSON.stringify({
+            textQuery,
+            maxResultCount: 1,
+            languageCode: "en",
+          }),
+        });
+        const v1Data = await v1Response.json();
+        const place = v1Data?.places?.[0];
+
+        if (v1Response.ok && place) {
+          return res.json({
+            rating: place.rating ?? null,
+            userRatingsTotal: place.userRatingCount ?? null,
+            name: place.displayName?.text ?? null,
+            placeId: place.id ?? null,
+            provider: "places-v1",
+          });
+        }
+      } catch {
+        // fall through to legacy API
+      }
+
+      // Fallback: Places Text Search (Legacy).
+      const legacyUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
+        textQuery
+      )}&key=${apiKey}`;
+      const legacyResponse = await fetch(legacyUrl);
+      const legacyData = await legacyResponse.json();
+
+      if (legacyResponse.ok && legacyData.status !== "REQUEST_DENIED") {
+        const result = legacyData.results?.[0];
+        if (result) {
+          return res.json({
+            rating: result.rating ?? null,
+            userRatingsTotal: result.user_ratings_total ?? null,
+            name: result.name ?? null,
+            placeId: result.place_id ?? null,
+            provider: "places-legacy",
+          });
+        }
+      }
     }
 
-    const result = data.results?.[0];
-    if (!result) {
-      return res.json({ rating: null, userRatingsTotal: null });
-    }
-
-    return res.json({
-      rating: result.rating ?? null,
-      userRatingsTotal: result.user_ratings_total ?? null,
-      name: result.name ?? null,
-      placeId: result.place_id ?? null,
-    });
+    return res.json({ rating: null, userRatingsTotal: null });
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch place rating" });
   }
