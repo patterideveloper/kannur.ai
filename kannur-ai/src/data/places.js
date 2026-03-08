@@ -682,6 +682,32 @@ export const places = [
     ],
   },
   {
+    id: "pazhassi-dam",
+    name: "Pazhassi Dam",
+    nameMl: "പഴശ്ശി ഡാം",
+    type: "Viewpoint",
+    area: "Valiyambram, Kannur",
+    areaMl: "വളിയാംബ്രം, കണ്ണൂർ",
+    description:
+      "A scenic dam and reservoir stretch near Kannur, popular for calm water views, evening breeze, and family outings.",
+    descriptionMl:
+      "കണ്ണൂരിന് സമീപമുള്ള മനോഹരമായ ഡാം-ജലാശയ പ്രദേശം; ശാന്തമായ ജലദൃശ്യങ്ങൾക്കും സായാഹ്ന കാറ്റിനും കുടുംബസഞ്ചാരത്തിനും പ്രസിദ്ധമാണ്.",
+    tags: ["view", "nature", "family", "quiet"],
+    source: "https://www.google.com/search?q=pazhassi+dam",
+    mapsQuery: "Pazhassi Dam Kannur",
+    images: [
+      {
+        url: "/images/places/pazhassi_dam/pazhassi_dam-800.jpg",
+        srcSet:
+          "/images/places/pazhassi_dam/pazhassi_dam-480.jpg 480w, /images/places/pazhassi_dam/pazhassi_dam-800.jpg 800w, /images/places/pazhassi_dam/pazhassi_dam-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Pazhassi Dam reservoir view",
+        credit: "Wikimedia Commons",
+        creditUrl: "https://commons.wikimedia.org/wiki/File:Pazhassi_Dam.jpg",
+      },
+    ],
+  },
+  {
     id: "parassinikadavu-muthappan-temple",
     name: "Parassinikadavu Muthappan Temple",
     nameMl: "പരശ്ശിനിക്കടവ് മുത്തപ്പൻ ക്ഷേത്രം",
@@ -1228,6 +1254,20 @@ const deepContentById = {
     photoPointsMl: ["ഫ്ലോട്ടിംഗ് ഭാഗങ്ങൾ", "ജലപ്രതിഫലനങ്ങൾ", "ജലത്തിനുമുകളിലെ സന്ധ്യലൈറ്റുകൾ"],
     nearbyStopsEn: ["Nearby local parks", "Family eateries", "Kannur route viewpoints"],
     nearbyStopsMl: ["സമീപ ലൊക്കൽ പാർക്കുകൾ", "കുടുംബ ഭക്ഷണകേന്ദ്രങ്ങൾ", "കണ്ണൂർ റൂട്ടിലെ വ്യൂ പോയിന്റുകൾ"],
+  },
+  "pazhassi-dam": {
+    historyEn:
+      "Pazhassi Dam is a major river-side leisure and irrigation landmark in Kannur district, valued for its broad reservoir views and calm setting.",
+    historyMl:
+      "കണ്ണൂർ ജില്ലയിലെ പ്രധാന നദീതീര വിനോദ-സേചന കേന്ദ്രങ്ങളിലൊന്നാണ് പഴശ്ശി ഡാം; വിശാല ജലാശയ ദൃശ്യങ്ങളും ശാന്ത അന്തരീക്ഷവുമാണ് പ്രത്യേകത.",
+    timingsEn: "Open area; best visited in daylight and early evening.",
+    timingsMl: "തുറന്ന പ്രദേശം; പകൽ സമയത്തും സായാഹ്നത്തും സന്ദർശിക്കുന്നത് മികച്ചത്.",
+    entryFeeEn: "Generally no fixed entry fee; local parking charges may apply.",
+    entryFeeMl: "സ്ഥിരമായ പ്രവേശനഫീസ് സാധാരണ ഇല്ല; പ്രാദേശിക പാർക്കിംഗ് നിരക്ക് ഉണ്ടായേക്കാം.",
+    photoPointsEn: ["Dam-side railing views", "Reservoir panorama", "Golden-hour water reflections"],
+    photoPointsMl: ["ഡാം സൈഡ് റെയിലിംഗ് കാഴ്ചകൾ", "ജലാശയ പനോരമ", "ഗോൾഡൻ-അവർ ജലപ്രതിഫലനം"],
+    nearbyStopsEn: ["Mattanur side attractions", "Kannur airport route", "Nearby local eateries"],
+    nearbyStopsMl: ["മട്ടന്നൂർ ഭാഗത്തെ ആകർഷണങ്ങൾ", "കണ്ണൂർ എയർപോർട്ട് റൂട്ട്", "സമീപ പ്രാദേശിക ഭക്ഷണ സ്റ്റോപ്പുകൾ"],
   },
   "parassinikadavu-muthappan-temple": {
     historyEn:
