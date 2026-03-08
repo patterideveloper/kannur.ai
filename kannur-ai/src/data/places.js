@@ -321,6 +321,117 @@ export const places = [
     ],
   },
   {
+    id: "chootad-beach",
+    name: "Chootad Beach",
+    nameMl: "ചൂട്ടാട് ബീച്ച്",
+    type: "Beach",
+    area: "Kannur district",
+    areaMl: "കണ്ണൂർ ജില്ല",
+    description:
+      "A quieter shoreline near Kannur known for open sands, sea breeze, and relaxed sunset views.",
+    descriptionMl:
+      "കണ്ണൂരിന് സമീപമുള്ള ശാന്തമായ കടൽത്തീരം; വിശാലമായ മണൽത്തീരും സായാഹ്ന ദൃശ്യങ്ങളും കൊണ്ട് അറിയപ്പെടുന്നു.",
+    tags: ["beach", "quiet", "nature", "sunset"],
+    source: "https://www.google.com/search?q=chootad+beach",
+    mapsQuery: "Chootad Beach Kannur",
+    images: [
+      {
+        url: "/images/places/chootad_beach/chootad_beach-800.jpg",
+        srcSet:
+          "/images/places/chootad_beach/chootad_beach-480.jpg 480w, /images/places/chootad_beach/chootad_beach-800.jpg 800w, /images/places/chootad_beach/chootad_beach-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Chootad Beach in Kannur",
+        credit: "Kerala Tourism",
+        creditUrl:
+          "https://www.keralatourism.org/images/ebooks/unexpected-destination/large/chootad_beach20170925061644.jpg",
+        isBright: true,
+      },
+    ],
+  },
+  {
+    id: "azheekal-beach",
+    name: "Azheekal Beach",
+    nameMl: "അഴിക്കൽ ബീച്ച്",
+    type: "Beach",
+    area: "Azhikode, Kannur",
+    areaMl: "അഴീക്കോട്, കണ്ണൂർ",
+    description:
+      "A scenic coastal stretch known for fishing harbor views, sea breeze, and long shoreline walks.",
+    descriptionMl:
+      "മത്സ്യബന്ധന തുറമുഖ ദൃശ്യങ്ങളും കടൽക്കാറ്റും നീളം കൂടിയ തീരനടപ്പാതയും കൊണ്ട് ശ്രദ്ധേയമായ കടൽത്തീരം.",
+    tags: ["beach", "family", "sunset", "nature"],
+    source: "https://www.google.com/search?q=azheekal+beach",
+    mapsQuery: "Azheekal Beach Kannur",
+    images: [
+      {
+        url: "/images/places/azheekal_beach/azheekal_beach-800.jpg",
+        srcSet:
+          "/images/places/azheekal_beach/azheekal_beach-480.jpg 480w, /images/places/azheekal_beach/azheekal_beach-800.jpg 800w, /images/places/azheekal_beach/azheekal_beach-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Azheekal Beach coastline",
+        credit: "Wikimedia Commons",
+        creditUrl:
+          "https://commons.wikimedia.org/wiki/File:Azhikkal_beach_Kannur.jpg",
+        isBright: true,
+      },
+    ],
+  },
+  {
+    id: "thalassery-beach",
+    name: "Thalassery Beach",
+    nameMl: "തലശ്ശേരി ബീച്ച്",
+    type: "Beach",
+    area: "Thalassery",
+    areaMl: "തലശ്ശേരി",
+    description:
+      "City beach in Thalassery with sea views, evening walks, and easy access to nearby heritage spots.",
+    descriptionMl:
+      "തലശ്ശേരിയിലെ നഗരകടൽത്തീരം; സായാഹ്ന നടത്തത്തിനും സമീപ പൈതൃക കേന്ദ്രങ്ങൾക്കുമുള്ള എളുപ്പമുള്ള എത്തിച്ചേരൽ.",
+    tags: ["beach", "city", "family", "sunset"],
+    source: "https://www.google.com/search?q=thalassery+beach",
+    mapsQuery: "Thalassery Beach",
+    images: [
+      {
+        url: "/images/places/thalassery_beach/thalassery_beach-800.jpg",
+        srcSet:
+          "/images/places/thalassery_beach/thalassery_beach-480.jpg 480w, /images/places/thalassery_beach/thalassery_beach-800.jpg 800w, /images/places/thalassery_beach/thalassery_beach-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Thalassery Beach",
+        credit: "Wikimedia Commons",
+        creditUrl: "https://commons.wikimedia.org/wiki/File:Beach_in_Thalassery.jpg",
+        isBright: true,
+      },
+    ],
+  },
+  {
+    id: "ezhara-beach",
+    name: "Ezhara Beach",
+    nameMl: "എഴര ബീച്ച്",
+    type: "Beach",
+    area: "Kannur district",
+    areaMl: "കണ്ണൂർ ജില്ല",
+    description:
+      "A relatively less-crowded beach around Kannur, good for calm sea views and sunset photography.",
+    descriptionMl:
+      "കണ്ണൂരിനോട് ചേർന്ന താരതമ്യേന കുറവ് തിരക്കുള്ള കടൽത്തീരം; ശാന്തമായ കടൽദൃശ്യങ്ങൾക്കും സൺസെറ്റ് ഫോട്ടോകൾക്കുമായി അനുയോജ്യം.",
+    tags: ["beach", "quiet", "nature", "sunset"],
+    source: "https://www.google.com/search?q=ezhara+beach",
+    mapsQuery: "Ezhara Beach Kannur",
+    images: [
+      {
+        url: "/images/places/ezhara_beach/ezhara_beach-800.jpg",
+        srcSet:
+          "/images/places/ezhara_beach/ezhara_beach-480.jpg 480w, /images/places/ezhara_beach/ezhara_beach-800.jpg 800w, /images/places/ezhara_beach/ezhara_beach-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Sunset at Ezhara Beach",
+        credit: "Wikimedia Commons",
+        creditUrl:
+          "https://commons.wikimedia.org/wiki/File:Sunset_at_Ezhara_Beach_.jpg",
+        isBright: true,
+      },
+    ],
+  },
+  {
     id: "kairali-handicrafts",
     name: "Kairali Handicrafts",
     nameMl: "കൈരളി ഹാൻഡിക്രാഫ്റ്റ്സ്",
