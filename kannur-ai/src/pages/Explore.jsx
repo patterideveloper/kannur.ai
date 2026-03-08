@@ -12,8 +12,6 @@ const tagGroups = [
   { value: "temple" },
   { value: "church" },
   { value: "mosque" },
-  { value: "family" },
-  { value: "quiet" },
 ];
 
 const routeToTag = {
@@ -27,8 +25,6 @@ const routeToTag = {
   temples: "temple",
   churches: "church",
   mosques: "mosque",
-  family: "family",
-  quiet: "quiet",
 };
 
 const tagToRoute = {
@@ -41,8 +37,6 @@ const tagToRoute = {
   temple: "temples",
   church: "churches",
   mosque: "mosques",
-  family: "family",
-  quiet: "quiet",
 };
 
 function PlaceCard({ place, lang, t, fromPath }) {
