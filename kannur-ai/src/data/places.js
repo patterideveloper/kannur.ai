@@ -682,6 +682,60 @@ export const places = [
     ],
   },
   {
+    id: "parassinikadavu-muthappan-temple",
+    name: "Parassinikadavu Muthappan Temple",
+    nameMl: "പരശ്ശിനിക്കടവ് മുത്തപ്പൻ ക്ഷേത്രം",
+    type: "Worship",
+    area: "Parassinikadavu, Kannur",
+    areaMl: "പരശ്ശിനിക്കടവ്, കണ്ണൂർ",
+    description:
+      "A famous riverside shrine in Kannur dedicated to Sree Muthappan, known for daily rituals and strong local devotion.",
+    descriptionMl:
+      "ശ്രീ മുത്തപ്പനു സമർപ്പിച്ച കണ്ണൂരിലെ പ്രശസ്ത നദീതീര ആരാധനാലയം; നിത്യചടങ്ങുകൾക്കും ഭക്തിപാരമ്പര്യത്തിനും അറിയപ്പെടുന്നു.",
+    tags: ["temple", "heritage", "family"],
+    source: "https://www.google.com/search?q=parassinikadavu+muthappan+temple",
+    mapsQuery: "Parassinikadavu Muthappan Temple",
+    images: [
+      {
+        url: "/images/places/parassinikadavu_muthappan_temple/parassinikadavu_muthappan_temple-800.jpg",
+        srcSet:
+          "/images/places/parassinikadavu_muthappan_temple/parassinikadavu_muthappan_temple-480.jpg 480w, /images/places/parassinikadavu_muthappan_temple/parassinikadavu_muthappan_temple-800.jpg 800w, /images/places/parassinikadavu_muthappan_temple/parassinikadavu_muthappan_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Parassinikadavu Muthappan Temple",
+        credit: "Wikimedia Commons",
+        creditUrl:
+          "https://commons.wikimedia.org/wiki/File:Parassinikkadavu_Muthappan_temple_(4).jpg",
+      },
+    ],
+  },
+  {
+    id: "rajarajeshwara-temple",
+    name: "Rajarajeshwara Temple",
+    nameMl: "രാജരാജേശ്വര ക്ഷേത്രം",
+    type: "Worship",
+    area: "Taliparamba, Kannur",
+    areaMl: "തളിപ്പറമ്പ്, കണ്ണൂർ",
+    description:
+      "Historic Shiva temple at Taliparamba, one of the most important pilgrimage centers in North Kerala.",
+    descriptionMl:
+      "തളിപ്പറമ്പിലെ ചരിത്രപ്രധാന ശിവക്ഷേത്രം; ഉത്തരകേരളത്തിലെ പ്രധാന തീർത്ഥാടന കേന്ദ്രങ്ങളിൽ ഒന്നാണ്.",
+    tags: ["temple", "heritage", "family"],
+    source: "https://www.google.com/search?q=rajarajeshwara+temple",
+    mapsQuery: "Rajarajeshwara Temple Taliparamba",
+    images: [
+      {
+        url: "/images/places/rajarajeshwara_temple/rajarajeshwara_temple-800.jpg",
+        srcSet:
+          "/images/places/rajarajeshwara_temple/rajarajeshwara_temple-480.jpg 480w, /images/places/rajarajeshwara_temple/rajarajeshwara_temple-800.jpg 800w, /images/places/rajarajeshwara_temple/rajarajeshwara_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Rajarajeshwara Temple Taliparamba",
+        credit: "Wikimedia Commons",
+        creditUrl:
+          "https://commons.wikimedia.org/wiki/File:Rajarajeshwara_Temple_Taliparamba.jpg",
+      },
+    ],
+  },
+  {
     id: "mridanga-saileswari-temple",
     name: "Mridanga Saileswari Temple",
     nameMl: "മൃദംഗശൈലേശ്വരി ക്ഷേത്രം",
@@ -1174,6 +1228,34 @@ const deepContentById = {
     photoPointsMl: ["ഫ്ലോട്ടിംഗ് ഭാഗങ്ങൾ", "ജലപ്രതിഫലനങ്ങൾ", "ജലത്തിനുമുകളിലെ സന്ധ്യലൈറ്റുകൾ"],
     nearbyStopsEn: ["Nearby local parks", "Family eateries", "Kannur route viewpoints"],
     nearbyStopsMl: ["സമീപ ലൊക്കൽ പാർക്കുകൾ", "കുടുംബ ഭക്ഷണകേന്ദ്രങ്ങൾ", "കണ്ണൂർ റൂട്ടിലെ വ്യൂ പോയിന്റുകൾ"],
+  },
+  "parassinikadavu-muthappan-temple": {
+    historyEn:
+      "Parassinikadavu Muthappan Temple is one of the most visited spiritual centers in Kannur, known for Theyyam-influenced ritual traditions around Sree Muthappan.",
+    historyMl:
+      "ശ്രീ മുത്തപ്പനുമായി ബന്ധമുള്ള തെയ്യം സ്വാധീനമുള്ള ആചാരപരമ്പര്യങ്ങൾക്കായി പ്രശസ്തമായ കണ്ണൂരിലെ ഏറ്റവും കൂടുതൽ സന്ദർശിക്കപ്പെടുന്ന ആരാധനാകേന്ദ്രങ്ങളിൽ ഒന്നാണ് പരശ്ശിനിക്കടവ് മുത്തപ്പൻ ക്ഷേത്രം.",
+    timingsEn: "Typically open from early morning to evening with ritual breaks.",
+    timingsMl: "സാധാരണയായി രാവിലെ മുതൽ വൈകുന്നേരം വരെ; ചടങ്ങുകൾക്കനുസരിച്ചുള്ള ഇടവേളകൾ ഉണ്ടാകും.",
+    entryFeeEn: "No fixed entry fee; offerings and prasadam are optional.",
+    entryFeeMl: "സ്ഥിര പ്രവേശനഫീസ് ഇല്ല; വഴിപാടും പ്രസാദവും ഐച്ഛികമാണ്.",
+    photoPointsEn: ["Temple entrance", "Riverside walkway", "Evening ritual ambience"],
+    photoPointsMl: ["ക്ഷേത്രപ്രവേശനം", "നദീതീര നടപ്പാത", "വൈകുന്നേര ആചാരാന്തരീക്ഷം"],
+    nearbyStopsEn: ["Parassinikkadavu Snake Park", "Valapattanam river side", "Kannur city"],
+    nearbyStopsMl: ["പരശ്ശിനിക്കടവ് സ്നേക്ക് പാർക്ക്", "വളപട്ടണം നദീതീരം", "കണ്ണൂർ നഗരം"],
+  },
+  "rajarajeshwara-temple": {
+    historyEn:
+      "Rajarajeshwara Temple at Taliparamba is an ancient and revered Shiva temple, central to Malabar's temple pilgrimage circuit.",
+    historyMl:
+      "തളിപ്പറമ്പിലെ രാജരാജേശ്വര ക്ഷേത്രം മലബാർ തീർത്ഥാടന പാതയിലെ പ്രധാന കേന്ദ്രമായ അതിപുരാതനവും ആരാധ്യവുമായ ശിവക്ഷേത്രമാണ്.",
+    timingsEn: "Morning and evening darshan hours; special festival schedules apply.",
+    timingsMl: "രാവിലെയും വൈകുന്നേരത്തെയും ദർശനസമയം; ഉത്സവദിവസങ്ങളിൽ പ്രത്യേക ഷെഡ്യൂളുകൾ ഉണ്ടായിരിക്കും.",
+    entryFeeEn: "No regular entry fee; special pooja charges vary.",
+    entryFeeMl: "സാധാരണ പ്രവേശനഫീസ് ഇല്ല; പ്രത്യേക പൂജാ നിരക്കുകൾ വ്യത്യാസപ്പെടാം.",
+    photoPointsEn: ["Temple gopuram approach", "Traditional architecture details", "Festival-lit forecourt"],
+    photoPointsMl: ["ക്ഷേത്ര ഗോപുരത്തിലേക്കുള്ള മുഖ്യവഴി", "പരമ്പരാഗത വാസ്തു വിശദാംശങ്ങൾ", "ഉത്സവ അലങ്കാരമുള്ള മുൻപ്രാകാരം"],
+    nearbyStopsEn: ["Mamanikkunnu Temple", "Taliparamba town", "Paithalmala route links"],
+    nearbyStopsMl: ["മാമണിക്കുന്ന് ക്ഷേത്രം", "തളിപ്പറമ്പ് പട്ടണം", "പൈതൽമല റൂട്ടിലേക്കുള്ള ബന്ധങ്ങൾ"],
   },
   "mridanga-saileswari-temple": {
     historyEn: "A historically significant temple in the region, linked with local ritual and devotional traditions.",
