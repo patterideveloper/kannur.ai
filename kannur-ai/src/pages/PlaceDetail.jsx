@@ -2,28 +2,45 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 
-function buildDetailImages(place) {
+function buildDetailImages(place, remoteImages = []) {
   const images = [...(place.images || [])];
-  if (images.length !== 1) return images;
+  if (images.length === 0 && remoteImages.length === 0) return images;
 
   const primary = images[0];
-  if (!primary?.url || !primary?.srcSet) return images;
+  const remoteMapped = (remoteImages || []).map((img) => ({
+    url: img.url,
+    srcSet: null,
+    alt: img.alt || `${place.name} photo`,
+    credit: img.credit || "Wikimedia Commons",
+    creditUrl: img.creditUrl,
+  }));
 
-  const view2Url = primary.url.replace(
-    /(\/images\/(?:places|temples)\/[^/]+(?:\/[^/]+)?)-800\.jpg$/,
-    "$1_view2-800.jpg"
-  );
+  for (const img of remoteMapped) {
+    if (images.length >= 4) break;
+    if (!img.url) continue;
+    const exists = images.some((item) => item.url === img.url);
+    if (!exists) images.push(img);
+  }
 
-  if (view2Url === primary.url) return images;
+  if (!primary?.url || !primary?.srcSet) return images.slice(0, 4);
+  const variants = ["view2", "view3", "view4"];
 
-  const view2SrcSet = primary.srcSet.replace(/-([0-9]+)\.jpg/g, "_view2-$1.jpg");
-  images.push({
-    ...primary,
-    url: view2Url,
-    srcSet: view2SrcSet,
-    alt: `${primary.alt || place.name} alternate view`,
-  });
-  return images;
+  for (const variant of variants) {
+    if (images.length >= 4) break;
+    const variantUrl = primary.url.replace(/-800\.jpg$/, `_${variant}-800.jpg`);
+    if (variantUrl === primary.url) continue;
+    const alreadyExists = images.some((item) => item.url === variantUrl);
+    if (alreadyExists) continue;
+    const variantSrcSet = primary.srcSet.replace(/-([0-9]+)\.jpg/g, `_${variant}-$1.jpg`);
+    images.push({
+      ...primary,
+      url: variantUrl,
+      srcSet: variantSrcSet,
+      alt: `${primary.alt || place.name} alternate view`,
+    });
+  }
+
+  return images.slice(0, 4);
 }
 
 function getDetailTemplate(place, lang, displayType, displayArea) {
@@ -256,12 +273,7 @@ export default function PlaceDetail({ lang, t }) {
   const [activeImage, setActiveImage] = useState(0);
   const [place, setPlace] = useState(null);
   const [loadingPlace, setLoadingPlace] = useState(true);
-  const [ratingState, setRatingState] = useState({
-    loading: true,
-    rating: null,
-    totalRatings: null,
-    error: false,
-  });
+  const [remoteImages, setRemoteImages] = useState([]);
 
   useEffect(() => {
     const loadPlace = async () => {
@@ -291,41 +303,23 @@ export default function PlaceDetail({ lang, t }) {
   }, [placeId]);
 
   useEffect(() => {
-    const fetchRating = async () => {
+    const loadRemoteImages = async () => {
       if (!place) return;
-      setRatingState({
-        loading: true,
-        rating: null,
-        totalRatings: null,
-        error: false,
-      });
       try {
-        const response = await fetch(
-          `/api/place-rating?query=${encodeURIComponent(
-            place.mapsQuery || `${place.name} Kannur`
-          )}`
-        );
+        const query = place.mapsQuery || `${place.name} Kannur`;
+        const response = await fetch(`/api/place-images?query=${encodeURIComponent(query)}`);
         if (!response.ok) {
-          throw new Error("Rating fetch failed");
+          setRemoteImages([]);
+          return;
         }
         const data = await response.json();
-        setRatingState({
-          loading: false,
-          rating: data.rating ?? null,
-          totalRatings: data.userRatingsTotal ?? null,
-          error: false,
-        });
-      } catch (error) {
-        setRatingState({
-          loading: false,
-          rating: null,
-          totalRatings: null,
-          error: true,
-        });
+        setRemoteImages(data.items || []);
+      } catch {
+        setRemoteImages([]);
       }
     };
 
-    fetchRating();
+    loadRemoteImages();
   }, [place]);
 
   if (loadingPlace) {
@@ -362,7 +356,7 @@ export default function PlaceDetail({ lang, t }) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
   const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&output=embed`;
   const backPath = location.state?.from || "/explore";
-  const images = buildDetailImages(place);
+  const images = buildDetailImages(place, remoteImages);
   const activeImageItem = images[activeImage] || null;
   const hasMultipleImages = images.length > 1;
   const detail = getDetailTemplate(place, lang, displayType, displayArea);
@@ -401,17 +395,6 @@ export default function PlaceDetail({ lang, t }) {
           <section className="detail-meta">
             <div className="detail-pill">{displayType}</div>
             <div className="detail-pill">{displayArea}</div>
-            <div className="detail-pill">
-              {ratingState.loading
-                ? lang === "ml"
-                  ? "റേറ്റിംഗ് ലോഡ് ചെയ്യുന്നു..."
-                  : "Loading rating..."
-                : ratingState.rating !== null && ratingState.rating !== undefined
-                  ? `${ratingState.rating} / 5${ratingState.totalRatings ? ` (${ratingState.totalRatings})` : ""}`
-                  : lang === "ml"
-                    ? "റേറ്റിംഗ് ലഭ്യമല്ല"
-                    : "Rating unavailable"}
-            </div>
           </section>
 
           <section className="detail-gallery">
@@ -426,7 +409,7 @@ export default function PlaceDetail({ lang, t }) {
                   )}
                   <img
                     src={activeImageItem.url}
-                    srcSet={activeImageItem.srcSet}
+                    srcSet={activeImageItem.srcSet || undefined}
                     sizes="100vw"
                     alt={activeImageItem.alt || displayName}
                     loading="eager"

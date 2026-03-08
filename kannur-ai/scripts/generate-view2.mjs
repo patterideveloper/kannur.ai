@@ -7,6 +7,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "..", "public", "images");
 const sizes = [480, 800, 1200];
+const variants = {
+  view2: { cropW: 0.88, cropH: 0.88, left: 0.22, top: 0.12, sat: 1.04, bright: 1.01 },
+  view3: { cropW: 0.84, cropH: 0.84, left: 0.08, top: 0.18, sat: 1.06, bright: 1.03 },
+  view4: { cropW: 0.9, cropH: 0.82, left: 0.12, top: 0.05, sat: 1.02, bright: 1.0 },
+};
 
 async function walk(dir) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -30,28 +35,30 @@ async function ensureView2(base1200) {
 
   if (!meta.width || !meta.height) return;
 
-  const cropWidth = Math.max(1, Math.floor(meta.width * 0.88));
-  const cropHeight = Math.max(1, Math.floor(meta.height * 0.88));
-  const left = Math.max(0, Math.floor((meta.width - cropWidth) * 0.22));
-  const top = Math.max(0, Math.floor((meta.height - cropHeight) * 0.12));
+  for (const [variantName, cfg] of Object.entries(variants)) {
+    const cropWidth = Math.max(1, Math.floor(meta.width * cfg.cropW));
+    const cropHeight = Math.max(1, Math.floor(meta.height * cfg.cropH));
+    const left = Math.max(0, Math.floor((meta.width - cropWidth) * cfg.left));
+    const top = Math.max(0, Math.floor((meta.height - cropHeight) * cfg.top));
 
-  for (const size of sizes) {
-    const outJpg = path.join(dir, `${baseName}_view2-${size}.jpg`);
-    const outWebp = path.join(dir, `${baseName}_view2-${size}.webp`);
+    for (const size of sizes) {
+      const outJpg = path.join(dir, `${baseName}_${variantName}-${size}.jpg`);
+      const outWebp = path.join(dir, `${baseName}_${variantName}-${size}.webp`);
 
-    await sharp(base1200)
-      .extract({ left, top, width: cropWidth, height: cropHeight })
-      .resize(size, size, { fit: "inside", withoutEnlargement: false })
-      .modulate({ saturation: 1.04, brightness: 1.01 })
-      .jpeg({ quality: 82 })
-      .toFile(outJpg);
+      await sharp(base1200)
+        .extract({ left, top, width: cropWidth, height: cropHeight })
+        .resize(size, size, { fit: "inside", withoutEnlargement: false })
+        .modulate({ saturation: cfg.sat, brightness: cfg.bright })
+        .jpeg({ quality: 82 })
+        .toFile(outJpg);
 
-    await sharp(base1200)
-      .extract({ left, top, width: cropWidth, height: cropHeight })
-      .resize(size, size, { fit: "inside", withoutEnlargement: false })
-      .modulate({ saturation: 1.04, brightness: 1.01 })
-      .webp({ quality: 80 })
-      .toFile(outWebp);
+      await sharp(base1200)
+        .extract({ left, top, width: cropWidth, height: cropHeight })
+        .resize(size, size, { fit: "inside", withoutEnlargement: false })
+        .modulate({ saturation: cfg.sat, brightness: cfg.bright })
+        .webp({ quality: 80 })
+        .toFile(outWebp);
+    }
   }
 }
 
