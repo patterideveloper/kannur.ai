@@ -1411,6 +1411,23 @@ h3,
   flex-wrap: wrap;
 }
 
+.detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.9fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.detail-main {
+  display: grid;
+  gap: 14px;
+}
+
+.detail-side {
+  position: sticky;
+  top: 84px;
+}
+
 .detail-pill {
   padding: 8px 12px;
   border-radius: 999px;
@@ -1498,6 +1515,100 @@ h3,
   height: 100%;
   min-height: 320px;
   border: 0;
+}
+
+.detail-card {
+  border-radius: 16px;
+  border: 1px solid rgba(29, 53, 87, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 12px 26px rgba(10, 27, 31, 0.08);
+  padding: 16px;
+}
+
+.detail-card h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.detail-card p {
+  margin: 0;
+  color: rgba(9, 13, 24, 0.82);
+  line-height: 1.6;
+}
+
+.detail-card p + p {
+  margin-top: 10px;
+}
+
+.detail-grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.detail-mini {
+  border-radius: 12px;
+  border: 1px solid rgba(29, 53, 87, 0.1);
+  background: rgba(29, 53, 87, 0.03);
+  padding: 12px;
+}
+
+.detail-mini h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(29, 53, 87, 0.8);
+}
+
+.detail-mini p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.detail-mini-wide {
+  grid-column: 1 / -1;
+}
+
+.detail-tips {
+  margin: 0;
+  padding: 0 0 0 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.detail-tips li {
+  color: rgba(9, 13, 24, 0.85);
+  line-height: 1.55;
+}
+
+.detail-facts {
+  display: grid;
+  gap: 8px;
+}
+
+.fact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(29, 53, 87, 0.18);
+}
+
+.fact-row:last-child {
+  border-bottom: none;
+}
+
+.fact-row span {
+  color: rgba(47, 59, 67, 0.72);
+  font-size: 13px;
+}
+
+.fact-row strong {
+  color: var(--sea);
+  font-size: 13px;
+  text-align: right;
 }
 
 .ai-section {
@@ -1870,6 +1981,23 @@ h3,
   .hero-content {
     max-width: 100%;
     margin-top: 0;
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .detail-side {
+    position: static;
+  }
+
+  .detail-card h2 {
+    font-size: 20px;
+  }
+
+  .detail-grid-two {
+    grid-template-columns: 1fr;
   }
 
   .hero-actions {
