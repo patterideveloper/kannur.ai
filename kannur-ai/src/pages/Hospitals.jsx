@@ -47,7 +47,7 @@ export default function Hospitals({ lang, t }) {
       />
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {lang === "ml" ? "ഹോം" : "Back to Home"}
+          {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1>{lang === "ml" ? "ആശുപത്രികൾ" : "Hospitals & Essentials"}</h1>
         <p>{lang === "ml" ? "അത്യാവശ്യ ആരോഗ്യ സേവനങ്ങൾ." : "Essential healthcare contacts."}</p>

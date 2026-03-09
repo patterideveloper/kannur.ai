@@ -90,7 +90,7 @@ export default function Temples({ lang, t }) {
       />
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {lang === "ml" ? "ഹോം" : "Back to Home"}
+          {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1>{lang === "ml" ? "ക്ഷേത്രങ്ങൾ & തീർത്ഥാടനം" : "Temples & Pilgrimage"}</h1>
         <p>{lang === "ml" ? "പ്രശസ്തമായ ക്ഷേത്രങ്ങളും തീർത്ഥാടന കേന്ദ്രങ്ങളും." : "Major temples and pilgrimage spots."}</p>

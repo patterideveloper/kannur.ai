@@ -63,7 +63,7 @@ export default function People({ lang, t }) {
       />
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {lang === "ml" ? "ഹോം" : "Back to Home"}
+          {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1>{lang === "ml" ? "കണ്ണൂരിലെ പ്രമുഖർ" : "People of Kannur"}</h1>
         <p>{lang === "ml" ? "കണ്ണൂരിൽ നിന്നുള്ള ശ്രദ്ധേയ വ്യക്തികൾ." : "Notable people from Kannur district."}</p>

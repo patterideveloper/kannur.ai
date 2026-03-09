@@ -35,7 +35,7 @@ export default function Theyyam({ lang, t }) {
     <main className="page">
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {lang === "ml" ? "ഹോം" : "Back to Home"}
+          {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1>{lang === "ml" ? "തെയ്യം കലണ്ടർ" : "Theyyam Calendar"}</h1>
         <p>

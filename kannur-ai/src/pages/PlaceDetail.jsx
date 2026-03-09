@@ -327,7 +327,7 @@ export default function PlaceDetail({ lang, t }) {
       <main className="page">
         <section className="page-hero">
           <Link className="back-link" to="/explore">
-            ← {lang === "ml" ? "എക്സ്പ്ലോർ" : "Back to Explore"}
+            {lang === "ml" ? "എക്സ്പ്ലോർ" : "Back to Explore"}
           </Link>
           <h1>{lang === "ml" ? "ലോഡ് ചെയ്യുന്നു..." : "Loading..."}</h1>
         </section>
@@ -340,7 +340,7 @@ export default function PlaceDetail({ lang, t }) {
       <main className="page">
         <section className="page-hero">
           <Link className="back-link" to="/explore">
-            ← {lang === "ml" ? "എക്സ്പ്ലോർ" : "Back to Explore"}
+            {lang === "ml" ? "എക്സ്പ്ലോർ" : "Back to Explore"}
           </Link>
           <h1>{lang === "ml" ? "സ്ഥലം കണ്ടെത്താനായില്ല" : "Place not found"}</h1>
         </section>
@@ -384,7 +384,7 @@ export default function PlaceDetail({ lang, t }) {
 
       <section className="page-hero">
         <Link className="back-link" to={backPath}>
-          ← {lang === "ml" ? "എക്സ്പ്ലോറിലേക്ക് മടങ്ങുക" : "Back to Explore"}
+          {lang === "ml" ? "എക്സ്പ്ലോറിലേക്ക് മടങ്ങുക" : "Back to Explore"}
         </Link>
         <h1>{displayName}</h1>
         <p>{displayDesc}</p>

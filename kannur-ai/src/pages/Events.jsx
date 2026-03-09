@@ -49,7 +49,7 @@ export default function Events({ lang, t }) {
       />
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {t?.eventsPage?.back || (lang === "ml" ? "ഹോം" : "Back to Home")}
+          {t?.eventsPage?.back || (lang === "ml" ? "ഹോം" : "Back to Home")}
         </Link>
         <h1>{t?.eventsPage?.title || (lang === "ml" ? "വാർഷിക ഇവന്റുകൾ" : "Annual Events")}</h1>
         <p>{t?.eventsPage?.subtitle || (lang === "ml" ? "വർഷേന നടക്കുന്ന പ്രധാന ചടങ്ങുകൾ." : "Key annual festivals and rituals.")}</p>

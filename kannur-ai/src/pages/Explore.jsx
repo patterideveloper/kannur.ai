@@ -224,7 +224,7 @@ export default function Explore({ lang, t }) {
       />
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {lang === "ml" ? "ഹോം" : "Back to Home"}
+          {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1>{lang === "ml" ? "സഞ്ചാര ഇടങ്ങൾ" : "Explore Kannur"}</h1>
         <p>

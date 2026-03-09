@@ -48,7 +48,7 @@ export default function Eats({ lang, t }) {
       />
       <section className="page-hero">
         <Link className="back-link" to="/">
-          ← {lang === "ml" ? "ഹോം" : "Back to Home"}
+          {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1>{lang === "ml" ? "ഭക്ഷണ ഇടങ്ങൾ" : "Local Eateries"}</h1>
         <p>
