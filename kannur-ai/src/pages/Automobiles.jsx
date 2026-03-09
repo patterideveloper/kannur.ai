@@ -1,8 +1,27 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Seo from "../components/Seo";
-import { automobiles } from "../data/extras";
 
 export default function Automobiles({ lang, t }) {
+  const [automobiles, setAutomobiles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadAutomobiles = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/automobiles");
+        const data = await response.json();
+        setAutomobiles(data.items || []);
+      } catch {
+        setAutomobiles([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadAutomobiles();
+  }, []);
+
   const carBrands = automobiles.filter((item) => item.category !== "bike");
   const bikeBrands = automobiles.filter((item) => item.category === "bike");
 
@@ -23,7 +42,9 @@ export default function Automobiles({ lang, t }) {
           {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1 className="auto-page-title">
-          {lang === "ml" ? "ഓട്ടോമൊബൈൽ ബ്രാൻഡുകൾ" : "Automobile Brands"}
+          {lang === "ml"
+            ? "കണ്ണൂരിൽ ലഭ്യമായ ഓട്ടോമൊബൈൽ ബ്രാൻഡുകൾ"
+            : "Available Automobile Brands in Kannur"}
         </h1>
         <p>
           {lang === "ml"
@@ -36,6 +57,9 @@ export default function Automobiles({ lang, t }) {
         <div className="section-head">
           <h2 className="auto-section-title">{lang === "ml" ? "കാർ ബ്രാൻഡുകൾ" : "Car Brands"}</h2>
         </div>
+        {loading ? (
+          <p>{lang === "ml" ? "ലോഡ് ചെയ്യുന്നു..." : "Loading..."}</p>
+        ) : (
         <div className="automobile-logo-grid">
           {carBrands.map((item) => {
             const brand = lang === "ml" ? item.brandMl || item.brand : item.brand;
@@ -52,12 +76,16 @@ export default function Automobiles({ lang, t }) {
             );
           })}
         </div>
+        )}
       </section>
 
       <section className="info-section">
         <div className="section-head">
           <h2 className="auto-section-title">{lang === "ml" ? "ബൈക്ക് ബ്രാൻഡുകൾ" : "Bike Brands"}</h2>
         </div>
+        {loading ? (
+          <p>{lang === "ml" ? "ലോഡ് ചെയ്യുന്നു..." : "Loading..."}</p>
+        ) : (
         <div className="automobile-logo-grid">
           {bikeBrands.map((item) => {
             const brand = lang === "ml" ? item.brandMl || item.brand : item.brand;
@@ -74,6 +102,7 @@ export default function Automobiles({ lang, t }) {
             );
           })}
         </div>
+        )}
       </section>
     </main>
   );

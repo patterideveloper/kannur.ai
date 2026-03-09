@@ -1590,6 +1590,35 @@ h3,
   margin: 0 0 8px;
 }
 
+.vehicle-model-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.vehicle-model-card {
+  background: #fff;
+  border: 1px solid rgba(47, 59, 67, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(10, 27, 31, 0.1);
+}
+
+.vehicle-model-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.vehicle-model-card p {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 650;
+  color: rgba(11, 16, 32, 0.86);
+}
+
 @media (max-width: 760px) {
   .automobile-logo-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

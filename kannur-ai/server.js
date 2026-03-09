@@ -5,6 +5,7 @@ import { fetchTheyyamEvents } from "./server/theyyam.js";
 import { fetchTemplesFromTravelKannur, fetchTemplesFromWiki } from "./server/temples.js";
 import { buildExplorePlaces, getExplorePlaceById } from "./server/explore.js";
 import { fetchKannurCivicSnapshot } from "./server/kannurCivic.js";
+import { getAutomobileById, getAutomobiles } from "./server/automobiles.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -86,6 +87,28 @@ app.get("/api/kannur-civic", async (req, res) => {
     return res.json(data);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch Kannur civic data" });
+  }
+});
+
+app.get("/api/automobiles", (req, res) => {
+  try {
+    const category = req.query.category?.toString();
+    const items = getAutomobiles({ category });
+    return res.json({ items });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch automobiles" });
+  }
+});
+
+app.get("/api/automobiles/:id", (req, res) => {
+  try {
+    const item = getAutomobileById(req.params.id);
+    if (!item) {
+      return res.status(404).json({ error: "Automobile not found" });
+    }
+    return res.json({ item });
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch automobile detail" });
   }
 });
 

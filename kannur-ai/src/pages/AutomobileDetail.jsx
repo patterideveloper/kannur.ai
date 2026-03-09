@@ -1,10 +1,44 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
-import { automobiles } from "../data/extras";
 
 export default function AutomobileDetail({ lang, t }) {
   const { automobileId } = useParams();
-  const item = automobiles.find((entry) => entry.id === automobileId);
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadItem = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/automobiles/${automobileId}`);
+        if (!response.ok) {
+          setItem(null);
+          return;
+        }
+        const data = await response.json();
+        setItem(data.item || null);
+      } catch {
+        setItem(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadItem();
+  }, [automobileId]);
+
+  if (loading) {
+    return (
+      <main className="page">
+        <section className="page-hero">
+          <Link className="back-link" to="/automobiles">
+            {lang === "ml" ? "ഓട്ടോമൊബൈൽ" : "Back to Automobiles"}
+          </Link>
+          <p>{lang === "ml" ? "ലോഡ് ചെയ്യുന്നു..." : "Loading..."}</p>
+        </section>
+      </main>
+    );
+  }
 
   if (!item) {
     return (
@@ -27,6 +61,7 @@ export default function AutomobileDetail({ lang, t }) {
   const mapsUrl = item.mapsQuery
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.mapsQuery)}`
     : null;
+  const models = item.models || [];
 
   return (
     <main className="page">
@@ -60,14 +95,25 @@ export default function AutomobileDetail({ lang, t }) {
                 {t.mapsLink}
               </a>
             )}
-            {item.website && (
-              <a className="map-link" href={item.website} target="_blank" rel="noreferrer">
-                {lang === "ml" ? "ഓദ്യോഗിക വെബ്സൈറ്റ്" : "Official Website"}
-              </a>
-            )}
           </div>
         </div>
       </section>
+
+      {models.length > 0 && (
+        <section className="info-section">
+          <div className="section-head">
+            <h2>{lang === "ml" ? "ലഭ്യമായ മോഡലുകൾ" : "Available Models in Kannur"}</h2>
+          </div>
+          <div className="vehicle-model-grid">
+            {models.map((model) => (
+              <article key={model.name} className="vehicle-model-card">
+                <img src={model.imageUrl} alt={model.name} loading="lazy" decoding="async" />
+                <p>{model.name}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
