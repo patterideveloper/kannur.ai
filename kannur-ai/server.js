@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { fetchTheyyamEvents } from "./server/theyyam.js";
 import { fetchTemplesFromTravelKannur, fetchTemplesFromWiki } from "./server/temples.js";
 import { buildExplorePlaces, getExplorePlaceById } from "./server/explore.js";
+import { fetchKannurCivicSnapshot } from "./server/kannurCivic.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -76,6 +77,15 @@ app.get("/api/explore/:id", (req, res) => {
     return res.json({ item });
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch place detail" });
+  }
+});
+
+app.get("/api/kannur-civic", async (req, res) => {
+  try {
+    const data = await fetchKannurCivicSnapshot();
+    return res.json(data);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch Kannur civic data" });
   }
 });
 

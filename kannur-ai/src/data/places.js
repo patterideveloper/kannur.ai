@@ -708,6 +708,58 @@ export const places = [
     ],
   },
   {
+    id: "ezharakund-waterfalls",
+    name: "Ezharakund Waterfalls",
+    nameMl: "ഏഴരകുണ്ട് വെള്ളച്ചാട്ടം",
+    type: "Viewpoint",
+    area: "Kannur district",
+    areaMl: "കണ്ണൂർ ജില്ല",
+    description:
+      "A scenic waterfall spot in Kannur district known for monsoon greenery and short nature breaks.",
+    descriptionMl:
+      "മൺസൂൺ കാലത്തെ പച്ചപ്പിനും ചെറുനേരത്തെ പ്രകൃതി വിശ്രമത്തിനും അനുയോജ്യമായ കണ്ണൂർ ജില്ലയിലെ മനോഹര വെള്ളച്ചാട്ട സ്ഥലം.",
+    tags: ["nature", "view", "quiet", "family"],
+    source: "https://www.google.com/search?q=ezharakund+waterfalls",
+    mapsQuery: "Ezharakund Waterfalls Kannur",
+    images: [
+      {
+        url: "/images/places/ezharakund_waterfalls/ezharakund_waterfalls-800.jpg",
+        srcSet:
+          "/images/places/ezharakund_waterfalls/ezharakund_waterfalls-480.jpg 480w, /images/places/ezharakund_waterfalls/ezharakund_waterfalls-800.jpg 800w, /images/places/ezharakund_waterfalls/ezharakund_waterfalls-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Ezharakund Waterfalls",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=ezharakund+waterfalls&tbm=isch",
+      },
+    ],
+  },
+  {
+    id: "thodeekalam-temple",
+    name: "Thodeekalam Temple",
+    nameMl: "തൊടീക്കളം ക്ഷേത്രം",
+    type: "Worship",
+    area: "Kannur district",
+    areaMl: "കണ്ണൂർ ജില്ല",
+    description:
+      "A local temple in Kannur district known for traditional rituals and regular prayer gatherings.",
+    descriptionMl:
+      "പരമ്പരാഗത ആചാരങ്ങളും സ്ഥിരം ആരാധനകളും കൊണ്ട് അറിയപ്പെടുന്ന കണ്ണൂർ ജില്ലയിലെ പ്രാദേശിക ക്ഷേത്രം.",
+    tags: ["temple", "heritage", "family"],
+    source: "https://www.google.com/search?q=thodeekalam+temple+timings",
+    mapsQuery: "Thodeekalam Temple Kannur",
+    images: [
+      {
+        url: "/images/places/thodeekalam_temple/thodeekalam_temple-800.jpg",
+        srcSet:
+          "/images/places/thodeekalam_temple/thodeekalam_temple-480.jpg 480w, /images/places/thodeekalam_temple/thodeekalam_temple-800.jpg 800w, /images/places/thodeekalam_temple/thodeekalam_temple-1200.jpg 1200w",
+        sizes: "(max-width: 700px) 80vw, 420px",
+        alt: "Thodeekalam Temple",
+        credit: "Google Images",
+        creditUrl: "https://www.google.com/search?q=thodeekalam+temple&tbm=isch",
+      },
+    ],
+  },
+  {
     id: "parassinikadavu-muthappan-temple",
     name: "Parassinikadavu Muthappan Temple",
     nameMl: "പരശ്ശിനിക്കടവ് മുത്തപ്പൻ ക്ഷേത്രം",
@@ -1268,6 +1320,34 @@ const deepContentById = {
     photoPointsMl: ["ഡാം സൈഡ് റെയിലിംഗ് കാഴ്ചകൾ", "ജലാശയ പനോരമ", "ഗോൾഡൻ-അവർ ജലപ്രതിഫലനം"],
     nearbyStopsEn: ["Mattanur side attractions", "Kannur airport route", "Nearby local eateries"],
     nearbyStopsMl: ["മട്ടന്നൂർ ഭാഗത്തെ ആകർഷണങ്ങൾ", "കണ്ണൂർ എയർപോർട്ട് റൂട്ട്", "സമീപ പ്രാദേശിക ഭക്ഷണ സ്റ്റോപ്പുകൾ"],
+  },
+  "ezharakund-waterfalls": {
+    historyEn:
+      "Ezharakund Waterfalls is a seasonal natural attraction in Kannur district, especially popular during and just after monsoon.",
+    historyMl:
+      "മൺസൂൺ കാലത്തും അതിന് ശേഷവും കൂടുതൽ സജീവമാകുന്ന കണ്ണൂർ ജില്ലയിലെ സീസണൽ പ്രകൃതി ആകർഷണമാണ് ഏഴരകുണ്ട് വെള്ളച്ചാട്ടം.",
+    timingsEn: "Best visited in daylight; monsoon season is ideal for flow.",
+    timingsMl: "പകൽസമയത്ത് സന്ദർശിക്കുക; വെള്ളച്ചാട്ട പ്രവാഹത്തിന് മൺസൂൺ മികച്ചത്.",
+    entryFeeEn: "Usually no fixed entry fee; local parking charges may apply.",
+    entryFeeMl: "സാധാരണ സ്ഥിര പ്രവേശനഫീസ് ഇല്ല; പാർക്കിംഗ് നിരക്ക് ഉണ്ടായേക്കാം.",
+    photoPointsEn: ["Waterfall front view", "Rock and stream stretch", "Monsoon green backdrop"],
+    photoPointsMl: ["വെള്ളച്ചാട്ടത്തിന്റെ മുൻദൃശ്യം", "പാറയും നീരൊഴുക്കും ഉള്ള ഭാഗം", "മൺസൂൺ പച്ചപ്പുള്ള പശ്ചാത്തലം"],
+    nearbyStopsEn: ["Pazhassi Dam", "Nearby hill viewpoints", "Local tea/food stops"],
+    nearbyStopsMl: ["പഴശ്ശി ഡാം", "സമീപ കുന്നിൻ വ്യൂ പോയിന്റുകൾ", "പ്രാദേശിക ചായ/ഭക്ഷണ സ്റ്റോപ്പുകൾ"],
+  },
+  "thodeekalam-temple": {
+    historyEn:
+      "Thodeekalam Temple is a local worship center in Kannur district with regular temple rituals and community participation.",
+    historyMl:
+      "സ്ഥിരമായ ക്ഷേത്ര ആചാരങ്ങളോടെയും സമുദായ പങ്കാളിത്തത്തോടെയും പ്രവർത്തിക്കുന്ന കണ്ണൂർ ജില്ലയിലെ പ്രാദേശിക ആരാധനാകേന്ദ്രമാണ് തൊടീക്കളം ക്ഷേത്രം.",
+    timingsEn: "Typical temple timings in morning and evening.",
+    timingsMl: "സാധാരണ ക്ഷേത്രദർശനം രാവിലെ, വൈകുന്നേരം.",
+    entryFeeEn: "No standard entry fee; offerings are optional.",
+    entryFeeMl: "സ്ഥിര പ്രവേശനഫീസ് ഇല്ല; വഴിപാടുകൾ ഐച്ഛികം.",
+    photoPointsEn: ["Temple entrance", "Courtyard view", "Festival lighting days"],
+    photoPointsMl: ["ക്ഷേത്ര പ്രവേശനം", "പ്രാകാര ദൃശ്യം", "ഉത്സവ ലൈറ്റിംഗ് ദിവസങ്ങൾ"],
+    nearbyStopsEn: ["Regional temple circuit", "Kannur town route", "Nearby eateries"],
+    nearbyStopsMl: ["പ്രാദേശിക ക്ഷേത്ര സർക്യൂട്ട്", "കണ്ണൂർ ടൗൺ റൂട്ട്", "സമീപ ഭക്ഷണകേന്ദ്രങ്ങൾ"],
   },
   "parassinikadavu-muthappan-temple": {
     historyEn:
