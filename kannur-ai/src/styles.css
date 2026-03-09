@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap");
+
 :root {
   --ink: #0b1020;
   --sea: #1d3557;
@@ -17,7 +19,7 @@
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
   color: var(--ink);
   background:
     radial-gradient(circle at 14% 12%, rgba(230, 57, 70, 0.16), transparent 46%),
@@ -25,6 +27,19 @@ body {
     linear-gradient(180deg, #fff5f6 0%, #f6fbff 35%, #eef5fb 70%, #e2edf6 100%);
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+.app[data-lang="en"] {
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+}
+
+.app[data-lang="en"] .place-head h3,
+.app[data-lang="en"] .info-card h3,
+.app[data-lang="en"] .immersive-card h3,
+.app[data-lang="en"] .why-glass h3,
+.app[data-lang="en"] .detail-card h2 {
+  font-family: "Sora", "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  letter-spacing: -0.01em;
 }
 
 a {
@@ -304,17 +319,34 @@ a {
   backdrop-filter: blur(4px);
 }
 
-.hero-top .lang-toggle {
+.hero-top .lang-switcher {
   margin-left: auto;
-  background: rgba(9, 13, 24, 0.45);
-  border: 1px solid rgba(241, 250, 238, 0.6);
-  color: rgba(241, 250, 238, 0.95);
-  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
   border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  background: rgba(9, 13, 24, 0.45);
+  border: 1px solid rgba(241, 250, 238, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.hero-top .lang-option {
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(241, 250, 238, 0.82);
+  background: transparent;
+  letter-spacing: 0.04em;
+  min-height: 28px;
+}
+
+.hero-top .lang-option.active {
+  background: rgba(241, 250, 238, 0.95);
+  color: #0b1a2f;
 }
 
 .hero-top .burger {
@@ -483,15 +515,8 @@ a {
   backdrop-filter: blur(10px);
 }
 
-.lang-toggle {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(47, 59, 67, 0.2);
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--sea);
+.lang-switcher {
+  display: inline-flex;
 }
 
 .eyebrow {
@@ -1083,7 +1108,6 @@ h3,
   margin: 0 0 4px;
   font-size: 18px;
   font-weight: 700;
-  font-family: "Instrument Serif", serif;
 }
 
 .why-glass p {
@@ -1976,6 +2000,17 @@ h3,
     left: 0;
     right: 0;
     padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 10px;
+  }
+
+  .hero-top .lang-switcher {
+    gap: 2px;
+    padding: 3px;
+  }
+
+  .hero-top .lang-option {
+    padding: 5px 8px;
+    font-size: 10px;
+    min-height: 26px;
   }
 
   .hero-content {

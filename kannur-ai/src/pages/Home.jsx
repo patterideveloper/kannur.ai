@@ -216,19 +216,31 @@ export default function Home({ lang, t, setLang, menuOpen, setMenuOpen }) {
           <div className="hero-gradient" />
         </div>
         <div className="hero-inner">
-        <div className="hero-top">
+          <div className="hero-top">
           <div className="hero-banner">KANNUR.iO</div>
-          <button
-            type="button"
-            className="lang-toggle"
-            onClick={(event) => {
-              event.stopPropagation();
-              setLang((prev) => (prev === "en" ? "ml" : "en"));
-            }}
-            aria-label={t?.languageSwitch || "Switch language"}
+          <div
+            className="lang-switcher"
+            role="group"
+            aria-label={lang === "ml" ? "ഭാഷ തിരഞ്ഞെടുക്കുക" : "Select language"}
+            onClick={(event) => event.stopPropagation()}
           >
-            {t?.languageSwitch || "മലയാളം"}
-          </button>
+            <button
+              type="button"
+              className={`lang-option ${lang === "en" ? "active" : ""}`}
+              onClick={() => setLang("en")}
+              aria-pressed={lang === "en"}
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              className={`lang-option ${lang === "ml" ? "active" : ""}`}
+              onClick={() => setLang("ml")}
+              aria-pressed={lang === "ml"}
+            >
+              മലയാളം
+            </button>
+          </div>
           <button
             className={`burger ${menuOpen ? "open" : ""}`}
             onClick={(event) => {
