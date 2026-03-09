@@ -236,6 +236,9 @@ export default function Home({ lang, t, setLang, menuOpen, setMenuOpen }) {
           <Link to="/hospitals" onClick={() => setMenuOpen(false)}>
             {t.sections.hospitals}
           </Link>
+          <Link to="/automobiles" onClick={() => setMenuOpen(false)}>
+            {t.sections.automobiles}
+          </Link>
         </div>
       </header>
 
@@ -309,6 +312,10 @@ export default function Home({ lang, t, setLang, menuOpen, setMenuOpen }) {
           <Link to="/people" className="landing-chip-card">
             <strong>{lang === "ml" ? "People of Kannur" : "People of Kannur"}</strong>
             <span>{lang === "ml" ? "പ്രമുഖരുടെ കഥകൾ" : "Stories of notable personalities"}</span>
+          </Link>
+          <Link to="/automobiles" className="landing-chip-card">
+            <strong>{lang === "ml" ? "Automobiles" : "Automobiles"}</strong>
+            <span>{lang === "ml" ? "കണ്ണൂരിലെ ഷോറൂമുകൾ" : "Brand showrooms in Kannur"}</span>
           </Link>
         </div>
       </section>
@@ -491,6 +498,23 @@ export default function Home({ lang, t, setLang, menuOpen, setMenuOpen }) {
                   <li>{lang === "ml" ? "പുതിയ അറിയിപ്പുകൾ ലഭ്യമല്ല." : "No updates available right now."}</li>
                 )}
               </ul>
+            </article>
+
+            <article className="civic-card">
+              <h3>{lang === "ml" ? "വാഹന രജിസ്ട്രേഷൻ (കണ്ണൂർ)" : "Vehicle Registration (Kannur)"}</h3>
+              <div className="reg-list">
+                {[
+                  "KL-13 Kannur",
+                  "KL-58 Thalassery",
+                  "KL-59 Taliparamba",
+                  "KL-78 Iritty",
+                  "KL-86 Payyanur",
+                ].map((item) => (
+                  <span key={item} className="reg-chip">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </article>
 
             <article className="civic-card civic-card-wide">

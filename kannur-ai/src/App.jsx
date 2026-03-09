@@ -9,6 +9,8 @@ import People from "./pages/People";
 import Hospitals from "./pages/Hospitals";
 import Theyyam from "./pages/Theyyam";
 import PlaceDetail from "./pages/PlaceDetail";
+import Automobiles from "./pages/Automobiles";
+import AutomobileDetail from "./pages/AutomobileDetail";
 
 const translations = {
   en: {
@@ -78,6 +80,7 @@ const translations = {
       personalities: "People of Kannur",
       events: "Annual Events",
       hospitals: "Hospitals & Essentials",
+      automobiles: "Automobiles",
     },
     eventsPage: {
       title: "Annual Events",
@@ -222,6 +225,7 @@ const translations = {
       personalities: "കണ്ണൂരിലെ പ്രമുഖർ",
       events: "വാർഷിക ഇവന്റുകൾ",
       hospitals: "ആശുപത്രികൾ & അത്യാവശ്യങ്ങൾ",
+      automobiles: "ഓട്ടോമൊബൈൽ",
     },
     eventsPage: {
       title: "വാർഷിക ഇവന്റുകൾ",
@@ -303,7 +307,7 @@ const translations = {
 };
 
 export default function App() {
-  const [lang, setLang] = useState("ml");
+  const [lang, setLang] = useState("en");
   const [menuOpen, setMenuOpen] = useState(false);
   
 
@@ -327,6 +331,7 @@ export default function App() {
           <Link to="/events">{t.sections.events}</Link>
           <Link to="/people">{t.sections.personalities}</Link>
           <Link to="/hospitals">{t.sections.hospitals}</Link>
+          <Link to="/automobiles">{t.sections.automobiles}</Link>
         </div>
       </nav>
       <Routes>
@@ -351,6 +356,8 @@ export default function App() {
         <Route path="/theyyam" element={<Theyyam lang={lang} t={t} />} />
         <Route path="/people" element={<People lang={lang} t={t} />} />
         <Route path="/hospitals" element={<Hospitals lang={lang} t={t} />} />
+        <Route path="/automobiles" element={<Automobiles lang={lang} t={t} />} />
+        <Route path="/automobiles/:automobileId" element={<AutomobileDetail lang={lang} t={t} />} />
       </Routes>
 
       <footer className="footer footer-modern">
