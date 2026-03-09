@@ -2112,6 +2112,33 @@ h3,
   color: var(--sea);
 }
 
+.auto-detail-actions {
+  justify-content: flex-end;
+}
+
+.location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(29, 53, 87, 0.2);
+  background: rgba(29, 53, 87, 0.08);
+  white-space: nowrap;
+}
+
+.map-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+}
+
+.map-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--sea);
+}
+
 .secondary-link {
   color: #fff;
   background: linear-gradient(135deg, var(--sun), #f05d3b);
