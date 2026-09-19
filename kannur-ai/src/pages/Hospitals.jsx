@@ -23,7 +23,12 @@ function InfoCard({ title, description, meta, source, mapsQuery, t }) {
       )}
       <div className="info-actions">
         {mapsUrl && (
-          <a className="map-link" href={mapsUrl} target="_blank" rel="noreferrer">
+          <a
+            className="map-link"
+            href={mapsUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             {t.mapsLink}
           </a>
         )}
@@ -50,7 +55,11 @@ export default function Hospitals({ lang, t }) {
           {lang === "ml" ? "ഹോം" : "Back to Home"}
         </Link>
         <h1>{lang === "ml" ? "ആശുപത്രികൾ" : "Hospitals & Essentials"}</h1>
-        <p>{lang === "ml" ? "അത്യാവശ്യ ആരോഗ്യ സേവനങ്ങൾ." : "Essential healthcare contacts."}</p>
+        <p>
+          {lang === "ml"
+            ? "അത്യാവശ്യ ആരോഗ്യ സേവനങ്ങൾ."
+            : "Essential healthcare contacts."}
+        </p>
       </section>
 
       <section className="info-section">
@@ -61,10 +70,22 @@ export default function Hospitals({ lang, t }) {
           {hospitals.map((hospital) => (
             <InfoCard
               key={hospital.id}
-              title={hospital.name}
-              description={hospital.description}
+              title={
+                lang === "ml" ? hospital.nameMl || hospital.name : hospital.name
+              }
+              description={
+                lang === "ml"
+                  ? hospital.descriptionMl || hospital.description
+                  : hospital.description
+              }
               meta={[
-                { label: t.labels.area, value: hospital.area },
+                {
+                  label: t.labels.area,
+                  value:
+                    lang === "ml"
+                      ? hospital.areaMl || hospital.area
+                      : hospital.area,
+                },
                 { label: t.labels.phone, value: hospital.phone },
               ]}
               source={hospital.source}

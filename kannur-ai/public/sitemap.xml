@@ -21,4 +21,8 @@
   <url>
     <loc>https://kannur.io/hospitals</loc>
   </url>
+  <url><loc>https://kannur.io/directory</loc></url>
+  <url><loc>https://kannur.io/automobiles</loc></url>
+  <url><loc>https://kannur.io/explore/nature</loc></url>
+  <url><loc>https://kannur.io/explore/islands</loc></url>
 </urlset>

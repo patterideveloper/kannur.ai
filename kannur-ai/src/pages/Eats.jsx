@@ -2,7 +2,15 @@ import { Link } from "react-router-dom";
 import Seo from "../components/Seo";
 import { eateries, specialties } from "../data/extras";
 
-function InfoCard({ title, subtitle, description, meta, source, mapsQuery, t }) {
+function InfoCard({
+  title,
+  subtitle,
+  description,
+  meta,
+  source,
+  mapsQuery,
+  t,
+}) {
   const mapsUrl = mapsQuery
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`
     : null;
@@ -24,7 +32,12 @@ function InfoCard({ title, subtitle, description, meta, source, mapsQuery, t }) 
       )}
       <div className="info-actions">
         {mapsUrl && (
-          <a className="map-link" href={mapsUrl} target="_blank" rel="noreferrer">
+          <a
+            className="map-link"
+            href={mapsUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             {t.mapsLink}
           </a>
         )}
@@ -61,16 +74,29 @@ export default function Eats({ lang, t }) {
       <section className="info-section">
         <div className="section-head">
           <h2>{t.sections.eats}</h2>
-          <p>{lang === "ml" ? "പ്രസിദ്ധ ഭക്ഷണ ഇടങ്ങൾ." : "Local favorites to taste Kannur."}</p>
+          <p>
+            {lang === "ml"
+              ? "പ്രസിദ്ധ ഭക്ഷണ ഇടങ്ങൾ."
+              : "Local favorites to taste Kannur."}
+          </p>
         </div>
         <div className="info-grid">
           {eateries.map((spot) => (
             <InfoCard
               key={spot.id}
-              title={spot.name}
-              subtitle={spot.type}
-              description={spot.description}
-              meta={[{ label: t.labels.area, value: spot.area }]}
+              title={lang === "ml" ? spot.nameMl || spot.name : spot.name}
+              subtitle={lang === "ml" ? spot.typeMl || spot.type : spot.type}
+              description={
+                lang === "ml"
+                  ? spot.descriptionMl || spot.description
+                  : spot.description
+              }
+              meta={[
+                {
+                  label: t.labels.area,
+                  value: lang === "ml" ? spot.areaMl || spot.area : spot.area,
+                },
+              ]}
               source={spot.source}
               mapsQuery={spot.mapsQuery}
               t={t}
@@ -87,9 +113,13 @@ export default function Eats({ lang, t }) {
           {specialties.map((item) => (
             <InfoCard
               key={item.id}
-              title={item.name}
-              subtitle={item.type}
-              description={item.description}
+              title={lang === "ml" ? item.nameMl || item.name : item.name}
+              subtitle={lang === "ml" ? item.typeMl || item.type : item.type}
+              description={
+                lang === "ml"
+                  ? item.descriptionMl || item.description
+                  : item.description
+              }
               source={item.source}
               t={t}
             />

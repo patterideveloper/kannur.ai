@@ -2,45 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 
-function buildDetailImages(place, remoteImages = []) {
-  const images = [...(place.images || [])];
-  if (images.length === 0 && remoteImages.length === 0) return images;
-
-  const primary = images[0];
-  const remoteMapped = (remoteImages || []).map((img) => ({
-    url: img.url,
-    srcSet: null,
-    alt: img.alt || `${place.name} photo`,
-    credit: img.credit || "Wikimedia Commons",
-    creditUrl: img.creditUrl,
-  }));
-
-  for (const img of remoteMapped) {
-    if (images.length >= 4) break;
-    if (!img.url) continue;
-    const exists = images.some((item) => item.url === img.url);
-    if (!exists) images.push(img);
-  }
-
-  if (!primary?.url || !primary?.srcSet) return images.slice(0, 4);
-  const variants = ["view2", "view3", "view4"];
-
-  for (const variant of variants) {
-    if (images.length >= 4) break;
-    const variantUrl = primary.url.replace(/-800\.jpg$/, `_${variant}-800.jpg`);
-    if (variantUrl === primary.url) continue;
-    const alreadyExists = images.some((item) => item.url === variantUrl);
-    if (alreadyExists) continue;
-    const variantSrcSet = primary.srcSet.replace(/-([0-9]+)\.jpg/g, `_${variant}-$1.jpg`);
-    images.push({
-      ...primary,
-      url: variantUrl,
-      srcSet: variantSrcSet,
-      alt: `${primary.alt || place.name} alternate view`,
-    });
-  }
-
-  return images.slice(0, 4);
+// Only use the place's curated gallery; search results may depict another location.
+function buildDetailImages(place) {
+  return (place.images || []).filter(
+    (image, index, images) =>
+      image.url && images.findIndex((item) => item.url === image.url) === index,
+  );
 }
 
 function getDetailTemplate(place, lang, displayType, displayArea) {
@@ -51,10 +18,19 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
   if (hasTag("beach") || place.type === "Beach") kind = "beach";
   else if (hasTag("heritage") || place.type === "Heritage") kind = "heritage";
   else if (hasTag("hill") || place.type === "Hill") kind = "hill";
-  else if (hasTag("wildlife") || place.type === "Wildlife" || place.type === "Zoo") {
+  else if (
+    hasTag("wildlife") ||
+    place.type === "Wildlife" ||
+    place.type === "Zoo"
+  ) {
     kind = "nature";
   } else if (hasTag("shopping") || place.type === "Shopping") kind = "shopping";
-  else if (hasTag("temple") || hasTag("church") || hasTag("mosque") || place.type === "Worship") {
+  else if (
+    hasTag("temple") ||
+    hasTag("church") ||
+    hasTag("mosque") ||
+    place.type === "Worship"
+  ) {
     kind = "worship";
   }
 
@@ -65,7 +41,8 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
           "This stretch is best enjoyed unhurried. Early mornings are calm, evenings are ideal for long walks and sunset photos, and sea breeze stays pleasant through most months.",
         bestTime: "October to March; sunset hours are usually the most scenic.",
         duration: "1.5 to 3 hours",
-        experience: "Sunset views, shoreline walk, relaxed family time, quick photo stop",
+        experience:
+          "Sunset views, shoreline walk, relaxed family time, quick photo stop",
         tips: [
           "Check tide and wave conditions before entering wet sand zones.",
           "Carry water and slippers; sand can get hot in peak afternoon.",
@@ -75,7 +52,8 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
       heritage: {
         overview:
           "This is one of the key historical experiences around Kannur. Plan enough time to walk the site slowly, read context boards if available, and stay through golden hour for photography.",
-        bestTime: "October to March; visit early morning or late afternoon for softer light.",
+        bestTime:
+          "October to March; visit early morning or late afternoon for softer light.",
         duration: "1.5 to 2.5 hours",
         experience: "Architecture, history walk, photo points, coastal views",
         tips: [
@@ -87,9 +65,11 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
       hill: {
         overview:
           "A good choice when you want cooler weather and viewpoint-focused travel. Weather can shift quickly, so keep the plan flexible and avoid very late starts.",
-        bestTime: "October to February for clearer views and comfortable trekking weather.",
+        bestTime:
+          "October to February for clearer views and comfortable trekking weather.",
         duration: "3 to 5 hours",
-        experience: "Viewpoints, short treks, misty landscapes, nature photography",
+        experience:
+          "Viewpoints, short treks, misty landscapes, nature photography",
         tips: [
           "Start early and keep buffer time for weather changes.",
           "Carry drinking water, light snacks, and a rain layer.",
@@ -99,9 +79,11 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
       nature: {
         overview:
           "This stop works best as a slow-pace nature experience. Keep noise low, follow local guidelines, and give yourself enough time to observe the surroundings.",
-        bestTime: "October to March; mornings are usually better for visibility and comfort.",
+        bestTime:
+          "October to March; mornings are usually better for visibility and comfort.",
         duration: "2 to 4 hours",
-        experience: "Green landscapes, quiet exploration, family-friendly outing",
+        experience:
+          "Green landscapes, quiet exploration, family-friendly outing",
         tips: [
           "Avoid feeding animals and stay on marked areas.",
           "Carry insect repellent for greener zones.",
@@ -149,9 +131,11 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
       beach: {
         overview:
           "ഈ കടൽത്തീരം ആസ്വദിക്കാൻ മികച്ചത് മന്ദഗതിയിലുള്ള സന്ദർശനമാണ്. രാവിലെ ശാന്തതയും വൈകുന്നേരം സൺസെറ്റ് ദൃശ്യങ്ങളും ഫോട്ടോഗ്രഫിക്കും മികച്ചതാണ്.",
-        bestTime: "ഒക്ടോബർ മുതൽ മാർച്ച് വരെ; സന്ധ്യാസമയമാണ് സാധാരണയായി ഏറ്റവും മനോഹരം.",
+        bestTime:
+          "ഒക്ടോബർ മുതൽ മാർച്ച് വരെ; സന്ധ്യാസമയമാണ് സാധാരണയായി ഏറ്റവും മനോഹരം.",
         duration: "1.5 മുതൽ 3 മണിക്കൂർ",
-        experience: "സൺസെറ്റ് ദൃശ്യങ്ങൾ, തീരനടത്ത്, കുടുംബസമയം, ഫോട്ടോ സ്റ്റോപ്പ്",
+        experience:
+          "സൺസെറ്റ് ദൃശ്യങ്ങൾ, തീരനടത്ത്, കുടുംബസമയം, ഫോട്ടോ സ്റ്റോപ്പ്",
         tips: [
           "വെള്ളത്തിൽ ഇറങ്ങുന്നതിന് മുമ്പ് ടൈഡും തിരമാല സാഹചര്യവും പരിശോധിക്കുക.",
           "വെള്ളവും സ്ലിപ്പറുകളും കൈയിൽ കരുതുക; ഉച്ചയ്ക്ക് മണൽ ചൂടാകാം.",
@@ -161,7 +145,8 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
       heritage: {
         overview:
           "കണ്ണൂരിലെ പ്രധാന പൈതൃക അനുഭവങ്ങളിലൊന്നാണിത്. ശാന്തമായി നടന്ന് കാണാൻ മതിയായ സമയം മാറ്റിവെക്കുക; സന്ധ്യയിലെ ലൈറ്റിൽ ഫോട്ടോകൾ മനോഹരമാകും.",
-        bestTime: "ഒക്ടോബർ മുതൽ മാർച്ച് വരെ; രാവിലെ അല്ലെങ്കിൽ വൈകുന്നേരം മികച്ചത്.",
+        bestTime:
+          "ഒക്ടോബർ മുതൽ മാർച്ച് വരെ; രാവിലെ അല്ലെങ്കിൽ വൈകുന്നേരം മികച്ചത്.",
         duration: "1.5 മുതൽ 2.5 മണിക്കൂർ",
         experience: "വാസ്തു, ചരിത്രനടത്ത്, ഫോട്ടോ പോയിന്റുകൾ, തീരദൃശ്യങ്ങൾ",
         tips: [
@@ -175,7 +160,8 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
           "തണുത്ത കാലാവസ്ഥയും വ്യൂ പോയിന്റ് യാത്രയും ആഗ്രഹിക്കുന്നവർക്ക് അനുയോജ്യമായിടമാണ്. കാലാവസ്ഥ വേഗത്തിൽ മാറാൻ സാധ്യതയുള്ളതിനാൽ പദ്ധതി ഇളവോടെ വയ്ക്കുക.",
         bestTime: "ഒക്ടോബർ മുതൽ ഫെബ്രുവരി വരെ; ട്രെക്കിംഗിന് സൗകര്യപ്രദം.",
         duration: "3 മുതൽ 5 മണിക്കൂർ",
-        experience: "വ്യൂ പോയിന്റുകൾ, ചെറു ട്രെക്ക്, മഞ്ഞുമൂടിയ ദൃശ്യം, പ്രകൃതി ഫോട്ടോഗ്രഫി",
+        experience:
+          "വ്യൂ പോയിന്റുകൾ, ചെറു ട്രെക്ക്, മഞ്ഞുമൂടിയ ദൃശ്യം, പ്രകൃതി ഫോട്ടോഗ്രഫി",
         tips: [
           "രാവിലെ തന്നെ ആരംഭിക്കുക; കാലാവസ്ഥ മാറ്റത്തിന് സമയം കരുതുക.",
           "വെള്ളം, ചെറിയ സ്‌നാക്ക്, മഴക്കോട്ട് എന്നിവ കൈയിൽ കരുതുക.",
@@ -199,7 +185,8 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
           "കണ്ണൂരിലെ കൈത്തറി, ഹാൻഡിക്രാഫ്റ്റ്, സ്മരണികകൾ വാങ്ങാൻ അനുയോജ്യമായ സ്റ്റോപ്പാണ്. കഴിയുമെങ്കിൽ 2-3 കടകൾ തമ്മിൽ താരതമ്യം ചെയ്ത് വാങ്ങുക.",
         bestTime: "വൈകുന്നേരം വരെ; വർഷം മുഴുവൻ.",
         duration: "1 മുതൽ 2.5 മണിക്കൂർ",
-        experience: "കൈത്തറി ഷോപ്പിംഗ്, പ്രാദേശിക ഹാൻഡിക്രാഫ്റ്റ്, ഗിഫ്റ്റ് പിക്കുകൾ",
+        experience:
+          "കൈത്തറി ഷോപ്പിംഗ്, പ്രാദേശിക ഹാൻഡിക്രാഫ്റ്റ്, ഗിഫ്റ്റ് പിക്കുകൾ",
         tips: [
           "വാങ്ങുന്നതിന് മുമ്പ് മെറ്റീരിയലും ഉത്ഭവവും ചോദിച്ച് ഉറപ്പാക്കുക.",
           "ഡിജിറ്റൽ പേയ്മെന്റിനൊപ്പം ചെറിയ കാഷും കരുതുക.",
@@ -221,7 +208,8 @@ function getDetailTemplate(place, lang, displayType, displayArea) {
       default: {
         overview:
           "പ്രാദേശിക സംസ്കാരവും മനോഹര ദൃശ്യങ്ങളും എളുപ്പത്തിലുള്ള എത്തിച്ചേരലും നൽകുന്ന കണ്ണൂരിലെ ശുപാർശ ചെയ്ത സ്റ്റോപ്പാണ് ഇത്.",
-        bestTime: "സാധാരണയായി സുഖകരമായ കാലാവസ്ഥയ്ക്കായി ഒക്ടോബർ മുതൽ മാർച്ച് വരെ.",
+        bestTime:
+          "സാധാരണയായി സുഖകരമായ കാലാവസ്ഥയ്ക്കായി ഒക്ടോബർ മുതൽ മാർച്ച് വരെ.",
         duration: "1 മുതൽ 2 മണിക്കൂർ",
         experience: "പ്രാദേശിക അന്തരീക്ഷം, ഫോട്ടോ നിമിഷങ്ങൾ, ശാന്ത പര്യവേക്ഷണം",
         tips: [
@@ -273,13 +261,14 @@ export default function PlaceDetail({ lang, t }) {
   const [activeImage, setActiveImage] = useState(0);
   const [place, setPlace] = useState(null);
   const [loadingPlace, setLoadingPlace] = useState(true);
-  const [remoteImages, setRemoteImages] = useState([]);
 
   useEffect(() => {
     const loadPlace = async () => {
       try {
         setLoadingPlace(true);
-        const response = await fetch(`/api/explore/${encodeURIComponent(placeId)}`);
+        const response = await fetch(
+          `/api/explore/${encodeURIComponent(placeId)}`,
+        );
         if (!response.ok) {
           throw new Error("Not found");
         }
@@ -295,32 +284,12 @@ export default function PlaceDetail({ lang, t }) {
   }, [placeId]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [placeId]);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [placeId, loadingPlace]);
 
   useEffect(() => {
     setActiveImage(0);
   }, [placeId]);
-
-  useEffect(() => {
-    const loadRemoteImages = async () => {
-      if (!place) return;
-      try {
-        const query = place.mapsQuery || `${place.name} Kannur`;
-        const response = await fetch(`/api/place-images?query=${encodeURIComponent(query)}`);
-        if (!response.ok) {
-          setRemoteImages([]);
-          return;
-        }
-        const data = await response.json();
-        setRemoteImages(data.items || []);
-      } catch {
-        setRemoteImages([]);
-      }
-    };
-
-    loadRemoteImages();
-  }, [place]);
 
   if (loadingPlace) {
     return (
@@ -342,7 +311,9 @@ export default function PlaceDetail({ lang, t }) {
           <Link className="back-link" to="/explore">
             {lang === "ml" ? "എക്സ്പ്ലോർ" : "Back to Explore"}
           </Link>
-          <h1>{lang === "ml" ? "സ്ഥലം കണ്ടെത്താനായില്ല" : "Place not found"}</h1>
+          <h1>
+            {lang === "ml" ? "സ്ഥലം കണ്ടെത്താനായില്ല" : "Place not found"}
+          </h1>
         </section>
       </main>
     );
@@ -350,20 +321,26 @@ export default function PlaceDetail({ lang, t }) {
 
   const displayName = lang === "ml" ? place.nameMl || place.name : place.name;
   const displayArea = lang === "ml" ? place.areaMl || place.area : place.area;
-  const displayDesc = lang === "ml" ? place.descriptionMl || place.description : place.description;
+  const displayDesc =
+    lang === "ml"
+      ? place.descriptionMl || place.description
+      : place.description;
   const displayType = t.types[place.type.toLowerCase()] || place.type;
   const mapsQuery = place.mapsQuery || `${place.name} Kannur`;
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
   const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&output=embed`;
   const backPath = location.state?.from || "/explore";
-  const images = buildDetailImages(place, remoteImages);
+  const images = buildDetailImages(place);
   const activeImageItem = images[activeImage] || null;
   const hasMultipleImages = images.length > 1;
   const detail = getDetailTemplate(place, lang, displayType, displayArea);
   const deep = place.deepContent || {};
-  const historyText = lang === "ml" ? deep.historyMl || deep.historyEn : deep.historyEn;
-  const timingsText = lang === "ml" ? deep.timingsMl || deep.timingsEn : deep.timingsEn;
-  const entryFeeText = lang === "ml" ? deep.entryFeeMl || deep.entryFeeEn : deep.entryFeeEn;
+  const historyText =
+    lang === "ml" ? deep.historyMl || deep.historyEn : deep.historyEn;
+  const timingsText =
+    lang === "ml" ? deep.timingsMl || deep.timingsEn : deep.timingsEn;
+  const entryFeeText =
+    lang === "ml" ? deep.entryFeeMl || deep.entryFeeEn : deep.entryFeeEn;
   const photoPoints =
     lang === "ml"
       ? deep.photoPointsMl || deep.photoPointsEn || []
@@ -423,17 +400,25 @@ export default function PlaceDetail({ lang, t }) {
                       className="carousel-nav prev"
                       type="button"
                       onClick={() =>
-                        setActiveImage((prev) => (prev - 1 + images.length) % images.length)
+                        setActiveImage(
+                          (prev) => (prev - 1 + images.length) % images.length,
+                        )
                       }
-                      aria-label={lang === "ml" ? "മുൻ ചിത്രം" : "Previous image"}
+                      aria-label={
+                        lang === "ml" ? "മുൻ ചിത്രം" : "Previous image"
+                      }
                     >
                       ‹
                     </button>
                     <button
                       className="carousel-nav next"
                       type="button"
-                      onClick={() => setActiveImage((prev) => (prev + 1) % images.length)}
-                      aria-label={lang === "ml" ? "അടുത്ത ചിത്രം" : "Next image"}
+                      onClick={() =>
+                        setActiveImage((prev) => (prev + 1) % images.length)
+                      }
+                      aria-label={
+                        lang === "ml" ? "അടുത്ത ചിത്രം" : "Next image"
+                      }
                     >
                       ›
                     </button>
@@ -442,7 +427,11 @@ export default function PlaceDetail({ lang, t }) {
 
                 {activeImageItem.credit && activeImageItem.creditUrl && (
                   <figcaption>
-                    <a href={activeImageItem.creditUrl} target="_blank" rel="noreferrer">
+                    <a
+                      href={activeImageItem.creditUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       Photo: {activeImageItem.credit}
                     </a>
                   </figcaption>
@@ -459,7 +448,9 @@ export default function PlaceDetail({ lang, t }) {
 
           {historyText && (
             <section className="detail-card">
-              <h2>{lang === "ml" ? "ചരിത്രവും പശ്ചാത്തലവും" : "History & Context"}</h2>
+              <h2>
+                {lang === "ml" ? "ചരിത്രവും പശ്ചാത്തലവും" : "History & Context"}
+              </h2>
               <p>{historyText}</p>
             </section>
           )}
@@ -492,7 +483,9 @@ export default function PlaceDetail({ lang, t }) {
           </section>
 
           <section className="detail-card">
-            <h2>{lang === "ml" ? "പ്രായോഗിക വിവരങ്ങൾ" : "Practical Information"}</h2>
+            <h2>
+              {lang === "ml" ? "പ്രായോഗിക വിവരങ്ങൾ" : "Practical Information"}
+            </h2>
             <div className="detail-grid-two">
               <div className="detail-mini">
                 <h3>{lang === "ml" ? "സമയം" : "Timings"}</h3>
@@ -506,7 +499,9 @@ export default function PlaceDetail({ lang, t }) {
           </section>
 
           <section className="detail-card">
-            <h2>{lang === "ml" ? "മികച്ച ഫോട്ടോ പോയിന്റുകൾ" : "Best Photo Points"}</h2>
+            <h2>
+              {lang === "ml" ? "മികച്ച ഫോട്ടോ പോയിന്റുകൾ" : "Best Photo Points"}
+            </h2>
             <ul className="detail-tips">
               {photoPoints.map((point) => (
                 <li key={point}>{point}</li>
@@ -525,7 +520,12 @@ export default function PlaceDetail({ lang, t }) {
 
           <section className="detail-map-wrap">
             <div className="place-actions">
-              <a className="map-link" href={mapsUrl} target="_blank" rel="noreferrer">
+              <a
+                className="map-link"
+                href={mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {t.mapsLink}
               </a>
             </div>

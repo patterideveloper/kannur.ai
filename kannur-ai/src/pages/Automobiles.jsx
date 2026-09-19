@@ -5,15 +5,20 @@ import Seo from "../components/Seo";
 export default function Automobiles({ lang, t }) {
   const [automobiles, setAutomobiles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const loadAutomobiles = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/automobiles");
+        const response = await fetch("/api/automobiles", {
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!response.ok) throw new Error("Directory unavailable");
         const data = await response.json();
         setAutomobiles(data.items || []);
       } catch {
+        setError(true);
         setAutomobiles([]);
       } finally {
         setLoading(false);
@@ -53,55 +58,78 @@ export default function Automobiles({ lang, t }) {
         </p>
       </section>
 
+      {error && (
+        <p role="alert">
+          {lang === "ml"
+            ? "ബ്രാൻഡുകൾ ലഭ്യമല്ല. ദയവായി പേജ് വീണ്ടും ലോഡ് ചെയ്യുക."
+            : "The brand directory is temporarily unavailable. Please reload to try again."}
+        </p>
+      )}
       <section className="info-section">
         <div className="section-head">
-          <h2 className="auto-section-title">{lang === "ml" ? "കാർ ബ്രാൻഡുകൾ" : "Car Brands"}</h2>
+          <h2 className="auto-section-title">
+            {lang === "ml" ? "കാർ ബ്രാൻഡുകൾ" : "Car Brands"}
+          </h2>
         </div>
         {loading ? (
           <p>{lang === "ml" ? "ലോഡ് ചെയ്യുന്നു..." : "Loading..."}</p>
         ) : (
-        <div className="automobile-logo-grid">
-          {carBrands.map((item) => {
-            const brand = lang === "ml" ? item.brandMl || item.brand : item.brand;
-            return (
-              <Link
-                key={item.id}
-                to={`/automobiles/${item.id}`}
-                className={`automobile-logo-tile ${item.theme ? `theme-${item.theme}` : ""}`}
-                aria-label={brand}
-              >
-                <img src={item.logo} alt={brand} loading="lazy" decoding="async" />
-                <p className="automobile-logo-name">{brand}</p>
-              </Link>
-            );
-          })}
-        </div>
+          <div className="automobile-logo-grid">
+            {carBrands.map((item) => {
+              const brand =
+                lang === "ml" ? item.brandMl || item.brand : item.brand;
+              return (
+                <Link
+                  key={item.id}
+                  to={`/automobiles/${item.id}`}
+                  className={`automobile-logo-tile ${item.theme ? `theme-${item.theme}` : ""}`}
+                  aria-label={brand}
+                >
+                  <img
+                    src={item.logo}
+                    alt={brand}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p className="automobile-logo-name">{brand}</p>
+                </Link>
+              );
+            })}
+          </div>
         )}
       </section>
 
       <section className="info-section">
         <div className="section-head">
-          <h2 className="auto-section-title">{lang === "ml" ? "ബൈക്ക് ബ്രാൻഡുകൾ" : "Bike Brands"}</h2>
+          <h2 className="auto-section-title">
+            {lang === "ml" ? "ബൈക്ക് ബ്രാൻഡുകൾ" : "Bike Brands"}
+          </h2>
         </div>
         {loading ? (
           <p>{lang === "ml" ? "ലോഡ് ചെയ്യുന്നു..." : "Loading..."}</p>
         ) : (
-        <div className="automobile-logo-grid">
-          {bikeBrands.map((item) => {
-            const brand = lang === "ml" ? item.brandMl || item.brand : item.brand;
-            return (
-              <Link
-                key={item.id}
-                to={`/automobiles/${item.id}`}
-                className={`automobile-logo-tile ${item.theme ? `theme-${item.theme}` : ""}`}
-                aria-label={brand}
-              >
-                <img src={item.logo} alt={brand} loading="lazy" decoding="async" />
-                <p className="automobile-logo-name">{brand}</p>
-              </Link>
-            );
-          })}
-        </div>
+          <div className="automobile-logo-grid">
+            {bikeBrands.map((item) => {
+              const brand =
+                lang === "ml" ? item.brandMl || item.brand : item.brand;
+              return (
+                <Link
+                  key={item.id}
+                  to={`/automobiles/${item.id}`}
+                  className={`automobile-logo-tile ${item.theme ? `theme-${item.theme}` : ""}`}
+                  aria-label={brand}
+                >
+                  <img
+                    src={item.logo}
+                    alt={brand}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p className="automobile-logo-name">{brand}</p>
+                </Link>
+              );
+            })}
+          </div>
         )}
       </section>
     </main>

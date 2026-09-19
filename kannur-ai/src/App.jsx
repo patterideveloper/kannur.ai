@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
+import Icon from "./components/Icon";
+import Directory from "./pages/Directory";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Eats from "./pages/Eats";
@@ -28,7 +30,8 @@ const translations = {
     aiTitle: "Ask Kannur",
     aiDesc:
       "This assistant uses local tags and curated sources to suggest real places. Ask anything in plain English.",
-    chatPlaceholder: "Ask for beaches, a 1-day plan, quiet spots, or local shopping...",
+    chatPlaceholder:
+      "Ask for beaches, a 1-day plan, quiet spots, or local shopping...",
     send: "Send",
     footerTagline: "Built for the curious. Powered by the coast.",
     footerLinks: {
@@ -69,7 +72,8 @@ const translations = {
     },
     introText:
       "Hi! I’m your Kannur guide. Ask me for beaches, forts, quiet spots, local shopping, or a 1-day plan — I’ll curate a route with the best views.",
-    planHint: "Tip: carry water, start early for hills, and check tides if you’re visiting Dharmadam Island.",
+    planHint:
+      "Tip: carry water, start early for hills, and check tides if you’re visiting Dharmadam Island.",
     mapsLink: "Google Maps",
     viewDetails: "View Details",
     sections: {
@@ -77,6 +81,7 @@ const translations = {
       eats: "Local Eats",
       specialties: "Kannur Specialties",
       temples: "Temples & Pilgrimage",
+      theyyam: "Theyyam Calendar",
       personalities: "People of Kannur",
       events: "Annual Events",
       hospitals: "Hospitals & Essentials",
@@ -86,7 +91,8 @@ const translations = {
       title: "Annual Events",
       subtitle: "Key annual festivals and rituals.",
       back: "Back to Home",
-      description: "Annual festivals and cultural events across Kannur district.",
+      description:
+        "Annual festivals and cultural events across Kannur district.",
     },
     home: {
       heroCaptions: [
@@ -102,7 +108,8 @@ const translations = {
       theyyamCta: "Theyyam Calendar",
       soundscapeEyebrow: "Malabar Soundscape",
       soundscapeTitle: "Feel the rhythm of Kannur",
-      soundscapeCopy: "Tap to play authentic sounds of Kannur — drums, waves, and looms.",
+      soundscapeCopy:
+        "Tap to play authentic sounds of Kannur — drums, waves, and looms.",
       soundLabels: {
         theyyam: "Theyyam Drums (Chenda)",
         waves: "Muzhappilangad Waves",
@@ -126,8 +133,7 @@ const translations = {
     },
     predictor: {
       title: "Theyyam Calendar Predictor",
-      desc:
-        "Strict mode: only verified schedules are shown from trusted sources. Enter your travel dates to find exact performances.",
+      desc: "Strict mode: only verified schedules are shown from trusted sources. Enter your travel dates to find exact performances.",
       startLabel: "Start date",
       endLabel: "End date",
       find: "Find performances",
@@ -173,9 +179,11 @@ const translations = {
     aiTitle: "കണ്ണൂർ AI",
     aiDesc:
       "പ്രാദേശിക ടാഗുകളും ഔദ്യോഗിക സ്രോതസ്സുകളും അടിസ്ഥാനമാക്കി നിർദ്ദേശങ്ങൾ നൽകുന്നു. മലയാളത്തിൽ ചോദിക്കാം.",
-    chatPlaceholder: "ബീച്ചുകൾ, 1-ദിവസ പ്ലാൻ, ശാന്ത ഇടങ്ങൾ, ലോക്കൽ ഷോപ്പിംഗ്...",
+    chatPlaceholder:
+      "ബീച്ചുകൾ, 1-ദിവസ പ്ലാൻ, ശാന്ത ഇടങ്ങൾ, ലോക്കൽ ഷോപ്പിംഗ്...",
     send: "അയക്കൂ",
-    footerTagline: "കൗതുകത്തിനായി നിർമ്മിച്ചത്. തീരത്തിന്റെ ഊർജ്ജത്തിൽ പ്രവർത്തിക്കുന്നു.",
+    footerTagline:
+      "കൗതുകത്തിനായി നിർമ്മിച്ചത്. തീരത്തിന്റെ ഊർജ്ജത്തിൽ പ്രവർത്തിക്കുന്നു.",
     footerLinks: {
       calendar: "സാംസ്കാരിക കലണ്ടർ",
       food: "ഭക്ഷ്യ മാപ്പ്",
@@ -214,7 +222,8 @@ const translations = {
     },
     introText:
       "ഹായ്! ഞാൻ നിങ്ങളുടെ കണ്ണൂർ കോമ്പസ്. ബീച്ച്, കോട്ട, ശാന്ത സ്ഥലങ്ങൾ, ലോക്കൽ ഷോപ്പിംഗ് അല്ലെങ്കിൽ 1-ദിവസ പ്ലാൻ — പറയൂ, ഞാൻ പ്ലാൻ ചെയ്യാം.",
-    planHint: "ടിപ്പ്: വെള്ളം എടുത്തോളൂ, കുന്നിലേക്ക് രാവിലെ തന്നെ പോകൂ, ധർമ്മടം ദ്വീപിന് ടൈഡ് സമയം പരിശോധിക്കൂ.",
+    planHint:
+      "ടിപ്പ്: വെള്ളം എടുത്തോളൂ, കുന്നിലേക്ക് രാവിലെ തന്നെ പോകൂ, ധർമ്മടം ദ്വീപിന് ടൈഡ് സമയം പരിശോധിക്കൂ.",
     mapsLink: "ഗൂഗിൾ മാപ്സ്",
     viewDetails: "വിശദാംശങ്ങൾ കാണൂ",
     sections: {
@@ -222,6 +231,7 @@ const translations = {
       eats: "പ്രസിദ്ധ ഭക്ഷണ ഇടങ്ങൾ",
       specialties: "കണ്ണൂർ സ്പെഷ്യൽ വിഭവങ്ങൾ",
       temples: "ക്ഷേത്രങ്ങളും തീർത്ഥാടനവും",
+      theyyam: "തെയ്യം കലണ്ടർ",
       personalities: "കണ്ണൂരിലെ പ്രമുഖർ",
       events: "വാർഷിക ഇവന്റുകൾ",
       hospitals: "ആശുപത്രികൾ & അത്യാവശ്യങ്ങൾ",
@@ -235,8 +245,7 @@ const translations = {
     },
     predictor: {
       title: "തെയ്യം കലണ്ടർ പ്രെഡിക്ടർ",
-      desc:
-        "സ്റ്റ്രിക്റ്റ് മോഡ്: വിശ്വസനീയ സ്രോതസ്സുകളിൽ നിന്നുള്ള ഷെഡ്യൂളുകൾ മാത്രമേ കാണിക്കൂ. യാത്രാ തീയതികൾ നൽകൂ.",
+      desc: "സ്റ്റ്രിക്റ്റ് മോഡ്: വിശ്വസനീയ സ്രോതസ്സുകളിൽ നിന്നുള്ള ഷെഡ്യൂളുകൾ മാത്രമേ കാണിക്കൂ. യാത്രാ തീയതികൾ നൽകൂ.",
       startLabel: "ആരംഭ തീയതി",
       endLabel: "അവസാന തീയതി",
       find: "ഇവന്റുകൾ കാണൂ",
@@ -307,62 +316,231 @@ const translations = {
 };
 
 export default function App() {
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(() => {
+    try {
+      return localStorage.getItem("kannur-language") === "ml" ? "ml" : "en";
+    } catch {
+      return "en";
+    }
+  });
   const [menuOpen, setMenuOpen] = useState(false);
-  
-
+  const menuRef = useRef(null),
+    toggleRef = useRef(null);
+  const location = useLocation();
   const t = translations[lang];
-
+  const ml = lang === "ml";
+  const say = (en, mal) => (ml ? mal : en);
   useEffect(() => {
-    document.documentElement.lang = lang === "ml" ? "ml" : "en";
+    document.documentElement.lang = lang;
+    try {
+      localStorage.setItem("kannur-language", lang);
+    } catch {}
   }, [lang]);
-
-  
-
+  useEffect(() => {
+    setMenuOpen(false);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [location.pathname]);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    menuRef.current?.querySelector("button")?.focus();
+    const keydown = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key === "Tab") {
+        const items = menuRef.current?.querySelectorAll("button,a");
+        if (!items?.length) return;
+        if (e.shiftKey && document.activeElement === items[0]) {
+          e.preventDefault();
+          items[items.length - 1].focus();
+        }
+        if (!e.shiftKey && document.activeElement === items[items.length - 1]) {
+          e.preventDefault();
+          items[0].focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", keydown);
+    return () => {
+      document.body.style.overflow = previous;
+      document.removeEventListener("keydown", keydown);
+      toggleRef.current?.focus();
+    };
+  }, [menuOpen]);
+  const links = [
+    ["/explore", say("Explore", "സ്ഥലങ്ങൾ")],
+    ["/theyyam", say("Theyyam", "തെയ്യം")],
+    ["/eats", say("Eat & drink", "ഭക്ഷണം")],
+    ["/events", say("What's on", "ആഘോഷങ്ങൾ")],
+    ["/people", say("Our people", "പ്രമുഖർ")],
+    ["/temples", say("Sacred places", "പുണ്യസ്ഥലങ്ങൾ")],
+    ["/directory", say("Local directory", "ഡയറക്ടറി")],
+    ["/automobiles", say("Automobiles", "വാഹനങ്ങൾ")],
+    ["/hospitals", say("Hospitals", "ആശുപത്രികൾ")],
+  ];
   return (
     <div className="app" data-lang={lang}>
-      <nav className="desktop-nav">
-        <Link to="/" className="nav-brand">
-          {t.title}
-        </Link>
-        <div className="nav-links">
-          <Link to="/explore">{t.sections.explore}</Link>
-          <Link to="/eats">{t.sections.eats}</Link>
-          <Link to="/events">{t.sections.events}</Link>
-          <Link to="/people">{t.sections.personalities}</Link>
-          <Link to="/hospitals">{t.sections.hospitals}</Link>
-          <Link to="/automobiles">{t.sections.automobiles}</Link>
+      <a href="#main-content" className="skip-link">
+        {say("Skip to content", "ഉള്ളടക്കത്തിലേക്ക്")}
+      </a>
+      <header className="site-header">
+        <div className="site-header-inner">
+          <Link className="brand" to="/" aria-label="Kannur.io home">
+            kannur<span>.io</span>
+            <i>✳</i>
+          </Link>
+          <nav
+            className="desktop-nav"
+            aria-label={say("Main navigation", "പ്രധാന നാവിഗേഷൻ")}
+          >
+            {links.slice(0, 4).map(([to, label]) => (
+              <NavLink key={to} to={to}>
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <button
+              className="language-button"
+              onClick={() => setLang(ml ? "en" : "ml")}
+              aria-label={say("Switch to Malayalam", "ഇംഗ്ലീഷിലേക്ക് മാറുക")}
+            >
+              {ml ? "English" : "മലയാളം"}
+            </button>
+            <button
+              ref={toggleRef}
+              className="menu-button"
+              onClick={() => setMenuOpen(true)}
+              aria-expanded={menuOpen}
+              aria-controls="site-menu"
+              aria-label={say("Open menu", "മെനു തുറക്കുക")}
+            >
+              <span>{say("Menu", "മെനു")}</span>
+              <Icon name="menu" />
+            </button>
+          </div>
         </div>
-      </nav>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              lang={lang}
-              t={t}
-              setLang={setLang}
-              menuOpen={menuOpen}
-              setMenuOpen={setMenuOpen}
-            />
-          }
-        />
-        <Route path="/explore" element={<Explore lang={lang} t={t} />} />
-        <Route path="/explore/:filter" element={<Explore lang={lang} t={t} />} />
-        <Route path="/explore/place/:placeId" element={<PlaceDetail lang={lang} t={t} />} />
-        <Route path="/eats" element={<Eats lang={lang} t={t} />} />
-        <Route path="/temples" element={<Temples lang={lang} t={t} />} />
-        <Route path="/events" element={<Events lang={lang} t={t} />} />
-        <Route path="/theyyam" element={<Theyyam lang={lang} t={t} />} />
-        <Route path="/people" element={<People lang={lang} t={t} />} />
-        <Route path="/hospitals" element={<Hospitals lang={lang} t={t} />} />
-        <Route path="/automobiles" element={<Automobiles lang={lang} t={t} />} />
-        <Route path="/automobiles/:automobileId" element={<AutomobileDetail lang={lang} t={t} />} />
-      </Routes>
-
-      <footer className="footer footer-modern">
-        <p className="footer-copy">{t.footerCopy}</p>
+      </header>
+      {menuOpen && (
+        <div
+          className="menu-backdrop"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setMenuOpen(false);
+          }}
+        >
+          <div
+            className="menu-panel"
+            id="site-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label={say("Explore Kannur menu", "കണ്ണൂർ മെനു")}
+            ref={menuRef}
+          >
+            <div className="menu-heading">
+              <span className="brand">
+                kannur<span>.io</span>
+              </span>
+              <button
+                className="icon-button"
+                aria-label={say("Close menu", "മെനു അടയ്ക്കുക")}
+                onClick={() => setMenuOpen(false)}
+              >
+                <Icon name="close" />
+              </button>
+            </div>
+            <p className="eyebrow">
+              {say("MAKE YOURSELF AT HOME", "കണ്ണൂരിലേക്ക് സ്വാഗതം")}
+            </p>
+            <nav>
+              {[["/", say("Home", "ഹോം")], ...links].map(([to, label], i) => (
+                <Link key={to} to={to} onClick={() => setMenuOpen(false)}>
+                  <small>{String(i + 1).padStart(2, "0")}</small>
+                  {label}
+                  <Icon />
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+      <div id="main-content" tabIndex="-1" className="route-content">
+        <Routes>
+          <Route path="/" element={<Home lang={lang} t={t} />} />
+          <Route path="/explore" element={<Explore lang={lang} t={t} />} />
+          <Route
+            path="/explore/:filter"
+            element={<Explore lang={lang} t={t} />}
+          />
+          <Route
+            path="/explore/place/:placeId"
+            element={<PlaceDetail lang={lang} t={t} />}
+          />
+          <Route path="/eats" element={<Eats lang={lang} t={t} />} />
+          <Route path="/temples" element={<Temples lang={lang} t={t} />} />
+          <Route path="/events" element={<Events lang={lang} t={t} />} />
+          <Route path="/theyyam" element={<Theyyam lang={lang} t={t} />} />
+          <Route path="/people" element={<People lang={lang} t={t} />} />
+          <Route path="/hospitals" element={<Hospitals lang={lang} t={t} />} />
+          <Route
+            path="/automobiles"
+            element={<Automobiles lang={lang} t={t} />}
+          />
+          <Route
+            path="/automobiles/:automobileId"
+            element={<AutomobileDetail lang={lang} t={t} />}
+          />
+          <Route path="/directory" element={<Directory lang={lang} t={t} />} />
+          <Route
+            path="*"
+            element={
+              <main className="page">
+                <h1>{say("This path ends here.", "ഈ പേജ് ലഭ്യമല്ല.")}</h1>
+                <Link className="button" to="/">
+                  {say("Return home", "ഹോമിലേക്ക്")}
+                </Link>
+              </main>
+            }
+          />
+        </Routes>
+      </div>
+      <footer className="site-footer">
+        <div>
+          <Link className="brand" to="/">
+            kannur<span>.io</span>
+            <i>✳</i>
+          </Link>
+          <p>
+            {say(
+              "A little closer to the coast.",
+              "തീരത്തോട് കുറച്ചുകൂടി അടുത്ത്.",
+            )}
+          </p>
+        </div>
+        <p>
+          {say(
+            "Built for the curious. Rooted in Kannur.",
+            "കൗതുകമുള്ളവർക്കായി. കണ്ണൂരിൽ വേരൂന്നി.",
+          )}
+          <br />
+          <small>© {new Date().getFullYear()} Kannur.io</small>
+        </p>
       </footer>
+      <nav
+        className="mobile-dock"
+        aria-label={say("Quick navigation", "ദ്രുത നാവിഗേഷൻ")}
+      >
+        {[
+          ["/", "home", "Home", "ഹോം"],
+          ["/explore", "compass", "Explore", "സ്ഥലങ്ങൾ"],
+          ["/theyyam", "sun", "Theyyam", "തെയ്യം"],
+          ["/directory", "grid", "Local", "ഡയറക്ടറി"],
+        ].map(([to, icon, en, mal]) => (
+          <NavLink end={to === "/"} key={to} to={to}>
+            <Icon name={icon} />
+            <span>{say(en, mal)}</span>
+          </NavLink>
+        ))}
+      </nav>
     </div>
   );
 }

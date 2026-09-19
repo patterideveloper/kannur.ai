@@ -8,6 +8,8 @@ const tagGroups = [
   { value: "heritage" },
   { value: "hill" },
   { value: "wildlife" },
+  { value: "nature" },
+  { value: "island" },
   { value: "shopping" },
   { value: "temple" },
   { value: "church" },
@@ -16,10 +18,14 @@ const tagGroups = [
 
 const routeToTag = {
   all: "all",
+  beach: "beach",
+  hill: "hill",
   beaches: "beach",
   heritage: "heritage",
   hills: "hill",
   wildlife: "wildlife",
+  nature: "nature",
+  island: "island",
   shopping: "shopping",
   worship: "temple",
   temples: "temple",
@@ -33,6 +39,8 @@ const tagToRoute = {
   heritage: "heritage",
   hill: "hills",
   wildlife: "wildlife",
+  nature: "nature",
+  island: "island",
   shopping: "shopping",
   temple: "temples",
   church: "churches",
@@ -42,34 +50,15 @@ const tagToRoute = {
 function PlaceCard({ place, lang, t, fromPath }) {
   const displayName = lang === "ml" ? place.nameMl || place.name : place.name;
   const displayArea = lang === "ml" ? place.areaMl || place.area : place.area;
-  const displayDesc = lang === "ml" ? place.descriptionMl || place.description : place.description;
+  const displayDesc =
+    lang === "ml"
+      ? place.descriptionMl || place.description
+      : place.description;
   const typeKey = place.type.toLowerCase();
   const displayType = t.types[typeKey] || place.type;
-  const distanceLabel = (() => {
-    const km = Number(place.distanceKm);
-    if (!Number.isNaN(km) && km > 0) {
-      return `${km} km`;
-    }
-    if (!Number.isNaN(km) && km === 0) {
-      return lang === "ml" ? "കണ്ണൂർ നഗരം" : "Kannur town";
-    }
-    if (place.coords?.lat && place.coords?.lng) {
-      if (place.distanceState?.loading) {
-        return "0km";
-      }
-      if (place.distanceState?.error) {
-        return "0km";
-      }
-      return "0km";
-    }
-    if (place.distanceState?.loading) {
-      return "0km";
-    }
-    if (place.distanceState?.error) {
-      return "0km";
-    }
-    return displayArea;
-  })();
+  const km = place.distanceKm;
+  const distanceLabel =
+    typeof km === "number" && Number.isFinite(km) ? `${km} km` : displayArea;
 
   return (
     <article className="place-card">
@@ -87,20 +76,26 @@ function PlaceCard({ place, lang, t, fromPath }) {
               {place.images[0].srcSet && (
                 <source
                   type="image/webp"
-                  srcSet={place.images[0].srcSet.replace(/\\.jpg/g, ".webp")}
+                  srcSet={place.images[0].srcSet.replace(/\.jpg/g, ".webp")}
                 />
               )}
               <img
                 src={place.images[0].url}
                 srcSet={place.images[0].srcSet}
-                sizes={place.images[0].sizes || "(max-width: 700px) 80vw, 420px"}
+                sizes={
+                  place.images[0].sizes || "(max-width: 700px) 80vw, 420px"
+                }
                 alt={place.images[0].alt}
                 loading="lazy"
                 decoding="async"
               />
             </picture>
             <figcaption>
-              <a href={place.images[0].creditUrl} target="_blank" rel="noreferrer">
+              <a
+                href={place.images[0].creditUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Photo: {place.images[0].credit}
               </a>
             </figcaption>
@@ -108,7 +103,11 @@ function PlaceCard({ place, lang, t, fromPath }) {
         </div>
       )}
       <div className="place-actions">
-        <Link className="map-link secondary-link" to={`/explore/place/${place.id}`} state={{ from: fromPath }}>
+        <Link
+          className="map-link secondary-link"
+          to={`/explore/place/${place.id}`}
+          state={{ from: fromPath }}
+        >
           {t.viewDetails || (lang === "ml" ? "കൂടുതൽ കാണൂ" : "View Details")}
         </Link>
       </div>
@@ -120,7 +119,14 @@ export default function Explore({ lang, t }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { filter } = useParams();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(
+    () => new URLSearchParams(location.search).get("q") || "",
+  );
+  const [loadError, setLoadError] = useState(false);
+  useEffect(
+    () => setSearch(new URLSearchParams(location.search).get("q") || ""),
+    [location.search],
+  );
   const [placesData, setPlacesData] = useState([]);
   const [placesLoading, setPlacesLoading] = useState(true);
   const [distances, setDistances] = useState({});
@@ -130,7 +136,7 @@ export default function Explore({ lang, t }) {
   const activeTag = (filter ? routeToTag[filter] : "all") || "all";
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, []);
 
   useEffect(() => {
@@ -145,10 +151,12 @@ export default function Explore({ lang, t }) {
       try {
         setPlacesLoading(true);
         const response = await fetch("/api/explore");
+        if (!response.ok) throw new Error("Places unavailable");
         const data = await response.json();
         setPlacesData(data.items || []);
       } catch (error) {
         setPlacesData([]);
+        setLoadError(true);
       } finally {
         setPlacesLoading(false);
       }
@@ -166,7 +174,10 @@ export default function Explore({ lang, t }) {
         .filter((place) => place.coords?.lat && place.coords?.lng)
         .map((place) => ({ id: place.id, ...place.coords }));
 
-      if (destinations.length === 0) return;
+      if (destinations.length === 0) {
+        setDistancesLoading(false);
+        return;
+      }
 
       try {
         const response = await fetch("/api/distances", {
@@ -196,16 +207,21 @@ export default function Explore({ lang, t }) {
   const filteredPlaces = useMemo(() => {
     return combinedPlaces.filter((place) => {
       const matchesTag =
-        activeTag === "all" || place.tags.includes(activeTag) || place.type.toLowerCase() === activeTag;
+        activeTag === "all" ||
+        place.tags.includes(activeTag) ||
+        place.type.toLowerCase() === activeTag;
       const searchValue = search.toLowerCase();
       const matchesSearch =
         place.name.toLowerCase().includes(searchValue) ||
         place.description.toLowerCase().includes(searchValue) ||
         (place.nameMl && place.nameMl.toLowerCase().includes(searchValue)) ||
-        (place.descriptionMl && place.descriptionMl.toLowerCase().includes(searchValue)) ||
+        (place.descriptionMl &&
+          place.descriptionMl.toLowerCase().includes(searchValue)) ||
         place.tags.some((tag) => tag.includes(searchValue)) ||
         (place.searchAliases &&
-          place.searchAliases.some((alias) => alias.toLowerCase().includes(searchValue)));
+          place.searchAliases.some((alias) =>
+            alias.toLowerCase().includes(searchValue),
+          ));
       return matchesTag && matchesSearch;
     });
   }, [activeTag, search, combinedPlaces]);
@@ -229,7 +245,7 @@ export default function Explore({ lang, t }) {
         <h1>{lang === "ml" ? "സഞ്ചാര ഇടങ്ങൾ" : "Explore Kannur"}</h1>
         <p>
           {lang === "ml"
-            ? "ബീച്ചുകൾ, കോട്ടകൾ, കുന്നുകൾ, വന്യജീവി സങ്കേതങ്ങൾ—all in one place."
+            ? "ബീച്ചുകൾ, കോട്ടകൾ, കുന്നുകൾ, വന്യജീവി സങ്കേതങ്ങൾ—എല്ലാം ഒരിടത്ത്."
             : "Beaches, forts, hills, and wildlife—everything curated in one place."}
         </p>
       </section>
@@ -252,6 +268,7 @@ export default function Explore({ lang, t }) {
         <div className="search-row">
           <input
             value={search}
+            aria-label={t.searchPlaceholder}
             onChange={(event) => setSearch(event.target.value)}
             placeholder={t.searchPlaceholder}
           />
@@ -267,6 +284,24 @@ export default function Explore({ lang, t }) {
         </section>
       )}
 
+      {!placesLoading && (loadError || filteredPlaces.length === 0) && (
+        <section className="empty-state" role="status">
+          <h2>
+            {lang === "ml"
+              ? "സ്ഥലങ്ങൾ ലഭ്യമല്ല"
+              : loadError
+                ? "We couldn't load the places."
+                : "No places match your search."}
+          </h2>
+          <p>
+            {lang === "ml"
+              ? "വീണ്ടും ശ്രമിക്കൂ."
+              : loadError
+                ? "Please try reloading the page."
+                : "Try another word or choose a different category."}
+          </p>
+        </section>
+      )}
       <section className="grid">
         {filteredPlaces.map((place) => (
           <PlaceCard
@@ -281,7 +316,7 @@ export default function Explore({ lang, t }) {
             }}
             lang={lang}
             t={t}
-            fromPath={location.pathname}
+            fromPath={location.pathname + location.search}
           />
         ))}
       </section>

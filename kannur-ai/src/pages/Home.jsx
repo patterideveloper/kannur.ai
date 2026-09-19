@@ -1,537 +1,472 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { lazy, Suspense, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Seo from "../components/Seo";
-const bentoCards = [
+import Icon from "../components/Icon";
+import { places } from "../data/places";
+import { videos } from "../data/media";
+const CivicUpdates = lazy(() => import("../components/CivicUpdates"));
+const categories = [
+  ["beaches", "wave", "By the sea", "കടൽത്തീരങ്ങൾ"],
+  ["heritage", "culture", "Heritage", "പൈതൃകം"],
+  ["hills", "mountain", "Into the hills", "മലനിരകൾ"],
+  ["temples", "sun", "Sacred spaces", "പുണ്യസ്ഥലങ്ങൾ"],
+  ["shopping", "grid", "Local finds", "നാടൻ വിപണി"],
+];
+const collections = [
   {
-    id: "theyyam",
-    size: "large",
-    title: "The Red Ritual",
-    copy: "Not a dance, but a living god.",
-    image: "/bento/theyyam.svg",
+    title: "Chase the coastline",
+    ml: "തീരങ്ങൾ തേടി",
+    tag: "SALT IN THE AIR",
+    tagMl: "കടൽക്കാറ്റിൽ",
+    image: "muzhappilangad_sunset",
+    path: "/explore/beaches",
+    icon: "wave",
   },
   {
-    id: "beach",
-    size: "wide",
-    title: "Drive the Tide",
-    copy: "4km of firm sand. Windows down. Arabian Sea at your wheels.",
-    image: "/bento/beach.svg",
+    title: "Walk through history",
+    ml: "ചരിത്രത്തിലൂടെ",
+    tag: "STORIES IN STONE",
+    tagMl: "കല്ലിലെ കഥകൾ",
+    image: "st_angelo_fort",
+    path: "/explore/heritage",
+    icon: "culture",
   },
   {
-    id: "cake",
-    size: "small",
-    title: "The First Slice",
-    copy: "Did you know the first Indian cake was baked here in 1883?",
-    image: "/bento/cake.svg",
-  },
-  {
-    id: "mist",
-    size: "small",
-    title: "Mist & Moss",
-    copy: "Trek the Paithalmala heights for a view above the clouds.",
-    image: "/bento/mist.svg",
+    title: "Take the slow road",
+    ml: "ശാന്തമായ യാത്ര",
+    tag: "A LITTLE MORE GREEN",
+    tagMl: "പച്ചപ്പിലേക്ക്",
+    image: "dharmadam_island",
+    path: "/explore/nature",
+    icon: "mountain",
   },
 ];
-
-export default function Home({ lang, t, setLang, menuOpen, setMenuOpen }) {
-  const whyRef = useRef(null);
-  const audioRef = useRef(null);
-  const [activeSound, setActiveSound] = useState(null);
-  const videoRef = useRef(null);
-  const [videoActive, setVideoActive] = useState(false);
-  const whyVideoRef = useRef(null);
-  const [whyVideoActive, setWhyVideoActive] = useState(false);
-  const [civicLoading, setCivicLoading] = useState(true);
-  const [civicData, setCivicData] = useState(null);
-  const [activeCivicUpdate, setActiveCivicUpdate] = useState(0);
-  const roleLabel = (role) => {
-    if (lang !== "ml") return role;
-    if (role === "Mayor") return "മേയർ";
-    if (role === "Deputy Mayor") return "ഡെപ്യൂട്ടി മേയർ";
-    if (role === "Secretary") return "സെക്രട്ടറി";
-    if (role === "District Collector") return "ജില്ലാ കലക്ടർ";
-    return role;
-  };
-
-  useEffect(() => {
-    const node = videoRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVideoActive(true);
-          } else {
-            setVideoActive(false);
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const node = whyVideoRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setWhyVideoActive(true);
-          } else {
-            setWhyVideoActive(false);
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  const soundOptions = [
-    {
-      id: "theyyam",
-      label: t?.home?.soundLabels?.theyyam || "Theyyam Drums (Chenda)",
-      src: "/media/theyyam-chenda.mp3",
-    },
-    {
-      id: "waves",
-      label: t?.home?.soundLabels?.waves || "Muzhappilangad Waves",
-      src: "/media/muzhappilangad-waves.mp3",
-    },
-    {
-      id: "loom",
-      label: t?.home?.soundLabels?.loom || "Chirakkal Handloom",
-      src: "/media/chirakkal-handloom.mp3",
-    },
-  ];
-
-  const handleSoundToggle = async (sound) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (activeSound?.id === sound.id) {
-      audio.pause();
-      setActiveSound(null);
+export default function Home({ lang, t }) {
+  const ml = lang === "ml";
+  const say = (en, mal) => (ml ? mal : en);
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const [selection, setSelection] = useState("beach");
+  const [sound, setSound] = useState(null);
+  const [soundError, setSoundError] = useState(false);
+  const [showCivic, setShowCivic] = useState(false);
+  const audio = useRef(null);
+  const picks = places
+    .filter((p) => (p.tags || []).includes(selection))
+    .slice(0, 4);
+  async function toggleSound(id) {
+    if (!audio.current) return;
+    if (sound === id) {
+      audio.current.pause();
+      setSound(null);
       return;
     }
-    audio.src = sound.src;
+    setSoundError(false);
+    audio.current.src = `/media/${id}.mp3`;
     try {
-      await audio.play();
-      setActiveSound(sound);
-    } catch (error) {
-      setActiveSound(null);
+      await audio.current.play();
+      setSound(id);
+    } catch {
+      setSoundError(true);
+      setSound(null);
     }
-  };
-
-  useEffect(() => {
-    const container = whyRef.current;
-    if (!container) return;
-    return undefined;
-  }, []);
-
-  useEffect(() => {
-    const loadCivicData = async () => {
-      try {
-        setCivicLoading(true);
-        const response = await fetch("/api/kannur-civic");
-        const data = await response.json();
-        if (!response.ok) throw new Error("civic fetch failed");
-        setCivicData(data || null);
-      } catch {
-        setCivicData(null);
-      } finally {
-        setCivicLoading(false);
-      }
-    };
-
-    loadCivicData();
-  }, []);
-
-  useEffect(() => {
-    const updates = civicData?.updates || [];
-    if (updates.length <= 1) return undefined;
-    const interval = setInterval(() => {
-      setActiveCivicUpdate((prev) => (prev + 1) % updates.length);
-    }, 4200);
-    return () => clearInterval(interval);
-  }, [civicData?.updates]);
-
+  }
   return (
-    <main>
+    <main className="home-new">
       <Seo
-        lang={lang === "ml" ? "ml" : "en"}
+        lang={lang}
         path="/"
-        title="Kannur | Explore Tourism"
-        description={
-          lang === "ml"
-            ? "കണ്ണൂരിലെ കടൽത്തീരങ്ങൾ, ക്ഷേത്രങ്ങൾ, ഭക്ഷണകേന്ദ്രങ്ങൾ, ഇവന്റ്‌లు എന്നിവ കണ്ടെത്തൂ."
-            : "Explore beaches, temples, food, events, and cultural heritage across Kannur, Kerala."
-        }
+        title="Kannur.io | A different kind of Kerala"
+        description="Discover Kannur through its beaches, Theyyam traditions, handloom, food and local stories. Explore the Malabar coast in English and Malayalam."
+        image="/images/hero/kannur_premium-1200.jpg"
       />
-
-      <header
-        className="hero-hook civic-hook home-top-shell"
-        onClick={() => {
-          if (menuOpen) setMenuOpen(false);
-        }}
-      >
-        <div className="hero-inner">
-          <div className="hero-top">
-          <div className="hero-banner">KANNUR.iO</div>
-          <div
-            className="lang-switcher"
-            role="group"
-            aria-label={lang === "ml" ? "ഭാഷ തിരഞ്ഞെടുക്കുക" : "Select language"}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              className={`lang-option ${lang === "en" ? "active" : ""}`}
-              onClick={() => setLang("en")}
-              aria-pressed={lang === "en"}
-            >
-              EN
-            </button>
-            <button
-              type="button"
-              className={`lang-option ${lang === "ml" ? "active" : ""}`}
-              onClick={() => setLang("ml")}
-              aria-pressed={lang === "ml"}
-            >
-              മലയാളം
-            </button>
-          </div>
-          <button
-            className={`burger ${menuOpen ? "open" : ""}`}
-            onClick={(event) => {
-              event.stopPropagation();
-              setMenuOpen((prev) => !prev);
-              }}
-              aria-label="Toggle menu"
-            >
-              <span />
-              <span />
-              <span />
-            </button>
-          </div>
-        </div>
-        <div
-          className={`mobile-menu ${menuOpen ? "open" : ""}`}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <Link to="/explore" onClick={() => setMenuOpen(false)}>
-            {t.sections.explore}
-          </Link>
-          <Link to="/eats" onClick={() => setMenuOpen(false)}>
-            {t.sections.eats}
-          </Link>
-          <Link to="/events" onClick={() => setMenuOpen(false)}>
-            {t.sections.events}
-          </Link>
-          <Link to="/people" onClick={() => setMenuOpen(false)}>
-            {t.sections.personalities}
-          </Link>
-          <Link to="/hospitals" onClick={() => setMenuOpen(false)}>
-            {t.sections.hospitals}
-          </Link>
-          <Link to="/automobiles" onClick={() => setMenuOpen(false)}>
-            {t.sections.automobiles}
-          </Link>
-        </div>
-      </header>
-
-      <section className="premium-first-section">
-        <picture>
+      <section className="destination-hero">
+        <picture className="destination-photo">
           <source
             type="image/webp"
-            srcSet="/images/hero/kannur_premium-480.webp 480w, /images/hero/kannur_premium-800.webp 800w, /images/hero/kannur_premium-1200.webp 1200w, /images/hero/kannur_premium-1600.webp 1600w"
+            srcSet="/images/hero/kannur_premium-480.webp 480w, /images/hero/kannur_premium-800.webp 800w, /images/hero/kannur_premium-1600.webp 1600w"
           />
           <img
             src="/images/hero/kannur_premium-1200.jpg"
-            srcSet="/images/hero/kannur_premium-480.jpg 480w, /images/hero/kannur_premium-800.jpg 800w, /images/hero/kannur_premium-1200.jpg 1200w, /images/hero/kannur_premium-1600.jpg 1600w"
             sizes="100vw"
-            alt={lang === "ml" ? "കണ്ണൂരിലെ സായാഹ്ന ദൃശ്യം" : "Beautiful sunset view of Kannur"}
-            loading="eager"
-            decoding="async"
+            alt={say(
+              "Sunset over Kannur's rocky coastline",
+              "കണ്ണൂരിലെ തീരത്ത് സൂര്യാസ്തമയം",
+            )}
             fetchpriority="high"
           />
         </picture>
-        <div className="premium-first-overlay">
-          <p>{lang === "ml" ? "KANNUR" : "KANNUR"}</p>
-          <h2>{lang === "ml" ? "കടൽ, പൈതൃകം, താളം — എല്ലാം ഒരേ നഗരത്തിൽ." : "Coast, heritage, and rhythm — in one city."}</h2>
-          <Link className="primary" to="/explore">
-            {lang === "ml" ? "ഇപ്പോൾ കണ്ടെത്തൂ" : "Explore Now"}
-          </Link>
-        </div>
-      </section>
-
-      <section className="landing-block">
-        <div className="landing-copy">
-          <p className="eyebrow">{lang === "ml" ? "സ്വാഗതം" : "Welcome"}</p>
-          <h1 className="section-title landing-title">
-            {lang === "ml"
-              ? "ഇന്ന് കണ്ണൂരിൽ എന്ത് അനുഭവിക്കാം?"
-              : "What can you experience in Kannur today?"}
-          </h1>
-          <p className="landing-subtitle">
-            {lang === "ml"
-              ? "കടൽത്തീരം, പൈതൃകം, ഭക്ഷണം, ഇവന്റുകൾ — മൊബൈലിൽ എളുപ്പമായി അന്വേഷിക്കാൻ രൂപകൽപ്പന ചെയ്ത ഗൈഡ്."
-              : "Beaches, heritage, food, and events — designed to explore quickly on mobile first."}
+        <div className="hero-shade" />
+        <div className="destination-copy">
+          <p className="eyebrow light">
+            <span className="tiny-star">✳</span>{" "}
+            {say(
+              "KERALA, A LITTLE FURTHER NORTH",
+              "കേരളത്തിന്റെ വടക്കൻ തീരത്ത്",
+            )}
           </p>
-        </div>
-
-        <div className="landing-media-card">
-          <img
-            src="/images/hero/muzhappilangad_sunset-1200.jpg"
-            srcSet="/images/hero/muzhappilangad_sunset-480.jpg 480w, /images/hero/muzhappilangad_sunset-800.jpg 800w, /images/hero/muzhappilangad_sunset-1200.jpg 1200w"
-            sizes="(max-width: 700px) 92vw, 520px"
-            alt={lang === "ml" ? "മുഴപ്പിലങ്ങാട് സന്ധ്യാ ദൃശ്യം" : "Muzhappilangad sunset view"}
-            loading="eager"
-            decoding="async"
-          />
-          <div className="landing-media-overlay">
-            {lang === "ml" ? "മുഴപ്പിലങ്ങാട് • ഡ്രൈവ്-ഇൻ ബീച്ച്" : "Muzhappilangad • Drive-in Beach"}
+          <h1>
+            {say("Some places stay", "ചില നാടുകൾ")}
+            <br />
+            <em>{say("with you.", "മനസ്സിൽ തങ്ങും.")}</em>
+          </h1>
+          <p className="destination-intro">
+            {say(
+              "A coast that slows you down. A culture that stirs your soul. This is Kannur.",
+              "യാത്രയുടെ വേഗം കുറയ്ക്കുന്ന തീരം. മനസ്സിനെ തൊടുന്ന സംസ്കാരം. ഇതാണ് കണ്ണൂർ.",
+            )}
+          </p>
+          <form
+            className="discovery-search"
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate(
+                `/explore${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`,
+              );
+            }}
+          >
+            <Icon name="search" />
+            <input
+              aria-label={say("Search Kannur", "കണ്ണൂരിൽ തിരയുക")}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={say(
+                "Where would you like to go?",
+                "എവിടേക്കാണ് യാത്ര?",
+              )}
+            />
+            <button aria-label={say("Explore results", "സ്ഥലങ്ങൾ കണ്ടെത്തുക")}>
+              <Icon />
+            </button>
+          </form>
+          <div className="hero-suggestions">
+            <span>{say("Start with", "ഇവിടെ തുടങ്ങാം")}</span>
+            <Link to="/explore/beaches">{say("Beaches", "ബീച്ചുകൾ")}</Link>
+            <Link to="/theyyam">{say("Theyyam", "തെയ്യം")}</Link>
+            <Link to="/eats">{say("Local food", "നാടൻ ഭക്ഷണം")}</Link>
           </div>
         </div>
-
-        <div className="landing-quick-grid">
-          <Link to="/explore" className="landing-chip-card">
-            <strong>{lang === "ml" ? "Explore Kannur" : "Explore Kannur"}</strong>
-            <span>{lang === "ml" ? "സ്ഥലങ്ങൾ, ബീച്ചുകൾ, പൈതൃകം" : "Places, beaches, heritage"}</span>
-          </Link>
-          <Link to="/events" className="landing-chip-card">
-            <strong>{lang === "ml" ? "Annual Events" : "Annual Events"}</strong>
-            <span>{lang === "ml" ? "വർഷേന നടക്കുന്ന പ്രധാന ആഘോഷങ്ങൾ" : "Major yearly celebrations"}</span>
-          </Link>
-          <Link to="/eats" className="landing-chip-card">
-            <strong>{lang === "ml" ? "Local Eats" : "Local Eats"}</strong>
-            <span>{lang === "ml" ? "പ്രാദേശിക രുചികൾ കണ്ടെത്തൂ" : "Find authentic local food"}</span>
-          </Link>
-          <Link to="/people" className="landing-chip-card">
-            <strong>{lang === "ml" ? "People of Kannur" : "People of Kannur"}</strong>
-            <span>{lang === "ml" ? "പ്രമുഖരുടെ കഥകൾ" : "Stories of notable personalities"}</span>
-          </Link>
-          <Link to="/automobiles" className="landing-chip-card">
-            <strong>{lang === "ml" ? "Automobiles" : "Automobiles"}</strong>
-            <span>{lang === "ml" ? "കണ്ണൂരിലെ ഷോറൂമുകൾ" : "Brand showrooms in Kannur"}</span>
-          </Link>
+        <div className="hero-footnote">
+          <span>
+            <Icon name="pin" />{" "}
+            {say("Kannur · Malabar Coast", "കണ്ണൂർ · മലബാർ തീരം")}
+          </span>
+          <a href="#discover">{say("SCROLL TO DISCOVER", "കൂടുതൽ കാണുക")} ↓</a>
         </div>
       </section>
-
-      <section id="why-kannur" className="why-section" ref={whyRef}>
-        <div className="why-head">
-          <p className="eyebrow">{t?.home?.whyEyebrow || "Why Kannur?"}</p>
-          <h2 className="section-title">
-            {t?.home?.whyTitle || "Heritage, coast, and craft — in one pulse."}
+      <div className="destination-strip">
+        <span>
+          {say("THE LAND OF LOOMS & LORES", "തറികളുടെയും തിറകളുടെയും നാട്")}
+        </span>
+        <span>11.87° N &nbsp; 75.37° E</span>
+        <span>
+          {say("YOUR LOCAL WINDOW INTO KANNUR", "കണ്ണൂരിനെ അടുത്തറിയാം")}
+        </span>
+      </div>
+      <section className="section-shell intro-section" id="discover">
+        <div>
+          <p className="eyebrow">
+            {say("NOT JUST A DESTINATION", "ഒരു യാത്രയേക്കാൾ കൂടുതൽ")}
+          </p>
+          <h2>
+            {say("Find your kind", "നിങ്ങളുടെ ഇഷ്ടങ്ങൾക്കൊപ്പം")}
+            <br />
+            <em>{say("of Kannur.", "കണ്ണൂരിൽ.")}</em>
           </h2>
         </div>
-        <div className="why-video">
-          <iframe
-            ref={whyVideoRef}
-            src={
-              whyVideoActive
-                ? "https://www.youtube.com/embed/imASkAzwU7U?rel=0&modestbranding=1&controls=0&autoplay=1&mute=1&loop=1&playlist=imASkAzwU7U"
-                : "https://www.youtube.com/embed/imASkAzwU7U?rel=0&modestbranding=1&controls=0&loop=1&playlist=imASkAzwU7U"
-            }
-            title={t?.home?.whyVideoTitle || "Why Kannur - Video"}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
+        <p className="section-lead">
+          {say(
+            "Follow the sea breeze, find a story in an old fort, or lose track of time watching a loom. There is more than one way to belong here.",
+            "കടൽക്കാറ്റിനെ പിന്തുടരൂ, പഴയ കോട്ടയിലെ കഥകൾ തേടൂ, കൈത്തറിയുടെ താളത്തിൽ സമയം മറക്കൂ. കണ്ണൂരിനെ അറിയാൻ വഴികൾ പലതാണ്.",
+          )}
+        </p>
+      </section>
+      <nav
+        className="category-rail section-shell"
+        aria-label={say("Explore by experience", "അനുഭവങ്ങൾ തിരഞ്ഞെടുക്കുക")}
+      >
+        {categories.map(([path, icon, en, mal]) => (
+          <Link key={path} to={`/explore/${path}`}>
+            <span className="category-icon">
+              <Icon name={icon} />
+            </span>
+            <span>{say(en, mal)}</span>
+            <Icon />
+          </Link>
+        ))}
+      </nav>
+      <section className="collection-grid section-shell">
+        {collections.map((item, i) => (
+          <Link
+            className={`collection-card collection-${i}`}
+            to={item.path}
+            key={item.path}
+          >
+            <img
+              src={`/images/hero/${item.image}-800.webp`}
+              alt={say(item.title, item.ml)}
+              loading="lazy"
+            />
+            <div className="collection-copy">
+              <p className="eyebrow light">{say(item.tag, item.tagMl)}</p>
+              <h3>{say(item.title, item.ml)}</h3>
+            </div>
+            <span className="round-arrow">
+              <Icon />
+            </span>
+          </Link>
+        ))}
+      </section>
+      <section className="section-shell places-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">
+              {say("A GOOD PLACE TO START", "യാത്ര ഇവിടെ തുടങ്ങാം")}
+            </p>
+            <h2>{say("Worth the detour.", "വഴിമാറി കാണേണ്ടവ.")}</h2>
+          </div>
+          <Link className="text-link" to="/explore">
+            {say("All places", "എല്ലാ സ്ഥലങ്ങളും")} <Icon />
+          </Link>
+        </div>
+        <div
+          className="editor-tabs"
+          role="group"
+          aria-label={say("Featured places", "തിരഞ്ഞെടുത്ത സ്ഥലങ്ങൾ")}
+        >
+          {[
+            ["beach", "Coast", "തീരം"],
+            ["heritage", "Heritage", "പൈതൃകം"],
+            ["hill", "Hills", "മലകൾ"],
+          ].map(([id, en, mal]) => (
+            <button
+              key={id}
+              aria-pressed={selection === id}
+              className={selection === id ? "selected" : ""}
+              onClick={() => setSelection(id)}
+            >
+              {say(en, mal)}
+            </button>
+          ))}
+        </div>
+        <div className="featured-grid">
+          {picks.map((place) => (
+            <article className="featured-card" key={place.id}>
+              <Link
+                to={`/explore/place/${place.id}`}
+                className="featured-image"
+              >
+                <img
+                  src={place.images?.[0]?.url}
+                  alt={say(place.name, place.nameMl || place.name)}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="photo-label">
+                  {t.types[place.type.toLowerCase()] || place.type}
+                </span>
+              </Link>
+              <p className="mini-area">
+                <Icon name="pin" />
+                {say(place.area, place.areaMl || place.area)}
+              </p>
+              <h3>
+                <Link to={`/explore/place/${place.id}`}>
+                  {say(place.name, place.nameMl || place.name)}
+                </Link>
+              </h3>
+              <Link className="text-link" to={`/explore/place/${place.id}`}>
+                {say("Discover this place", "കൂടുതൽ അറിയുക")}
+                <Icon />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="ritual-section">
+        <div className="ritual-photo">
+          <img
+            src="/images/hero/theyyam_fire-1200.webp"
+            alt={say(
+              "Theyyam ritual in firelight",
+              "തീയുടെ വെളിച്ചത്തിൽ തെയ്യം",
+            )}
+            loading="lazy"
           />
         </div>
-        <Link className="primary video-cta" to="/theyyam">
-          {t?.home?.theyyamCta || "Theyyam Calendar"}
+        <div className="ritual-copy">
+          <p className="eyebrow light">
+            {say("THE SOUL OF NORTH MALABAR", "വടക്കൻ മലബാറിന്റെ ആത്മാവ്")}
+          </p>
+          <h2>
+            {say("More than a moment.", "ഒരു കാഴ്ചയ്ക്കപ്പുറം.")}
+            <br />
+            <em>{say("A living tradition.", "ജീവിക്കുന്ന പാരമ്പര്യം.")}</em>
+          </h2>
+          <p>
+            {say(
+              "The elaborate colours. The rhythm of chenda. The stories passed down through generations. Theyyam is a sacred ritual woven into the life of Kannur's communities.",
+              "വർണാഭമായ വേഷങ്ങൾ. ചെണ്ടയുടെ താളം. തലമുറകളിലൂടെ കൈമാറിയ കഥകൾ. കണ്ണൂരിന്റെ സാമൂഹിക ജീവിതത്തോട് ചേർന്നുനിൽക്കുന്ന പവിത്രമായ അനുഷ്ഠാനമാണ് തെയ്യം.",
+            )}
+          </p>
+          <Link className="button cream" to="/theyyam">
+            {say("Explore the Theyyam calendar", "തെയ്യം കലണ്ടർ കാണുക")}
+            <Icon />
+          </Link>
+          <span className="ritual-note">
+            {say(
+              "Rituals follow local calendars. Check dates and visiting guidance before you go.",
+              "ചടങ്ങുകൾ പ്രാദേശിക കലണ്ടർ അനുസരിച്ചാണ്. തീയതികളും സന്ദർശന നിർദ്ദേശങ്ങളും മുൻകൂട്ടി പരിശോധിക്കുക.",
+            )}
+          </span>
+        </div>
+      </section>
+      <section className="section-shell everyday-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">
+              {say("GET TO KNOW THE PLACE", "നാടിനെ അടുത്തറിയാം")}
+            </p>
+            <h2>{say("Beyond the postcard.", "കാഴ്ചകൾക്കപ്പുറം.")}</h2>
+          </div>
+          <p>
+            {say(
+              "The people, flavours and everyday life that make it Kannur.",
+              "കണ്ണൂരിനെ കണ്ണൂരാക്കുന്ന മനുഷ്യരും രുചികളും നിത്യജീവിതവും.",
+            )}
+          </p>
+        </div>
+        <div className="story-links">
+          {[
+            [
+              "/eats",
+              "01",
+              "Taste Malabar",
+              "മലബാറിന്റെ രുചി",
+              "Local eateries & signature dishes",
+              "നാടൻ ഭക്ഷണവും പ്രത്യേക വിഭവങ്ങളും",
+            ],
+            [
+              "/people",
+              "02",
+              "Meet its people",
+              "കണ്ണൂരിലെ പ്രമുഖർ",
+              "Lives that shaped the district",
+              "നാടിനെ രൂപപ്പെടുത്തിയ ജീവിതങ്ങൾ",
+            ],
+            [
+              "/events",
+              "03",
+              "Be part of the occasion",
+              "ആഘോഷങ്ങളിൽ പങ്കുചേരാം",
+              "Festivals & annual gatherings",
+              "ഉത്സവങ്ങളും വാർഷിക ആഘോഷങ്ങളും",
+            ],
+          ].map(([to, n, en, mal, desc, descMl]) => (
+            <Link to={to} key={to}>
+              <span className="story-number">{n}</span>
+              <div>
+                <h3>{say(en, mal)}</h3>
+                <p>{say(desc, descMl)}</p>
+              </div>
+              <Icon />
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="section-shell listening-section">
+        <div>
+          <p className="eyebrow">
+            {say("PAUSE. PRESS PLAY.", "ഒന്ന് നിൽക്കൂ. കേൾക്കൂ.")}
+          </p>
+          <h2>
+            {say("A place with its", "ഈ നാടിന്")}{" "}
+            <em>{say("own rhythm.", "സ്വന്തം താളം.")}</em>
+          </h2>
+        </div>
+        <div className="listen-controls">
+          {[
+            ["theyyam-chenda", "Chenda", "ചെണ്ട"],
+            ["muzhappilangad-waves", "Waves", "തിരമാലകൾ"],
+            ["chirakkal-handloom", "Handloom", "കൈത്തറി"],
+          ].map(([id, en, mal]) => (
+            <button
+              key={id}
+              aria-pressed={sound === id}
+              className={sound === id ? "playing" : ""}
+              onClick={() => toggleSound(id)}
+            >
+              <Icon name="sound" />
+              {say(en, mal)}
+              <span>{sound === id ? "Ⅱ" : "▷"}</span>
+            </button>
+          ))}
+          <audio ref={audio} preload="none" onEnded={() => setSound(null)} />
+          {soundError && (
+            <p role="status">
+              {say(
+                "This audio could not be played. Please try again.",
+                "ഓഡിയോ ലഭ്യമല്ല. വീണ്ടും ശ്രമിക്കുക.",
+              )}
+            </p>
+          )}
+        </div>
+      </section>
+      <section
+        className="section-shell film-links"
+        aria-label={say("Films from Kannur", "കണ്ണൂരിന്റെ കാഴ്ചകൾ")}
+      >
+        {videos.map((video) => (
+          <a
+            key={video.id}
+            className="text-link"
+            href={`https://www.youtube.com/watch?v=${video.id}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {say(video.title, video.titleMl)}{" "}
+            <span>{say("Watch film", "വീഡിയോ കാണുക")}</span>
+            <Icon />
+          </a>
+        ))}
+      </section>
+      <section className="section-shell local-section">
+        <div>
+          <p className="eyebrow">
+            {say("FOR VISITORS. FOR LOCALS.", "സന്ദർശകർക്കും നാട്ടുകാർക്കും.")}
+          </p>
+          <h2>{say("The practical side.", "ഉപയോഗപ്രദമായ വിവരങ്ങൾ.")}</h2>
+          <p>
+            {say(
+              "Find local services, showrooms and district information in one place.",
+              "പ്രാദേശിക സേവനങ്ങളും ഷോറൂമുകളും ജില്ലാ വിവരങ്ങളും ഒരിടത്ത്.",
+            )}
+          </p>
+        </div>
+        <Link className="button" to="/directory">
+          {say("Open the local directory", "പ്രാദേശിക ഡയറക്ടറി")}
+          <Icon />
         </Link>
       </section>
-
-      <section id="soundscape" className="immersive-section">
-        <div className="section-head">
-          <p className="eyebrow">{t?.home?.soundscapeEyebrow || "Malabar Soundscape"}</p>
-          <h2 className="section-title">{t?.home?.soundscapeTitle || "Feel the rhythm of Kannur"}</h2>
-        </div>
-        <div className="immersive-grid">
-          <div className="immersive-card">
-            <p>
-              {t?.home?.soundscapeCopy ||
-                "Tap to play authentic sounds of Kannur — drums, waves, and looms."}
-            </p>
-            <div className="sound-row">
-              {soundOptions.map((sound) => (
-                <button
-                  key={sound.id}
-                  type="button"
-                  className={`sound-chip ${activeSound?.id === sound.id ? "active" : ""}`}
-                  onClick={() => handleSoundToggle(sound)}
-                >
-                  <span className="sound-dot" />
-                  {sound.label}
-                </button>
-              ))}
-              <button
-                type="button"
-                className="sound-chip ghost"
-                onClick={() => {
-                  if (audioRef.current) audioRef.current.pause();
-                  setActiveSound(null);
-                }}
-              >
-                {t?.home?.stopAudio || "Stop Audio"}
-              </button>
-            </div>
-            <audio ref={audioRef} preload="none" />
+      <section className="section-shell civic-disclosure">
+        <button
+          aria-expanded={showCivic}
+          aria-controls="civic-panel"
+          onClick={() => setShowCivic((v) => !v)}
+        >
+          <span>
+            {say("District & civic information", "ജില്ലാ ഭരണവും സേവനങ്ങളും")}
+          </span>
+          <span>{showCivic ? "−" : "+"}</span>
+        </button>
+        {showCivic && (
+          <div id="civic-panel">
+            <Suspense fallback={<p>{say("Loading…", "ലോഡ് ചെയ്യുന്നു…")}</p>}>
+              <CivicUpdates lang={lang} />
+            </Suspense>
           </div>
-
-          <div className="immersive-card">
-            <h3>{t?.home?.driveTitle || "Asia's Longest Drive-in beach"}</h3>
-            <p>{t?.home?.driveCopy || "Experience the drive‑in beach at sunset."}</p>
-            <div className="drive-embed">
-              <iframe
-                ref={videoRef}
-                src={
-                  videoActive
-                    ? "https://www.youtube.com/embed/yeuJbqIFKJM?rel=0&modestbranding=1&autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=yeuJbqIFKJM"
-                    : "https://www.youtube.com/embed/yeuJbqIFKJM?rel=0&modestbranding=1&controls=0&showinfo=0&loop=1&playlist=yeuJbqIFKJM"
-                }
-                title={t?.home?.driveVideoTitle || "Muzhappilangad Beach Video"}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-            <Link className="primary video-cta" to="/explore">
-              {t?.home?.exploreCta || "Explore More"}
-            </Link>
-          </div>
-        </div>
+        )}
       </section>
-
-      <section id="civic-updates" className="why-section civic-section">
-        <div className="civic-content">
-          <div className="civic-head">
-            <p className="eyebrow">
-              {lang === "ml" ? "കണ്ണൂർ സിവിക് അപ്‌ഡേറ്റ്സ്" : "Kannur Civic Updates"}
-            </p>
-            <h2 className="section-title civic-title">
-              {lang === "ml"
-                ? "കണ്ണൂരിന്റെ നിലവിലെ ഭരണവും ഔദ്യോഗിക അപ്‌ഡേറ്റുകളും"
-                : "Kannur Live: Leadership, Services, and Official Updates"}
-            </h2>
-            <p className="civic-meta">
-              {civicLoading
-                ? (lang === "ml" ? "ഡാറ്റ ലോഡ് ചെയ്യുന്നു..." : "Loading latest official data...")
-                : civicData?.fetchedAt
-                  ? `${lang === "ml" ? "അവസാനം അപ്‌ഡേറ്റ് ചെയ്തത്" : "Last updated"}: ${new Date(civicData.fetchedAt).toLocaleString(lang === "ml" ? "ml-IN" : "en-IN")}`
-                  : (lang === "ml" ? "ഓദ്യോഗിക സ്രോതസ്സിൽ നിന്ന് ഡാറ്റ" : "Data from official civic source")}
-            </p>
-          </div>
-
-          <div className="civic-ticker">
-            <span>{lang === "ml" ? "ലൈവ്" : "LIVE"}</span>
-            <p>
-              {civicData?.updates?.[activeCivicUpdate] ||
-                (lang === "ml"
-                  ? "കണ്ണൂർ കോർപ്പറേഷൻ ഔദ്യോഗിക പോർട്ടലിൽ നിന്നുള്ള അപ്‌ഡേറ്റുകൾ ഇവിടെ കാണിക്കും."
-                  : "Updates from Kannur Corporation official portal will appear here.")}
-            </p>
-          </div>
-
-          <div className="civic-kpis">
-            <div className="civic-kpi">
-              <strong>{civicData?.officials?.length || 0}</strong>
-              <span>{lang === "ml" ? "പ്രധാന ഭരണ ചുമതലകൾ" : "Key Leadership Roles"}</span>
-            </div>
-            <div className="civic-kpi">
-              <strong>{civicData?.updates?.length || 0}</strong>
-              <span>{lang === "ml" ? "പുതിയ അറിയിപ്പുകൾ" : "Recent Notices"}</span>
-            </div>
-            <div className="civic-kpi">
-              <strong>{civicData?.services?.length || 0}</strong>
-              <span>{lang === "ml" ? "പ്രധാന സേവനങ്ങൾ" : "Service Categories"}</span>
-            </div>
-          </div>
-
-          <div className="civic-grid dynamic">
-            <article className="civic-card">
-              <h3>{lang === "ml" ? "നിലവിലെ ഭരണചുമതല" : "Current Leadership"}</h3>
-              <ul className="official-list">
-                {(civicData?.officials || []).map((item) => (
-                  <li key={`${item.role}-${item.name}`}>
-                    {item.image ? (
-                      <img src={item.image} alt={`${item.name} ${item.role}`} loading="lazy" decoding="async" />
-                    ) : null}
-                    <strong>{roleLabel(item.role)}</strong>
-                    <span>{item.name}</span>
-                    {item.phone ? <small>{item.phone}</small> : null}
-                  </li>
-                ))}
-                {!civicData?.officials?.length && !civicLoading && (
-                  <li>
-                    <span>{lang === "ml" ? "മേയർ/ഡെപ്യൂട്ടി മേയർ/സെക്രട്ടറി വിവരങ്ങൾ ലഭ്യമല്ല." : "Mayor/Deputy Mayor/Secretary data unavailable."}</span>
-                  </li>
-                )}
-              </ul>
-            </article>
-
-            <article className="civic-card civic-visual-card">
-              <img
-                src="/images/hero/st_angelo_fort-1200.jpg"
-                alt={lang === "ml" ? "കണ്ണൂർ നഗര ദൃശ്യം" : "Kannur cityscape"}
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="civic-visual-overlay">
-                <p>{lang === "ml" ? "ഡിസ്ട്രിക്ട് പൾസ്" : "District Pulse"}</p>
-                <h3>
-                  {civicData?.updates?.[activeCivicUpdate] ||
-                    (lang === "ml" ? "കണ്ണൂർ കോർപ്പറേഷൻ വാർത്തകൾ" : "Kannur Corporation Updates")}
-                </h3>
-              </div>
-            </article>
-
-            <article className="civic-card">
-              <h3>{lang === "ml" ? "പുതിയ അറിയിപ്പുകൾ" : "Recent Updates"}</h3>
-              <ul>
-                {(civicData?.updates || []).slice(0, 6).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-                {!civicData?.updates?.length && !civicLoading && (
-                  <li>{lang === "ml" ? "പുതിയ അറിയിപ്പുകൾ ലഭ്യമല്ല." : "No updates available right now."}</li>
-                )}
-              </ul>
-            </article>
-
-            <article className="civic-card">
-              <h3>{lang === "ml" ? "വാഹന രജിസ്ട്രേഷൻ (കണ്ണൂർ)" : "Vehicle Registration (Kannur)"}</h3>
-              <div className="reg-list">
-                {[
-                  "KL-13 Kannur",
-                  "KL-58 Thalassery",
-                  "KL-59 Taliparamba",
-                  "KL-78 Iritty",
-                  "KL-86 Payyanur",
-                ].map((item) => (
-                  <span key={item} className="reg-chip">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </article>
-
-            <article className="civic-card civic-card-wide">
-              <h3>{lang === "ml" ? "കണ്ണൂർ കോർപ്പറേഷൻ - പെട്ടെന്നുള്ള വിവരങ്ങൾ" : "Kannur Corporation Quick Facts"}</h3>
-              <div className="civic-facts">
-                <p><strong>{lang === "ml" ? "ബന്ധപ്പെടുക" : "Contact"}:</strong> {civicData?.contact?.phone || "0497-2700141"}</p>
-                <p><strong>{lang === "ml" ? "ഇമെയിൽ" : "Email"}:</strong> {civicData?.contact?.email || "kannurmunicipalcorporation@gmail.com"}</p>
-                <p><strong>{lang === "ml" ? "സേവനങ്ങൾ" : "Services"}:</strong> {(civicData?.services || []).slice(0, 5).join(", ") || (lang === "ml" ? "ജനന/മരണം രജിസ്ട്രേഷൻ, പ്രോപ്പർട്ടി ടാക്സ്, ലൈസൻസ് സേവനങ്ങൾ" : "Civil Registration, Property Tax, License Services")}</p>
-              </div>
-              <a className="secondary-link" href="https://kannurcorporation.lsgkerala.gov.in/" target="_blank" rel="noreferrer">
-                {lang === "ml" ? "ഓദ്യോഗിക പോർട്ടൽ തുറക്കുക" : "Open Official Portal"}
-              </a>
-            </article>
-          </div>
-        </div>
-      </section>
-
     </main>
   );
 }
