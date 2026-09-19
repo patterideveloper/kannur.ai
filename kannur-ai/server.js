@@ -1,4 +1,5 @@
 import express from "express";
+import { getResorts } from "./server/resorts.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { fetchTheyyamEvents } from "./server/theyyam.js";
@@ -15,6 +16,10 @@ const port = process.env.PORT || 5174;
 const placeImagesCache = new Map();
 
 app.use(express.json());
+app.get("/api/resorts", (req, res) => {
+  res.set("Cache-Control", "public, max-age=300");
+  res.json({ resorts: getResorts() });
+});
 app.get("/api/theyyam", async (req, res) => {
   try {
     const { start, end } = req.query;

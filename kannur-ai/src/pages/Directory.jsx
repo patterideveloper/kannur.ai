@@ -4,6 +4,7 @@ import Icon from "../components/Icon";
 export default function Directory({ lang, t }) {
   const ml = lang === "ml";
   const cards = [
+    ["/resorts", "wave", "Resorts & stays", "റിസോർട്ടുകളും താമസങ്ങളും", "Beach resorts, hill retreats and backwater stays", "കടൽത്തീരത്തും മലനിരകളിലും കായലോരത്തും താമസങ്ങൾ"],
     [
       "/hospitals",
       "heart",

@@ -430,6 +430,13 @@ export default function Home({ lang, t }) {
           </a>
         ))}
       </section>
+      <section className="section-shell stay-home">
+        <img src="/images/resorts/ktdc-malabar-courtyard/cover.webp" srcSet="/images/resorts/ktdc-malabar-courtyard/cover-small.webp 480w, /images/resorts/ktdc-malabar-courtyard/cover.webp 960w" sizes="(max-width:650px) 100vw, 50vw" loading="lazy" width="960" height="640" alt={say("KTDC Malabar Courtyard, Muzhappilangad", "കെടിഡിസി മലബാർ കോർട്ട്യാർഡ്, മുഴപ്പിലങ്ങാട്")} />
+        <div><p className="eyebrow">{say("MAKE YOURSELF AT HOME", "ഇവിടെ തങ്ങാം")}</p>
+        <h2>{say("A little longer. A little closer.", "കുറച്ചുകൂടി നേരം. നാടിനോടു ചേർന്ന്.")}</h2>
+        <p>{say("Wake up by the sea, hide away in the hills, or slow down by the backwaters. Discover resorts and stays across Kannur and nearby Kasaragod.", "കടൽത്തീരത്തും മലനിരകളിലും കായലോരത്തും താമസിക്കാം. കണ്ണൂരിലെയും സമീപത്തെ കാസർഗോഡിലെയും റിസോർട്ടുകൾ കണ്ടെത്തൂ.")}</p>
+        <Link className="button" to="/resorts">{say("Find your stay", "താമസസ്ഥലം കണ്ടെത്തൂ")}<Icon /></Link></div>
+      </section>
       <section className="section-shell local-section">
         <div>
           <p className="eyebrow">

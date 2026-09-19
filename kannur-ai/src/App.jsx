@@ -3,6 +3,7 @@ import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import Icon from "./components/Icon";
 import Directory from "./pages/Directory";
 import Home from "./pages/Home";
+import Resorts from "./pages/Resorts";
 import Explore from "./pages/Explore";
 import Eats from "./pages/Eats";
 import Temples from "./pages/Temples";
@@ -369,6 +370,7 @@ export default function App() {
   }, [menuOpen]);
   const links = [
     ["/explore", say("Explore", "സ്ഥലങ്ങൾ")],
+    ["/resorts", say("Resorts & stays", "താമസങ്ങൾ")],
     ["/theyyam", say("Theyyam", "തെയ്യം")],
     ["/eats", say("Eat & drink", "ഭക്ഷണം")],
     ["/events", say("What's on", "ആഘോഷങ്ങൾ")],
@@ -475,6 +477,7 @@ export default function App() {
             path="/explore/place/:placeId"
             element={<PlaceDetail lang={lang} t={t} />}
           />
+          <Route path="/resorts" element={<Resorts lang={lang} />} />
           <Route path="/eats" element={<Eats lang={lang} t={t} />} />
           <Route path="/temples" element={<Temples lang={lang} t={t} />} />
           <Route path="/events" element={<Events lang={lang} t={t} />} />
