@@ -13,6 +13,10 @@
 .stays-filters { display:flex; flex-wrap:wrap; gap:.5rem; padding:1.2rem 0; }
 .stays-filters button { border:1px solid var(--line); border-radius:30px; padding:.7rem 1rem; background:transparent; color:var(--ink); font:inherit; font-size:.85rem; min-height:44px; }
 .stays-filters button[aria-pressed="true"] { background:var(--sea); color:white; border-color:var(--sea); }
+.stays-neighborhoods { display:flex; align-items:center; flex-wrap:wrap; gap:.6rem; margin:-.25rem 0 1rem; }
+.stays-neighborhoods span { color:var(--muted); font-size:.76rem; margin-right:.2rem; }
+.stays-neighborhoods button { border:0; border-bottom:1px solid var(--line); background:transparent; color:var(--sea); padding:.5rem .2rem; font:inherit; font-size:.8rem; min-height:44px; }
+.stays-neighborhoods button[aria-pressed="true"] { border-bottom:2px solid var(--sun); color:var(--sun); font-weight:700; }
 .stays-count { color:var(--muted); font-size:.8rem; }
 .stays-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.3rem; }
 .stay-card { min-width:0; background:var(--paper); border:1px solid var(--line); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; }

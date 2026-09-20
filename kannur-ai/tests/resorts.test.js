@@ -4,9 +4,9 @@ import { existsSync, readFileSync } from 'node:fs';
 import { getResorts } from '../server/resorts.js';
 const resorts = getResorts();
 test('directory contains unique, bilingual, sourced stays', () => {
-  assert.equal(resorts.length,30);
+  assert.equal(resorts.length,41);
   assert.equal(new Set(resorts.map(r=>r.id)).size,resorts.length);
-  assert.equal(resorts.filter(r=>r.district==='Kannur').length,23);
+  assert.equal(resorts.filter(r=>r.district==='Kannur').length,34);
   assert.equal(resorts.filter(r=>r.district==='Kasaragod').length,7);
   for (const r of resorts) {
     for(const key of ['name','nameMl','area','areaMl','description','descriptionMl','address','sourceUrl','checkedOn']) assert.ok(r[key],`${r.id}: ${key}`);
@@ -19,6 +19,13 @@ test('directory contains unique, bilingual, sourced stays', () => {
       assert.ok(r.imageSource);
     }
   }
+});
+test('new coastal listings are distinct and searchable by neighborhood', () => {
+  const thottada = resorts.filter(r=>`${r.area} ${r.address}`.toLowerCase().includes('thottada'));
+  const adikadalayi = resorts.filter(r=>`${r.area} ${r.address}`.toLowerCase().includes('adikadalayi'));
+  assert.ok(thottada.length >= 12);
+  assert.ok(adikadalayi.length >= 5);
+  assert.equal(new Set(resorts.map(r=>r.name.toLowerCase())).size,resorts.length);
 });
 test('Google links include the property name and address, not just Kannur', () => {
   for(const r of resorts) {

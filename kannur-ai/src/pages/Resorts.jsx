@@ -57,8 +57,9 @@ export default function Resorts({ lang }) {
   const q = params.get("q") || "";
   const kind = kinds.some(([id]) => id === params.get("kind")) ? params.get("kind") : "";
   const region = ["Kannur", "Kasaragod"].includes(params.get("region")) ? params.get("region") : "";
+  const area = ["Thottada", "Adikadalayi"].includes(params.get("area")) ? params.get("area") : "";
   const change = (key, value) => setParams(current => { const next = new URLSearchParams(current); value ? next.set(key, value) : next.delete(key); return next; }, { replace: true });
-  const visible = resorts.filter(r => (!kind || r.kind === kind) && (!region || r.district === region) && `${r.name} ${r.nameMl} ${r.area} ${r.areaMl} ${r.address}`.toLowerCase().includes(q.trim().toLowerCase()));
+  const visible = resorts.filter(r => (!kind || r.kind === kind) && (!region || r.district === region) && (!area || `${r.area} ${r.address}`.toLowerCase().includes(area.toLowerCase())) && `${r.name} ${r.nameMl} ${r.area} ${r.areaMl} ${r.address}`.toLowerCase().includes(q.trim().toLowerCase()));
   return <main className="page stays-page">
     <Seo lang={lang} path="/resorts" title={say("Resorts & Stays in Kannur | Kannur.io", "കണ്ണൂരിലെ റിസോർട്ടുകളും താമസങ്ങളും | Kannur.io")} description="Find beach resorts, hill retreats and backwater stays in Kannur and nearby Kasaragod, with photos, contact details and Google Maps directions." />
     <section className="page-hero stays-hero">
@@ -74,10 +75,15 @@ export default function Resorts({ lang }) {
         <label className="stays-region"><span>{say("Location", "സ്ഥലം")}</span><select value={region} onChange={e => change("region", e.target.value)}><option value="">{say("Kannur & nearby", "കണ്ണൂരും സമീപവും")}</option><option value="Kannur">{say("Kannur only", "കണ്ണൂർ മാത്രം")}</option><option value="Kasaragod">{say("Nearby · Kasaragod", "സമീപത്ത് · കാസർഗോഡ്")}</option></select></label>
       </div>
       <div className="stays-filters">{kinds.map(([id, en, ml]) => <button type="button" key={id} aria-pressed={kind === id} onClick={() => change("kind", id)}>{say(en, ml)}</button>)}</div>
+      <div className="stays-neighborhoods" aria-label={say("Explore by area", "പ്രദേശമനുസരിച്ച് കാണുക")}>
+        <span>{say("Explore by area", "പ്രദേശമനുസരിച്ച്")}</span>
+        <button type="button" aria-pressed={area === "Thottada"} onClick={() => change("area", area === "Thottada" ? "" : "Thottada")}>{say("Thottada coast", "തോട്ടട തീരം")}</button>
+        <button type="button" aria-pressed={area === "Adikadalayi"} onClick={() => change("area", area === "Adikadalayi" ? "" : "Adikadalayi")}>{say("Adikadalayi", "ആദികടലായി")}</button>
+      </div>
       {status === "loading" && <p role="status">{say("Finding your next stay…", "താമസസ്ഥലങ്ങൾ ലഭ്യമാക്കുന്നു…")}</p>}
       {status === "error" && <div role="alert"><p>{say("We couldn't load the stays. Please try again.", "വിവരങ്ങൾ ലഭ്യമായില്ല. വീണ്ടും ശ്രമിക്കൂ.")}</p><button className="button" onClick={() => setRetry(n => n + 1)}>{say("Try again", "വീണ്ടും ശ്രമിക്കുക")}</button></div>}
       {status === "ready" && <><p className="stays-count" role="status">{visible.length} {say(visible.length === 1 ? "place to stay" : "places to stay", "താമസസ്ഥലങ്ങൾ")}</p><div className="stays-grid">{visible.map(r => <ResortCard key={r.id} resort={r} say={say} />)}</div>{!visible.length && <div className="stays-empty"><h2>{say("Try a wider search.", "മറ്റൊരു തിരച്ചിൽ ശ്രമിക്കൂ.")}</h2><button className="button" onClick={() => setParams({})}>{say("Show all stays", "എല്ലാ താമസങ്ങളും കാണുക")}</button></div>}</>}
-      <p className="stays-disclaimer">{say("A researched directory, not a booking service or an exhaustive list. Confirm availability, prices and access directly with the property. Google photos opens image search; images belong to their respective owners. Information checked 19 September 2026.", "ഇത് വിവര ഡയറക്ടറിയാണ്; ബുക്കിംഗ് സേവനമോ സമ്പൂർണ പട്ടികയോ അല്ല. ലഭ്യതയും നിരക്കും പ്രവേശന വിവരങ്ങളും താമസസ്ഥലവുമായി സ്ഥിരീകരിക്കുക. ഗൂഗിൾ ചിത്രങ്ങൾ എന്ന ലിങ്ക് ചിത്ര തിരച്ചിൽ തുറക്കും. ചിത്രങ്ങളുടെ അവകാശം അതത് ഉടമകൾക്കാണ്. വിവരങ്ങൾ പരിശോധിച്ചത്: 19 സെപ്റ്റംബർ 2026.")}</p>
+      <p className="stays-disclaimer">{say("A researched directory, not a booking service or an exhaustive list. Confirm availability, prices and access directly with the property. Google photos opens image search; images belong to their respective owners. Latest listings checked 20 September 2026.", "ഇത് വിവര ഡയറക്ടറിയാണ്; ബുക്കിംഗ് സേവനമോ സമ്പൂർണ പട്ടികയോ അല്ല. ലഭ്യതയും നിരക്കും പ്രവേശന വിവരങ്ങളും താമസസ്ഥലവുമായി സ്ഥിരീകരിക്കുക. ഗൂഗിൾ ചിത്രങ്ങൾ എന്ന ലിങ്ക് ചിത്ര തിരച്ചിൽ തുറക്കും. ചിത്രങ്ങളുടെ അവകാശം അതത് ഉടമകൾക്കാണ്. പുതിയ വിവരങ്ങൾ പരിശോധിച്ചത്: 20 സെപ്റ്റംബർ 2026.")}</p>
     </section>
   </main>;
 }
