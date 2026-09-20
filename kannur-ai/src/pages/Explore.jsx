@@ -231,7 +231,9 @@ export default function Explore({ lang, t }) {
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
         path={filter ? `/explore/${filter}` : "/explore"}
-        title="Explore Kannur | Kannur | Explore Tourism"
+        title={filter
+          ? `${({ beaches: "Beaches", heritage: "Heritage", hills: "Hills", wildlife: "Wildlife", nature: "Nature", islands: "Islands", shopping: "Shopping", temples: "Temples", churches: "Churches", mosques: "Mosques" })[filter] || "Places"} in Kannur | Kannur.io`
+          : "Places to Visit in Kannur: Beaches, Forts & Temples | Kannur.io"}
         description={
           lang === "ml"
             ? "കണ്ണൂരിലെ ടൂറിസ്റ്റ് സ്പോട്ടുകൾ, കടൽത്തീരങ്ങൾ, പാരമ്പര്യ കേന്ദ്രങ്ങൾ എന്നിവ കണ്ടെത്തൂ."

@@ -76,8 +76,8 @@ export default function Home({ lang, t }) {
       <Seo
         lang={lang}
         path="/"
-        title="Kannur.io | A different kind of Kerala"
-        description="Discover Kannur through its beaches, Theyyam traditions, handloom, food and local stories. Explore the Malabar coast in English and Malayalam."
+        title="Kannur Tourism: Beaches, Theyyam & Places to Visit | Kannur.io"
+        description="Explore Kannur, Kerala: beaches, Theyyam rituals, heritage, local food, resorts and practical travel information. A bilingual guide to North Malabar."
         image="/images/hero/kannur_premium-1200.jpg"
       />
       <section className="destination-hero">

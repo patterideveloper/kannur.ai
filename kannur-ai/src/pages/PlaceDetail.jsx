@@ -355,7 +355,7 @@ export default function PlaceDetail({ lang, t }) {
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
         path={`/explore/place/${place.id}`}
-        title={`${displayName} | Kannur | Explore Tourism`}
+        title={`${displayName} | Kannur.io`}
         description={displayDesc}
       />
 

@@ -68,7 +68,7 @@ export default function AutomobileDetail({ lang, t }) {
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
         path={`/automobiles/${item.id}`}
-        title={`${brand} | Kannur | Explore Tourism`}
+        title={`${brand} | Kannur.io`}
         description={description}
       />
 

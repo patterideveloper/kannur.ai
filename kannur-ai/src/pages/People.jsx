@@ -54,7 +54,7 @@ export default function People({ lang, t }) {
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
         path="/people"
-        title="People of Kannur | Kannur | Explore Tourism"
+        title="People of Kannur | Kannur.io"
         description={
           lang === "ml"
             ? "കണ്ണൂരിൽ നിന്നുള്ള ശ്രദ്ധേയ വ്യക്തികൾ."

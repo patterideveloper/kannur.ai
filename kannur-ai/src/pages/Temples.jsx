@@ -81,7 +81,7 @@ export default function Temples({ lang, t }) {
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
         path="/temples"
-        title="Temples & Pilgrimage | Kannur | Explore Tourism"
+        title="Temples & Pilgrimage | Kannur.io"
         description={
           lang === "ml"
             ? "കണ്ണൂരിലെ പ്രധാന ക്ഷേത്രങ്ങളും തീർത്ഥാടന കേന്ദ്രങ്ങളും."

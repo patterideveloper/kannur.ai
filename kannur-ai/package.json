@@ -9,7 +9,8 @@
     "dev:full": "concurrently \"node server.js\" \"vite\"",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prebuild": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",

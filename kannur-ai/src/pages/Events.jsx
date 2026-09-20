@@ -39,7 +39,7 @@ export default function Events({ lang, t }) {
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
         path="/events"
-        title="Annual Events | Kannur | Explore Tourism"
+        title="Annual Events | Kannur.io"
         description={
           t?.eventsPage?.description ||
           (lang === "ml"

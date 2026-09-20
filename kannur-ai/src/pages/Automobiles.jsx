@@ -35,7 +35,7 @@ export default function Automobiles({ lang, t }) {
       <Seo
         lang={lang === "ml" ? "ml" : "en"}
         path="/automobiles"
-        title="Automobiles in Kannur | Kannur | Explore Tourism"
+        title="Automobiles in Kannur | Kannur.io"
         description={
           lang === "ml"
             ? "കണ്ണൂരിലെ കാർ, ബൈക്ക് ബ്രാൻഡുകളുടെ സാന്നിധ്യം ലോഗോ ഗ്രിഡിലൂടെ കാണൂ."

@@ -1,4 +1,6 @@
 import express from "express";
+import { readFileSync } from "node:fs";
+import { renderSeoHtml } from "./server/seo.js";
 import { getResorts } from "./server/resorts.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -224,10 +226,18 @@ app.get("/api/place-images", async (req, res) => {
 });
 
 const distDir = path.join(__dirname, "dist");
-app.use(express.static(distDir));
+app.use(express.static(distDir, { index: false }));
+const htmlTemplate = readFileSync(path.join(distDir, "index.html"), "utf8");
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(distDir, "index.html"));
+  let html;
+  try {
+    html = renderSeoHtml(htmlTemplate, req.path);
+  } catch {
+    return res.status(404).send("Page not found");
+  }
+  if (!html) return res.status(404).send("Page not found");
+  res.type("html").send(html);
 });
 
 app.listen(port, () => {

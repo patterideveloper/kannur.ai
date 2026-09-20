@@ -1,18 +1,30 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 
 const SITE_URL = "https://kannur.io";
-const DEFAULT_TITLE = "Kannur | Explore Tourism";
+const DEFAULT_TITLE = "Kannur Tourism: Beaches, Theyyam & Places to Visit | Kannur.io";
 const DEFAULT_DESCRIPTION =
-  "Explore beaches, temples, food, events, and cultural heritage across Kannur, Kerala.";
+  "Explore Kannur, Kerala: beaches, Theyyam rituals, heritage, local food, resorts and practical travel information. A bilingual guide to North Malabar.";
 const DEFAULT_IMAGE = "/og-image.svg";
 
 export default function Seo({ title, description, path = "/", image, lang = "en" }) {
+  useEffect(() => {
+    document.querySelectorAll("head [data-ssr-seo]").forEach((element) => element.remove());
+  }, []);
   const pageTitle = title || DEFAULT_TITLE;
   const pageDescription = description || DEFAULT_DESCRIPTION;
   const canonicalUrl = `${SITE_URL}${path}`;
   const imageUrl = (image || DEFAULT_IMAGE).startsWith("http")
     ? image || DEFAULT_IMAGE
     : `${SITE_URL}${image || DEFAULT_IMAGE}`;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": path === "/" ? "WebSite" : "WebPage",
+    name: path === "/" ? "Kannur.io" : pageTitle,
+    description: pageDescription,
+    url: canonicalUrl,
+    inLanguage: ["en", "ml"],
+  };
 
   return (
     <Helmet>
@@ -30,6 +42,9 @@ export default function Seo({ title, description, path = "/", image, lang = "en"
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={imageUrl} />
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData).replace(/</g, "\\u003c")}
+      </script>
     </Helmet>
   );
 }
