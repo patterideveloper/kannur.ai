@@ -24,11 +24,12 @@ export default function Directory({ lang, t }) {
     [
       "/eats",
       "sun",
-      "Local eateries",
-      "നാടൻ ഭക്ഷണശാലകൾ",
-      "Find your next Malabar meal",
-      "മലബാറിന്റെ രുചികൾ കണ്ടെത്തൂ",
+      "Restaurants & food",
+      "ഭക്ഷണശാലകളും രുചികളും",
+      "Biryani, seafood and local favourites",
+      "ബിരിയാണി, കടൽവിഭവങ്ങൾ, നാടൻ രുചികൾ",
     ],
+    ["/education", "grid", "Education", "വിദ്യാഭ്യാസം", "Universities, colleges and schools", "സർവകലാശാലകൾ, കോളേജുകൾ, സ്കൂളുകൾ"],
     [
       "/people",
       "culture",

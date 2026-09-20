@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Resorts from "./pages/Resorts";
 import Explore from "./pages/Explore";
 import Eats from "./pages/Eats";
+import Education from "./pages/Education";
 import Temples from "./pages/Temples";
 import Events from "./pages/Events";
 import People from "./pages/People";
@@ -373,6 +374,7 @@ export default function App() {
     ["/resorts", say("Resorts & stays", "താമസങ്ങൾ")],
     ["/theyyam", say("Theyyam", "തെയ്യം")],
     ["/eats", say("Eat & drink", "ഭക്ഷണം")],
+    ["/education", say("Education", "വിദ്യാഭ്യാസം")],
     ["/events", say("What's on", "ആഘോഷങ്ങൾ")],
     ["/people", say("Our people", "പ്രമുഖർ")],
     ["/temples", say("Sacred places", "പുണ്യസ്ഥലങ്ങൾ")],
@@ -479,6 +481,7 @@ export default function App() {
           />
           <Route path="/resorts" element={<Resorts lang={lang} />} />
           <Route path="/eats" element={<Eats lang={lang} t={t} />} />
+          <Route path="/education" element={<Education lang={lang} />} />
           <Route path="/temples" element={<Temples lang={lang} t={t} />} />
           <Route path="/events" element={<Events lang={lang} t={t} />} />
           <Route path="/theyyam" element={<Theyyam lang={lang} t={t} />} />
