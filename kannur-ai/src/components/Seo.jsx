@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import { useEffect } from "react";
 
 const SITE_URL = "https://kannur.io";
 const DEFAULT_TITLE = "Kannur Tourism: Beaches, Theyyam & Places to Visit | Kannur.io";
@@ -8,9 +7,6 @@ const DEFAULT_DESCRIPTION =
 const DEFAULT_IMAGE = "/og-image.svg";
 
 export default function Seo({ title, description, path = "/", image, lang = "en" }) {
-  useEffect(() => {
-    document.querySelectorAll("head [data-ssr-seo]").forEach((element) => element.remove());
-  }, []);
   const pageTitle = title || DEFAULT_TITLE;
   const pageDescription = description || DEFAULT_DESCRIPTION;
   const canonicalUrl = `${SITE_URL}${path}`;

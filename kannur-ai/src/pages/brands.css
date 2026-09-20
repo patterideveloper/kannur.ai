@@ -1,0 +1,20 @@
+.brands-page { max-width: 1220px; }
+.brands-intro { max-width: 770px; }
+.brands-controls { margin: 12px 0 24px; }
+.brands-search { display: grid; gap: 8px; max-width: 440px; font-weight: 700; }
+.brands-search input { min-height: 48px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); font-weight: 400; }
+.brands-filters { display: flex; gap: 8px; overflow-x: auto; padding: 18px 0 5px; }
+.brands-filters button { min-height: 44px; flex: none; padding: 9px 16px; border: 1px solid var(--ink); border-radius: 50px; background: transparent; color: var(--ink); }
+.brands-filters button.active { background: var(--ink); color: #fff; }
+.brands-count { margin: 8px 0 0; }
+.brands-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.brand-card { display: flex; flex-direction: column; align-items: center; padding: 27px 18px 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; text-align: center; }
+.brand-card-icon { display: grid; place-items: center; width: 106px; height: 106px; margin-bottom: 17px; border-radius: 24px; background: #f4f5f0; }
+.brand-card-icon img { width: 74px; height: 74px; object-fit: contain; }
+.brand-card h2 { margin: 0 0 4px; font-size: 18px; letter-spacing: -.03em; }
+.brand-card p { margin: 0 0 18px; font-size: 13px; }
+.brand-card-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px 15px; margin-top: auto; }
+.brand-card-links a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink); font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.brands-note, .brands-empty { margin: 25px 0; font-size: 13px; }
+@media (max-width: 900px) { .brands-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; } .brand-card { padding: 22px 9px 12px; } .brand-card-icon { width: 82px; height: 82px; border-radius: 18px; } .brand-card-icon img { width: 62px; height: 62px; } .brand-card h2 { font-size: 15px; } .brand-card p { font-size: 11px; } }

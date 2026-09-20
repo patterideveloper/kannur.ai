@@ -7,7 +7,7 @@
   --sun: #b83e2e;
   --mist: #e7ede7;
   --line: #dce1d7;
-  --muted: #67766c;
+  --muted: #4f6256;
   --font-display: "Manrope", sans-serif;
   --font-serif: "Instrument Serif", Georgia, serif;
   --radius-lg: 20px;
@@ -874,6 +874,16 @@ a {
 .search-row > span {
   font-size: 11px;
   white-space: nowrap;
+}
+.search-clear {
+  flex: none;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 .grid,
 .info-grid,
@@ -2052,7 +2062,7 @@ a {
     justify-content: center;
     gap: 4px;
     min-height: 44px;
-    color: #7a877e;
+    color: #4f6256;
   }
   .mobile-dock a svg {
     width: 21px;
@@ -2157,7 +2167,7 @@ a {
 .listing-actions a:hover { color: #a94d38; }
 .hospital-phone { display: inline-flex; align-self: flex-start; margin-top: .95rem; color: #1c5360; font-size: .95rem; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .listing-empty { padding: 4rem 1rem; text-align: center; border: 1px dashed #aebdbc; border-radius: 18px; }
-.listing-disclaimer { max-width: 650px; margin: 2rem 0 0; color: #687a80; font-size: .82rem; line-height: 1.5; }
+.listing-disclaimer { max-width: 650px; margin: 2rem 0 0; color: #4c6268; font-size: .82rem; line-height: 1.5; }
 @media (max-width: 850px) { .listing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .listing-hero-inner, .listing-content { width: min(100% - 2rem, 1200px); } .listing-hero-inner { padding: 6.5rem 0 3.3rem; } .listing-eyebrow { margin-top: 2.2rem; } .listing-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); } .listing-grid { grid-template-columns: 1fr; gap: .75rem; } .listing-card { min-height: 215px; } .listing-card h2 { margin-top: 1.3rem; } .listing-content { padding-top: 1.3rem; } }
 /* Theyyam calendar: a focused editorial experience, independent of generic cards. */

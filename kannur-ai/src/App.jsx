@@ -16,6 +16,7 @@ import Theyyam from "./pages/Theyyam";
 import PlaceDetail from "./pages/PlaceDetail";
 import Automobiles from "./pages/Automobiles";
 import AutomobileDetail from "./pages/AutomobileDetail";
+import Brands from "./pages/Brands";
 
 const translations = {
   en: {
@@ -330,6 +331,7 @@ export default function App() {
   const menuRef = useRef(null),
     toggleRef = useRef(null);
   const location = useLocation();
+  const previousPath = useRef(location.pathname);
   const t = translations[lang];
   const ml = lang === "ml";
   const say = (en, mal) => (ml ? mal : en);
@@ -342,6 +344,17 @@ export default function App() {
   useEffect(() => {
     setMenuOpen(false);
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    if (previousPath.current !== location.pathname) {
+      previousPath.current = location.pathname;
+      const frame = requestAnimationFrame(() => {
+        const heading = document.querySelector("#main-content h1");
+        if (heading) {
+          heading.tabIndex = -1;
+          heading.focus({ preventScroll: true });
+        }
+      });
+      return () => cancelAnimationFrame(frame);
+    }
   }, [location.pathname]);
   useEffect(() => {
     if (!menuOpen) return;
@@ -382,6 +395,7 @@ export default function App() {
     ["/temples", say("Sacred places", "പുണ്യസ്ഥലങ്ങൾ")],
     ["/directory", say("Local directory", "ഡയറക്ടറി")],
     ["/automobiles", say("Automobiles", "വാഹനങ്ങൾ")],
+    ["/brands", say("Brands", "ബ്രാൻഡുകൾ")],
     ["/hospitals", say("Hospitals", "ആശുപത്രികൾ")],
   ];
   return (
@@ -419,7 +433,7 @@ export default function App() {
               onClick={() => setMenuOpen(true)}
               aria-expanded={menuOpen}
               aria-controls="site-menu"
-              aria-label={say("Open menu", "മെനു തുറക്കുക")}
+              aria-label={menuOpen ? say("Menu open", "മെനു തുറന്നിരിക്കുന്നു") : say("Open menu", "മെനു തുറക്കുക")}
             >
               <span>{say("Menu", "മെനു")}</span>
               <Icon name="menu" />
@@ -494,6 +508,7 @@ export default function App() {
             path="/automobiles"
             element={<Automobiles lang={lang} t={t} />}
           />
+          <Route path="/brands" element={<Brands lang={lang} />} />
           <Route
             path="/automobiles/:automobileId"
             element={<AutomobileDetail lang={lang} t={t} />}

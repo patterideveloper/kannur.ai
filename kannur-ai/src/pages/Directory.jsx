@@ -21,6 +21,7 @@ export default function Directory({ lang, t }) {
       "Car and motorcycle showrooms",
       "കാർ, ബൈക്ക് ഷോറൂമുകൾ",
     ],
+    ["/brands", "grid", "Brands in Kannur", "കണ്ണൂരിലെ ബ്രാൻഡുകൾ", "Food, fashion, retail and automobile brands", "ഭക്ഷണം, വസ്ത്രങ്ങൾ, റീട്ടെയിൽ, വാഹന ബ്രാൻഡുകൾ"],
     [
       "/eats",
       "sun",

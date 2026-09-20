@@ -123,6 +123,7 @@ export default function Explore({ lang, t }) {
     () => new URLSearchParams(location.search).get("q") || "",
   );
   const [loadError, setLoadError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
   useEffect(
     () => setSearch(new URLSearchParams(location.search).get("q") || ""),
     [location.search],
@@ -147,22 +148,26 @@ export default function Explore({ lang, t }) {
   }, [filter, navigate]);
 
   useEffect(() => {
+    const controller = new AbortController();
     const loadPlaces = async () => {
       try {
         setPlacesLoading(true);
-        const response = await fetch("/api/explore");
+        setLoadError(false);
+        const response = await fetch("/api/explore", { signal: controller.signal });
         if (!response.ok) throw new Error("Places unavailable");
         const data = await response.json();
         setPlacesData(data.items || []);
       } catch (error) {
+        if (error.name === "AbortError") return;
         setPlacesData([]);
         setLoadError(true);
       } finally {
-        setPlacesLoading(false);
+        if (!controller.signal.aborted) setPlacesLoading(false);
       }
     };
     loadPlaces();
-  }, []);
+    return () => controller.abort();
+  }, [retryCount]);
 
   useEffect(() => {
     if (placesData.length === 0) return;
@@ -258,6 +263,7 @@ export default function Explore({ lang, t }) {
             <button
               key={tag.value}
               className={`chip ${activeTag === tag.value ? "active" : ""}`}
+              aria-pressed={activeTag === tag.value}
               onClick={() => {
                 const route = tagToRoute[tag.value];
                 navigate(route ? `/explore/${route}` : "/explore");
@@ -274,7 +280,12 @@ export default function Explore({ lang, t }) {
             onChange={(event) => setSearch(event.target.value)}
             placeholder={t.searchPlaceholder}
           />
-          <span>
+          {search && (
+            <button className="search-clear" type="button" onClick={() => setSearch("")}>
+              {lang === "ml" ? "തിരയൽ മായ്ക്കുക" : "Clear search"}
+            </button>
+          )}
+          <span role="status" aria-live="polite">
             {filteredPlaces.length} {t.spotsLabel}
           </span>
         </div>
@@ -302,6 +313,11 @@ export default function Explore({ lang, t }) {
                 ? "Please try reloading the page."
                 : "Try another word or choose a different category."}
           </p>
+          {loadError && (
+            <button className="button" type="button" onClick={() => setRetryCount((count) => count + 1)}>
+              {lang === "ml" ? "വീണ്ടും ശ്രമിക്കുക" : "Try again"}
+            </button>
+          )}
         </section>
       )}
       <section className="grid">

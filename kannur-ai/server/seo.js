@@ -26,6 +26,7 @@ const staticPages = {
   "/hospitals": page("Hospitals and Healthcare in Kannur | Kannur.io", "Find private, public and specialist hospitals across Kannur district.", simpleItems(hospitals)),
   "/temples": page("Temples and Pilgrimage in Kannur | Kannur.io", "Explore Kannur temples and places of worship, with locations and travel details.", allPlaces.filter((item) => item.path.includes("/place/temple-"))),
   "/automobiles": page("Automobile Showrooms in Kannur | Kannur.io", "Find car and motorcycle brands and showroom locations in Kannur district."),
+  "/brands": page("Brands in Kannur | Kannur.io", "Explore food, fashion, footwear and automobile brands with a verified presence in Kannur district."),
   "/directory": page("Kannur Local Directory | Kannur.io", "Useful local places and services across Kannur district."),
 };
 const filters = {
