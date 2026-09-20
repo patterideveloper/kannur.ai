@@ -1,16 +1,8 @@
-const toModelImagePath = (name) =>
-  `/images/automobiles/models/${name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")}.svg`;
-
 const model = (name, imageUrl = "", sourceUrl = "") => ({
   name,
-  imageUrl: imageUrl || toModelImagePath(name),
+  imageUrl: imageUrl || null,
   sourceUrl,
 });
-
-const buildModels = (names) => names.map((name) => model(name));
 
 export const vehicleModelsByBrand = {
   "maruti-suzuki-kannur": [
@@ -82,16 +74,8 @@ export const vehicleModelsByBrand = {
     ),
   ],
   "toyota-kannur": [
-    model(
-      "Innova Hycross",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/2022_Toyota_Kijang_Innova_2.4_G_GUN142R_%2820220302%29.jpg/330px-2022_Toyota_Kijang_Innova_2.4_G_GUN142R_%2820220302%29.jpg",
-      "https://en.wikipedia.org/wiki/Toyota_Innova"
-    ),
-    model(
-      "Urban Cruiser Hyryder",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg/330px-2022_Suzuki_Grand_Vitara_GX_Smart_Hybrid_%28Indonesia%29_front_view.jpg",
-      "https://en.wikipedia.org/wiki/Suzuki_Grand_Vitara_(2022)"
-    ),
+    model("Innova Hycross"),
+    model("Urban Cruiser Hyryder", "/images/automobiles/models/toyota-hyryder.webp", "https://commons.wikimedia.org/wiki/File:Toyota_Urban_Cruiser_Hyryder,_Goa,_India.jpg"),
     model(
       "Fortuner",
       "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/2015_Toyota_Fortuner_%28New_Zealand%29.jpg/330px-2015_Toyota_Fortuner_%28New_Zealand%29.jpg",
@@ -109,28 +93,12 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_02.jpg/330px-2021_Kia_Sonet_1.5_Premiere_%28Indonesia%29_front_view_02.jpg",
       "https://en.wikipedia.org/wiki/Kia_Sonet"
     ),
-    model(
-      "Carens",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/2016_Kia_Rondo_LX_Value_in_Sterling_Metallic%2C_Front_Right%2C_05-18-2023.jpg/330px-2016_Kia_Rondo_LX_Value_in_Sterling_Metallic%2C_Front_Right%2C_05-18-2023.jpg",
-      "https://en.wikipedia.org/wiki/Kia_Carens"
-    ),
+    model("Carens", "/images/automobiles/models/kia-carens.webp", "https://commons.wikimedia.org/wiki/File:2022_Kia_Carens_1.4_(India)_front_view_01.jpg"),
   ],
   "mg-motors-kannur": [
-    model(
-      "Hector",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/2018_Baojun_530.jpg/330px-2018_Baojun_530.jpg",
-      "https://en.wikipedia.org/wiki/Baojun_530"
-    ),
-    model(
-      "Astor",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/MG_ZS_%28crossover%2C_second_generation%29_DSC_8542.jpg/330px-MG_ZS_%28crossover%2C_second_generation%29_DSC_8542.jpg",
-      "https://en.wikipedia.org/wiki/MG_ZS_(crossover)"
-    ),
-    model(
-      "Comet EV",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/2023_Wuling_Air_EV_Long_Range.jpg/330px-2023_Wuling_Air_EV_Long_Range.jpg",
-      "https://en.wikipedia.org/wiki/Wuling_Air_EV"
-    ),
+    model("Hector"),
+    model("Astor"),
+    model("Comet EV"),
   ],
   "honda-kannur": [
     model(
@@ -138,11 +106,7 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/2022_Honda_City_ZX_i-VTEC_%28India%29_front_view_%28cropped%29.jpg/330px-2022_Honda_City_ZX_i-VTEC_%28India%29_front_view_%28cropped%29.jpg",
       "https://en.wikipedia.org/wiki/Honda_City"
     ),
-    model(
-      "Elevate",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Honda_WR-V_Z%2B_%285BA-DG5%29_front.jpg/330px-Honda_WR-V_Z%2B_%285BA-DG5%29_front.jpg",
-      "https://en.wikipedia.org/wiki/Honda_Elevate"
-    ),
+    model("Elevate", "/images/automobiles/models/honda-elevate.webp", "https://www.hondacarindia.com/honda-elevate"),
     model(
       "Amaze",
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Honda_Amaze_front_view_%28cropped%29.jpg/330px-Honda_Amaze_front_view_%28cropped%29.jpg",
@@ -228,11 +192,7 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/4/41/Dominar_400.jpg",
       "https://commons.wikimedia.org/wiki/File:Dominar_400.jpg"
     ),
-    model(
-      "Chetak",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bajaj_Chetak_150.JPG/330px-Bajaj_Chetak_150.JPG",
-      "https://en.wikipedia.org/wiki/Bajaj_Chetak"
-    ),
+    model("Chetak", "/images/automobiles/models/bajaj-chetak.webp", "https://commons.wikimedia.org/wiki/File:Bajaj_Chetak_electric_scooters_(2026)_01.jpg"),
   ],
   "tvs-kannur": [
     model(
@@ -269,33 +229,13 @@ export const vehicleModelsByBrand = {
     ),
   ],
   "ktm-kannur": [
-    model(
-      "Duke 250",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Ktm_duke_390.jpg/330px-Ktm_duke_390.jpg",
-      "https://en.wikipedia.org/wiki/KTM_390_series"
-    ),
-    model(
-      "RC 390",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Ktm_duke_390.jpg/330px-Ktm_duke_390.jpg",
-      "https://en.wikipedia.org/wiki/KTM_390_series"
-    ),
-    model(
-      "Adventure 390",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Ktm_duke_390.jpg/330px-Ktm_duke_390.jpg",
-      "https://en.wikipedia.org/wiki/KTM_390_series"
-    ),
+    model("Duke 250", "/images/automobiles/models/ktm-250-duke.webp", "https://www.ktmindia.com/ktm-bikes/naked-bike/ktm-250-duke"),
+    model("RC 390", "/images/automobiles/models/ktm-rc-390.webp", "https://www.ktmindia.com/ktm-bikes/supersport/ktm-rc-390"),
+    model("Adventure 390", "/images/automobiles/models/ktm-390-adventure.webp", "https://www.ktmindia.com/ktm-bikes/travel/ktm-390-adventure"),
   ],
   "suzuki-bike-kannur": [
-    model(
-      "Access 125",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Japan-Mobility-Show-2025-RuinDig_2481.jpg/330px-Japan-Mobility-Show-2025-RuinDig_2481.jpg",
-      "https://en.wikipedia.org/wiki/Suzuki_Access_125"
-    ),
-    model(
-      "Burgman Street",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/BURGMAN650_K6.JPG/330px-BURGMAN650_K6.JPG",
-      "https://en.wikipedia.org/wiki/Suzuki_Burgman"
-    ),
+    model("Access 125", "/images/automobiles/models/suzuki-access-125.webp", "https://commons.wikimedia.org/wiki/File:Suzuki_Access_125,_2023.jpg"),
+    model("Burgman Street"),
     model(
       "Gixxer",
       "https://upload.wikimedia.org/wikipedia/commons/3/33/Suzuki_Gixxer_negra.jpg",
@@ -303,11 +243,7 @@ export const vehicleModelsByBrand = {
     ),
   ],
   "triumph-kannur": [
-    model(
-      "Speed 400",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f3/Triumph_Scrambler_400_X%2C_M-M25.jpg",
-      "https://commons.wikimedia.org/wiki/File:Triumph_Scrambler_400_X,_M-M25.jpg"
-    ),
+    model("Speed 400", "/images/automobiles/models/triumph-speed-400.webp", "https://commons.wikimedia.org/wiki/File:Triumph_Speed_400.jpg"),
     model(
       "Scrambler 400 X",
       "https://upload.wikimedia.org/wikipedia/commons/f/f3/Triumph_Scrambler_400_X%2C_M-M25.jpg",
@@ -320,38 +256,27 @@ export const vehicleModelsByBrand = {
     ),
   ],
   "jawa-kannur": [
-    model(
-      "Jawa 42",
-      "https://upload.wikimedia.org/wikipedia/commons/6/61/Jawa_42_Bobber_%28India%29_2025.jpg",
-      "https://commons.wikimedia.org/wiki/File:Jawa_42_Bobber_(India)_2025.jpg"
-    ),
-    model(
-      "Jawa 350",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Jawa_350.jpg/330px-Jawa_350.jpg",
-      "https://en.wikipedia.org/wiki/Jawa_350"
-    ),
-    model(
-      "Jawa Perak",
-      "https://upload.wikimedia.org/wikipedia/commons/a/a2/Jawa_Perak_250.jpg",
-      "https://commons.wikimedia.org/wiki/File:Jawa_Perak_250.jpg"
-    ),
+    model("Jawa 42"),
+    model("Jawa 350"),
+    model("Jawa Perak"),
+  ],
+  "yezdi-kannur": [
+    model("Yezdi Adventure", "/images/automobiles/models/yezdi-adventure.webp", "https://dealer.jawayezdimotorcycles.com/location/kerala/kannur/"),
+    model("Yezdi Roadster", "/images/automobiles/models/yezdi-roadster.webp", "https://dealer.jawayezdimotorcycles.com/location/kerala/kannur/"),
+  ],
+  "aprilia-kannur": [
+    model("SXR 160", "/images/automobiles/models/aprilia-sxr-160.webp", "https://press.piaggiogroup.com/it_IT/post/show/205348/piaggio-group-aprilia-sxr-160-.html"),
+  ],
+  "bsa-kannur": [
+    model("Gold Star 650", "/images/automobiles/models/bsa-gold-star.webp", "https://dealer.jawayezdimotorcycles.com/locator/kannur/thana/hmss-motors--2R04EZ/products/bsa-gold-star-650--a30beb0e-01a0-4726-b26b-3b10789924bf"),
+  ],
+  "river-kannur": [
+    model("Indie", "/images/automobiles/models/river-indie.webp", "https://www.rideriver.com/indie"),
   ],
   "vespa-kannur": [
-    model(
-      "Vespa VXL 125",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vespa_LX150_3V_2013_Topbox_installed.JPG/330px-Vespa_LX150_3V_2013_Topbox_installed.JPG",
-      "https://en.wikipedia.org/wiki/Piaggio_Vespa_LX"
-    ),
-    model(
-      "Vespa SXL 150",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vespa_LX150_3V_2013_Topbox_installed.JPG/330px-Vespa_LX150_3V_2013_Topbox_installed.JPG",
-      "https://en.wikipedia.org/wiki/Piaggio_Vespa_LX"
-    ),
-    model(
-      "Vespa ZX 125",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Vespa_LX150_3V_2013_Topbox_installed.JPG/330px-Vespa_LX150_3V_2013_Topbox_installed.JPG",
-      "https://en.wikipedia.org/wiki/Piaggio_Vespa_LX"
-    ),
+    model("Vespa VXL 125"),
+    model("Vespa SXL 150"),
+    model("Vespa ZX 125"),
   ],
   "honda-bike-kannur": [
     model(
@@ -359,11 +284,7 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Gold_Metallic_Honda_Activa.jpg/330px-Gold_Metallic_Honda_Activa.jpg",
       "https://en.wikipedia.org/wiki/Honda_Activa"
     ),
-    model(
-      "Dio 125",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Honda_Dio.jpg/330px-Honda_Dio.jpg",
-      "https://en.wikipedia.org/wiki/Honda_Dio"
-    ),
+    model("Dio 125"),
     model(
       "Hornet 2.0",
       "https://upload.wikimedia.org/wikipedia/commons/6/6d/Honda_Hornet_2.0_Repsol_Edition.jpg",
@@ -376,11 +297,7 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/a/a0/Hero_Splendor_Plus_i3s_and_IBS_2018.jpg",
       "https://commons.wikimedia.org/wiki/File:Hero_Splendor_Plus_i3s_and_IBS_2018.jpg"
     ),
-    model(
-      "Passion Plus",
-      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hero_Honda_Passion_bike.jpg",
-      "https://commons.wikimedia.org/wiki/File:Hero_Honda_Passion_bike.jpg"
-    ),
+    model("Passion Plus"),
     model(
       "Xpulse 200",
       "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Modified_Xpulse_200V.jpg/330px-Modified_Xpulse_200V.jpg",
@@ -405,20 +322,8 @@ export const vehicleModelsByBrand = {
     ),
   ],
   "ather-kannur": [
-    model(
-      "450X",
-      "https://upload.wikimedia.org/wikipedia/commons/9/9a/AtherLogo.jpg",
-      "https://commons.wikimedia.org/wiki/File:AtherLogo.jpg"
-    ),
-    model(
-      "Rizta",
-      "https://upload.wikimedia.org/wikipedia/commons/9/9a/AtherLogo.jpg",
-      "https://commons.wikimedia.org/wiki/File:AtherLogo.jpg"
-    ),
-    model(
-      "450S",
-      "https://upload.wikimedia.org/wikipedia/commons/9/9a/AtherLogo.jpg",
-      "https://commons.wikimedia.org/wiki/File:AtherLogo.jpg"
-    ),
+    model("450X"),
+    model("Rizta"),
+    model("450S"),
   ],
 };

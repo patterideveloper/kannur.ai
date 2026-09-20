@@ -2,6 +2,21 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 
+function ModelPhoto({ model, brandLogo, lang }) {
+  const [failed, setFailed] = useState(false);
+
+  if (!model.imageUrl || failed) {
+    return (
+      <div className="vehicle-model-photo-unavailable">
+        <img src={brandLogo} alt="" loading="lazy" decoding="async" />
+        <span>{lang === "ml" ? "മോഡൽ ചിത്രം ലഭ്യമല്ല" : "Model photo unavailable"}</span>
+      </div>
+    );
+  }
+
+  return <img src={model.imageUrl} alt={model.name} loading="lazy" decoding="async" onError={() => setFailed(true)} />;
+}
+
 export default function AutomobileDetail({ lang, t }) {
   const { automobileId } = useParams();
   const [item, setItem] = useState(null);
@@ -107,12 +122,13 @@ export default function AutomobileDetail({ lang, t }) {
       {models.length > 0 && (
         <section className="info-section">
           <div className="section-head">
-            <h2>{lang === "ml" ? "ലഭ്യമായ മോഡലുകൾ" : "Available Models in Kannur"}</h2>
+            <h2>{lang === "ml" ? "പ്രധാന മോഡലുകൾ" : "Featured models"}</h2>
+            <p>{lang === "ml" ? "പ്രാദേശിക സ്റ്റോക്ക് ഷോറൂമുമായി സ്ഥിരീകരിക്കുക." : "Confirm local stock with the showroom before visiting."}</p>
           </div>
           <div className="vehicle-model-grid">
             {models.map((model) => (
               <article key={model.name} className="vehicle-model-card">
-                <img src={model.imageUrl} alt={model.name} loading="lazy" decoding="async" />
+                <ModelPhoto model={model} brandLogo={item.logo} lang={lang} />
                 <p>{model.name}</p>
               </article>
             ))}
