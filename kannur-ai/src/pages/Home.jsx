@@ -141,6 +141,7 @@ export default function Home({ lang, t }) {
           </form>
           <div className="hero-suggestions">
             <span>{say("Start with", "ഇവിടെ തുടങ്ങാം")}</span>
+            <Link className="plan-chip" to="/plan">{say("Plan my day ↗", "യാത്ര പ്ലാൻ ചെയ്യൂ ↗")}</Link>
             <Link to="/explore/beaches">{say("Beaches", "ബീച്ചുകൾ")}</Link>
             <Link to="/theyyam">{say("Theyyam", "തെയ്യം")}</Link>
             <Link to="/eats">{say("Local food", "നാടൻ ഭക്ഷണം")}</Link>

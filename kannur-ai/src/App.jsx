@@ -7,6 +7,7 @@ import Resorts from "./pages/Resorts";
 import Explore from "./pages/Explore";
 import Eats from "./pages/Eats";
 import Education from "./pages/Education";
+import DayPlanner from "./pages/DayPlanner";
 import Temples from "./pages/Temples";
 import Events from "./pages/Events";
 import People from "./pages/People";
@@ -371,6 +372,7 @@ export default function App() {
   }, [menuOpen]);
   const links = [
     ["/explore", say("Explore", "സ്ഥലങ്ങൾ")],
+    ["/plan", say("Plan my day", "യാത്ര പ്ലാൻ ചെയ്യൂ")],
     ["/resorts", say("Resorts & stays", "താമസങ്ങൾ")],
     ["/theyyam", say("Theyyam", "തെയ്യം")],
     ["/eats", say("Eat & drink", "ഭക്ഷണം")],
@@ -471,6 +473,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home lang={lang} t={t} />} />
           <Route path="/explore" element={<Explore lang={lang} t={t} />} />
+          <Route path="/plan" element={<DayPlanner lang={lang} />} />
           <Route
             path="/explore/:filter"
             element={<Explore lang={lang} t={t} />}

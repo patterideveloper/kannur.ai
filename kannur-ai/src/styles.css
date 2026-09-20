@@ -422,6 +422,7 @@ a {
   border-bottom: 1px solid #ffffff6b;
   padding: 3px 0;
 }
+.hero-suggestions .plan-chip { border: 1px solid #ffffffa8; border-radius: 99px; background: #fff3; padding: 7px 12px; color: #fff; font-weight: 700; backdrop-filter: blur(8px); }
 .hero-footnote {
   position: absolute;
   bottom: 25px;

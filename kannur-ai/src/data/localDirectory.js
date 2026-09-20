@@ -12,6 +12,7 @@ export const restaurants = [
   { id: 'karthika', name: 'Karthika Hotel', ml: 'കാർത്തിക ഹോട്ടൽ', area: 'Kannur town', areaMl: 'കണ്ണൂർ നഗരം', kind: 'Seafood', note: 'Local recommendations highlight its fish meals.', noteMl: 'മീൻ ഊണിന് നാട്ടുകാർ ശുപാർശ ചെയ്യുന്ന ഇടം.', source: 'https://www.reddit.com/r/kannur/comments/1qjxq83/' },
   { id: 'soft', name: 'Hotel Soft', ml: 'സോഫ്റ്റ് ഹോട്ടൽ', area: 'Kannur town', areaMl: 'കണ്ണൂർ നഗരം', kind: 'Biryani', note: 'A Fort Road biryani stop recommended by locals.', noteMl: 'ഫോർട്ട് റോഡിലെ നാട്ടുകാർ ശുപാർശ ചെയ്യുന്ന ബിരിയാണി കേന്ദ്രം.', source: 'https://www.reddit.com/r/kannur/comments/1eh92d4/' },
   { id: 'onakkan', name: 'Onakkan Bharathi', ml: 'ഓണക്കൻ ഭാരതി', area: 'Kannur town', areaMl: 'കണ്ണൂർ നഗരം', kind: 'Breakfast', note: 'A familiar name for traditional breakfast near the railway station.', noteMl: 'റെയിൽവേ സ്റ്റേഷനടുത്തുള്ള പരമ്പരാഗത പ്രഭാതഭക്ഷണ കേന്ദ്രം.', source: 'https://www.reddit.com/r/kannur/comments/1jdxj08/' },
+  { id: 'muthazham-payyanur', name: 'Hotel Muthazham Payyanur', ml: 'മുത്താഴം ഹോട്ടൽ പയ്യന്നൂർ', area: 'Mavichery, Payyanur', areaMl: 'മാവിച്ചേരി, പയ്യന്നൂർ', kind: 'Malabar', note: 'A local Kerala-meals stop in Payyanur.', noteMl: 'പയ്യന്നൂരിലെ കേരള ഊണിന്റെ ഒരു കേന്ദ്രം.', source: 'https://www.zomato.com/payyannur/hotel-muthazham-payyanur-payyannur-locality/order' },
 ];
 
 export const institutions = [
