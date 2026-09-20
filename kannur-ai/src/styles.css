@@ -2141,3 +2141,78 @@ a {
 .listing-disclaimer { max-width: 650px; margin: 2rem 0 0; color: #687a80; font-size: .82rem; line-height: 1.5; }
 @media (max-width: 850px) { .listing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .listing-hero-inner, .listing-content { width: min(100% - 2rem, 1200px); } .listing-hero-inner { padding: 6.5rem 0 3.3rem; } .listing-eyebrow { margin-top: 2.2rem; } .listing-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); } .listing-grid { grid-template-columns: 1fr; gap: .75rem; } .listing-card { min-height: 215px; } .listing-card h2 { margin-top: 1.3rem; } .listing-content { padding-top: 1.3rem; } }
+/* Theyyam calendar: a focused editorial experience, independent of generic cards. */
+.theyyam-page { max-width: 1280px; }
+.theyyam-hero { position: relative; min-height: min(680px, 76svh); overflow: hidden; border-radius: 18px; background: #2c1817; color: #fff; display: flex; align-items: end; }
+.theyyam-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #1b1015d9 0%, #1b101544 70%), linear-gradient(0deg, #1b1015d9, transparent 70%); }
+.theyyam-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.theyyam-hero-content { position: relative; z-index: 1; padding: clamp(28px, 6vw, 78px); max-width: 700px; }
+.theyyam-back { display: inline-flex; padding: 9px 0; margin-bottom: 80px; font-size: 13px; font-weight: 700; }
+.theyyam-eyebrow, .theyyam-kicker { font-size: 11px; font-weight: 800; letter-spacing: .19em; }
+.theyyam-hero h1 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(52px, 7vw, 100px); line-height: .99; letter-spacing: -.035em; margin: 14px 0 21px; }
+.theyyam-hero-content > p:not(.theyyam-eyebrow) { max-width: 510px; font-size: clamp(15px, 2vw, 19px); line-height: 1.6; }
+.theyyam-hero-link { display: inline-flex; align-items: center; gap: 32px; border-bottom: 1px solid #ffffffaa; padding: 10px 0; margin-top: 17px; font-weight: 700; }
+.theyyam-calendar { max-width: 1080px; margin: 0 auto; padding: clamp(48px, 7vw, 100px) 0; }
+.theyyam-calendar-head { max-width: 700px; }
+.theyyam-calendar-head h2, .theyyam-result-head h2, .theyyam-guide h2 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -.025em; }
+.theyyam-calendar-head h2 { font-size: clamp(38px, 5vw, 66px); margin: 13px 0; }
+.theyyam-calendar-head > p { color: var(--muted); }
+.theyyam-quick { display: flex; gap: 9px; flex-wrap: wrap; margin: 30px 0 15px; }
+.theyyam-quick button { border: 1px solid var(--line); background: var(--paper); border-radius: 99px; min-height: 44px; padding: 8px 17px; font-size: 13px; font-weight: 700; }
+.theyyam-quick button:hover, .theyyam-quick button:focus-visible { border-color: var(--sun); color: var(--sun); }
+.theyyam-search { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end; background: #f0ede4; padding: 18px; border-radius: 15px; }
+.theyyam-search label { display: grid; gap: 5px; font-size: 12px; font-weight: 700; min-width: 0; }
+.theyyam-search input { width: 100%; min-width: 0; min-height: 50px; border: 1px solid #d8d8d0; background: white; border-radius: 8px; padding: 10px; color: var(--ink); }
+.theyyam-search > button { min-height: 50px; border: 0; border-radius: 8px; padding: 0 23px; background: var(--sun); color: white; font-weight: 800; }
+.theyyam-alert { margin: 15px 0; padding: 13px 17px; border-radius: 9px; background: #fff3e3; color: #723e20; font-size: 13px; }
+.theyyam-alert p { margin: 0; }
+.theyyam-result-head { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; border-bottom: 1px solid var(--line); margin-top: 58px; padding-bottom: 14px; }
+.theyyam-result-head h2 { font-size: clamp(31px, 4vw, 45px); margin: 0; }
+.theyyam-result-head span { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.theyyam-empty { padding: 65px 28px; text-align: center; background: var(--paper); border: 1px solid var(--line); border-radius: 13px; margin-top: 22px; }
+.theyyam-empty > span { display: block; color: var(--sun); font-size: 37px; margin-bottom: 10px; }
+.theyyam-empty h3 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); font-weight: 400; margin-bottom: 8px; }
+.theyyam-empty p { max-width: 530px; margin: 6px auto; color: var(--muted); }
+.theyyam-empty button { border: 0; background: var(--sun); color: white; border-radius: 7px; padding: 12px 20px; font-weight: 700; }
+.theyyam-list { display: grid; gap: 12px; margin-top: 22px; }
+.theyyam-event { display: grid; grid-template-columns: 92px 1fr; gap: 20px; padding: 25px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
+.theyyam-event-date { display: flex; flex-direction: column; align-items: center; justify-content: center; align-self: start; aspect-ratio: 1; background: #f5e8e1; color: #8e3325; border-radius: 10px; }
+.theyyam-event-date strong { font-family: var(--font-serif); font-size: 44px; line-height: 1; }
+.theyyam-event-date span { font-size: 12px; text-transform: uppercase; font-weight: 800; }
+.theyyam-event-overline { font-size: 10px; color: var(--sun); text-transform: uppercase; letter-spacing: .12em; font-weight: 800; margin: 0 0 7px; }
+.theyyam-event h3 { font-size: clamp(19px, 2.5vw, 26px); margin: 0 0 13px; }
+.theyyam-event-meta { display: flex; gap: 6px 18px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
+.theyyam-event-meta a { text-decoration: underline; }
+.theyyam-event-links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 20px; font-size: 12px; color: var(--sun); font-weight: 800; }
+.theyyam-guide { display: flex; justify-content: space-between; gap: 30px; background: #193830; color: white; border-radius: 15px; padding: clamp(26px, 5vw, 48px); margin-top: 65px; }
+.theyyam-guide > div:first-child { max-width: 560px; }
+.theyyam-guide h2 { font-size: clamp(34px, 4vw, 50px); margin: 10px 0; }
+.theyyam-guide p { color: #d5e1db; margin: 0; }
+.theyyam-guide-links { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 210px; }
+.theyyam-guide-links a { border-bottom: 1px solid #ffffff88; padding: 7px 0; }
+.theyyam-guide-links small { color: #bfd3c8; margin-top: 12px; }
+@media (max-width: 700px) {
+  .theyyam-page { padding-left: 0; padding-right: 0; }
+  .theyyam-hero { border-radius: 0; min-height: 67svh; }
+  .theyyam-hero::after { background: linear-gradient(0deg, #1b1015ee 0%, #1b10158a 47%, #1b101533 100%); }
+  .theyyam-hero-content { padding: 28px 22px 34px; }
+  .theyyam-back { margin-bottom: 90px; }
+  .theyyam-calendar { padding: 46px 18px; }
+  .theyyam-search { grid-template-columns: 1fr 1fr; gap: 9px; padding: 12px; }
+  .theyyam-search > button { grid-column: 1 / -1; }
+  .theyyam-search input { font-size: 13px; padding: 8px 5px; }
+  .theyyam-event { grid-template-columns: 64px 1fr; gap: 12px; padding: 16px; }
+  .theyyam-event-date strong { font-size: 31px; }
+  .theyyam-guide { flex-direction: column; margin-top: 45px; }
+}
+
+.theyyam-event-warning { margin: 0 0 14px; padding: 11px 13px; border-left: 3px solid #c37732; background: #fff3e3; color: #723e20; font-size: 12px; line-height: 1.5; }
+.theyyam-month-search { max-width: 640px; grid-template-columns: 1fr 1fr; }
+.theyyam-month-search select { width: 100%; min-width: 0; min-height: 50px; padding: 10px 14px; border: 1px solid #d8d8d0; border-radius: 8px; background: white; color: var(--ink); }
+.theyyam-area-filters { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+.theyyam-area-filters button { min-height: 44px; border: 1px solid var(--line); background: var(--paper); border-radius: 99px; padding: 8px 17px; font-size: 13px; font-weight: 700; }
+.theyyam-area-filters button[aria-pressed="true"] { background: var(--ink); color: white; border-color: var(--ink); }
+.theyyam-rituals { margin-top: 18px; font-size: 13px; }
+.theyyam-rituals > strong { display: block; margin-bottom: 8px; }
+.theyyam-rituals > div { display: flex; flex-wrap: wrap; gap: 7px; }
+.theyyam-rituals span { display: inline-block; padding: 5px 9px; border-radius: 6px; background: var(--mist); color: var(--ink); line-height: 1.35; }

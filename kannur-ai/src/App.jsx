@@ -392,7 +392,7 @@ export default function App() {
       <header className="site-header">
         <div className="site-header-inner">
           <Link className="brand" to="/" aria-label="Kannur.io home">
-            kannur<span>.io</span>
+            Kannur<span>.io</span>
             <i>✳</i>
           </Link>
           <nav
@@ -444,7 +444,7 @@ export default function App() {
           >
             <div className="menu-heading">
               <span className="brand">
-                kannur<span>.io</span>
+                Kannur<span>.io</span>
               </span>
               <button
                 className="icon-button"
@@ -515,7 +515,7 @@ export default function App() {
       <footer className="site-footer">
         <div>
           <Link className="brand" to="/">
-            kannur<span>.io</span>
+            Kannur<span>.io</span>
             <i>✳</i>
           </Link>
           <p>

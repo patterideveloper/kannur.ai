@@ -2,7 +2,7 @@ import express from "express";
 import { getResorts } from "./server/resorts.js";
 import path from "path";
 import { fileURLToPath } from "url";
-import { fetchTheyyamEvents } from "./server/theyyam.js";
+import { fetchTheyyamEvents, isAllowedMonth } from "./server/theyyam.js";
 import { fetchTemplesFromTravelKannur, fetchTemplesFromWiki } from "./server/temples.js";
 import { buildExplorePlaces, getExplorePlaceById } from "./server/explore.js";
 import { fetchKannurCivicSnapshot } from "./server/kannurCivic.js";
@@ -21,25 +21,16 @@ app.get("/api/resorts", (req, res) => {
   res.json({ resorts: getResorts() });
 });
 app.get("/api/theyyam", async (req, res) => {
+  const month = req.query.month;
+  if (typeof month !== "string" || !isAllowedMonth(month)) {
+    return res.status(400).json({ error: "Choose this month or one of the next six months" });
+  }
   try {
-    const { start, end } = req.query;
-    const events = await fetchTheyyamEvents({ startDate: start, endDate: end });
-    res.json({
-      strict: true,
-      sources: [
-        {
-          name: "DTPC Kannur",
-          url: "https://www.dtpckannur.com/theyyam-calendar",
-        },
-        {
-          name: "Kerala Tourism Theyyam Calendar",
-          url: "https://www.keralatourism.org/theyyamcalendar/index.php",
-        },
-      ],
-      events,
-    });
+    const calendar = await fetchTheyyamEvents({ month });
+    res.set("Cache-Control", "public, max-age=300");
+    res.json(calendar);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch calendar data" });
+    res.status(503).json({ error: "Calendar source temporarily unavailable" });
   }
 });
 
