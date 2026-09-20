@@ -2,6 +2,7 @@ import { lazy, Suspense, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Seo from "../components/Seo";
 import Icon from "../components/Icon";
+import HistorySection from "../components/HistorySection";
 import { places } from "../data/places";
 import { videos } from "../data/media";
 const CivicUpdates = lazy(() => import("../components/CivicUpdates"));
@@ -284,6 +285,7 @@ export default function Home({ lang, t }) {
           ))}
         </div>
       </section>
+      <HistorySection lang={lang} />
       <section className="ritual-section">
         <div className="ritual-photo">
           <img
