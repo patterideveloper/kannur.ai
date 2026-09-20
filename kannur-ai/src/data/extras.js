@@ -451,45 +451,6 @@ export const personalities = [
   },
 ];
 
-export const hospitals = [
-  {
-    id: "district-hospital-kannur",
-    name: "District Hospital Kannur",
-    nameMl: "ജില്ലാ ആശുപത്രി കണ്ണൂർ",
-    area: "Burnacherry, Kannur",
-    phone: "0497-2731234",
-    description: "Government district hospital in Kannur town.",
-    descriptionMl: "കണ്ണൂർ നഗരത്തിലെ സർക്കാർ ജില്ലാ ആശുപത്രി.",
-    areaMl: "ബർണശ്ശേരി, കണ്ണൂർ",
-    source: "https://kannur.nic.in/en/public-utility-category/hospitals/",
-    mapsQuery: "District Hospital Kannur",
-  },
-  {
-    id: "general-hospital-thalassery",
-    name: "General Hospital Thalassery",
-    nameMl: "ജനറൽ ആശുപത്രി തലശ്ശേരി",
-    area: "Thalassery",
-    phone: "0490-2322150",
-    description: "Government general hospital serving Thalassery and nearby areas.",
-    descriptionMl: "തലശ്ശേരിക്കും സമീപ പ്രദേശങ്ങൾക്കുമുള്ള സർക്കാർ ജനറൽ ആശുപത്രി.",
-    areaMl: "തലശ്ശേരി",
-    source: "https://kannur.nic.in/en/public-utility-category/hospitals/",
-    mapsQuery: "General Hospital Thalassery",
-  },
-  {
-    id: "taluk-hq-hospital-taliparamba",
-    name: "Taluk Headquarters Hospital, Taliparamba",
-    nameMl: "താലൂക്ക് ആസ്ഥാന ആശുപത്രി തളിപ്പറമ്പ്",
-    area: "Taliparamba",
-    phone: "0490-2473388",
-    description: "Government taluk hospital for Taliparamba region.",
-    descriptionMl: "തളിപ്പറമ്പ് മേഖലയിലെ സർക്കാർ താലൂക്ക് ആശുപത്രി.",
-    areaMl: "തളിപ്പറമ്പ്",
-    source: "https://kannur.nic.in/en/public-utility-category/hospitals/",
-    mapsQuery: "Taluk Head Quarters Hospital Taliparamba",
-  },
-];
-
 export const automobiles = [
   {
     id: "maruti-suzuki-kannur",

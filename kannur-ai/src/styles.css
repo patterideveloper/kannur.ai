@@ -2105,6 +2105,7 @@ a {
 .listing-page { min-height: 100vh; background: #f6f3eb; color: #183146; }
 .listing-hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(circle at 82% 18%, #b44f35 0, transparent 35%), linear-gradient(130deg, #1b2e39, #375568 65%, #8a5543); }
 .listing-education .listing-hero { background: radial-gradient(circle at 78% 15%, #639ba0 0, transparent 35%), linear-gradient(130deg, #142c3b, #31516a 70%, #477a76); }
+.listing-health .listing-hero { background: radial-gradient(circle at 80% 18%, #5f9a9e 0, transparent 37%), linear-gradient(130deg, #143245, #265c66 70%, #588a85); }
 .listing-hero::after { content: ""; position: absolute; width: 32rem; height: 32rem; border: 1px solid #ffffff42; border-radius: 50%; right: -8rem; bottom: -21rem; pointer-events: none; box-shadow: 0 0 0 6rem #ffffff0a, 0 0 0 12rem #ffffff08; }
 .listing-hero-inner, .listing-content { width: min(1200px, calc(100% - 3rem)); margin-inline: auto; }
 .listing-hero-inner { position: relative; z-index: 1; padding: 8rem 0 5rem; }
@@ -2127,12 +2128,14 @@ a {
 .listing-card { display: flex; flex-direction: column; min-height: 250px; padding: 1.4rem; background: #fff; border: 1px solid #dde4de; border-radius: 18px; box-shadow: 0 12px 30px #1831460b; }
 .listing-card-top { display: flex; justify-content: space-between; gap: 1rem; color: #a34b39; font-size: .73rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .listing-education .listing-card-top { color: #32757d; }
+.listing-health .listing-card-top { color: #28717b; }
 .listing-card h2 { margin: 2rem 0 .25rem; color: #1b3448; font-size: clamp(1.35rem, 2.2vw, 1.8rem); line-height: 1.14; letter-spacing: -.03em; }
 .listing-area { margin: 0; color: #8a4a3e; font-size: .9rem; font-weight: 650; }
 .listing-note { margin: .85rem 0 0; color: #586873; line-height: 1.55; }
 .listing-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: auto; padding-top: 1.4rem; }
 .listing-actions a { color: #17475c; font-weight: 700; font-size: .87rem; text-decoration: none; border-bottom: 1px solid currentColor; }
 .listing-actions a:hover { color: #a94d38; }
+.hospital-phone { display: inline-flex; align-self: flex-start; margin-top: .95rem; color: #1c5360; font-size: .95rem; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .listing-empty { padding: 4rem 1rem; text-align: center; border: 1px dashed #aebdbc; border-radius: 18px; }
 .listing-disclaimer { max-width: 650px; margin: 2rem 0 0; color: #687a80; font-size: .82rem; line-height: 1.5; }
 @media (max-width: 850px) { .listing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
