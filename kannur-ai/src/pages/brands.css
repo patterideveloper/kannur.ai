@@ -13,8 +13,9 @@
 .brand-card-icon img { width: 74px; height: 74px; object-fit: contain; }
 .brand-card h2 { margin: 0 0 4px; font-size: 18px; letter-spacing: -.03em; }
 .brand-card p { margin: 0 0 18px; font-size: 13px; }
-.brand-card-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px 15px; margin-top: auto; }
-.brand-card-links a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink); font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.brands-error { margin-bottom: 20px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.brands-error p { margin-bottom: 8px; }
+.brands-error button { min-height: 44px; padding: 9px 16px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: #fff; }
 .brands-note, .brands-empty { margin: 25px 0; font-size: 13px; }
 @media (max-width: 900px) { .brands-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 650px) { .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; } .brand-card { padding: 22px 9px 12px; } .brand-card-icon { width: 82px; height: 82px; border-radius: 18px; } .brand-card-icon img { width: 62px; height: 62px; } .brand-card h2 { font-size: 15px; } .brand-card p { font-size: 11px; } }
