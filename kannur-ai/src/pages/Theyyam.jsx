@@ -12,9 +12,11 @@ const upcomingMonths = () => {
 };
 const copy = {
   en: {
+    seoDescription: "Browse upcoming Theyyam rituals by month and year in Kannur and nearby districts. Confirm dates with each shrine before visiting.",
     back: "Back to home", eyebrow: "RITUALS OF NORTH MALABAR", title: "Follow the sacred season.", intro: "Browse Theyyam calendar listings from Kerala Theyyam. Dates are subject to change; always confirm with the shrine before travelling.", browse: "Browse the calendar", heading: "Choose your month", explanation: "Select a month and year, up to six months ahead. Older dates are not shown.", month: "Month", year: "Year", loading: "Checking the calendar…", error: "The calendar is unavailable right now.", retry: "Try again", results: "Calendar listings", empty: "No upcoming listings for this month", emptyNote: "This source may not have published the month's rituals yet. Check back closer to the season.", dateConflict: "The source's heading gives a different year. Please confirm these dates with the shrine before planning a visit.", rituals: "Theyyams listed", source: "View source", map: "Find on Maps", checked: "Checked", note: "Visit with care", noteText: "Theyyam is a living ritual, not a scheduled stage show. Festival dates, times and access may change. Confirm locally and respect the shrine's customs.", sourceTitle: "Kerala Theyyam calendar", district: "District", all: "Kannur & nearby", kannur: "Kannur only", nearby: "Nearby districts", count: "listings", noneKannur: "No Kannur listings for this month. Try Kannur & nearby to see other published events.", nextMonth: "See next month",
   },
   ml: {
+    seoDescription: "കണ്ണൂരിലും സമീപ ജില്ലകളിലും മാസം തിരിച്ചുള്ള തെയ്യം അനുഷ്ഠാനങ്ങൾ കാണാം. യാത്രയ്ക്ക് മുമ്പ് ഓരോ കാവുമായും തീയതി ഉറപ്പാക്കുക.",
     back: "ഹോമിലേക്ക്", eyebrow: "വടക്കൻ മലബാറിന്റെ അനുഷ്ഠാനം", title: "തെയ്യക്കാലം കണ്ടെത്താം.", intro: "കേരള തെയ്യം പ്രസിദ്ധീകരിച്ച കലണ്ടർ കാണാം. തീയതികൾ മാറാം; യാത്രയ്ക്ക് മുമ്പ് കാവുമായി ഉറപ്പാക്കുക.", browse: "കലണ്ടർ കാണുക", heading: "മാസം തിരഞ്ഞെടുക്കൂ", explanation: "ഈ മാസവും അടുത്ത ആറു മാസങ്ങളും തിരഞ്ഞെടുക്കാം. കഴിഞ്ഞ തീയതികൾ കാണിക്കില്ല.", month: "മാസം", year: "വർഷം", loading: "കലണ്ടർ പരിശോധിക്കുന്നു…", error: "കലണ്ടർ ഇപ്പോൾ ലഭ്യമല്ല.", retry: "വീണ്ടും ശ്രമിക്കുക", results: "കലണ്ടറിലെ തെയ്യങ്ങൾ", empty: "ഈ മാസത്തിൽ വരാനിരിക്കുന്ന തെയ്യങ്ങൾ പട്ടികയിൽ ഇല്ല", emptyNote: "ഈ മാസത്തെ തെയ്യങ്ങൾ ഇനിയും പ്രസിദ്ധീകരിച്ചിട്ടില്ലായിരിക്കാം. സീസണിനോട് അടുത്ത് വീണ്ടും പരിശോധിക്കുക.", dateConflict: "ഉറവിടത്തിലെ തലക്കെട്ടിൽ മറ്റൊരു വർഷമാണ്. യാത്രയ്ക്ക് മുമ്പ് കാവുമായി തീയതി സ്ഥിരീകരിക്കുക.", rituals: "പട്ടികയിലെ തെയ്യങ്ങൾ", source: "ഉറവിടം കാണുക", map: "മാപ്പിൽ കാണുക", checked: "പരിശോധിച്ചത്", note: "ആചാരങ്ങളെ മാനിക്കാം", noteText: "തെയ്യം ഒരു അനുഷ്ഠാനമാണ്, സ്റ്റേജ് ഷോ അല്ല. തീയതിയും സമയവും പ്രവേശനവും മാറാം. കാവുമായി സ്ഥിരീകരിച്ച് ആചാരങ്ങൾ പാലിക്കുക.", sourceTitle: "കേരള തെയ്യം കലണ്ടർ", district: "ജില്ല", all: "കണ്ണൂരും സമീപവും", kannur: "കണ്ണൂർ മാത്രം", nearby: "സമീപ ജില്ലകൾ", count: "പട്ടികകൾ", noneKannur: "ഈ മാസത്തിൽ കണ്ണൂരിലെ തെയ്യങ്ങൾ പട്ടികയിൽ ഇല്ല. സമീപ ജില്ലകളിലെ വിവരങ്ങൾക്കായി ഫിൽട്ടർ മാറ്റുക.", nextMonth: "അടുത്ത മാസം കാണൂ",
   },
 };
@@ -45,7 +47,7 @@ export default function Theyyam({ lang }) {
   const events = (data?.events || []).filter((event) => area === "all" || (area === "kannur" ? event.district === "Kannur" : event.district !== "Kannur"));
   return (
     <main className="page theyyam-page">
-      <Seo lang={lang} path="/theyyam" title={lang === "ml" ? "തെയ്യം കലണ്ടർ | Kannur.io" : "Theyyam Calendar | Kannur.io"} />
+      <Seo lang={lang} path="/theyyam" title={lang === "ml" ? "തെയ്യം കലണ്ടർ | Kannur.io" : "Theyyam Calendar | Kannur.io"} description={c.seoDescription} />
       <section className="theyyam-hero">
         <img src="/images/hero/theyyam_fire-1200.webp" srcSet="/images/hero/theyyam_fire-480.webp 480w, /images/hero/theyyam_fire-800.webp 800w, /images/hero/theyyam_fire-1200.webp 1200w" sizes="(max-width: 700px) 100vw, 1100px" alt="Theyyam fire ritual in Kannur" />
         <div className="theyyam-hero-content">

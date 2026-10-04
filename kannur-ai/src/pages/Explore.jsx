@@ -240,9 +240,13 @@ export default function Explore({ lang, t }) {
           ? `${({ beaches: "Beaches", heritage: "Heritage", hills: "Hills", wildlife: "Wildlife", nature: "Nature", islands: "Islands", shopping: "Shopping", temples: "Temples", churches: "Churches", mosques: "Mosques" })[filter] || "Places"} in Kannur | Kannur.io`
           : "Places to Visit in Kannur: Beaches, Forts & Temples | Kannur.io"}
         description={
-          lang === "ml"
-            ? "കണ്ണൂരിലെ ടൂറിസ്റ്റ് സ്പോട്ടുകൾ, കടൽത്തീരങ്ങൾ, പാരമ്പര്യ കേന്ദ്രങ്ങൾ എന്നിവ കണ്ടെത്തൂ."
-            : "Discover tourist spots, beaches, heritage sites, and shopping in and around Kannur."
+          filter
+            ? lang === "ml"
+              ? `കണ്ണൂരിലെ ${t.tags[activeTag] || "സ്ഥലങ്ങൾ"} കണ്ടെത്തൂ, ഫോട്ടോകളും സ്ഥല വിവരങ്ങളും മാപ്പ് ലിങ്കുകളും സഹിതം.`
+              : `Discover ${(t.tags[activeTag] || "places").toLowerCase()} in Kannur, Kerala, with photos, local details and map links.`
+            : lang === "ml"
+              ? "കണ്ണൂരിലെ ടൂറിസ്റ്റ് സ്പോട്ടുകൾ, കടൽത്തീരങ്ങൾ, പാരമ്പര്യ കേന്ദ്രങ്ങൾ എന്നിവ കണ്ടെത്തൂ."
+              : "Discover tourist spots, beaches, heritage sites, and shopping in and around Kannur."
         }
       />
       <section className="page-hero">

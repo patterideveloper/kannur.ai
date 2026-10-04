@@ -37,14 +37,6 @@ const translations = {
     chatPlaceholder:
       "Ask for beaches, a 1-day plan, quiet spots, or local shopping...",
     send: "Send",
-    footerTagline: "Built for the curious. Powered by the coast.",
-    footerLinks: {
-      calendar: "Cultural Calendar",
-      food: "Food Map",
-      stay: "Stay Local",
-      contact: "Contact",
-    },
-    footerCopy: "© 2026 Kannur.io",
     tags: {
       all: "All",
       beach: "Beaches",
@@ -186,15 +178,6 @@ const translations = {
     chatPlaceholder:
       "ബീച്ചുകൾ, 1-ദിവസ പ്ലാൻ, ശാന്ത ഇടങ്ങൾ, ലോക്കൽ ഷോപ്പിംഗ്...",
     send: "അയക്കൂ",
-    footerTagline:
-      "കൗതുകത്തിനായി നിർമ്മിച്ചത്. തീരത്തിന്റെ ഊർജ്ജത്തിൽ പ്രവർത്തിക്കുന്നു.",
-    footerLinks: {
-      calendar: "സാംസ്കാരിക കലണ്ടർ",
-      food: "ഭക്ഷ്യ മാപ്പ്",
-      stay: "സ്റ്റേ ലോക്കൽ",
-      contact: "ബന്ധപ്പെടുക",
-    },
-    footerCopy: "© 2026 Kannur.io",
     tags: {
       all: "എല്ലാം",
       beach: "ബീച്ചുകൾ",
@@ -528,17 +511,26 @@ export default function App() {
         </Routes>
       </div>
       <footer className="site-footer">
-        <div>
-          <Link className="brand" to="/">
-            Kannur<span>.io</span>
-            <i>✳</i>
-          </Link>
-          <p>
-            {say(
-              "A little closer to the coast.",
-              "തീരത്തോട് കുറച്ചുകൂടി അടുത്ത്.",
-            )}
-          </p>
+        <div className="site-footer-top">
+          <div>
+            <Link className="brand" to="/">
+              Kannur<span>.io</span>
+              <i>✳</i>
+            </Link>
+            <p>
+              {say(
+                "A little closer to the coast.",
+                "തീരത്തോട് കുറച്ചുകൂടി അടുത്ത്.",
+              )}
+            </p>
+          </div>
+          <nav className="footer-nav" aria-label={say("Footer navigation", "ഫൂട്ടർ നാവിഗേഷൻ")}>
+            {links.map(([to, label]) => (
+              <Link key={to} to={to}>
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
         <p>
           {say(

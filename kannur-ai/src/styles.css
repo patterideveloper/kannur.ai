@@ -1520,9 +1520,15 @@ a {
   border-top: 1px solid var(--line);
   padding: 40px 48px;
   display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.site-footer-top {
+  display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 30px;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 .site-footer .brand {
   font-size: 28px;
@@ -1534,6 +1540,21 @@ a {
 .site-footer > p {
   text-align: right;
   line-height: 2;
+}
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  max-width: 560px;
+}
+.footer-nav a {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.footer-nav a:hover {
+  color: var(--ink);
+  text-decoration: underline;
 }
 .app[data-lang="ml"] {
   font-family: "Noto Sans Malayalam", sans-serif;
@@ -2037,6 +2058,13 @@ a {
   .site-footer {
     padding: 30px 20px calc(90px + env(safe-area-inset-bottom));
     display: block;
+  }
+  .site-footer-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-nav {
+    max-width: none;
   }
   .site-footer > p {
     text-align: left;

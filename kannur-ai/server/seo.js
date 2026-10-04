@@ -7,7 +7,7 @@ import { getResorts } from "./resorts.js";
 
 const BASE = "https://kannur.io";
 const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
-const page = (title, description, items = [], image = "/og-image.svg") => ({ title, description, items, image });
+const page = (title, description, items = [], image = "/og-image.png", extra = {}) => ({ title, description, items, image, ...extra });
 const placeItems = buildExplorePlaces();
 const allPlaces = placeItems.map((place) => ({ name: place.name, path: `/explore/place/${place.id}`, description: place.description }));
 const simpleItems = (items) => items.map((item) => ({ name: item.name, description: item.description }));
@@ -47,7 +47,11 @@ export function getSeoPage(pathname) {
     if (!place) return null;
     return page(`${place.name} | Places to Visit in Kannur | Kannur.io`, place.description || `Visit ${place.name} in Kannur, Kerala. Find photos, travel details and directions.`, [
       { name: "Explore more places in Kannur", path: "/explore" },
-    ], place.images?.[0]?.url || "/og-image.svg");
+    ], place.images?.[0]?.url || "/og-image.png", {
+      schemaType: place.type === "Worship" ? "PlaceOfWorship" : "TouristAttraction",
+      geo: place.coords,
+      addressLocality: place.area,
+    });
   }
   const automobileId = path.match(/^\/automobiles\/([a-z0-9-]+)$/)?.[1];
   if (automobileId) {
@@ -65,7 +69,21 @@ export function renderSeoHtml(template, pathname) {
   const imageUrl = data.image.startsWith("http") ? data.image : `${BASE}${data.image}`;
   const itemMarkup = data.items.length ? `<ul>${data.items.map((item) => `<li>${item.path ? `<a href="${escapeHtml(item.path)}">${escapeHtml(item.name)}</a>` : `<strong>${escapeHtml(item.name)}</strong>`}${item.description ? ` — ${escapeHtml(item.description)}` : ""}</li>`).join("")}</ul>` : "";
   const content = `<main><h1>${escapeHtml(data.title.split(" | ")[0])}</h1><p>${escapeHtml(data.description)}</p>${itemMarkup}<p><a href="/">Kannur.io home</a></p></main>`;
-  const schema = { "@context": "https://schema.org", "@type": pathname === "/" ? "WebSite" : "WebPage", name: pathname === "/" ? "Kannur.io" : data.title, description: data.description, url: canonical, inLanguage: ["en", "ml"] };
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": data.schemaType || (pathname === "/" ? "WebSite" : "WebPage"),
+    name: pathname === "/" ? "Kannur.io" : data.title,
+    description: data.description,
+    url: canonical,
+    image: imageUrl,
+    inLanguage: ["en", "ml"],
+    ...(data.geo?.lat && data.geo?.lng
+      ? { geo: { "@type": "GeoCoordinates", latitude: data.geo.lat, longitude: data.geo.lng } }
+      : {}),
+    ...(data.addressLocality
+      ? { address: { "@type": "PostalAddress", addressLocality: data.addressLocality, addressRegion: "Kerala", addressCountry: "IN" } }
+      : {}),
+  };
   const tags = `<title>${escapeHtml(data.title)}</title><meta name="description" content="${escapeHtml(data.description)}"><link rel="canonical" href="${escapeHtml(canonical)}"><meta property="og:type" content="website"><meta property="og:title" content="${escapeHtml(data.title)}"><meta property="og:description" content="${escapeHtml(data.description)}"><meta property="og:url" content="${escapeHtml(canonical)}"><meta property="og:image" content="${escapeHtml(imageUrl)}"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>`;
   const serverTags = tags.replace(/<(title|meta|link|script)\b/g, '<$1 data-ssr-seo=""');
   return template.replace(/<title>.*?<\/title>/, "").replace("</head>", `${serverTags}</head>`).replace('<div id="root"></div>', `<div id="root">${content}</div>`);

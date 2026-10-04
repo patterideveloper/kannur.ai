@@ -4,9 +4,18 @@ const SITE_URL = "https://kannur.io";
 const DEFAULT_TITLE = "Kannur Tourism: Beaches, Theyyam & Places to Visit | Kannur.io";
 const DEFAULT_DESCRIPTION =
   "Explore Kannur, Kerala: beaches, Theyyam rituals, heritage, local food, resorts and practical travel information. A bilingual guide to North Malabar.";
-const DEFAULT_IMAGE = "/og-image.svg";
+const DEFAULT_IMAGE = "/og-image.png";
 
-export default function Seo({ title, description, path = "/", image, lang = "en" }) {
+export default function Seo({
+  title,
+  description,
+  path = "/",
+  image,
+  lang = "en",
+  schemaType,
+  geo,
+  addressLocality,
+}) {
   const pageTitle = title || DEFAULT_TITLE;
   const pageDescription = description || DEFAULT_DESCRIPTION;
   const canonicalUrl = `${SITE_URL}${path}`;
@@ -15,11 +24,25 @@ export default function Seo({ title, description, path = "/", image, lang = "en"
     : `${SITE_URL}${image || DEFAULT_IMAGE}`;
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": path === "/" ? "WebSite" : "WebPage",
+    "@type": schemaType || (path === "/" ? "WebSite" : "WebPage"),
     name: path === "/" ? "Kannur.io" : pageTitle,
     description: pageDescription,
     url: canonicalUrl,
+    image: imageUrl,
     inLanguage: ["en", "ml"],
+    ...(geo?.lat && geo?.lng
+      ? { geo: { "@type": "GeoCoordinates", latitude: geo.lat, longitude: geo.lng } }
+      : {}),
+    ...(addressLocality
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            addressLocality,
+            addressRegion: "Kerala",
+            addressCountry: "IN",
+          },
+        }
+      : {}),
   };
 
   return (

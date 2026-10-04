@@ -58,7 +58,16 @@ export default function Directory({ lang, t }) {
   ];
   return (
     <main className="page">
-      <Seo lang={lang} path="/directory" title="Local directory | Kannur.io" />
+      <Seo
+        lang={lang}
+        path="/directory"
+        title={ml ? "പ്രാദേശിക ഡയറക്ടറി | Kannur.io" : "Kannur Local Directory | Kannur.io"}
+        description={
+          ml
+            ? "സേവനങ്ങളും കടകളും നാടിന്റെ വിശേഷങ്ങളും കണ്ടെത്തൂ."
+            : "Useful places, local businesses and the people who make this district home."
+        }
+      />
       <section className="page-hero">
         <Link className="back-link" to="/">
           {ml ? "ഹോം" : "Home"}

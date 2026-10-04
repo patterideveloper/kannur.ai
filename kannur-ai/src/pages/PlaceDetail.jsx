@@ -326,6 +326,7 @@ export default function PlaceDetail({ lang, t }) {
       ? place.descriptionMl || place.description
       : place.description;
   const displayType = t.types[place.type.toLowerCase()] || place.type;
+  const schemaType = place.type === "Worship" ? "PlaceOfWorship" : "TouristAttraction";
   const mapsQuery = place.mapsQuery || `${place.name} Kannur`;
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
   const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&output=embed`;
@@ -357,6 +358,10 @@ export default function PlaceDetail({ lang, t }) {
         path={`/explore/place/${place.id}`}
         title={`${displayName} | Kannur.io`}
         description={displayDesc}
+        image={images[0]?.url}
+        schemaType={schemaType}
+        geo={place.coords}
+        addressLocality={place.area}
       />
 
       <section className="page-hero">
