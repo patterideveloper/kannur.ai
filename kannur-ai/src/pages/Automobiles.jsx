@@ -90,6 +90,7 @@ export default function Automobiles({ lang, t }) {
                     alt={brand}
                     loading="lazy"
                     decoding="async"
+                    onError={(event) => { event.currentTarget.style.display = "none"; }}
                   />
                   <p className="automobile-logo-name">{brand}</p>
                 </Link>
@@ -124,6 +125,7 @@ export default function Automobiles({ lang, t }) {
                     alt={brand}
                     loading="lazy"
                     decoding="async"
+                    onError={(event) => { event.currentTarget.style.display = "none"; }}
                   />
                   <p className="automobile-logo-name">{brand}</p>
                 </Link>

@@ -72,7 +72,7 @@ export function getSeoPage(pathname) {
   if (automobileId) {
     const automobile = getAutomobileById(automobileId);
     if (!automobile) return null;
-    return page(`${automobile.name} Showroom in Kannur | Kannur.io`, `Find ${automobile.name} showroom information and vehicle models available in Kannur.`, [{ name: "Automobile brands in Kannur", path: "/automobiles" }]);
+    return page(`${automobile.brand} Showroom in Kannur | Kannur.io`, `Find ${automobile.brand} showroom information and vehicle models available in Kannur.`, [{ name: "Automobile brands in Kannur", path: "/automobiles" }]);
   }
   return null;
 }

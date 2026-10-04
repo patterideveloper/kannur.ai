@@ -326,4 +326,65 @@ export const vehicleModelsByBrand = {
     model("Rizta"),
     model("450S"),
   ],
+  "jeep-kannur": [
+    model(
+      "Compass",
+      "https://upload.wikimedia.org/wikipedia/commons/8/83/Jeep-compass-2018-petrol-at-limited-india-front.jpg",
+      "https://commons.wikimedia.org/wiki/File:Jeep-compass-2018-petrol-at-limited-india-front.jpg"
+    ),
+    model(
+      "Meridian",
+      "https://upload.wikimedia.org/wikipedia/commons/8/85/2021_Jeep_Commander_Limited_%28Brazil%29_front_view.png",
+      "https://commons.wikimedia.org/wiki/File:2021_Jeep_Commander_Limited_(Brazil)_front_view.png"
+    ),
+    model(
+      "Wrangler",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a7/Jeep_Wrangler_Rubicon_%28JL%29_4xe_1X7A0285.jpg",
+      "https://commons.wikimedia.org/wiki/File:Jeep_Wrangler_Rubicon_(JL)_4xe_1X7A0285.jpg"
+    ),
+  ],
+  "nissan-kannur": [
+    model(
+      "Magnite",
+      "https://upload.wikimedia.org/wikipedia/commons/9/90/2020_Nissan_Magnite_front_view_%28India%29_01.png",
+      "https://commons.wikimedia.org/wiki/File:2020_Nissan_Magnite_front_view_(India)_01.png"
+    ),
+    model(
+      "X-Trail",
+      "https://upload.wikimedia.org/wikipedia/commons/3/35/Nissan_X-Trail_%28T33%29_1X7A7179.jpg",
+      "https://commons.wikimedia.org/wiki/File:Nissan_X-Trail_(T33)_1X7A7179.jpg"
+    ),
+    model("Tekton"),
+  ],
+  "moto-morini-kannur": [
+    model(
+      "X-Cape 650",
+      "https://upload.wikimedia.org/wikipedia/commons/f/ff/Moto_Morini_X-Cape_%282021%29.jpg",
+      "https://commons.wikimedia.org/wiki/File:Moto_Morini_X-Cape_(2021).jpg"
+    ),
+    model(
+      "Seiemmezzo Retro Street",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a2/Moto_Morini_Seiemmezzo_%282022%29.jpg",
+      "https://commons.wikimedia.org/wiki/File:Moto_Morini_Seiemmezzo_(2022).jpg"
+    ),
+    model(
+      "Seiemmezzo Scrambler",
+      "https://upload.wikimedia.org/wikipedia/commons/c/cf/Moto_Morini_Seiemmezzo_SCR.jpg",
+      "https://commons.wikimedia.org/wiki/File:Moto_Morini_Seiemmezzo_SCR.jpg"
+    ),
+  ],
+  "zontes-kannur": [
+    model("350R"),
+    model("350T"),
+    model("GK350"),
+  ],
+  "qj-motor-kannur": [
+    model("SRC 250"),
+    model(
+      "SRV 300",
+      "https://upload.wikimedia.org/wikipedia/commons/1/12/QJMotor_SRV_300_A_2025.jpg",
+      "https://commons.wikimedia.org/wiki/File:QJMotor_SRV_300_A_2025.jpg"
+    ),
+    model("SRK 400"),
+  ],
 };

@@ -95,7 +95,7 @@ export default function AutomobileDetail({ lang, t }) {
 
       <section className="info-section automobile-detail-wrap">
         <figure className={`automobile-logo-detail ${item.theme ? `theme-${item.theme}` : ""}`}>
-          <img src={item.logo} alt={brand} />
+          <img src={item.logo} alt={brand} onError={(event) => { event.currentTarget.style.display = "none"; }} />
         </figure>
         <div className="automobile-detail-content">
           <h1>{dealer}</h1>
