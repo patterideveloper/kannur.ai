@@ -9,6 +9,8 @@ const tagGroups = [
   { value: "hill" },
   { value: "wildlife" },
   { value: "nature" },
+  { value: "waterfall" },
+  { value: "kayaking" },
   { value: "island" },
   { value: "shopping" },
   { value: "temple" },
@@ -25,6 +27,9 @@ const routeToTag = {
   hills: "hill",
   wildlife: "wildlife",
   nature: "nature",
+  waterfall: "waterfall",
+  waterfalls: "waterfall",
+  kayaking: "kayaking",
   island: "island",
   shopping: "shopping",
   worship: "temple",
@@ -40,6 +45,8 @@ const tagToRoute = {
   hill: "hills",
   wildlife: "wildlife",
   nature: "nature",
+  waterfall: "waterfalls",
+  kayaking: "kayaking",
   island: "island",
   shopping: "shopping",
   temple: "temples",
@@ -237,7 +244,7 @@ export default function Explore({ lang, t }) {
         lang={lang === "ml" ? "ml" : "en"}
         path={filter ? `/explore/${filter}` : "/explore"}
         title={filter
-          ? `${({ beaches: "Beaches", heritage: "Heritage", hills: "Hills", wildlife: "Wildlife", nature: "Nature", islands: "Islands", shopping: "Shopping", temples: "Temples", churches: "Churches", mosques: "Mosques" })[filter] || "Places"} in Kannur | Kannur.io`
+          ? `${({ beaches: "Beaches", heritage: "Heritage", hills: "Hills", wildlife: "Wildlife", nature: "Nature", waterfalls: "Waterfalls", kayaking: "Kayaking", islands: "Islands", shopping: "Shopping", temples: "Temples", churches: "Churches", mosques: "Mosques" })[filter] || "Places"} in Kannur | Kannur.io`
           : "Places to Visit in Kannur: Beaches, Forts & Temples | Kannur.io"}
         description={
           filter

@@ -8,6 +8,12 @@
 .day-hero h1 em, .day-result-head h2 em { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -.03em; }
 .day-hero-inner > p:last-child { max-width: 510px; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.5; color: #f7f5f2; }
 .day-layout { display: grid; grid-template-columns: minmax(300px, 430px) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); width: min(1180px, calc(100% - 3rem)); margin: auto; padding: 3rem 0 6rem; }
+.day-results-shell { width: min(820px, calc(100% - 3rem)); margin: auto; padding: 3rem 0 6rem; }
+.day-shortcuts { width: min(1180px, calc(100% - 3rem)); margin: 2.5rem auto 0; }
+.day-shortcuts > span { display: block; margin-bottom: .75rem; font-size: .85rem; font-weight: 650; color: #637780; }
+.day-shortcuts-row { display: flex; flex-wrap: wrap; gap: .6rem; }
+.day-shortcut-chip { display: inline-flex; padding: .55rem 1rem; border: 1px solid #1e4b58; border-radius: 999px; color: #1e4b58; font-size: .83rem; font-weight: 650; transition: background .2s; }
+.day-shortcut-chip:hover { background: #e9f0ee; }
 .day-form { align-self: start; padding: 2rem; background: #fff; border: 1px solid #e2e3dc; border-radius: 22px; box-shadow: 0 22px 65px #18334213; }
 .day-form-heading > span { color: #a34c3a; font-size: .72rem; font-weight: 750; letter-spacing: .16em; }
 .day-form-heading h2 { margin: .6rem 0 2rem; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1; letter-spacing: -.04em; }

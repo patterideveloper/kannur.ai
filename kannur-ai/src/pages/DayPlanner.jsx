@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import Icon from "../components/Icon";
-import { buildDayPlan, dayHours, dayInterests, dayRegions, normalizeDayOptions } from "../lib/dayPlanner";
+import { buildDayPlan, dayHours, dayInterests, dayRegions, itinerarySlugs, normalizeDayOptions, parseItinerarySlug } from "../lib/dayPlanner";
 import "./dayPlanner.css";
 
 const interestLabels = {
@@ -50,6 +50,21 @@ export default function DayPlanner({ lang }) {
       <h1>{say("A day worth", "ഓർമ്മയിൽ നിൽക്കുന്ന")} <em>{say("remembering.", "ഒരു ദിവസം.")}</em></h1>
       <p>{say("Tell us what you love. We’ll put together a thoughtful route using places already in our Kannur guide.", "നിങ്ങൾക്കിഷ്ടമുള്ളത് തിരഞ്ഞെടുക്കൂ. കണ്ണൂർ ഗൈഡിലെ സ്ഥലങ്ങൾ ചേർത്ത് ഒരു യാത്ര ഒരുക്കാം.")}</p>
     </div></section>
+
+    <div className="day-shortcuts">
+      <span>{say("Or jump straight to a ready-made day:", "അല്ലെങ്കിൽ തയ്യാറായ ഒരു യാത്ര തിരഞ്ഞെടുക്കൂ:")}</span>
+      <div className="day-shortcuts-row">
+        {itinerarySlugs.map((slug) => {
+          const parsed = parseItinerarySlug(slug);
+          const region = dayRegions.find((item) => item.id === parsed.region);
+          return (
+            <Link key={slug} to={`/plan/${slug}`} className="day-shortcut-chip">
+              {ml ? region.nameMl : region.name} · {parsed.hours}{say("h", "മ")}
+            </Link>
+          );
+        })}
+      </div>
+    </div>
 
     <div className="day-layout">
       <form className="day-form" onSubmit={makePlan}>

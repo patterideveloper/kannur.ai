@@ -1,20 +1,3 @@
-export const eateries = [
-  {
-    id: "paris-restaurant-thalassery",
-    name: "Paris Restaurant (Thalassery)",
-    nameMl: "പാരിസ് റെസ്റ്റോറന്റ് (തലശ്ശേരി)",
-    type: "Heritage eatery",
-    typeMl: "പൈതൃക ഭക്ഷണശാല",
-    areaMl: "തലശ്ശേരി",
-    descriptionMl: "തലശ്ശേരി ദം ബിരിയാണിയുടെ പേരിൽ അറിയപ്പെടുന്ന പാരമ്പര്യമുള്ള ഭക്ഷണശാല.",
-    area: "Thalassery",
-    description:
-      "The heritage home of Thalassery Dum Biryani, a legendary stop in the town’s food story.",
-    source: "https://www.keralatourism.org/thalassery/tourist-circuits/harbour-town/paris-hotel-street",
-    mapsQuery: "Paris Restaurant Thalassery",
-  },
-];
-
 export const specialties = [
   {
     id: "thalassery-biryani",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
+import { nearbyStopPlaceId } from "../data/places";
 
 // Only use the place's curated gallery; search results may depict another location.
 function buildDetailImages(place) {
@@ -517,9 +518,18 @@ export default function PlaceDetail({ lang, t }) {
           <section className="detail-card">
             <h2>{lang === "ml" ? "സമീപ സ്റ്റോപ്പുകൾ" : "Nearby Stops"}</h2>
             <ul className="detail-tips">
-              {nearbyStops.map((stop) => (
-                <li key={stop}>{stop}</li>
-              ))}
+              {nearbyStops.map((stop) => {
+                const stopId = nearbyStopPlaceId(stop);
+                return (
+                  <li key={stop}>
+                    {stopId && stopId !== place.id ? (
+                      <Link to={`/explore/place/${stopId}`}>{stop}</Link>
+                    ) : (
+                      stop
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </section>
 

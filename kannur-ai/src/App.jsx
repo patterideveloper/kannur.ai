@@ -17,6 +17,9 @@ import PlaceDetail from "./pages/PlaceDetail";
 import Automobiles from "./pages/Automobiles";
 import AutomobileDetail from "./pages/AutomobileDetail";
 import Brands from "./pages/Brands";
+import PhotoSpots from "./pages/PhotoSpots";
+import Itinerary from "./pages/Itinerary";
+import GettingHere from "./pages/GettingHere";
 
 const translations = {
   en: {
@@ -55,6 +58,8 @@ const translations = {
       sunset: "Sunset",
       drive: "Drive-in",
       nature: "Nature",
+      waterfall: "Waterfalls",
+      kayaking: "Kayaking",
       adventure: "Adventure",
       sunrise: "Sunrise",
       cool: "Cool",
@@ -196,6 +201,8 @@ const translations = {
       sunset: "സൂര്യസ്തമയം",
       drive: "ഡ്രൈവ്-ഇൻ",
       nature: "പ്രകൃതി",
+      waterfall: "വെള്ളച്ചാട്ടങ്ങൾ",
+      kayaking: "കയാക്കിംഗ്",
       adventure: "സാഹസം",
       sunrise: "സൂര്യോദയം",
       cool: "തണുപ്പ്",
@@ -380,6 +387,8 @@ export default function App() {
     ["/automobiles", say("Automobiles", "വാഹനങ്ങൾ")],
     ["/brands", say("Brands", "ബ്രാൻഡുകൾ")],
     ["/hospitals", say("Hospitals", "ആശുപത്രികൾ")],
+    ["/photo-spots", say("Photo spots", "ഫോട്ടോ സ്പോട്ടുകൾ")],
+    ["/how-to-reach-kannur", say("Getting here", "എത്തിച്ചേരൽ")],
   ];
   return (
     <div className="app" data-lang={lang}>
@@ -471,6 +480,7 @@ export default function App() {
           <Route path="/" element={<Home lang={lang} t={t} />} />
           <Route path="/explore" element={<Explore lang={lang} t={t} />} />
           <Route path="/plan" element={<DayPlanner lang={lang} />} />
+          <Route path="/plan/:slug" element={<Itinerary lang={lang} />} />
           <Route
             path="/explore/:filter"
             element={<Explore lang={lang} t={t} />}
@@ -492,6 +502,8 @@ export default function App() {
             element={<Automobiles lang={lang} t={t} />}
           />
           <Route path="/brands" element={<Brands lang={lang} />} />
+          <Route path="/photo-spots" element={<PhotoSpots lang={lang} t={t} />} />
+          <Route path="/how-to-reach-kannur" element={<GettingHere lang={lang} />} />
           <Route
             path="/automobiles/:automobileId"
             element={<AutomobileDetail lang={lang} t={t} />}

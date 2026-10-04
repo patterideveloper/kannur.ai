@@ -4,6 +4,7 @@ import Icon from "../components/Icon";
 export default function Directory({ lang, t }) {
   const ml = lang === "ml";
   const cards = [
+    ["/how-to-reach-kannur", "plane", "Getting here", "എത്തിച്ചേരൽ", "Flight, train and road routes into Kannur", "കണ്ണൂരിലേക്കുള്ള വിമാന, ട്രെയിൻ, റോഡ് മാർഗങ്ങൾ"],
     ["/resorts", "wave", "Resorts & stays", "റിസോർട്ടുകളും താമസങ്ങളും", "Beach resorts, hill retreats and backwater stays", "കടൽത്തീരത്തും മലനിരകളിലും കായലോരത്തും താമസങ്ങൾ"],
     [
       "/hospitals",

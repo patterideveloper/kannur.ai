@@ -4,6 +4,7 @@ import { events, personalities } from "../src/data/extras.js";
 import { restaurants, institutions } from "../src/data/localDirectory.js";
 import { hospitals } from "../src/data/hospitals.js";
 import { getResorts } from "./resorts.js";
+import { buildDayPlan, dayRegions, itinerarySlugs, parseItinerarySlug } from "../src/lib/dayPlanner.js";
 
 const BASE = "https://kannur.io";
 const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
@@ -28,9 +29,11 @@ const staticPages = {
   "/automobiles": page("Automobile Showrooms in Kannur | Kannur.io", "Find car and motorcycle brands and showroom locations in Kannur district."),
   "/brands": page("Brands in Kannur | Kannur.io", "Explore food, fashion, footwear and automobile brands with a verified presence in Kannur district."),
   "/directory": page("Kannur Local Directory | Kannur.io", "Useful local places and services across Kannur district."),
+  "/photo-spots": page("Best Photo Spots in Kannur | Kannur.io", "A curated map of the best photo spots across Kannur's beaches, forts, temples, hills and islands — picked for every place in our guide.", allPlaces),
+  "/how-to-reach-kannur": page("How to Reach Kannur: Flight, Train & Road Routes | Kannur.io", "Getting to Kannur, Kerala by flight, train or road — Kannur International Airport, Kannur Railway Station, and NH66 road distances from Bengaluru, Kochi, Kozhikode and Mangaluru."),
 };
 const filters = {
-  beaches: ["beach", "Beaches"], heritage: ["heritage", "Heritage"], hills: ["hill", "Hills"], wildlife: ["wildlife", "Wildlife"], nature: ["nature", "Nature"], islands: ["island", "Islands"], shopping: ["shopping", "Shopping"], temples: ["temple", "Temples"], churches: ["church", "Churches"], mosques: ["mosque", "Mosques"],
+  beaches: ["beach", "Beaches"], heritage: ["heritage", "Heritage"], hills: ["hill", "Hills"], wildlife: ["wildlife", "Wildlife"], nature: ["nature", "Nature"], waterfalls: ["waterfall", "Waterfalls"], kayaking: ["kayaking", "Kayaking"], islands: ["island", "Islands"], shopping: ["shopping", "Shopping"], temples: ["temple", "Temples"], churches: ["church", "Churches"], mosques: ["mosque", "Mosques"],
 };
 
 export function getSeoPage(pathname) {
@@ -52,6 +55,18 @@ export function getSeoPage(pathname) {
       geo: place.coords,
       addressLocality: place.area,
     });
+  }
+  const itinerarySlug = path.match(/^\/plan\/([a-z0-9-]+)$/)?.[1];
+  if (itinerarySlug) {
+    const parsed = parseItinerarySlug(itinerarySlug);
+    if (!parsed) return null;
+    const region = dayRegions.find((item) => item.id === parsed.region);
+    const plan = buildDayPlan({ region: parsed.region, hours: parsed.hours, interests: ["coast", "culture", "food"] });
+    return page(
+      `${parsed.hours}-Hour ${region.name} Itinerary | Kannur.io`,
+      `A ready-made ${parsed.hours}-hour route around ${region.name}, with ${plan.stops.length} stops picked from our Kannur guide and a one-tap Google Maps route.`,
+      plan.stops.map((stop) => ({ name: stop.name, path: stop.detailPath })),
+    );
   }
   const automobileId = path.match(/^\/automobiles\/([a-z0-9-]+)$/)?.[1];
   if (automobileId) {
@@ -92,5 +107,6 @@ export function renderSeoHtml(template, pathname) {
 export function getSitemapPaths() {
   const dynamic = allPlaces.map((item) => item.path);
   const automobilePaths = getAutomobiles().map((item) => `/automobiles/${item.id}`);
-  return [...new Set([...Object.keys(staticPages), ...Object.keys(filters).map((filter) => `/explore/${filter}`), ...dynamic, ...automobilePaths])];
+  const itineraryPaths = itinerarySlugs.map((slug) => `/plan/${slug}`);
+  return [...new Set([...Object.keys(staticPages), ...Object.keys(filters).map((filter) => `/explore/${filter}`), ...dynamic, ...automobilePaths, ...itineraryPaths])];
 }

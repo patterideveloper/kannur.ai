@@ -577,7 +577,7 @@ export const places = [
       "A backwater island cluster known for serene water channels, birdlife, and canoe experiences.",
     descriptionMl:
       "ശാന്തമായ കായൽച്ചാലുകൾ, പക്ഷിജീവജാലം, കനോ യാത്രകൾ എന്നിവയ്ക്ക് പ്രശസ്തമായ ദ്വീപുസമുച്ചയം.",
-    tags: ["island", "nature", "quiet", "family"],
+    tags: ["island", "nature", "quiet", "family", "kayaking"],
     source:
       "https://www.tripadvisor.in/Attraction_Review-g777115-d8474386-Reviews-Kavvayi_Islands-Kannur_Kannur_District_Kerala.html",
     mapsQuery: "Kavvayi Islands Kannur",
@@ -718,7 +718,7 @@ export const places = [
       "A scenic waterfall spot in Kannur district known for monsoon greenery and short nature breaks.",
     descriptionMl:
       "മൺസൂൺ കാലത്തെ പച്ചപ്പിനും ചെറുനേരത്തെ പ്രകൃതി വിശ്രമത്തിനും അനുയോജ്യമായ കണ്ണൂർ ജില്ലയിലെ മനോഹര വെള്ളച്ചാട്ട സ്ഥലം.",
-    tags: ["nature", "view", "quiet", "family"],
+    tags: ["nature", "view", "quiet", "family", "waterfall"],
     source: "https://www.google.com/search?q=ezharakund+waterfalls",
     mapsQuery: "Ezharakund Waterfalls Kannur",
     images: [
@@ -1488,6 +1488,34 @@ for (const place of places) {
     nearbyStopsEn: ["Nearby local attraction", "Food stop", "Town center"],
     nearbyStopsMl: ["സമീപ ആകർഷണം", "ഭക്ഷണ സ്റ്റോപ്പ്", "ടൗൺ സെന്റർ"],
   };
+}
+
+// A handful of nearbyStops entries name a real place using a slightly
+// different string than its canonical `name` (e.g. a shorter form, or a
+// common misspelling of the source material). Only verified 1:1 aliases
+// go here — ambiguous phrases ("Payyambalam area", "Local eateries") are
+// deliberately left unlinked rather than guessed at.
+const nearbyStopAliases = {
+  "St. Angelo Fort": "st-angelo-fort",
+  "Muzhappilangad Beach": "muzhappilangad",
+  "Parassinikkadavu Snake Park": "snake-park",
+  "Surabhi Handicraft": "surabhi-handicraft",
+  "Khadi Grama": "khadi-grama",
+  "Peralassery Temple": "peralassery-subramanya-temple",
+};
+
+const placeIdByName = new Map(places.map((place) => [place.name, place.id]));
+const placeIdByNameMl = new Map(
+  places.filter((place) => place.nameMl).map((place) => [place.nameMl, place.id]),
+);
+
+export function nearbyStopPlaceId(stopName) {
+  return (
+    placeIdByName.get(stopName) ||
+    placeIdByNameMl.get(stopName) ||
+    nearbyStopAliases[stopName] ||
+    null
+  );
 }
 
 export const quickPrompts = {

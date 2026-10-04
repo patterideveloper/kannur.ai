@@ -68,6 +68,19 @@ export function buildDayPlan(rawOptions) {
   return { ...options, regionName: region.name, regionNameMl: region.nameMl, stops, mapLegs };
 }
 
+export function parseItinerarySlug(slug) {
+  const match = /^([a-z]+)-(\d+)h$/.exec(slug || "");
+  if (!match) return null;
+  const region = dayRegions.find((item) => item.id === match[1]);
+  const hours = Number(match[2]);
+  if (!region || !dayHours.includes(hours)) return null;
+  return { region: region.id, hours };
+}
+
+export const itinerarySlugs = dayRegions.flatMap((region) =>
+  dayHours.map((hours) => `${region.id}-${hours}h`),
+);
+
 export function buildDirectionsUrl(origin, stops) {
   if (!stops.length) return "https://www.google.com/maps";
   const params = new URLSearchParams({ api: "1", origin, destination: stops.at(-1).mapsQuery, travelmode: "driving" });

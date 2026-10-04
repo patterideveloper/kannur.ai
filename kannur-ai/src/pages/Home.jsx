@@ -6,6 +6,7 @@ import HistorySection from "../components/HistorySection";
 import { places } from "../data/places";
 import { videos } from "../data/media";
 const CivicUpdates = lazy(() => import("../components/CivicUpdates"));
+const TheyyamPulse = lazy(() => import("../components/TheyyamPulse"));
 const categories = [
   ["beaches", "wave", "By the sea", "കടൽത്തീരങ്ങൾ"],
   ["heritage", "culture", "Heritage", "പൈതൃകം"],
@@ -312,6 +313,9 @@ export default function Home({ lang, t }) {
               "വർണാഭമായ വേഷങ്ങൾ. ചെണ്ടയുടെ താളം. തലമുറകളിലൂടെ കൈമാറിയ കഥകൾ. കണ്ണൂരിന്റെ സാമൂഹിക ജീവിതത്തോട് ചേർന്നുനിൽക്കുന്ന പവിത്രമായ അനുഷ്ഠാനമാണ് തെയ്യം.",
             )}
           </p>
+          <Suspense fallback={null}>
+            <TheyyamPulse lang={lang} />
+          </Suspense>
           <Link className="button cream" to="/theyyam">
             {say("Explore the Theyyam calendar", "തെയ്യം കലണ്ടർ കാണുക")}
             <Icon />
