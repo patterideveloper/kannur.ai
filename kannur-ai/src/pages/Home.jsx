@@ -7,6 +7,7 @@ import { places } from "../data/places";
 import { videos } from "../data/media";
 const CivicUpdates = lazy(() => import("../components/CivicUpdates"));
 const TheyyamPulse = lazy(() => import("../components/TheyyamPulse"));
+const LiveConditions = lazy(() => import("../components/LiveConditions"));
 const categories = [
   ["beaches", "wave", "By the sea", "കടൽത്തീരങ്ങൾ"],
   ["heritage", "culture", "Heritage", "പൈതൃകം"],
@@ -161,7 +162,9 @@ export default function Home({ lang, t }) {
         <span>
           {say("THE LAND OF LOOMS & LORES", "തറികളുടെയും തിറകളുടെയും നാട്")}
         </span>
-        <span>11.87° N &nbsp; 75.37° E</span>
+        <Suspense fallback={<span className="live-conditions">11.87° N &nbsp; 75.37° E</span>}>
+          <LiveConditions lang={lang} fallback="11.87° N 75.37° E" />
+        </Suspense>
         <span>
           {say("YOUR LOCAL WINDOW INTO KANNUR", "കണ്ണൂരിനെ അടുത്തറിയാം")}
         </span>

@@ -9,6 +9,7 @@ import { fetchTemplesFromTravelKannur, fetchTemplesFromWiki } from "./server/tem
 import { buildExplorePlaces, getExplorePlaceById } from "./server/explore.js";
 import { fetchKannurCivicSnapshot } from "./server/kannurCivic.js";
 import { getAutomobileById, getAutomobiles } from "./server/automobiles.js";
+import { fetchLiveConditions } from "./server/liveConditions.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +22,15 @@ app.use(express.json());
 app.get("/api/resorts", (req, res) => {
   res.set("Cache-Control", "public, max-age=300");
   res.json({ resorts: getResorts() });
+});
+app.get("/api/live-conditions", async (req, res) => {
+  try {
+    const data = await fetchLiveConditions();
+    res.set("Cache-Control", "public, max-age=1800");
+    res.json(data);
+  } catch (error) {
+    res.status(503).json({ error: "Live conditions temporarily unavailable" });
+  }
 });
 app.get("/api/theyyam", async (req, res) => {
   const month = req.query.month;
