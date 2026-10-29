@@ -21,6 +21,11 @@ export const vehicleModelsByBrand = {
       "https://commons.wikimedia.org/wiki/Special:FilePath/Maruti%20Suzuki%20Brezza.jpg",
       "https://commons.wikimedia.org/wiki/File:Maruti_Suzuki_Brezza.jpg"
     ),
+    model("WagonR"),
+    model("Dzire"),
+    model("Fronx"),
+    model("Grand Vitara"),
+    model("Ertiga"),
   ],
   "tata-motors-kannur": [
     model(
@@ -38,6 +43,10 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg/330px-Tata_Buzzard_Sport%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0651%29.jpg",
       "https://en.wikipedia.org/wiki/Tata_Harrier"
     ),
+    model("Altroz"),
+    model("Safari"),
+    model("Curvv"),
+    model("Tiago"),
   ],
   "mahindra-eram-kannur": [
     model(
@@ -55,6 +64,8 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg/330px-Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda%2C_East_Singbhum_India_%28Ank_Kumar%2C_Infosys_limited%29_02_%28cropped%29.jpg",
       "https://en.wikipedia.org/wiki/Mahindra_Thar"
     ),
+    model("Bolero"),
+    model("XUV 3XO"),
   ],
   "hyundai-kannur": [
     model(
@@ -72,6 +83,9 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg/330px-Hyundai_i20_%28III%2C_Facelift%29_%E2%80%93_f_11102025.jpg",
       "https://en.wikipedia.org/wiki/Hyundai_i20"
     ),
+    model("Exter"),
+    model("Verna"),
+    model("Alcazar"),
   ],
   "toyota-kannur": [
     model("Innova Hycross"),
@@ -81,6 +95,9 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/2015_Toyota_Fortuner_%28New_Zealand%29.jpg/330px-2015_Toyota_Fortuner_%28New_Zealand%29.jpg",
       "https://en.wikipedia.org/wiki/Toyota_Fortuner"
     ),
+    model("Glanza"),
+    model("Taisor"),
+    model("Camry"),
   ],
   "kia-kannur": [
     model(
@@ -94,11 +111,15 @@ export const vehicleModelsByBrand = {
       "https://en.wikipedia.org/wiki/Kia_Sonet"
     ),
     model("Carens", "/images/automobiles/models/kia-carens.webp", "https://commons.wikimedia.org/wiki/File:2022_Kia_Carens_1.4_(India)_front_view_01.jpg"),
+    model("Syros"),
+    model("Carnival"),
   ],
   "mg-motors-kannur": [
     model("Hector"),
     model("Astor"),
     model("Comet EV"),
+    model("ZS EV"),
+    model("Windsor EV"),
   ],
   "honda-kannur": [
     model(
@@ -112,6 +133,7 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Honda_Amaze_front_view_%28cropped%29.jpg/330px-Honda_Amaze_front_view_%28cropped%29.jpg",
       "https://en.wikipedia.org/wiki/Honda_Amaze"
     ),
+    model("WR-V"),
   ],
   "renault-kannur": [
     model(
@@ -180,6 +202,8 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/6/67/Yamaha_fascino_%E0%AE%AF%E0%AE%AE%E0%AE%95%E0%AE%BE_%E0%AE%AA%E0%AF%87%E0%AE%9A%E0%AE%BF%E0%AE%A9%E0%AF%8B_%E0%AE%B5%E0%AE%BE%E0%AE%95%E0%AE%A9%E0%AE%AE%E0%AF%8D.jpg",
       "https://commons.wikimedia.org/wiki/File:Yamaha_fascino_%E0%AE%AF%E0%AE%AE%E0%AE%95%E0%AE%BE_%E0%AE%AA%E0%AF%87%E0%AE%9A%E0%AE%BF%E0%AE%A9%E0%AF%8B_%E0%AE%B5%E0%AE%BE%E0%AE%95%E0%AE%A9%E0%AE%AE%E0%AF%8D.jpg"
     ),
+    model("R15"),
+    model("Aerox 155"),
   ],
   "bajaj-kannur": [
     model(
@@ -193,6 +217,8 @@ export const vehicleModelsByBrand = {
       "https://commons.wikimedia.org/wiki/File:Dominar_400.jpg"
     ),
     model("Chetak", "/images/automobiles/models/bajaj-chetak.webp", "https://commons.wikimedia.org/wiki/File:Bajaj_Chetak_electric_scooters_(2026)_01.jpg"),
+    model("Pulsar N250"),
+    model("Avenger"),
   ],
   "tvs-kannur": [
     model(
@@ -210,6 +236,8 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/TVS_Ntorq_125_Race_XP.jpg/330px-TVS_Ntorq_125_Race_XP.jpg",
       "https://en.wikipedia.org/wiki/TVS_Ntorq_125"
     ),
+    model("Raider 125"),
+    model("iQube"),
   ],
   "royal-enfield-kannur": [
     model(
@@ -227,11 +255,14 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/7/72/Royal_Enfield-_Bullet_350.jpg",
       "https://commons.wikimedia.org/wiki/File:Royal_Enfield-_Bullet_350.jpg"
     ),
+    model("Meteor 350"),
+    model("Himalayan"),
   ],
   "ktm-kannur": [
     model("Duke 250", "/images/automobiles/models/ktm-250-duke.webp", "https://www.ktmindia.com/ktm-bikes/naked-bike/ktm-250-duke"),
     model("RC 390", "/images/automobiles/models/ktm-rc-390.webp", "https://www.ktmindia.com/ktm-bikes/supersport/ktm-rc-390"),
     model("Adventure 390", "/images/automobiles/models/ktm-390-adventure.webp", "https://www.ktmindia.com/ktm-bikes/travel/ktm-390-adventure"),
+    model("Duke 390"),
   ],
   "suzuki-bike-kannur": [
     model("Access 125", "/images/automobiles/models/suzuki-access-125.webp", "https://commons.wikimedia.org/wiki/File:Suzuki_Access_125,_2023.jpg"),
@@ -241,6 +272,7 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/3/33/Suzuki_Gixxer_negra.jpg",
       "https://commons.wikimedia.org/wiki/File:Suzuki_Gixxer_negra.jpg"
     ),
+    model("Avenis"),
   ],
   "triumph-kannur": [
     model("Speed 400", "/images/automobiles/models/triumph-speed-400.webp", "https://commons.wikimedia.org/wiki/File:Triumph_Speed_400.jpg"),
@@ -290,6 +322,8 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/6/6d/Honda_Hornet_2.0_Repsol_Edition.jpg",
       "https://commons.wikimedia.org/wiki/File:Honda_Hornet_2.0_Repsol_Edition.jpg"
     ),
+    model("Shine 100"),
+    model("Unicorn"),
   ],
   "hero-honda-kannur": [
     model(
@@ -303,6 +337,8 @@ export const vehicleModelsByBrand = {
       "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Modified_Xpulse_200V.jpg/330px-Modified_Xpulse_200V.jpg",
       "https://en.wikipedia.org/wiki/Hero_XPulse_200"
     ),
+    model("HF Deluxe"),
+    model("Glamour"),
   ],
   "ola-electric-kannur": [
     model(
@@ -325,6 +361,7 @@ export const vehicleModelsByBrand = {
     model("450X"),
     model("Rizta"),
     model("450S"),
+    model("Rizta Z"),
   ],
   "jeep-kannur": [
     model(

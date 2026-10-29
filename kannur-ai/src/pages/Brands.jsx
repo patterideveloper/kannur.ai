@@ -35,6 +35,9 @@ const brands = [
   { name: "Reliance SMART Bazaar", category: "Retail", area: "Payyannur / Kuthuparamba", icon: "/images/brands/smart-bazaar.png" },
   { name: "DMart", category: "Retail", area: "Capitol Mall / Kannur Mall, Kannur", icon: "/images/brands/dmart.png" },
   { name: "Apollo Pharmacy", category: "Pharmacy", area: "Fort Road, Kannur", icon: null },
+  { name: "Alukkas", category: "Jewellery", area: "Kannur City Centre, Fort Road", icon: null },
+  { name: "Green's Hypermarket", category: "Retail", area: "Kannur City Centre, Fort Road", icon: null },
+  { name: "Apollo Clinic", category: "Healthcare", area: "Kannur City Centre, Fort Road", icon: null },
 ];
 
 export default function Brands({ lang }) {
@@ -80,8 +83,8 @@ export default function Brands({ lang }) {
     (category === "All" || brand.category === category) &&
     `${brand.name} ${brand.nameMl || ""}`.toLowerCase().includes(query.trim().toLowerCase()),
   );
-  const categories = ["All", "Food", "Fashion", "Footwear", "Eyewear", "Electronics", "Jewellery", "Watches", "Retail", "Pharmacy", "Entertainment", "Cars", "Bikes"];
-  const categoryMl = { All: "എല്ലാം", Food: "ഭക്ഷണം", Fashion: "വസ്ത്രങ്ങൾ", Footwear: "പാദരക്ഷകൾ", Eyewear: "കണ്ണടകൾ", Electronics: "ഇലക്ട്രോണിക്സ്", Jewellery: "ആഭരണങ്ങൾ", Watches: "വാച്ചുകൾ", Retail: "ചില്ലറ വ്യാപാരം", Pharmacy: "ഫാർമസി", Entertainment: "വിനോദം", Cars: "കാറുകൾ", Bikes: "ബൈക്കുകൾ" };
+  const categories = ["All", "Food", "Fashion", "Footwear", "Eyewear", "Electronics", "Jewellery", "Watches", "Retail", "Pharmacy", "Healthcare", "Entertainment", "Cars", "Bikes"];
+  const categoryMl = { All: "എല്ലാം", Food: "ഭക്ഷണം", Fashion: "വസ്ത്രങ്ങൾ", Footwear: "പാദരക്ഷകൾ", Eyewear: "കണ്ണടകൾ", Electronics: "ഇലക്ട്രോണിക്സ്", Jewellery: "ആഭരണങ്ങൾ", Watches: "വാച്ചുകൾ", Retail: "ചില്ലറ വ്യാപാരം", Pharmacy: "ഫാർമസി", Healthcare: "ആരോഗ്യ സംരക്ഷണം", Entertainment: "വിനോദം", Cars: "കാറുകൾ", Bikes: "ബൈക്കുകൾ" };
 
   return <main className="page brands-page">
     <Seo lang={lang} path="/brands" title="Brands in Kannur | Kannur.io" description="Explore food, fashion, footwear, electronics, jewellery, car and bike brands with a presence in Kannur district." />
