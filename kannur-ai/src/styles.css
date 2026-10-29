@@ -2267,7 +2267,7 @@ a {
 .theyyam-hero h1 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(52px, 7vw, 100px); line-height: .99; letter-spacing: -.035em; margin: 14px 0 21px; }
 .theyyam-hero-content > p:not(.theyyam-eyebrow) { max-width: 510px; font-size: clamp(15px, 2vw, 19px); line-height: 1.6; }
 .theyyam-hero-link { display: inline-flex; align-items: center; gap: 32px; border-bottom: 1px solid #ffffffaa; padding: 10px 0; margin-top: 17px; font-weight: 700; }
-.theyyam-calendar { max-width: 1080px; margin: 0 auto; padding: clamp(48px, 7vw, 100px) 0; }
+.theyyam-calendar { max-width: 1320px; margin: 0 auto; padding: clamp(48px, 7vw, 100px) 0; }
 .theyyam-calendar-head { max-width: 700px; }
 .theyyam-calendar-head h2, .theyyam-result-head h2, .theyyam-guide h2 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -.025em; }
 .theyyam-calendar-head h2 { font-size: clamp(38px, 5vw, 66px); margin: 13px 0; }
@@ -2289,16 +2289,30 @@ a {
 .theyyam-empty h3 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); font-weight: 400; margin-bottom: 8px; }
 .theyyam-empty p { max-width: 530px; margin: 6px auto; color: var(--muted); }
 .theyyam-empty button { border: 0; background: var(--sun); color: white; border-radius: 7px; padding: 12px 20px; font-weight: 700; }
-.theyyam-list { display: grid; gap: 12px; margin-top: 22px; }
+.theyyam-list { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 22px; align-items: start; }
 .theyyam-event { display: grid; grid-template-columns: 92px 1fr; gap: 20px; padding: 25px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
 .theyyam-event-date { display: flex; flex-direction: column; align-items: center; justify-content: center; align-self: start; aspect-ratio: 1; background: #f5e8e1; color: #8e3325; border-radius: 10px; }
 .theyyam-event-date strong { font-family: var(--font-serif); font-size: 44px; line-height: 1; }
 .theyyam-event-date span { font-size: 12px; text-transform: uppercase; font-weight: 800; }
-.theyyam-event-overline { font-size: 10px; color: var(--sun); text-transform: uppercase; letter-spacing: .12em; font-weight: 800; margin: 0 0 7px; }
+.theyyam-event-overline { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 10px; color: var(--sun); text-transform: uppercase; letter-spacing: .12em; font-weight: 800; margin: 0 0 7px; }
 .theyyam-event h3 { font-size: clamp(19px, 2.5vw, 26px); margin: 0 0 13px; }
 .theyyam-event-meta { display: flex; gap: 6px 18px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
 .theyyam-event-meta a { text-decoration: underline; }
 .theyyam-event-links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 20px; font-size: 12px; color: var(--sun); font-weight: 800; }
+.theyyam-status { display: inline-flex; align-items: center; letter-spacing: .04em; font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 99px; background: #eee; color: var(--muted); }
+.theyyam-status-ongoing, .theyyam-status-today { background: #8e3325; color: #fff; }
+.theyyam-status-tomorrow { background: #f5e8e1; color: #8e3325; }
+.theyyam-status-week { background: #eef1ec; color: #3a5c47; }
+.theyyam-event-ongoing, .theyyam-event-today { border-color: #8e3325; box-shadow: 0 0 0 1px #8e332522; }
+.theyyam-rituals-toggle { border: 0; background: none; padding: 4px 0; margin-top: 2px; font-size: 12px; font-weight: 800; color: var(--sun); cursor: pointer; }
+.theyyam-rituals-toggle:hover, .theyyam-rituals-toggle:focus-visible { text-decoration: underline; }
+.theyyam-today-jump { grid-column: 1 / -1; min-height: 50px; border: 1px solid var(--line); background: white; border-radius: 8px; padding: 0 20px; font-weight: 800; font-size: 13px; color: var(--sun); white-space: nowrap; }
+.theyyam-today-jump:hover, .theyyam-today-jump:focus-visible { border-color: var(--sun); }
+@media (min-width: 860px) {
+  .theyyam-list { grid-template-columns: repeat(2, 1fr); }
+  .theyyam-month-search { grid-template-columns: 1fr 1fr auto; }
+  .theyyam-today-jump { grid-column: auto; }
+}
 .theyyam-guide { display: flex; justify-content: space-between; gap: 30px; background: #193830; color: white; border-radius: 15px; padding: clamp(26px, 5vw, 48px); margin-top: 65px; }
 .theyyam-guide > div:first-child { max-width: 560px; }
 .theyyam-guide h2 { font-size: clamp(34px, 4vw, 50px); margin: 10px 0; }
