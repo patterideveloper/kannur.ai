@@ -79,7 +79,7 @@ export async function fetchTheyyamEvents({ month, now = new Date() }) {
   }
   const { today } = currentMonthInKannur(now);
   const deduped = new Map();
-  events.filter((event) => event.startDate.slice(0, 7) === month && event.endDate >= today)
+  events.filter((event) => event.startDate.slice(0, 7) === month && event.startDate >= today)
     .forEach((event) => deduped.set(`${event.startDate}-${event.name}`, event));
   return {
     events: [...deduped.values()].sort((a, b) => a.startDate.localeCompare(b.startDate) || a.name.localeCompare(b.name)),
