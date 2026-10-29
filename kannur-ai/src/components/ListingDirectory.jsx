@@ -41,7 +41,10 @@ export default function ListingDirectory({ lang, theme, eyebrow, title, intro, i
           {item.note && <p className="listing-note">{ml ? item.noteMl : item.note}</p>}
           <div className="listing-actions"><a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label={`${ml ? "മാപ്പിൽ കാണുക" : "View on map"}: ${item.name}`}>{ml ? "മാപ്പിൽ കാണുക ↗" : "Map ↗"}</a><a href={item.source} target="_blank" rel="noopener noreferrer" aria-label={`${ml ? "ഉറവിടം" : "View source"}: ${item.name}`}>{ml ? "ഉറവിടം ↗" : "Source ↗"}</a></div>
         </article>;
-      })}</div> : <div className="listing-empty">{ml ? "ഫലങ്ങളില്ല. മറ്റൊരു പേര് തിരയൂ." : "No matches. Try another name or category."}</div>}
+      })}</div> : <div className="listing-empty">
+        <p>{ml ? "ഫലങ്ങളില്ല. മറ്റൊരു പേര് തിരയൂ." : "No matches. Try another name or category."}</p>
+        {(query || filter !== "all") && <button type="button" onClick={() => { setQuery(""); setFilter("all"); }}>{ml ? "ഫിൽട്ടറുകൾ മായ്ക്കുക" : "Clear filters"}</button>}
+      </div>}
       <p className="listing-disclaimer">{ml ? "ഇത് തിരഞ്ഞെടുത്ത പട്ടികയാണ്; സമയവും ലഭ്യതയും പോകുന്നതിനു മുമ്പ് പരിശോധിക്കുക." : "A curated starting point, not a complete directory. Check current hours and availability before visiting."}</p>
     </section>
   </main>;

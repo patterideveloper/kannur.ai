@@ -49,7 +49,10 @@ export default function Hospitals({ lang }) {
             <a href={hospital.source} target="_blank" rel="noopener noreferrer" aria-label={`${ml ? "സ്ഥാപന വിവരങ്ങൾ" : "View provider or registry"}: ${hospital.name}`}>{ml ? "വിവരങ്ങൾ ↗" : "Provider / registry ↗"}</a>
           </div>
         </article>;
-      })}</div> : <div className="listing-empty">{ml ? "ഫലങ്ങളില്ല. മറ്റൊരു പേര് തിരയൂ." : "No matches. Try another hospital or location."}</div>}
+      })}</div> : <div className="listing-empty">
+        <p>{ml ? "ഫലങ്ങളില്ല. മറ്റൊരു പേര് തിരയൂ." : "No matches. Try another hospital or location."}</p>
+        {(query || category !== "All") && <button type="button" onClick={() => { setQuery(""); setCategory("All"); }}>{ml ? "ഫിൽട്ടറുകൾ മായ്ക്കുക" : "Clear filters"}</button>}
+      </div>}
       <p className="listing-disclaimer">{ml ? "ഇത് അടിയന്തര സേവന പട്ടികയല്ല. ചികിത്സ, ഫോൺ നമ്പർ, സമയങ്ങൾ എന്നിവ ആശുപത്രിയുമായി നേരിട്ട് സ്ഥിരീകരിക്കുക." : "This is a directory, not emergency triage. Call the hospital to confirm services, phone numbers and availability before travelling."}</p>
     </section>
   </main>;

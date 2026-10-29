@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
+import Icon from "../components/Icon";
 
 function ModelPhoto({ model, brandLogo, lang }) {
   const [failed, setFailed] = useState(false);
@@ -107,11 +108,7 @@ export default function AutomobileDetail({ lang, t }) {
           <div className="info-actions auto-detail-actions">
             {mapsUrl && (
               <a className="map-link location-link" href={mapsUrl} target="_blank" rel="noreferrer">
-                <span className="map-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" focusable="false">
-                    <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                  </svg>
-                </span>
+                <Icon name="pin" />
                 {t.mapsLink}
               </a>
             )}

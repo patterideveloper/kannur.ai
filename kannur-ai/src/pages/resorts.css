@@ -19,7 +19,15 @@
 .stays-neighborhoods button[aria-pressed="true"] { border-bottom:2px solid var(--sun); color:var(--sun); font-weight:700; }
 .stays-count { color:var(--muted); font-size:.8rem; }
 .stays-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.3rem; }
-.stay-card { min-width:0; background:var(--paper); border:1px solid var(--line); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; }
+.stay-card { min-width:0; background:var(--paper); border:1px solid var(--line); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; animation:arrive 0.5s ease both; }
+.stay-card:nth-child(1) { animation-delay:0ms; }
+.stay-card:nth-child(2) { animation-delay:40ms; }
+.stay-card:nth-child(3) { animation-delay:80ms; }
+.stay-card:nth-child(4) { animation-delay:120ms; }
+.stay-card:nth-child(5) { animation-delay:160ms; }
+.stay-card:nth-child(6) { animation-delay:200ms; }
+.stay-card:nth-child(7) { animation-delay:240ms; }
+.stay-card:nth-child(8) { animation-delay:280ms; }
 .stay-photo { display:block; position:relative; aspect-ratio:3/2; overflow:hidden; background:#e3ebe4; }
 .stay-photo img { width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
 @media(hover:hover) { .stay-photo:hover img { transform:scale(1.035); } }

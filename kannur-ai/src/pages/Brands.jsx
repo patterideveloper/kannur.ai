@@ -110,7 +110,10 @@ export default function Brands({ lang }) {
         <h2>{ml ? brand.nameMl || brand.name : brand.name}</h2><p>{ml ? brand.areaMl || brand.area : brand.area}</p>
       </article>)}
     </section>
-    {!shown.length && !loadingAutos && !autoError && <p className="brands-empty" role="status">{ml ? "ഇവിടെ പൊരുത്തപ്പെടുന്ന ബ്രാൻഡുകൾ ഇല്ല." : "No matching brands. Try another search or category."}</p>}
+    {!shown.length && !loadingAutos && !autoError && <div className="brands-empty" role="status">
+      <p>{ml ? "ഇവിടെ പൊരുത്തപ്പെടുന്ന ബ്രാൻഡുകൾ ഇല്ല." : "No matching brands. Try another search or category."}</p>
+      {(query || category !== "All") && <button type="button" onClick={() => { setQuery(""); setCategory("All"); }}>{ml ? "ഫിൽട്ടറുകൾ മായ്ക്കുക" : "Clear filters"}</button>}
+    </div>}
     <p className="brands-note">{ml ? "ബ്രാൻഡുകളുടെ സാന്നിധ്യം മാറാം. ലോഗോകൾ ബന്ധപ്പെട്ട കമ്പനികളുടെ ഉടമസ്ഥതയിലാണ്." : "Brand presence can change. Brand marks belong to their respective owners."}</p>
   </main>;
 }
