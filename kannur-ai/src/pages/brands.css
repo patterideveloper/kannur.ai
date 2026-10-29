@@ -18,5 +18,6 @@
 .brands-error p { margin-bottom: 8px; }
 .brands-error button { min-height: 44px; padding: 9px 16px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: #fff; }
 .brands-note, .brands-empty { margin: 25px 0; font-size: 13px; }
+/* 900: off-scale on purpose — 4-column grid needs extra room before dropping to 3 */
 @media (max-width: 900px) { .brands-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 650px) { .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; } .brand-card { padding: 22px 9px 12px; } .brand-card-icon { width: 82px; height: 82px; border-radius: 18px; } .brand-card-icon img { width: 62px; height: 62px; } .brand-card-initial { font-size: 28px; } .brand-card h2 { font-size: 15px; } .brand-card p { font-size: 11px; } }
+@media (max-width: 640px) { .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; } .brand-card { padding: 22px 9px 12px; } .brand-card-icon { width: 82px; height: 82px; border-radius: 18px; } .brand-card-icon img { width: 62px; height: 62px; } .brand-card-initial { font-size: 28px; } .brand-card h2 { font-size: 15px; } .brand-card p { font-size: 11px; } }

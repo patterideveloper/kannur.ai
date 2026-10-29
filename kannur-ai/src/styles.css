@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap");
+/*
+ * Breakpoint scale: new responsive rules should reach for one of these first.
+ *   640  - small phone (stack to one column)
+ *   768  - phone/tablet handoff
+ *   1024 - tablet/small-desktop grid density
+ * A few breakpoints below are intentionally off-scale because they're tuned
+ * to a specific component's content (documented inline where that's the case).
+ */
 :root {
   --ink: #183b32;
   --sea: #183b32;
@@ -6,7 +14,7 @@
   --paper: #fffef9;
   --sun: #b83e2e;
   --mist: #e7ede7;
-  --line: #dce1d7;
+  --line: #7c8d70;
   --muted: #4f6256;
   --font-display: "Manrope", sans-serif;
   --font-serif: "Instrument Serif", Georgia, serif;
@@ -1645,6 +1653,7 @@ a {
     transform: translateY(0);
   }
 }
+/* 1500: off-scale on purpose — ultra-wide-desktop enhancement, not a density/stacking breakpoint */
 @media (min-width: 1500px) {
   .destination-copy {
     max-width: 1240px;
@@ -1653,6 +1662,7 @@ a {
     height: 780px;
   }
 }
+/* 1100: off-scale on purpose — primary site-wide nav breakpoint, left untouched to avoid a global regression */
 @media (max-width: 1100px) {
   .desktop-nav {
     display: none;
@@ -2254,8 +2264,9 @@ a {
 .hospital-phone { display: inline-flex; align-self: flex-start; margin-top: .95rem; color: #1c5360; font-size: .95rem; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .listing-empty { padding: 4rem 1rem; text-align: center; border: 1px dashed #aebdbc; border-radius: 18px; }
 .listing-disclaimer { max-width: 650px; margin: 2rem 0 0; color: #4c6268; font-size: .82rem; line-height: 1.5; }
+/* 850: off-scale on purpose — listing cards need extra room before dropping to 2 columns */
 @media (max-width: 850px) { .listing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .listing-hero-inner, .listing-content { width: min(100% - 2rem, 1200px); } .listing-hero-inner { padding: 6.5rem 0 3.3rem; } .listing-eyebrow { margin-top: 2.2rem; } .listing-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); } .listing-grid { grid-template-columns: 1fr; gap: .75rem; } .listing-card { min-height: 215px; } .listing-card h2 { margin-top: 1.3rem; } .listing-content { padding-top: 1.3rem; } }
+@media (max-width: 640px) { .listing-hero-inner, .listing-content { width: min(100% - 2rem, 1200px); } .listing-hero-inner { padding: 6.5rem 0 3.3rem; } .listing-eyebrow { margin-top: 2.2rem; } .listing-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); } .listing-grid { grid-template-columns: 1fr; gap: .75rem; } .listing-card { min-height: 215px; } .listing-card h2 { margin-top: 1.3rem; } .listing-content { padding-top: 1.3rem; } }
 /* Theyyam calendar: a focused editorial experience, independent of generic cards. */
 .theyyam-page { max-width: 1280px; }
 .theyyam-hero { position: relative; min-height: min(680px, 76svh); overflow: hidden; border-radius: 18px; background: #2c1817; color: #fff; display: flex; align-items: end; }
@@ -2308,6 +2319,7 @@ a {
 .theyyam-rituals-toggle:hover, .theyyam-rituals-toggle:focus-visible { text-decoration: underline; }
 .theyyam-today-jump { grid-column: 1 / -1; min-height: 50px; border: 1px solid var(--line); background: white; border-radius: 8px; padding: 0 20px; font-weight: 800; font-size: 13px; color: var(--sun); white-space: nowrap; }
 .theyyam-today-jump:hover, .theyyam-today-jump:focus-visible { border-color: var(--sun); }
+/* 860: off-scale on purpose — event cards need extra room before splitting into 2 columns */
 @media (min-width: 860px) {
   .theyyam-list { grid-template-columns: repeat(2, 1fr); }
   .theyyam-month-search { grid-template-columns: 1fr 1fr auto; }
@@ -2456,7 +2468,7 @@ a {
   color: var(--muted);
   max-width: 640px;
 }
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .distance-row {
     grid-template-columns: 1fr;
     gap: 4px;
