@@ -5,7 +5,7 @@
 .brands-search input { min-height: 48px; padding: 11px 15px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); font-weight: 400; }
 .brands-filters { display: flex; gap: 8px; overflow-x: auto; padding: 18px 0 5px; }
 .brands-filters button { min-height: 44px; flex: none; padding: 9px 16px; border: 1px solid var(--ink); border-radius: 50px; background: transparent; color: var(--ink); }
-.brands-filters button.active { background: var(--ink); color: #fff; }
+.brands-filters button.active { background: var(--ink-fill); color: #fff; }
 .brands-count { margin: 8px 0 0; }
 .brands-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 .brand-card { display: flex; flex-direction: column; align-items: center; padding: 27px 18px 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; text-align: center; animation: arrive 0.5s ease both; }
@@ -24,11 +24,11 @@
 .brand-card p { margin: 0 0 18px; font-size: 13px; }
 .brands-error { margin-bottom: 20px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
 .brands-error p { margin-bottom: 8px; }
-.brands-error button { min-height: 44px; padding: 9px 16px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: #fff; }
+.brands-error button { min-height: 44px; padding: 9px 16px; border: 1px solid var(--ink-fill); border-radius: 8px; background: var(--ink-fill); color: #fff; }
 .brands-note { margin: 25px 0; font-size: 13px; }
 .brands-empty { margin: 25px 0; padding: 32px 20px; text-align: center; border: 1px dashed var(--line); border-radius: 13px; font-size: 13px; }
 .brands-empty p { margin: 0 0 14px; }
-.brands-empty button { min-height: 44px; border: 0; background: var(--sun); color: #fff; border-radius: 7px; padding: 10px 18px; font-weight: 700; }
+.brands-empty button { min-height: 44px; border: 0; background: var(--sun-fill); color: #fff; border-radius: 7px; padding: 10px 18px; font-weight: 700; }
 /* 900: off-scale on purpose — 4-column grid needs extra room before dropping to 3 */
 @media (max-width: 900px) { .brands-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; } .brand-card { padding: 22px 9px 12px; } .brand-card-icon { width: 82px; height: 82px; border-radius: 18px; } .brand-card-icon img { width: 62px; height: 62px; } .brand-card-initial { font-size: 28px; } .brand-card h2 { font-size: 15px; } .brand-card p { font-size: 11px; } }

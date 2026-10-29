@@ -12,7 +12,7 @@
 .stays-region select { font:inherit; font-size:.9rem; color:var(--ink); padding:.65rem; border:1px solid var(--line); background:var(--paper); border-radius:8px; }
 .stays-filters { display:flex; flex-wrap:wrap; gap:.5rem; padding:1.2rem 0; }
 .stays-filters button { border:1px solid var(--line); border-radius:30px; padding:.7rem 1rem; background:transparent; color:var(--ink); font:inherit; font-size:.85rem; min-height:44px; }
-.stays-filters button[aria-pressed="true"] { background:var(--sea); color:white; border-color:var(--sea); }
+.stays-filters button[aria-pressed="true"] { background:var(--ink-fill); color:white; border-color:var(--ink-fill); }
 .stays-neighborhoods { display:flex; align-items:center; flex-wrap:wrap; gap:.6rem; margin:-.25rem 0 1rem; }
 .stays-neighborhoods span { color:var(--muted); font-size:.76rem; margin-right:.2rem; }
 .stays-neighborhoods button { border:0; border-bottom:1px solid var(--line); background:transparent; color:var(--sea); padding:.5rem .2rem; font:inherit; font-size:.8rem; min-height:44px; }

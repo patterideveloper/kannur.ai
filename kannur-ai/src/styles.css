@@ -13,6 +13,10 @@
   --sand: #f6f5ef;
   --paper: #fffef9;
   --sun: #b83e2e;
+  --sun-fill: var(--sun);
+  --ink-fill: var(--ink);
+  --header-bg: #f6f5eff5;
+  --dock-bg: #fffef9f7;
   --mist: #e7ede7;
   --line: #7c8d70;
   --muted: #4f6256;
@@ -21,6 +25,29 @@
   --radius-lg: 20px;
   --radius-sm: 12px;
   --shadow: 0 15px 45px #183b320d;
+  color-scheme: light;
+}
+/*
+ * Dark mode: core tokens only. Pages that still lean on hardcoded hex
+ * colors instead of these variables (Resorts, Hospitals/Education/Eats/
+ * Temples, parts of Home) won't fully adapt yet — that's a separate,
+ * page-by-page follow-up, not an oversight here.
+ */
+:root[data-theme="dark"] {
+  --ink: #eef3ee;
+  --sea: #eef3ee;
+  --sand: #10201b;
+  --paper: #17261f;
+  --sun: #e0735a;
+  --sun-fill: #c64530;
+  --ink-fill: #2c4536;
+  --header-bg: #10201bf5;
+  --dock-bg: #17261ff7;
+  --mist: #1f2e27;
+  --line: #748a78;
+  --muted: #a4b6a8;
+  --shadow: 0 15px 45px #0000004d;
+  color-scheme: dark;
 }
 * {
   box-sizing: border-box;
@@ -141,7 +168,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background: var(--ink);
+  background: var(--ink-fill);
   color: #fffef4;
   border: 0;
   border-radius: 7px;
@@ -151,7 +178,7 @@ a {
 }
 .button.cream {
   background: #f5efdf;
-  color: var(--ink);
+  color: #183b32;
 }
 .text-link {
   display: inline-flex;
@@ -187,7 +214,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #f6f5eff5;
+  background: var(--header-bg);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
   padding-top: env(safe-area-inset-top);
@@ -253,6 +280,20 @@ a {
   font-size: 12px;
   min-height: 44px;
   padding: 8px 0;
+}
+.theme-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  border-radius: 99px;
+  color: var(--ink);
+}
+.theme-button:hover {
+  background: var(--mist);
 }
 .menu-button {
   display: flex;
@@ -388,7 +429,7 @@ a {
   gap: 15px;
   padding: 7px 7px 7px 18px;
   background: #fffdf6;
-  color: var(--ink);
+  color: #183b32;
   border-radius: 8px;
   box-shadow: 0 8px 30px #0002;
 }
@@ -396,7 +437,7 @@ a {
   border: 0;
   outline: none;
   background: none;
-  color: var(--ink);
+  color: #183b32;
   min-width: 0;
   flex: 1;
   font-size: 13px;
@@ -412,7 +453,7 @@ a {
   height: 45px;
   border: 0;
   border-radius: 5px;
-  background: var(--sun);
+  background: var(--sun-fill);
   color: white;
 }
 .hero-suggestions {
@@ -521,7 +562,7 @@ a {
   overflow: hidden;
   aspect-ratio: 4/4.6;
   border-radius: 12px;
-  background: var(--ink);
+  background: var(--ink-fill);
   color: white;
 }
 .collection-card:after {
@@ -603,9 +644,9 @@ a {
   font-size: 12px;
 }
 .editor-tabs button.selected {
-  background: var(--ink);
+  background: var(--ink-fill);
   color: white;
-  border-color: var(--ink);
+  border-color: var(--ink-fill);
 }
 .featured-grid {
   display: grid;
@@ -798,7 +839,7 @@ a {
   margin-left: auto;
 }
 .listen-controls button.playing {
-  background: var(--ink);
+  background: var(--ink-fill);
   color: white;
 }
 .local-section {
@@ -893,9 +934,9 @@ a {
   min-height: 44px;
 }
 .chip.active {
-  background: var(--ink);
+  background: var(--ink-fill);
   color: white;
-  border-color: var(--ink);
+  border-color: var(--ink-fill);
 }
 .search-row {
   display: flex;
@@ -2138,7 +2179,7 @@ a {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding: 9px 10px calc(8px + env(safe-area-inset-bottom));
-    background: #fffef9f7;
+    background: var(--dock-bg);
     border-top: 1px solid var(--line);
     backdrop-filter: blur(15px);
   }
@@ -2149,7 +2190,7 @@ a {
     justify-content: center;
     gap: 4px;
     min-height: 44px;
-    color: #4f6256;
+    color: var(--muted);
   }
   .mobile-dock a svg {
     width: 21px;
@@ -2290,7 +2331,7 @@ a {
 .theyyam-search { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end; background: #f0ede4; padding: 18px; border-radius: 15px; }
 .theyyam-search label { display: grid; gap: 5px; font-size: 12px; font-weight: 700; min-width: 0; }
 .theyyam-search input { width: 100%; min-width: 0; min-height: 50px; border: 1px solid #8c8c87; background: white; border-radius: 8px; padding: 10px; color: var(--ink); }
-.theyyam-search > button { min-height: 50px; border: 0; border-radius: 8px; padding: 0 23px; background: var(--sun); color: white; font-weight: 800; }
+.theyyam-search > button { min-height: 50px; border: 0; border-radius: 8px; padding: 0 23px; background: var(--sun-fill); color: white; font-weight: 800; }
 .theyyam-alert { margin: 15px 0; padding: 13px 17px; border-radius: 9px; background: #fff3e3; color: #723e20; font-size: 13px; }
 .theyyam-alert p { margin: 0; }
 .theyyam-result-head { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; border-bottom: 1px solid var(--line); margin-top: 58px; padding-bottom: 14px; }
@@ -2300,7 +2341,7 @@ a {
 .theyyam-empty > span { display: block; color: var(--sun); font-size: 37px; margin-bottom: 10px; }
 .theyyam-empty h3 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); font-weight: 400; margin-bottom: 8px; }
 .theyyam-empty p { max-width: 530px; margin: 6px auto; color: var(--muted); }
-.theyyam-empty button { border: 0; background: var(--sun); color: white; border-radius: 7px; padding: 12px 20px; font-weight: 700; }
+.theyyam-empty button { border: 0; background: var(--sun-fill); color: white; border-radius: 7px; padding: 12px 20px; font-weight: 700; }
 .theyyam-list { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 22px; align-items: start; }
 .theyyam-event { display: grid; grid-template-columns: 92px 1fr; gap: 20px; padding: 25px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; animation: arrive 0.5s ease both; }
 .theyyam-event:nth-child(1) { animation-delay: 0ms; }
@@ -2361,14 +2402,14 @@ a {
 .theyyam-month-search select { width: 100%; min-width: 0; min-height: 50px; padding: 10px 14px; border: 1px solid #8c8c87; border-radius: 8px; background: white; color: var(--ink); }
 .theyyam-area-filters { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
 .theyyam-area-filters button { min-height: 44px; border: 1px solid var(--line); background: var(--paper); border-radius: 99px; padding: 8px 17px; font-size: 13px; font-weight: 700; }
-.theyyam-area-filters button[aria-pressed="true"] { background: var(--ink); color: white; border-color: var(--ink); }
+.theyyam-area-filters button[aria-pressed="true"] { background: var(--ink-fill); color: white; border-color: var(--ink-fill); }
 .theyyam-rituals { margin-top: 18px; font-size: 13px; }
 .theyyam-rituals > strong { display: block; margin-bottom: 8px; }
 .theyyam-rituals > div { display: flex; flex-wrap: wrap; gap: 7px; }
 .theyyam-rituals span { display: inline-block; padding: 5px 9px; border-radius: 6px; background: var(--mist); color: var(--ink); line-height: 1.35; }
 
 .signature-dish {
-  background: var(--ink);
+  background: var(--ink-fill);
   color: #f5f1e2;
 }
 .signature-dish-inner {

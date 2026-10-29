@@ -317,6 +317,13 @@ export default function App() {
       return "en";
     }
   });
+  const [theme, setTheme] = useState(() => {
+    try {
+      const stored = localStorage.getItem("kannur-theme");
+      if (stored === "light" || stored === "dark") return stored;
+    } catch {}
+    return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null),
     toggleRef = useRef(null);
@@ -331,6 +338,13 @@ export default function App() {
       localStorage.setItem("kannur-language", lang);
     } catch {}
   }, [lang]);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.style.colorScheme = theme;
+    try {
+      localStorage.setItem("kannur-theme", theme);
+    } catch {}
+  }, [theme]);
   useEffect(() => {
     setMenuOpen(false);
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -412,6 +426,13 @@ export default function App() {
             ))}
           </nav>
           <div className="header-actions">
+            <button
+              className="theme-button"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              aria-label={theme === "dark" ? say("Switch to light mode", "ലൈറ്റ് മോഡിലേക്ക് മാറുക") : say("Switch to dark mode", "ഡാർക്ക് മോഡിലേക്ക് മാറുക")}
+            >
+              <Icon name={theme === "dark" ? "sun" : "moon"} />
+            </button>
             <button
               className="language-button"
               onClick={() => setLang(ml ? "en" : "ml")}

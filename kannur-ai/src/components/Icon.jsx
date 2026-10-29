@@ -7,6 +7,7 @@ export default function Icon({ name = "arrow", ...props }) {
     home: "m3 10 9-7 9 7v11H3V10Zm6 11v-8h6v8",
     grid: "M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z",
     sun: "M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2",
+    moon: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z",
     wave: "M2 8c4-6 6 6 10 0s6 6 10 0M2 16c4-6 6 6 10 0s6 6 10 0",
     mountain: "m2 21 8-17 12 17H2Zm5-11 3 3 3-4",
     culture: "M5 21V10h14v11M3 10h18L12 2 3 10Zm6 11v-7h6v7",
