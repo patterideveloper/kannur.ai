@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
+import ShareButton from "../components/ShareButton";
 import { buildDayPlan, parseItinerarySlug } from "../lib/dayPlanner";
 import "./dayPlanner.css";
 
@@ -113,6 +114,7 @@ export default function Itinerary({ lang }) {
             <Link className="day-share" to={`/plan?plan=1&area=${plan.region}&hours=${plan.hours}&interests=${plan.interests.join(",")}`}>
               {say("Customize this day", "ഈ യാത്ര ക്രമീകരിക്കൂ")} ↗
             </Link>
+            <ShareButton lang={lang} title={title} className="day-share" label={say("Share this route", "ഈ യാത്ര പങ്കിടൂ")} />
           </div>
           <p className="day-caution">
             {say(

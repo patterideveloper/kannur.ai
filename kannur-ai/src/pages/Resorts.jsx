@@ -61,7 +61,21 @@ export default function Resorts({ lang }) {
   const change = (key, value) => setParams(current => { const next = new URLSearchParams(current); value ? next.set(key, value) : next.delete(key); return next; }, { replace: true });
   const visible = resorts.filter(r => (!kind || r.kind === kind) && (!region || r.district === region) && (!area || `${r.area} ${r.address}`.toLowerCase().includes(area.toLowerCase())) && `${r.name} ${r.nameMl} ${r.area} ${r.areaMl} ${r.address}`.toLowerCase().includes(q.trim().toLowerCase()));
   return <main className="page stays-page">
-    <Seo lang={lang} path="/resorts" title={say("Resorts & Stays in Kannur | Kannur.io", "കണ്ണൂരിലെ റിസോർട്ടുകളും താമസങ്ങളും | Kannur.io")} description="Find beach resorts, hill retreats and backwater stays in Kannur and nearby Kasaragod, with photos, contact details and Google Maps directions." />
+    <Seo
+      lang={lang}
+      path="/resorts"
+      title={say("Resorts & Stays in Kannur | Kannur.io", "കണ്ണൂരിലെ റിസോർട്ടുകളും താമസങ്ങളും | Kannur.io")}
+      description="Find beach resorts, hill retreats and backwater stays in Kannur and nearby Kasaragod, with photos, contact details and Google Maps directions."
+      itemListSchema={resorts.map((r) => ({
+        "@type": "LodgingBusiness",
+        name: r.name,
+        description: r.description,
+        address: r.address,
+        telephone: r.phone || undefined,
+        image: r.image ? `https://kannur.io${r.image}` : undefined,
+        url: r.sourceUrl || undefined,
+      }))}
+    />
     <section className="page-hero stays-hero">
       <Link className="back-link" to="/">{say("Home", "ഹോം")}</Link>
       <p className="eyebrow">{say("STAY A LITTLE LONGER", "കുറച്ചുകൂടി ഇവിടെ തങ്ങൂ")}</p>

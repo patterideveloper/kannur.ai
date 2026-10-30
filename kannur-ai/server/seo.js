@@ -12,6 +12,24 @@ const page = (title, description, items = [], image = "/og-image.png", extra = {
 const placeItems = buildExplorePlaces();
 const allPlaces = placeItems.map((place) => ({ name: place.name, path: `/explore/place/${place.id}`, description: place.description }));
 const simpleItems = (items) => items.map((item) => ({ name: item.name, description: item.description }));
+const absoluteUrl = (value) => (value?.startsWith("http") ? value : `${BASE}${value}`);
+const resortListSchema = (resorts) => resorts.map((resort) => ({
+  "@type": "LodgingBusiness",
+  name: resort.name,
+  description: resort.description,
+  address: resort.address,
+  telephone: resort.phone || undefined,
+  image: resort.image ? absoluteUrl(resort.image) : undefined,
+  url: resort.sourceUrl || undefined,
+}));
+const restaurantListSchema = (items) => items.map((item) => ({
+  "@type": "Restaurant",
+  name: item.name,
+  description: item.note,
+  address: { "@type": "PostalAddress", addressLocality: item.area, addressRegion: "Kerala", addressCountry: "IN" },
+  servesCuisine: item.kind,
+  url: item.source || undefined,
+}));
 const staticPages = {
   "/": page("Kannur Tourism: Beaches, Theyyam & Places to Visit | Kannur.io", "Explore Kannur, Kerala: beaches, Theyyam rituals, heritage, local food, resorts and practical travel information. A bilingual guide to North Malabar.", [
     { name: "Explore places in Kannur", path: "/explore" }, { name: "Theyyam calendar", path: "/theyyam" }, { name: "Kannur beaches", path: "/explore/beaches" }, { name: "Restaurants in Kannur", path: "/eats" }, { name: "Resorts and stays", path: "/resorts" }, { name: "Plan a day in Kannur", path: "/plan" },
@@ -19,8 +37,8 @@ const staticPages = {
   "/explore": page("Places to Visit in Kannur: Beaches, Forts & Temples | Kannur.io", "Browse Kannur's beaches, historic forts, temples, islands, hills and local shopping places, with photos and map links.", allPlaces),
   "/theyyam": page("Theyyam Calendar in Kannur & North Malabar | Kannur.io", "Browse upcoming Theyyam rituals by month and year in Kannur and nearby districts. Confirm dates with each shrine before visiting."),
   "/plan": page("Plan a Day in Kannur | Kannur.io", "Build a day trip around Kannur's beaches, heritage, nature, Theyyam culture and local food."),
-  "/resorts": page("Resorts and Stays in Kannur | Kannur.io", "Find beach resorts, homestays and hill retreats in Kannur and nearby Kasaragod, with locations and map directions.", simpleItems(getResorts())),
-  "/eats": page("Restaurants and Local Food in Kannur | Kannur.io", "Explore Kannur restaurants, Thalassery biryani, seafood and Malabar food stops.", simpleItems(restaurants)),
+  "/resorts": page("Resorts and Stays in Kannur | Kannur.io", "Find beach resorts, homestays and hill retreats in Kannur and nearby Kasaragod, with locations and map directions.", simpleItems(getResorts()), "/og-image.png", { itemListSchema: resortListSchema(getResorts()) }),
+  "/eats": page("Restaurants and Local Food in Kannur | Kannur.io", "Explore Kannur restaurants, Thalassery biryani, seafood and Malabar food stops.", simpleItems(restaurants), "/og-image.png", { itemListSchema: restaurantListSchema(restaurants) }),
   "/education": page("Colleges and Schools in Kannur | Kannur.io", "Find universities, colleges and educational institutions across Kannur district.", simpleItems(institutions)),
   "/events": page("Festivals and Annual Events in Kannur | Kannur.io", "Discover Kannur's annual festivals, Theyyam season and cultural events.", simpleItems(events)),
   "/people": page("Famous People from Kannur | Kannur.io", "Meet notable artists, leaders, athletes and public figures from Kannur district.", simpleItems(personalities)),
@@ -99,7 +117,10 @@ export function renderSeoHtml(template, pathname) {
       ? { address: { "@type": "PostalAddress", addressLocality: data.addressLocality, addressRegion: "Kerala", addressCountry: "IN" } }
       : {}),
   };
-  const tags = `<title>${escapeHtml(data.title)}</title><meta name="description" content="${escapeHtml(data.description)}"><link rel="canonical" href="${escapeHtml(canonical)}"><meta property="og:type" content="website"><meta property="og:title" content="${escapeHtml(data.title)}"><meta property="og:description" content="${escapeHtml(data.description)}"><meta property="og:url" content="${escapeHtml(canonical)}"><meta property="og:image" content="${escapeHtml(imageUrl)}"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>`;
+  const itemListTag = data.itemListSchema?.length
+    ? `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "ItemList", itemListElement: data.itemListSchema.map((entity, index) => ({ "@type": "ListItem", position: index + 1, item: entity })) }).replace(/</g, "\\u003c")}</script>`
+    : "";
+  const tags = `<title>${escapeHtml(data.title)}</title><meta name="description" content="${escapeHtml(data.description)}"><link rel="canonical" href="${escapeHtml(canonical)}"><meta property="og:type" content="website"><meta property="og:title" content="${escapeHtml(data.title)}"><meta property="og:description" content="${escapeHtml(data.description)}"><meta property="og:url" content="${escapeHtml(canonical)}"><meta property="og:image" content="${escapeHtml(imageUrl)}"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>${itemListTag}`;
   const serverTags = tags.replace(/<(title|meta|link|script)\b/g, '<$1 data-ssr-seo=""');
   return template.replace(/<title>.*?<\/title>/, "").replace("</head>", `${serverTags}</head>`).replace('<div id="root"></div>', `<div id="root">${content}</div>`);
 }

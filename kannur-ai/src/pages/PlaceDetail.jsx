@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
+import ShareButton from "../components/ShareButton";
 import { nearbyStopPlaceId } from "../data/places";
 
 // Only use the place's curated gallery; search results may depict another location.
@@ -535,6 +536,7 @@ export default function PlaceDetail({ lang, t }) {
 
           <section className="detail-map-wrap">
             <div className="place-actions">
+              <ShareButton lang={lang} title={displayName} className="place-share" />
               <a
                 className="map-link"
                 href={mapsUrl}

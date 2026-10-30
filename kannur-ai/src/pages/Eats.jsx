@@ -8,7 +8,20 @@ export default function Eats({ lang }) {
   const dish = specialties[0];
   const whereToTry = restaurants.filter((r) => r.kind === "Biryani");
   return <>
-    <Seo lang={lang} path="/eats" title="Restaurants in Kannur | Kannur.io" description="Explore Kannur's local restaurants, biryani houses and seafood spots with locations and sources." />
+    <Seo
+      lang={lang}
+      path="/eats"
+      title="Restaurants in Kannur | Kannur.io"
+      description="Explore Kannur's local restaurants, biryani houses and seafood spots with locations and sources."
+      itemListSchema={restaurants.map((r) => ({
+        "@type": "Restaurant",
+        name: r.name,
+        description: r.note,
+        address: { "@type": "PostalAddress", addressLocality: r.area, addressRegion: "Kerala", addressCountry: "IN" },
+        servesCuisine: r.kind,
+        url: r.source || undefined,
+      }))}
+    />
     {dish && (
       <section className="signature-dish">
         <div className="signature-dish-inner">

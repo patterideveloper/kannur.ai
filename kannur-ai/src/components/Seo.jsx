@@ -15,6 +15,7 @@ export default function Seo({
   schemaType,
   geo,
   addressLocality,
+  itemListSchema,
 }) {
   const pageTitle = title || DEFAULT_TITLE;
   const pageDescription = description || DEFAULT_DESCRIPTION;
@@ -64,6 +65,19 @@ export default function Seo({
       <script type="application/ld+json">
         {JSON.stringify(structuredData).replace(/</g, "\\u003c")}
       </script>
+      {itemListSchema?.length ? (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: itemListSchema.map((entity, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: entity,
+            })),
+          }).replace(/</g, "\\u003c")}
+        </script>
+      ) : null}
     </Helmet>
   );
 }
